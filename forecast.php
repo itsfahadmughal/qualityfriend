@@ -1124,7 +1124,7 @@ function forecast_prediction($conn,$input_data_,$date_forecast_,$i_){
                                                                 $stay_capacity_arr1 = $input_data[$index_forecast_data] = [
                                                                     'period' => $index_forecast_data,
                                                                     'date' => $row['date_final'],
-                                                                    'sales' => $row['total_stay_capacity'],
+                                                                    'sales' => $row_inner_3['total_stay_capacity'],
                                                                 ];
                                                             }
                                                         }else{
@@ -1142,7 +1142,7 @@ function forecast_prediction($conn,$input_data_,$date_forecast_,$i_){
                                                                 $goods_cost_arr1 = $input_data[$index_forecast_data] = [
                                                                     'period' => $index_forecast_data,
                                                                     'date' => $row['date_final'],
-                                                                    'sales' => $row['total_cost_t'],
+                                                                    'sales' => $row_inner_4['total_cost_t'],
                                                                 ];
                                                             }
                                                         }else{
