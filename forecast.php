@@ -345,10 +345,10 @@ function forecast_prediction($conn,$input_data_,$date_forecast_,$i_){
                                 <div class="card-body p-0 pt-1">
                                     <ul class="nav nav-tabs" id="myTab" role="tablist">
                                         <li class="nav-item"> <a class="nav-link active" id="home-tab" data-toggle="tab" href="#home5" role="tab" aria-controls="home5" aria-expanded="true"><span class="hidden-sm-up"><i class="ti-home"></i></span> <span class="hidden-xs-down">Dashboard</span></a> </li>
-                                        <li class="nav-item"> <a class="nav-link" id="profile-tab1" data-toggle="tab" href="#profile1" role="tab" aria-controls="profile"><span class="hidden-sm-up"><i class="ti-user"></i></span> <span class="hidden-xs-down">Yearly Forecast</span></a></li>
                                         <li class="nav-item"> <a class="nav-link" id="profile-tab2" data-toggle="tab" href="#profile2" role="tab" aria-controls="profile"><span class="hidden-sm-up"><i class="ti-user"></i></span> <span class="hidden-xs-down">Budget Effective</span></a></li>
                                         <li class="nav-item"> <a class="nav-link" id="profile-tab3" data-toggle="tab" href="#profile3" role="tab" aria-controls="profile"><span class="hidden-sm-up"><i class="ti-user"></i></span> <span class="hidden-xs-down">Budget Forecast</span></a></li>
                                         <li class="nav-item"> <a class="nav-link" id="profile-tab4" data-toggle="tab" href="#profile4" role="tab" aria-controls="profile"><span class="hidden-sm-up"><i class="ti-user"></i></span> <span class="hidden-xs-down">Working</span></a></li>
+                                        <li class="nav-item"> <a class="nav-link" id="profile-tab1" data-toggle="tab" href="#profile1" role="tab" aria-controls="profile"><span class="hidden-sm-up"><i class="ti-user"></i></span> <span class="hidden-xs-down">Yearly Forecast</span></a></li>
                                         <li class="nav-item"> <a class="nav-link" id="profile-tab5" data-toggle="tab" href="#profile5" role="tab" aria-controls="profile"><span class="hidden-sm-up"><i class="ti-user"></i></span> <span class="hidden-xs-down">Staffing</span></a></li>
                                         <li class="nav-item"> <a class="nav-link" id="profile-tab6" data-toggle="tab" href="#profile6" role="tab" aria-controls="profile"><span class="hidden-sm-up"><i class="ti-user"></i></span> <span class="hidden-xs-down">Goods Purchasings</span></a></li>
                                         <!--                                        <li class="nav-item"> <a class="nav-link" id="profile-tab7" data-toggle="tab" href="#profile7" role="tab" aria-controls="profile"><span class="hidden-sm-up"><i class="ti-user"></i></span> <span class="hidden-xs-down">Forecast Effective Sale</span></a></li>-->
@@ -469,84 +469,6 @@ function forecast_prediction($conn,$input_data_,$date_forecast_,$i_){
                                                             <h4 class="card-title">Bar chart 2</h4>
                                                             <div id="bar-chart2" style="width:100%; height:97%;"></div>
                                                         </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-
-                                        <div class="tab-pane fade" id="profile1" role="tabpanel" aria-labelledby="profile-tab1">
-                                            <div class="row"> 
-                                                <div class="col-lg-12">
-                                                    <h3 class="forecast_main_color p-3 text-center">Yearly Budget forecast and effective</h3>
-                                                </div>
-                                                <div class="col-lg-12">
-                                                    <div class="table-responsive">
-                                                        <table class="pb-3 goods_table_responsive table table table-bordered table-hover table-striped">
-                                                            <thead>
-                                                                <tr class="forecast_pink_color text-center">
-                                                                    <th class=""></th>
-                                                                    <th class="">Jan Forecast</th>
-                                                                    <th class="">Jan Effective</th>
-                                                                    <th class="">Feb Forecast</th>
-                                                                    <th class="">Feb Forecast</th>
-                                                                    <th class="">Mar Forecast</th>
-                                                                    <th class="">Mar Forecast</th>
-                                                                    <th class="">Apr Forecast</th>
-                                                                    <th class="">Apr Forecast</th>
-                                                                    <th class="">May Forecast</th>
-                                                                    <th class="">May Forecast</th>
-                                                                    <th class="">Jun Forecast</th>
-                                                                    <th class="">Jun Forecast</th>
-                                                                    <th class="">Jul Forecast</th>
-                                                                    <th class="">Jul Forecast</th>
-                                                                    <th class="">Aug Forecast</th>
-                                                                    <th class="">Aug Forecast</th>
-                                                                    <th class="">Sep Forecast</th>
-                                                                    <th class="">Sep Forecast</th>
-                                                                    <th class="">Oct Forecast</th>
-                                                                    <th class="">Oct Forecast</th>
-                                                                    <th class="">Nov Forecast</th>
-                                                                    <th class="">Nov Forecast</th>
-                                                                    <th class="">Dec Forecast</th>
-                                                                    <th class="">Dec Forecast</th>
-                                                                    <th class="">Total</th>
-                                                                </tr>
-                                                                <tr>
-                                                                    <th>AUSGANGSLAGE /Key Facts</th>
-                                                                    <th colspan="25"></th>
-                                                                </tr>
-                                                            </thead>
-                                                            <tbody class="text-center">
-                                                                <tr>
-                                                                    <td>Gästezimmer /Rooms</td>
-                                                                    <td><?php echo 'abc'; ?></td>
-                                                                    <td><?php echo 'acv'; ?></td>
-                                                                    <td><?php echo 'abc'; ?></td>
-                                                                    <td><?php echo 'acv'; ?></td>
-                                                                    <td><?php echo 'abc'; ?></td>
-                                                                    <td><?php echo 'acv'; ?></td>
-                                                                    <td><?php echo 'abc'; ?></td>
-                                                                    <td><?php echo 'acv'; ?></td>
-                                                                    <td><?php echo 'abc'; ?></td>
-                                                                    <td><?php echo 'acv'; ?></td>
-                                                                    <td><?php echo 'abc'; ?></td>
-                                                                    <td><?php echo 'acv'; ?></td>
-                                                                    <td><?php echo 'abc'; ?></td>
-                                                                    <td><?php echo 'acv'; ?></td>
-                                                                    <td><?php echo 'abc'; ?></td>
-                                                                    <td><?php echo 'acv'; ?></td>
-                                                                    <td><?php echo 'abc'; ?></td>
-                                                                    <td><?php echo 'acv'; ?></td>
-                                                                    <td><?php echo 'abc'; ?></td>
-                                                                    <td><?php echo 'acv'; ?></td>
-                                                                    <td><?php echo 'abc'; ?></td>
-                                                                    <td><?php echo 'acv'; ?></td>
-                                                                    <td><?php echo 'abc'; ?></td>
-                                                                    <td><?php echo 'acv'; ?></td>
-                                                                    <td><?php echo 'acv'; ?></td>
-                                                                </tr>
-                                                            </tbody>
-                                                        </table>
                                                     </div>
                                                 </div>
                                             </div>
@@ -1217,6 +1139,85 @@ function forecast_prediction($conn,$input_data_,$date_forecast_,$i_){
                                                 </table>
                                             </div>
                                         </div>
+
+                                        <div class="tab-pane fade" id="profile1" role="tabpanel" aria-labelledby="profile-tab1">
+                                            <div class="row"> 
+                                                <div class="col-lg-12">
+                                                    <h3 class="forecast_main_color p-3 text-center">Yearly Budget forecast and effective</h3>
+                                                </div>
+                                                <div class="col-lg-12">
+                                                    <div class="table-responsive">
+                                                        <table class="pb-3 goods_table_responsive table table table-bordered table-hover table-striped">
+                                                            <thead>
+                                                                <tr class="forecast_pink_color text-center">
+                                                                    <th class=""></th>
+                                                                    <th class="">Jan Forecast</th>
+                                                                    <th class="">Jan Effective</th>
+                                                                    <th class="">Feb Forecast</th>
+                                                                    <th class="">Feb Forecast</th>
+                                                                    <th class="">Mar Forecast</th>
+                                                                    <th class="">Mar Forecast</th>
+                                                                    <th class="">Apr Forecast</th>
+                                                                    <th class="">Apr Forecast</th>
+                                                                    <th class="">May Forecast</th>
+                                                                    <th class="">May Forecast</th>
+                                                                    <th class="">Jun Forecast</th>
+                                                                    <th class="">Jun Forecast</th>
+                                                                    <th class="">Jul Forecast</th>
+                                                                    <th class="">Jul Forecast</th>
+                                                                    <th class="">Aug Forecast</th>
+                                                                    <th class="">Aug Forecast</th>
+                                                                    <th class="">Sep Forecast</th>
+                                                                    <th class="">Sep Forecast</th>
+                                                                    <th class="">Oct Forecast</th>
+                                                                    <th class="">Oct Forecast</th>
+                                                                    <th class="">Nov Forecast</th>
+                                                                    <th class="">Nov Forecast</th>
+                                                                    <th class="">Dec Forecast</th>
+                                                                    <th class="">Dec Forecast</th>
+                                                                    <th class="">Total</th>
+                                                                </tr>
+                                                                <tr>
+                                                                    <th>AUSGANGSLAGE /Key Facts</th>
+                                                                    <th colspan="25"></th>
+                                                                </tr>
+                                                            </thead>
+                                                            <tbody class="text-center">
+                                                                <tr>
+                                                                    <td>Gästezimmer /Rooms</td>
+                                                                    <td><?php echo 'abc'; ?></td>
+                                                                    <td><?php echo 'acv'; ?></td>
+                                                                    <td><?php echo 'abc'; ?></td>
+                                                                    <td><?php echo 'acv'; ?></td>
+                                                                    <td><?php echo 'abc'; ?></td>
+                                                                    <td><?php echo 'acv'; ?></td>
+                                                                    <td><?php echo 'abc'; ?></td>
+                                                                    <td><?php echo 'acv'; ?></td>
+                                                                    <td><?php echo 'abc'; ?></td>
+                                                                    <td><?php echo 'acv'; ?></td>
+                                                                    <td><?php echo 'abc'; ?></td>
+                                                                    <td><?php echo 'acv'; ?></td>
+                                                                    <td><?php echo 'abc'; ?></td>
+                                                                    <td><?php echo 'acv'; ?></td>
+                                                                    <td><?php echo 'abc'; ?></td>
+                                                                    <td><?php echo 'acv'; ?></td>
+                                                                    <td><?php echo 'abc'; ?></td>
+                                                                    <td><?php echo 'acv'; ?></td>
+                                                                    <td><?php echo 'abc'; ?></td>
+                                                                    <td><?php echo 'acv'; ?></td>
+                                                                    <td><?php echo 'abc'; ?></td>
+                                                                    <td><?php echo 'acv'; ?></td>
+                                                                    <td><?php echo 'abc'; ?></td>
+                                                                    <td><?php echo 'acv'; ?></td>
+                                                                    <td><?php echo 'acv'; ?></td>
+                                                                </tr>
+                                                            </tbody>
+                                                        </table>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+
 
                                         <div class="tab-pane fade" id="profile5" role="tabpanel" aria-labelledby="profile-tab5">
                                             <div class="row"> 
