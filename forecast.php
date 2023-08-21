@@ -870,7 +870,7 @@ function forecast_prediction($conn,$input_data_,$date_forecast_,$i_){
                                                                     ?>
                                                                 </tr>
                                                                 <tr class="forecast_light_gray_color">
-                                                                    <td class="text-left"><?php echo 'Gesamt'; ?></td>
+                                                                    <td class="text-left"><?php echo 'Betriebsaufwände /Total Costs'; ?></td>
                                                                     <td><?php echo array_sum($other_costs_arr)+array_sum($bank_charges_arr)+array_sum($taxes_arr)+array_sum($marketing_arr)+array_sum($adm_cost_arr)+array_sum($t_opr_cost_arr)+array_sum($staffing_arr)+array_sum($goods_cost_arr)+array_sum($anicillary_arr)+array_sum($spa_arr); ?></td>
                                                                     <?php
                                                     for($i=0;$i<12;$i++){
@@ -1529,7 +1529,7 @@ function forecast_prediction($conn,$input_data_,$date_forecast_,$i_){
                                                                 </tr>
 
                                                                 <tr class="forecast_light_gray_color">
-                                                                    <td class="text-left"><?php echo 'Gesamt'; ?></td>
+                                                                    <td class="text-left"><?php echo 'Betriebsaufwände /Total Costs'; ?></td>
                                                                     <td><?php echo array_sum($other_costs_arr2)+array_sum($bank_charges_arr2)+array_sum($taxes_arr2)+array_sum($marketing_arr2)+array_sum($adm_cost_arr2)+array_sum($t_opr_cost_arr2)+array_sum($staffing_arr1)+array_sum($goods_cost_arr2)+array_sum($anicillary_arr2)+array_sum($spa_arr2); ?></td>
                                                                     <?php
                                                     for($i=0;$i<12;$i++){
