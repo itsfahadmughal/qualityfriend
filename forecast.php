@@ -326,11 +326,11 @@ function forecast_prediction($conn,$input_data_,$date_forecast_,$i_){
                             <div class="card">
                                 <div class="card-body p-0 pt-1">
                                     <ul class="nav nav-tabs" id="myTab" role="tablist">
-                                        <li class="nav-item"> <a class="nav-link active" id="home-tab" data-toggle="tab" href="#home5" role="tab" aria-controls="home5" aria-expanded="true"><span class="hidden-sm-up"><i class="ti-home"></i></span> <span class="hidden-xs-down">Dashboard</span></a> </li>
                                         <li class="nav-item"> <a class="nav-link" id="profile-tab2" data-toggle="tab" href="#profile2" role="tab" aria-controls="profile"><span class="hidden-sm-up"><i class="ti-user"></i></span> <span class="hidden-xs-down">Budget Effective</span></a></li>
                                         <li class="nav-item"> <a class="nav-link" id="profile-tab3" data-toggle="tab" href="#profile3" role="tab" aria-controls="profile"><span class="hidden-sm-up"><i class="ti-user"></i></span> <span class="hidden-xs-down">Budget Forecast</span></a></li>
                                         <li class="nav-item"> <a class="nav-link" id="profile-tab4" data-toggle="tab" href="#profile4" role="tab" aria-controls="profile"><span class="hidden-sm-up"><i class="ti-user"></i></span> <span class="hidden-xs-down">Working</span></a></li>
                                         <li class="nav-item"> <a class="nav-link" id="profile-tab1" data-toggle="tab" href="#profile1" role="tab" aria-controls="profile"><span class="hidden-sm-up"><i class="ti-user"></i></span> <span class="hidden-xs-down">Yearly Forecast</span></a></li>
+                                        <li class="nav-item"> <a class="nav-link active" id="home-tab" data-toggle="tab" href="#home5" role="tab" aria-controls="home5" aria-expanded="true"><span class="hidden-sm-up"><i class="ti-home"></i></span> <span class="hidden-xs-down">Dashboard</span></a> </li>
                                         <li class="nav-item"> <a class="nav-link" id="profile-tab5" data-toggle="tab" href="#profile5" role="tab" aria-controls="profile"><span class="hidden-sm-up"><i class="ti-user"></i></span> <span class="hidden-xs-down">Staffing</span></a></li>
                                         <li class="nav-item"> <a class="nav-link" id="profile-tab6" data-toggle="tab" href="#profile6" role="tab" aria-controls="profile"><span class="hidden-sm-up"><i class="ti-user"></i></span> <span class="hidden-xs-down">Goods Purchasings</span></a></li>
                                         <!--                                        <li class="nav-item"> <a class="nav-link" id="profile-tab7" data-toggle="tab" href="#profile7" role="tab" aria-controls="profile"><span class="hidden-sm-up"><i class="ti-user"></i></span> <span class="hidden-xs-down">Forecast Effective Sale</span></a></li>-->
@@ -349,112 +349,6 @@ function forecast_prediction($conn,$input_data_,$date_forecast_,$i_){
                                         </li>
                                     </ul>
                                     <div class="tab-content tabcontent-border p-20 pl-0 pr-0" id="myTabContent">
-                                        <div role="tabpanel" class="tab-pane fade show active" id="home5" aria-labelledby="home-tab">
-                                            <div class="row">
-                                                <div class="col-lg-12">
-                                                    <h3 class="forecast_main_color p-3">BUDGET PREVIEW [FORECAST VS EFFECTIVE]</h3>
-                                                </div>
-                                                <div class="col-lg-3">
-                                                    <div class="table-responsive text-center">
-                                                        <table class="table">
-                                                            <thead>
-                                                                <tr>
-                                                                    <th class="" colspan="2">Select Month</th>
-                                                                    <th class="forecast_secondary_color">Total</th>
-                                                                </tr>
-                                                                <tr class="forecast_gray_color">
-                                                                    <th>Description</th>
-                                                                    <th>Forecast</th>
-                                                                    <th>Effective</th>
-                                                                </tr>
-                                                            </thead>
-                                                            <tbody>
-                                                                <tr class="forecast_main_color">
-                                                                    <td><?php echo 'abc'; ?></td>
-                                                                    <td><?php echo 'abc'; ?></td>
-                                                                    <td><?php echo 'acv'; ?></td>
-                                                                </tr>
-                                                                <tr class="">
-                                                                    <td><?php echo 'abc'; ?></td>
-                                                                    <td><?php echo 'abc'; ?></td>
-                                                                    <td><?php echo 'acv'; ?></td>
-                                                                </tr>
-                                                            </tbody>
-                                                        </table>
-                                                    </div>
-                                                </div>
-                                                <div class="col-lg-9">
-                                                    <div class="table-responsive text-center">
-                                                        <table class="table">
-                                                            <thead>
-                                                                <tr>
-                                                                    <th class="text-left" colspan="14">Budget Overview</th>
-                                                                </tr>
-                                                                <tr class="forecast_main_color">
-                                                                    <th>Month</th>
-                                                                    <th>Total</th>
-                                                                    <th>Jan</th>
-                                                                    <th>Feb</th>
-                                                                    <th>Mar</th>
-                                                                    <th>Apr</th>
-                                                                    <th>May</th>
-                                                                    <th>Jun</th>
-                                                                    <th>Jul</th>
-                                                                    <th>Aug</th>
-                                                                    <th>Sep</th>
-                                                                    <th>Oct</th>
-                                                                    <th>Nov</th>
-                                                                    <th>Dec</th>
-                                                                </tr>
-                                                            </thead>
-                                                            <tbody>
-                                                                <tr class="">
-                                                                    <td><?php echo 'Betriebserlöse Forecast'; ?></td>
-                                                                    <td class="forecast_secondary_color"><?php echo 'abewadsaec'; ?></td>
-                                                                    <td><?php echo 'abewadsaec'; ?></td>
-                                                                    <td><?php echo 'abewadsaec'; ?></td>
-                                                                    <td><?php echo 'abewadsaec'; ?></td>
-                                                                    <td><?php echo 'abewadsaec'; ?></td>
-                                                                    <td><?php echo 'abewadsaec'; ?></td>
-                                                                    <td><?php echo 'abewadsaec'; ?></td>
-                                                                    <td><?php echo 'abewadsaec'; ?></td>
-                                                                    <td><?php echo 'abewadsaec'; ?></td>
-                                                                    <td><?php echo 'abewadsaec'; ?></td>
-                                                                    <td><?php echo 'abewadsaec'; ?></td>
-                                                                    <td><?php echo 'abewadsaec'; ?></td>
-                                                                    <td><?php echo 'abewadsaec'; ?></td>
-                                                                </tr>
-                                                            </tbody>
-                                                        </table>
-                                                    </div>
-
-
-                                                    <div class="row">
-                                                        <div class="col-lg-3">
-                                                            <h4 class="card-title">Doughnut Chart</h4>
-                                                            <div id="doughnut-chart" style="width:100%; height:400px;"></div>
-                                                            <h4 class="card-title">Bar chart 3</h4>
-                                                            <div id="bar-chart3" style="width:100%; height:50%;"></div>
-                                                        </div>
-                                                        <div class="col-lg-6">
-
-                                                            <h4 class="card-title">Line chart</h4>
-                                                            <div id="main" style="width:100%; height:300px;"></div>
-
-                                                            <h4 class="card-title">Line chart 2</h4>
-                                                            <div id="main2" style="width:100%; height:300px;"></div>
-
-                                                            <h4 class="card-title">Bar chart</h4>
-                                                            <div id="bar-chart" style="width:100%; height:300px;"></div>
-                                                        </div>
-                                                        <div class="col-lg-3">
-                                                            <h4 class="card-title">Bar chart 2</h4>
-                                                            <div id="bar-chart2" style="width:100%; height:97%;"></div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
 
                                         <div class="tab-pane fade" id="profile2" role="tabpanel" aria-labelledby="profile-tab2">
                                             <div class="row"> 
@@ -1951,6 +1845,115 @@ function forecast_prediction($conn,$input_data_,$date_forecast_,$i_){
                                                 </div>
                                             </div>
                                         </div>
+
+
+                                        <div role="tabpanel" class="tab-pane fade show active" id="home5" aria-labelledby="home-tab">
+                                            <div class="row">
+                                                <div class="col-lg-12">
+                                                    <h3 class="forecast_main_color p-3">BUDGET PREVIEW [FORECAST VS EFFECTIVE]</h3>
+                                                </div>
+                                                <div class="col-lg-3">
+                                                    <div class="table-responsive text-center">
+                                                        <table class="table">
+                                                            <thead>
+                                                                <tr>
+                                                                    <th class="" colspan="2">Select Month</th>
+                                                                    <th class="forecast_secondary_color">Total</th>
+                                                                </tr>
+                                                                <tr class="forecast_gray_color">
+                                                                    <th>Description</th>
+                                                                    <th>Forecast</th>
+                                                                    <th>Effective</th>
+                                                                </tr>
+                                                            </thead>
+                                                            <tbody>
+                                                                <tr class="forecast_main_color">
+                                                                    <td><?php echo 'abc'; ?></td>
+                                                                    <td><?php echo 'abc'; ?></td>
+                                                                    <td><?php echo 'acv'; ?></td>
+                                                                </tr>
+                                                                <tr class="">
+                                                                    <td><?php echo 'abc'; ?></td>
+                                                                    <td><?php echo 'abc'; ?></td>
+                                                                    <td><?php echo 'acv'; ?></td>
+                                                                </tr>
+                                                            </tbody>
+                                                        </table>
+                                                    </div>
+                                                </div>
+                                                <div class="col-lg-9">
+                                                    <div class="table-responsive text-center">
+                                                        <table class="table">
+                                                            <thead>
+                                                                <tr>
+                                                                    <th class="text-left" colspan="14">Budget Overview</th>
+                                                                </tr>
+                                                                <tr class="forecast_main_color">
+                                                                    <th>Month</th>
+                                                                    <th>Total</th>
+                                                                    <th>Jan</th>
+                                                                    <th>Feb</th>
+                                                                    <th>Mar</th>
+                                                                    <th>Apr</th>
+                                                                    <th>May</th>
+                                                                    <th>Jun</th>
+                                                                    <th>Jul</th>
+                                                                    <th>Aug</th>
+                                                                    <th>Sep</th>
+                                                                    <th>Oct</th>
+                                                                    <th>Nov</th>
+                                                                    <th>Dec</th>
+                                                                </tr>
+                                                            </thead>
+                                                            <tbody>
+                                                                <tr class="">
+                                                                    <td><?php echo 'Betriebserlöse Forecast'; ?></td>
+                                                                    <td class="forecast_secondary_color"><?php echo 'abewadsaec'; ?></td>
+                                                                    <td><?php echo 'abewadsaec'; ?></td>
+                                                                    <td><?php echo 'abewadsaec'; ?></td>
+                                                                    <td><?php echo 'abewadsaec'; ?></td>
+                                                                    <td><?php echo 'abewadsaec'; ?></td>
+                                                                    <td><?php echo 'abewadsaec'; ?></td>
+                                                                    <td><?php echo 'abewadsaec'; ?></td>
+                                                                    <td><?php echo 'abewadsaec'; ?></td>
+                                                                    <td><?php echo 'abewadsaec'; ?></td>
+                                                                    <td><?php echo 'abewadsaec'; ?></td>
+                                                                    <td><?php echo 'abewadsaec'; ?></td>
+                                                                    <td><?php echo 'abewadsaec'; ?></td>
+                                                                    <td><?php echo 'abewadsaec'; ?></td>
+                                                                </tr>
+                                                            </tbody>
+                                                        </table>
+                                                    </div>
+
+
+                                                    <div class="row">
+                                                        <div class="col-lg-3">
+                                                            <h4 class="card-title">Doughnut Chart</h4>
+                                                            <div id="doughnut-chart" style="width:100%; height:400px;"></div>
+                                                            <h4 class="card-title">Bar chart 3</h4>
+                                                            <div id="bar-chart3" style="width:100%; height:50%;"></div>
+                                                        </div>
+                                                        <div class="col-lg-6">
+
+                                                            <h4 class="card-title">Line chart</h4>
+                                                            <div id="main" style="width:100%; height:300px;"></div>
+
+                                                            <h4 class="card-title">Line chart 2</h4>
+                                                            <div id="main2" style="width:100%; height:300px;"></div>
+
+                                                            <h4 class="card-title">Bar chart</h4>
+                                                            <div id="bar-chart" style="width:100%; height:300px;"></div>
+                                                        </div>
+                                                        <div class="col-lg-3">
+                                                            <h4 class="card-title">Bar chart 2</h4>
+                                                            <div id="bar-chart2" style="width:100%; height:97%;"></div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+
 
 
                                         <div class="tab-pane fade" id="profile5" role="tabpanel" aria-labelledby="profile-tab5">
