@@ -1000,22 +1000,61 @@ function forecast_prediction($conn,$input_data_,$date_forecast_,$i_){
                                                 </div>
 
                                                 <?php $months_arr1=$staffing_arr1=$goods_cost_arr1=$stay_capacity_arr1=$acc_balance_arr1=$accomodation_sale_arr1=$anicillary_sale_arr1=$total_stay_arr1=$spa_sale_arr1=$anicillary_arr1=$spa_arr1=$t_opr_cost_arr1=$adm_cost_arr1=$marketing_arr1=$taxes_arr1=$bank_charges_arr1=$total_loan_arr1=$other_costs_arr1=$date_cost1=array();
-                                                $sql_cost_effective = "SELECT * FROM `tbl_forecast_expenses` WHERE `hotel_id` = $hotel_id AND YEAR(`date`) = $year_ ORDER BY `date` ASC";
+                                                $pre_year_2 = $year_-2;
+                                                $index_forecast_data=0;
+                                                $date_forecast_last = "";
+                                                $sql_cost_effective = "SELECT *, DATE_FORMAT(`date`, '%m/%d/%Y') as date_final FROM `tbl_forecast_expenses` WHERE `hotel_id` = $hotel_id AND YEAR(`date`) = $pre_year_2 ORDER BY `date` ASC";
                                                 $result_cost_effective = $conn->query($sql_cost_effective);
                                                 if ($result_cost_effective && $result_cost_effective->num_rows > 0) {
                                                     while ($row = mysqli_fetch_array($result_cost_effective)) {
-                                                        array_push($anicillary_arr1,$row['costs_of_ancillary_goods']);
-                                                        array_push($spa_arr1,$row['costs_of_spa_products']);
-                                                        array_push($t_opr_cost_arr1,$row['total_operating_cost']);
-                                                        array_push($adm_cost_arr1,$row['administration_cost']);
-                                                        array_push($marketing_arr1,$row['marketing']);
-                                                        array_push($taxes_arr1,$row['taxes']);
-                                                        array_push($bank_charges_arr1,$row['bank_charges']);
-                                                        array_push($total_loan_arr1,$row['total_loan']);
-                                                        array_push($other_costs_arr1,$row['other_costs']);
-                                                        array_push($date_cost1,$row['date']);
 
-                                                        $time=strtotime($row['date']);
+                                                        $anicillary_arr1 = $input_data[$index_forecast_data] = [
+                                                            'period' => $index_forecast_data,
+                                                            'date' => $row['date_final'],
+                                                            'sales' => $row['costs_of_ancillary_goods'],
+                                                        ];
+                                                        $spa_arr1 = $input_data[$index_forecast_data] = [
+                                                            'period' => $index_forecast_data,
+                                                            'date' => $row['date_final'],
+                                                            'sales' => $row['costs_of_spa_products'],
+                                                        ];
+                                                        $t_opr_cost_arr1 = $input_data[$index_forecast_data] = [
+                                                            'period' => $index_forecast_data,
+                                                            'date' => $row['date_final'],
+                                                            'sales' => $row['total_operating_cost'],
+                                                        ];
+                                                        $adm_cost_arr1 = $input_data[$index_forecast_data] = [
+                                                            'period' => $index_forecast_data,
+                                                            'date' => $row['date_final'],
+                                                            'sales' => $row['administration_cost'],
+                                                        ];
+                                                        $marketing_arr1 = $input_data[$index_forecast_data] = [
+                                                            'period' => $index_forecast_data,
+                                                            'date' => $row['date_final'],
+                                                            'sales' => $row['marketing'],
+                                                        ];
+                                                        $taxes_arr1 = $input_data[$index_forecast_data] = [
+                                                            'period' => $index_forecast_data,
+                                                            'date' => $row['date_final'],
+                                                            'sales' => $row['taxes'],
+                                                        ];
+                                                        $bank_charges_arr1 = $input_data[$index_forecast_data] = [
+                                                            'period' => $index_forecast_data,
+                                                            'date' => $row['date_final'],
+                                                            'sales' => $row['bank_charges'],
+                                                        ];
+
+                                                        array_push($total_loan_arr1,$row['total_loan']);
+
+                                                        $other_costs_arr1 = $input_data[$index_forecast_data] = [
+                                                            'period' => $index_forecast_data,
+                                                            'date' => $row['date_final'],
+                                                            'sales' => $row['other_costs'],
+                                                        ];
+
+                                                        array_push($date_cost1,$row['date_final']);
+
+                                                        $time=strtotime($row['date_final']);
                                                         $month=date("m",$time);
                                                         array_push($months_arr1,$month);
                                                         $year=date("Y",$time);
@@ -1024,16 +1063,48 @@ function forecast_prediction($conn,$input_data_,$date_forecast_,$i_){
                                                         $result_inner_1 = $conn->query($sql_inner_1);
                                                         if ($result_inner_1 && $result_inner_1->num_rows > 0) {
                                                             while ($row_inner_1 = mysqli_fetch_array($result_inner_1)) {
-                                                                array_push($accomodation_sale_arr1,$row_inner_1['acc_sale']);
-                                                                array_push($anicillary_sale_arr1,$row_inner_1['ancill_sale']);
-                                                                array_push($spa_sale_arr1,$row_inner_1['spa_sale']);
-                                                                array_push($total_stay_arr1,$row_inner_1['total_stay']);
+                                                                $accomodation_sale_arr1 = $input_data[$index_forecast_data] = [
+                                                                    'period' => $index_forecast_data,
+                                                                    'date' => $row['date_final'],
+                                                                    'sales' => $row['acc_sale'],
+                                                                ];
+                                                                $anicillary_sale_arr1 = $input_data[$index_forecast_data] = [
+                                                                    'period' => $index_forecast_data,
+                                                                    'date' => $row['date_final'],
+                                                                    'sales' => $row['ancill_sale'],
+                                                                ];
+                                                                $spa_sale_arr1 = $input_data[$index_forecast_data] = [
+                                                                    'period' => $index_forecast_data,
+                                                                    'date' => $row['date_final'],
+                                                                    'sales' => $row['spa_sale'],
+                                                                ];
+                                                                $total_stay_arr1 = $input_data[$index_forecast_data] = [
+                                                                    'period' => $index_forecast_data,
+                                                                    'date' => $row['date_final'],
+                                                                    'sales' => $row['total_stay'],
+                                                                ];
                                                             }
                                                         }else{
-                                                            array_push($accomodation_sale_arr1,0);
-                                                            array_push($anicillary_sale_arr1,0);
-                                                            array_push($spa_sale_arr1,0);
-                                                            array_push($total_stay_arr1,0);
+                                                            $accomodation_sale_arr1 = $input_data[$index_forecast_data] = [
+                                                                'period' => $index_forecast_data,
+                                                                'date' => $row['date_final'],
+                                                                'sales' => 0,
+                                                            ];
+                                                            $anicillary_sale_arr1 = $input_data[$index_forecast_data] = [
+                                                                'period' => $index_forecast_data,
+                                                                'date' => $row['date_final'],
+                                                                'sales' => 0,
+                                                            ];
+                                                            $spa_sale_arr1 = $input_data[$index_forecast_data] = [
+                                                                'period' => $index_forecast_data,
+                                                                'date' => $row['date_final'],
+                                                                'sales' => 0,
+                                                            ];
+                                                            $total_stay_arr1 = $input_data[$index_forecast_data] = [
+                                                                'period' => $index_forecast_data,
+                                                                'date' => $row['date_final'],
+                                                                'sales' => 0,
+                                                            ];
                                                         }
 
 
@@ -1049,19 +1120,37 @@ function forecast_prediction($conn,$input_data_,$date_forecast_,$i_){
                                                         $sql_inner_3="SELECT `total_stay_capacity` FROM `tbl_forecast_keyfacts` WHERE hotel_id = $hotel_id AND MONTH(`date`) = $month AND YEAR(`date`) =  $year";
                                                         $result_inner_3 = $conn->query($sql_inner_3);
                                                         if ($result_inner_3 && $result_inner_3->num_rows > 0) {
-                                                            while ($row_inner_3 = mysqli_fetch_array($result_inner_3)) { array_push($stay_capacity_arr1,$row_inner_3['total_stay_capacity']);
-                                                                                                                       }
+                                                            while ($row_inner_3 = mysqli_fetch_array($result_inner_3)) {
+                                                                $stay_capacity_arr1 = $input_data[$index_forecast_data] = [
+                                                                    'period' => $index_forecast_data,
+                                                                    'date' => $row['date_final'],
+                                                                    'sales' => $row['total_stay_capacity'],
+                                                                ];
+                                                            }
                                                         }else{
-                                                            array_push($stay_capacity_arr1,0);
+                                                            $stay_capacity_arr1 = $input_data[$index_forecast_data] = [
+                                                                'period' => $index_forecast_data,
+                                                                'date' => $row['date_final'],
+                                                                'sales' => 1,
+                                                            ];
                                                         }
 
                                                         $sql_inner_4="SELECT SUM(`total_cost`) as total_cost_t FROM `tbl_forecast_goods_cost` WHERE hotel_id = $hotel_id AND MONTH(`date`) = $month AND YEAR(`date`) =  $year";
                                                         $result_inner_4 = $conn->query($sql_inner_4);
                                                         if ($result_inner_4 && $result_inner_4->num_rows > 0) {
-                                                            while ($row_inner_4 = mysqli_fetch_array($result_inner_4)) { array_push($goods_cost_arr1,$row_inner_4['total_cost_t']);
-                                                                                                                       }
+                                                            while ($row_inner_4 = mysqli_fetch_array($result_inner_4)) {
+                                                                $goods_cost_arr1 = $input_data[$index_forecast_data] = [
+                                                                    'period' => $index_forecast_data,
+                                                                    'date' => $row['date_final'],
+                                                                    'sales' => $row['total_cost_t'],
+                                                                ];
+                                                            }
                                                         }else{
-                                                            array_push($goods_cost_arr1,0);
+                                                            $goods_cost_arr1 = $input_data[$index_forecast_data] = [
+                                                                'period' => $index_forecast_data,
+                                                                'date' => $row['date_final'],
+                                                                'sales' => 0,
+                                                            ];
                                                         }
 
                                                         $sql_inner_5="SELECT SUM(`gross_salary`) as salary FROM `tbl_forecast_staffing_cost` WHERE hotel_id = $hotel_id AND `year` = $year";
@@ -1072,6 +1161,10 @@ function forecast_prediction($conn,$input_data_,$date_forecast_,$i_){
                                                         }else{
                                                             array_push($staffing_arr1,0);
                                                         }
+
+
+                                                        $date_forecast_last = $row['date_final'];
+                                                        $index_forecast_data++;
 
                                                     }
                                                 ?>
