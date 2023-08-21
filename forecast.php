@@ -985,8 +985,6 @@ function forecast_prediction($conn,$input_data_,$date_forecast_,$i_){
                                                 <?php } ?>
 
 
-
-
                                             </div>
                                         </div>
 
