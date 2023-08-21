@@ -4,7 +4,6 @@ include 'util_session.php';
 //include 'forecast_utils/read_xml_forecast.php';
 
 $year_ = date("Y");
-
 require './forecast_utills/sales-forecasting/vendor/autoload.php';
 use Cozy\ValueObjects\Matrix;
 
@@ -15,23 +14,6 @@ function forecast_prediction($conn,$input_data_,$date_forecast_,$i_){
     $date_forecast = $date_forecast_;
     $input_data = $input_data_;
     $i = $i_;
-
-    //$sql="SELECT ROUND(SUM(`accommodation_sale`),2) as total_sale, DATE_FORMAT(`date`, '%m/%d/%Y') as date_final FROM `tbl_forecast_reservations_rooms` WHERE `hotel_id` = 1 GROUP BY MONTH(`date`), YEAR(`date`) ORDER By `date` ASC";
-    //    $sql="SELECT costs_of_ancillary_goods, DATE_FORMAT(`date`, '%m/%d/%Y') as date_final FROM `tbl_forecast_expenses` WHERE `hotel_id` = 1 AND YEAR(`date`) >= 2022 ORDER BY `date` ASC";
-    //
-    //    $result = $conn->query($sql);
-    //    if ($result && $result->num_rows > 0) {
-    //        while($row = mysqli_fetch_array($result)) {
-    //            $input_data[$i] = [
-    //                'period' => $i,
-    //                'date' => $row['date_final'],
-    //                'sales' => $row['costs_of_ancillary_goods'],
-    //            ];
-    //            $date_forecast = $row['date_final'];
-    //            $i++;
-    //        }
-    //    }
-
 
     $split = explode("/",$date_forecast);
     $n =   intval($split[0]);
@@ -930,10 +912,9 @@ function forecast_prediction($conn,$input_data_,$date_forecast_,$i_){
                                                                 <tr class="">
                                                                     <td class="text-left"><?php echo 'Total Loan'; ?></td>
                                                                     <td><?php
-                                                    $Total_Loan_Temp = 0;
-                                                    if(isset($total_loan_arr[0])){ echo $total_loan_arr[0];
-                                                                                  $total_Loan_Temp = $total_loan_arr[0];
-                                                                                 }else{echo 0;} ?></td>
+                                                    if(isset($total_loan_arr[0])){ 
+                                                        echo $total_loan_arr[0];
+                                                    }else{echo 0;} ?></td>
                                                                     <?php
                                                     for($i=0;$i<12;$i++){
                                                         if(isset($months_arr[$i]) && $i == 0){
@@ -952,13 +933,19 @@ function forecast_prediction($conn,$input_data_,$date_forecast_,$i_){
 
                                                                 <tr class="forecast_main_color">
                                                                     <td class="text-left"><?php echo 'Liquidität /Liquidity'; ?></td>
-                                                                    <td><?php echo (array_sum($accomodation_sale_arr)+array_sum($anicillary_sale_arr)+array_sum($spa_sale_arr)+$Total_Acc_Balance_Temp)-(array_sum($other_costs_arr)+array_sum($bank_charges_arr)+array_sum($taxes_arr)+array_sum($marketing_arr)+array_sum($adm_cost_arr)+array_sum($t_opr_cost_arr)+array_sum($staffing_arr)+array_sum($goods_cost_arr)+array_sum($anicillary_arr)+array_sum($spa_arr)+$Total_Loan_Temp); ?></td>
+                                                                    <td><?php 
+                                                    $total_Loan_Temp=0;
+                                                    if(isset($total_loan_arr[0])){ 
+                                                        $total_Loan_Temp = $total_loan_arr[0]; 
+                                                    }else{$total_Loan_Temp = 0;} 
+
+                                                    echo (array_sum($accomodation_sale_arr)+array_sum($anicillary_sale_arr)+array_sum($spa_sale_arr)+$Total_Acc_Balance_Temp)-(array_sum($other_costs_arr)+array_sum($bank_charges_arr)+array_sum($taxes_arr)+array_sum($marketing_arr)+array_sum($adm_cost_arr)+array_sum($t_opr_cost_arr)+array_sum($staffing_arr)+array_sum($goods_cost_arr)+array_sum($anicillary_arr)+array_sum($spa_arr)+$total_Loan_Temp); ?></td>
                                                                     <?php
                                                     for($i=0;$i<12;$i++){
                                                         if(isset($months_arr[$i])){
                                                             if($i == 0){
                                                                     ?>
-                                                                    <td><?php echo ($accomodation_sale_arr[$i]+$spa_sale_arr[$i]+$anicillary_sale_arr[$i]+$Total_Acc_Balance_Temp)-($other_costs_arr[$i]+$bank_charges_arr[$i]+$taxes_arr[$i]+$marketing_arr[$i]+$adm_cost_arr[$i]+$t_opr_cost_arr[$i]+$staffing_arr[$i]+$goods_cost_arr[$i]+$anicillary_arr[$i]+$spa_arr[$i]+$Total_Loan_Temp); ?></td>
+                                                                    <td><?php echo ($accomodation_sale_arr[$i]+$spa_sale_arr[$i]+$anicillary_sale_arr[$i]+$Total_Acc_Balance_Temp)-($other_costs_arr[$i]+$bank_charges_arr[$i]+$taxes_arr[$i]+$marketing_arr[$i]+$adm_cost_arr[$i]+$t_opr_cost_arr[$i]+$staffing_arr[$i]+$goods_cost_arr[$i]+$anicillary_arr[$i]+$spa_arr[$i]+$total_Loan_Temp); ?></td>
                                                                     <?php
                                                             }else{
                                                                     ?>
@@ -1566,9 +1553,9 @@ function forecast_prediction($conn,$input_data_,$date_forecast_,$i_){
                                                                 <tr class="">
                                                                     <td class="text-left"><?php echo 'Total BankKonto'; ?></td>
                                                                     <td><?php 
-                                                    $Total_Acc_Balance_Temp = 0;
+                                                    $Total_Acc_Balance_Temp2 = 0;
                                                     if(isset($acc_balance_arr1[0])){ echo $acc_balance_arr1[0];
-                                                                                    $Total_Acc_Balance_Temp = $acc_balance_arr1[0];
+                                                                                    $Total_Acc_Balance_Temp2 = $acc_balance_arr1[0];
                                                                                    }else{echo 0;} ?></td>
                                                                     <?php
                                                     for($i=0;$i<12;$i++){
@@ -1591,17 +1578,14 @@ function forecast_prediction($conn,$input_data_,$date_forecast_,$i_){
                                                                     <td>
                                                                         <?php
                                                     $full_date_loan = date("Y")."-1-28";
-
-                                                    $index_desired=array_search($full_date_loan,$date_cost1);
-                                                    $Total_Loan_Temp = 0;
-                                                    if(isset($total_loan_arr1[$index_desired])){ echo $total_loan_arr1[$index_desired];
-                                                                                                $total_Loan_Temp = $total_loan_arr1[$index_desired];
-                                                                                               }else{echo 0;} ?></td>
+                                                    $index_desired2=array_search($full_date_loan,$date_cost1);
+                                                    if(isset($total_loan_arr1[$index_desired2])){ echo $total_loan_arr1[$index_desired2];
+                                                                                                }else{echo 0;} ?></td>
                                                                     <?php
                                                     for($i=0;$i<12;$i++){
-                                                        if(isset($total_loan_arr1[$index_desired]) && $i == 0){
+                                                        if(isset($total_loan_arr1[$index_desired2]) && $i == 0){
                                                                     ?>
-                                                                    <td><?php echo $total_loan_arr1[$index_desired]; ?></td>
+                                                                    <td><?php echo $total_loan_arr1[$index_desired2]; ?></td>
                                                                     <?php
                                                         }else{
                                                                     ?>
@@ -1615,12 +1599,22 @@ function forecast_prediction($conn,$input_data_,$date_forecast_,$i_){
 
                                                                 <tr class="forecast_main_color">
                                                                     <td class="text-left"><?php echo 'Liquidität /Liquidity'; ?></td>
-                                                                    <td><?php echo (array_sum($accomodation_sale_arr2)+array_sum($anicillary_sale_arr2)+array_sum($spa_sale_arr2)+$Total_Acc_Balance_Temp)-(array_sum($other_costs_arr2)+array_sum($bank_charges_arr2)+array_sum($taxes_arr2)+array_sum($marketing_arr2)+array_sum($adm_cost_arr2)+array_sum($t_opr_cost_arr2)+array_sum($staffing_arr1)+array_sum($goods_cost_arr2)+array_sum($anicillary_arr2)+array_sum($spa_arr2)+$Total_Loan_Temp); ?></td>
+                                                                    <td><?php 
+
+                                                    $full_date_loan = date("Y")."-1-28";
+                                                    $Total_Loan_Temp2 = 0;
+                                                    $index_desired2=array_search($full_date_loan,$date_cost1);
+                                                    if(isset($total_loan_arr1[$index_desired2])){
+                                                        $total_Loan_Temp2 = $total_loan_arr1[$index_desired2];
+                                                    }else{$total_Loan_Temp2 = 0;}
+
+
+                                                    echo (array_sum($accomodation_sale_arr2)+array_sum($anicillary_sale_arr2)+array_sum($spa_sale_arr2)+$Total_Acc_Balance_Temp2)-(array_sum($other_costs_arr2)+array_sum($bank_charges_arr2)+array_sum($taxes_arr2)+array_sum($marketing_arr2)+array_sum($adm_cost_arr2)+array_sum($t_opr_cost_arr2)+array_sum($staffing_arr1)+array_sum($goods_cost_arr2)+array_sum($anicillary_arr2)+array_sum($spa_arr2)+$Total_Loan_Temp2); ?></td>
                                                                     <?php
                                                     for($i=0;$i<12;$i++){
                                                         if($i == 0){
                                                                     ?>
-                                                                    <td><?php echo ($accomodation_sale_arr2[$i]+$spa_sale_arr2[$i]+$anicillary_sale_arr2[$i]+$Total_Acc_Balance_Temp)-($other_costs_arr2[$i]+$bank_charges_arr2[$i]+$taxes_arr2[$i]+$marketing_arr2[$i]+$adm_cost_arr2[$i]+$t_opr_cost_arr2[$i]+$staffing_arr1[$i]+$goods_cost_arr2[$i]+$anicillary_arr2[$i]+$spa_arr2[$i]+$Total_Loan_Temp); ?></td>
+                                                                    <td><?php echo ($accomodation_sale_arr2[$i]+$spa_sale_arr2[$i]+$anicillary_sale_arr2[$i]+$Total_Acc_Balance_Temp2)-($other_costs_arr2[$i]+$bank_charges_arr2[$i]+$taxes_arr2[$i]+$marketing_arr2[$i]+$adm_cost_arr2[$i]+$t_opr_cost_arr2[$i]+$staffing_arr1[$i]+$goods_cost_arr2[$i]+$anicillary_arr2[$i]+$spa_arr2[$i]+$Total_Loan_Temp2); ?></td>
                                                                     <?php
                                                         }else{
                                                                     ?>
@@ -1669,7 +1663,7 @@ function forecast_prediction($conn,$input_data_,$date_forecast_,$i_){
                                                         <tr class="forecast_light_gray_color">
                                                             <td class="text-left"><?php echo 'Betriebserlöse /Operating Revenue'; ?></td>
                                                             <td><?php echo round(array_sum($accomodation_sale_arr2)+array_sum($anicillary_sale_arr2)+array_sum($spa_sale_arr2),2); ?></td>
-                                                            <td><?php echo 'abc'; ?></td>
+                                                            <td><?php echo round(array_sum($accomodation_sale_arr)+array_sum($anicillary_sale_arr)+array_sum($spa_sale_arr),2); ?></td>
                                                             <td></td>
                                                             <td></td>
                                                             <td></td>
@@ -1679,7 +1673,7 @@ function forecast_prediction($conn,$input_data_,$date_forecast_,$i_){
                                                         <tr class="">
                                                             <td class="text-left"><?php echo 'Logisumsätze Netto / Hotel Revenues Net'; ?></td>
                                                             <td><?php echo round(array_sum($accomodation_sale_arr2),2); ?></td>
-                                                            <td><?php echo 'abc'; ?></td>
+                                                            <td><?php echo round(array_sum($accomodation_sale_arr),2); ?></td>
                                                             <td></td>
                                                             <td></td>
                                                             <td class="text-left"><?php echo 'Logisumsätze Netto / Hotel Revenues Net'; ?></td>
@@ -1689,7 +1683,7 @@ function forecast_prediction($conn,$input_data_,$date_forecast_,$i_){
                                                         <tr class="">
                                                             <td class="text-left"><?php echo 'Nebenerlöse Netto / Ancillary Revenues Net'; ?></td>
                                                             <td><?php echo round(array_sum($anicillary_sale_arr2),2); ?></td>
-                                                            <td><?php echo 'abc'; ?></td>
+                                                            <td><?php echo round(array_sum($anicillary_sale_arr),2); ?></td>
                                                             <td></td>
                                                             <td></td>
                                                             <td class="text-left"><?php echo 'Nebenerlöse Netto / Ancillary Revenues Net'; ?></td>
@@ -1699,7 +1693,7 @@ function forecast_prediction($conn,$input_data_,$date_forecast_,$i_){
                                                         <tr class="">
                                                             <td class="text-left"><?php echo 'Spa-Umsätze (22%) Netto/Spa Revenues Net'; ?></td>
                                                             <td><?php echo round(array_sum($spa_sale_arr2),2); ?></td>
-                                                            <td><?php echo 'abc'; ?></td>
+                                                            <td><?php echo round(array_sum($spa_sale_arr),2); ?></td>
                                                             <td></td>
                                                             <td></td>
                                                             <td class="text-left"><?php echo 'Spa-Umsätze (22%) Netto/Spa Revenues Net'; ?></td>
@@ -1712,7 +1706,7 @@ function forecast_prediction($conn,$input_data_,$date_forecast_,$i_){
                                                         <tr class="forecast_light_gray_color">
                                                             <td class="text-left"><?php echo 'Betriebsaufwände /Total Costs'; ?></td>
                                                             <td><?php echo round(array_sum($other_costs_arr2)+array_sum($bank_charges_arr2)+array_sum($taxes_arr2)+array_sum($marketing_arr2)+array_sum($adm_cost_arr2)+array_sum($t_opr_cost_arr2)+array_sum($staffing_arr1)+array_sum($goods_cost_arr2)+array_sum($anicillary_arr2)+array_sum($spa_arr2),2); ?></td>
-                                                            <td><?php echo 'abc'; ?></td>
+                                                            <td><?php echo round(array_sum($other_costs_arr)+array_sum($bank_charges_arr)+array_sum($taxes_arr)+array_sum($marketing_arr)+array_sum($adm_cost_arr)+array_sum($t_opr_cost_arr)+array_sum($staffing_arr)+array_sum($goods_cost_arr)+array_sum($anicillary_arr)+array_sum($spa_arr),2); ?></td>
                                                             <td></td>
                                                             <td></td>
                                                             <td></td>
@@ -1722,7 +1716,7 @@ function forecast_prediction($conn,$input_data_,$date_forecast_,$i_){
                                                         <tr class="">
                                                             <td class="text-left"><?php echo 'Wareneinsätze'; ?></td>
                                                             <td><?php echo round(array_sum($accomodation_sale_arr2)+array_sum($anicillary_sale_arr2)+array_sum($spa_sale_arr2),2); ?></td>
-                                                            <td><?php echo 'abc'; ?></td>
+                                                            <td><?php echo round(array_sum($accomodation_sale_arr)+array_sum($anicillary_sale_arr)+array_sum($spa_sale_arr),2); ?></td>
                                                             <td></td>
                                                             <td></td>
                                                             <td class="text-left"><?php echo 'Wareneinsätze'; ?></td>
@@ -1732,7 +1726,7 @@ function forecast_prediction($conn,$input_data_,$date_forecast_,$i_){
                                                         <tr class="">
                                                             <td class="text-left"><?php echo 'Mitarbeiter/Staffing'; ?></td>
                                                             <td><?php echo round(array_sum($staffing_arr1),2); ?></td>
-                                                            <td><?php echo 'abc'; ?></td>
+                                                            <td><?php echo round(array_sum($staffing_arr),2); ?></td>
                                                             <td></td>
                                                             <td></td>
                                                             <td class="text-left"><?php echo 'Mitarbeiter/Staffing'; ?></td>
@@ -1742,7 +1736,7 @@ function forecast_prediction($conn,$input_data_,$date_forecast_,$i_){
                                                         <tr class="">
                                                             <td class="text-left"><?php echo 'Betriebskosten Gesamt/Total Cost'; ?></td>
                                                             <td><?php echo round(array_sum($t_opr_cost_arr2),2); ?></td>
-                                                            <td><?php echo 'abc'; ?></td>
+                                                            <td><?php echo round(array_sum($t_opr_cost_arr),2); ?></td>
                                                             <td></td>
                                                             <td></td>
                                                             <td class="text-left"><?php echo 'Betriebskosten Gesamt/Total Cost'; ?></td>
@@ -1752,7 +1746,7 @@ function forecast_prediction($conn,$input_data_,$date_forecast_,$i_){
                                                         <tr class="">
                                                             <td class="text-left"><?php echo 'Verwaltungskosten /Administration Costs'; ?></td>
                                                             <td><?php echo round(array_sum($adm_cost_arr2),2); ?></td>
-                                                            <td><?php echo 'abc'; ?></td>
+                                                            <td><?php echo round(array_sum($adm_cost_arr),2); ?></td>
                                                             <td></td>
                                                             <td></td>
                                                             <td class="text-left"><?php echo 'Verwaltungskosten /Administration Costs'; ?></td>
@@ -1762,7 +1756,7 @@ function forecast_prediction($conn,$input_data_,$date_forecast_,$i_){
                                                         <tr class="">
                                                             <td class="text-left"><?php echo 'Marketing/Marketing'; ?></td>
                                                             <td><?php echo round(array_sum($marketing_arr2),2); ?></td>
-                                                            <td><?php echo 'abc'; ?></td>
+                                                            <td><?php echo round(array_sum($marketing_arr),2); ?></td>
                                                             <td></td>
                                                             <td></td>
                                                             <td class="text-left"><?php echo 'Marketing/Marketing'; ?></td>
@@ -1772,7 +1766,7 @@ function forecast_prediction($conn,$input_data_,$date_forecast_,$i_){
                                                         <tr class="">
                                                             <td class="text-left"><?php echo 'Steuern Und Gebühren/Taxes'; ?></td>
                                                             <td><?php echo round(array_sum($taxes_arr2),2); ?></td>
-                                                            <td><?php echo 'abc'; ?></td>
+                                                            <td><?php echo round(array_sum($taxes_arr),2); ?></td>
                                                             <td></td>
                                                             <td></td>
                                                             <td class="text-left"><?php echo 'Steuern Und Gebühren/Taxes'; ?></td>
@@ -1782,7 +1776,7 @@ function forecast_prediction($conn,$input_data_,$date_forecast_,$i_){
                                                         <tr class="">
                                                             <td class="text-left"><?php echo 'Bankspesen, Kk-Gebühren/Bank Charges'; ?></td>
                                                             <td><?php echo round(array_sum($bank_charges_arr2),2); ?></td>
-                                                            <td><?php echo 'abc'; ?></td>
+                                                            <td><?php echo round(array_sum($bank_charges_arr),2); ?></td>
                                                             <td></td>
                                                             <td></td>
                                                             <td class="text-left"><?php echo 'Bankspesen, Kk-Gebühren/Bank Charges'; ?></td>
@@ -1792,7 +1786,7 @@ function forecast_prediction($conn,$input_data_,$date_forecast_,$i_){
                                                         <tr class="">
                                                             <td class="text-left"><?php echo 'Sonst. Aufwände /Other Costs'; ?></td>
                                                             <td><?php echo round(array_sum($other_costs_arr2),2); ?></td>
-                                                            <td><?php echo 'abc'; ?></td>
+                                                            <td><?php echo round(array_sum($other_costs_arr),2); ?></td>
                                                             <td></td>
                                                             <td></td>
                                                             <td class="text-left"><?php echo 'Sonst. Aufwände /Other Costs'; ?></td>
@@ -1805,7 +1799,8 @@ function forecast_prediction($conn,$input_data_,$date_forecast_,$i_){
                                                         <tr class="forecast_light_gray_color">
                                                             <td class="text-left"><?php echo 'Gross Operating Profit (Be1)'; ?></td>
                                                             <td><?php echo round((array_sum($accomodation_sale_arr2)+array_sum($anicillary_sale_arr2)+array_sum($spa_sale_arr2))-(array_sum($other_costs_arr2)+array_sum($bank_charges_arr2)+array_sum($taxes_arr2)+array_sum($marketing_arr2)+array_sum($adm_cost_arr2)+array_sum($t_opr_cost_arr2)+array_sum($staffing_arr1)+array_sum($goods_cost_arr2)+array_sum($anicillary_arr2)+array_sum($spa_arr2)),2); ?></td>
-                                                            <td><?php echo 'abc'; ?></td>
+                                                            <td><?php
+                                                                echo round((array_sum($accomodation_sale_arr)+array_sum($anicillary_sale_arr)+array_sum($spa_sale_arr))-(array_sum($other_costs_arr)+array_sum($bank_charges_arr)+array_sum($taxes_arr)+array_sum($marketing_arr)+array_sum($adm_cost_arr)+array_sum($t_opr_cost_arr)+array_sum($staffing_arr)+array_sum($goods_cost_arr)+array_sum($anicillary_arr)+array_sum($spa_arr)),2); ?></td>
                                                             <td></td>
                                                             <td></td>
                                                             <td></td>
@@ -1820,7 +1815,11 @@ function forecast_prediction($conn,$input_data_,$date_forecast_,$i_){
                                                                 if(isset($acc_balance_arr1[0])){ echo $acc_balance_arr1[0];
                                                                                                }else{echo 0;} ?>
                                                             </td>
-                                                            <td><b><?php echo 'abc'; ?></b></td>
+                                                            <td>
+                                                                <?php
+                                                                if(isset($acc_balance_arr[0])){ echo $acc_balance_arr[0];
+                                                                                              }else{echo 0;} ?>
+                                                            </td>
                                                             <td></td>
                                                             <td></td>
                                                             <td></td>
@@ -1832,10 +1831,14 @@ function forecast_prediction($conn,$input_data_,$date_forecast_,$i_){
                                                             <td class="text-left"><?php echo 'Total Loan'; ?></td>
                                                             <td>
                                                                 <?php
-                                                                if(isset($total_loan_arr1[$index_desired])){ echo $total_loan_arr1[$index_desired];
-                                                                                                           }else{echo 0;} ?>
+                                                                if(isset($total_loan_arr1[$index_desired2])){ echo $total_loan_arr1[$index_desired2];
+                                                                                                            }else{echo 0;} ?>
                                                             </td>
-                                                            <td><b><?php echo 'abc'; ?></b></td>
+                                                            <td>
+                                                                <?php
+                                                                if(isset($total_loan_arr[0])){ echo $total_loan_arr[0];
+                                                                                             }else{echo 0;} ?>
+                                                            </td>
                                                             <td></td>
                                                             <td></td>
                                                             <td></td>
@@ -1845,8 +1848,20 @@ function forecast_prediction($conn,$input_data_,$date_forecast_,$i_){
 
                                                         <tr class="forecast_light_gray_color">
                                                             <td class="text-left"><?php echo 'Liquidität /Liquidity'; ?></td>
-                                                            <td><?php echo round((array_sum($accomodation_sale_arr2)+array_sum($anicillary_sale_arr2)+array_sum($spa_sale_arr2)+$Total_Acc_Balance_Temp)-(array_sum($other_costs_arr2)+array_sum($bank_charges_arr2)+array_sum($taxes_arr2)+array_sum($marketing_arr2)+array_sum($adm_cost_arr2)+array_sum($t_opr_cost_arr2)+array_sum($staffing_arr1)+array_sum($goods_cost_arr2)+array_sum($anicillary_arr2)+array_sum($spa_arr2)+$Total_Loan_Temp),2); ?></td>
-                                                            <td><?php echo 'abc'; ?></td>
+                                                            <td><?php
+                                                                $full_date_loan = date("Y")."-1-28";
+                                                                $Total_Loan_Temp2 = 0;
+                                                                $index_desired2=array_search($full_date_loan,$date_cost1);
+                                                                if(isset($total_loan_arr1[$index_desired2])){
+                                                                    $total_Loan_Temp2 = $total_loan_arr1[$index_desired2];
+                                                                }else{$total_Loan_Temp2 = 0;}
+                                                                echo round((array_sum($accomodation_sale_arr2)+array_sum($anicillary_sale_arr2)+array_sum($spa_sale_arr2)+$Total_Acc_Balance_Temp2)-(array_sum($other_costs_arr2)+array_sum($bank_charges_arr2)+array_sum($taxes_arr2)+array_sum($marketing_arr2)+array_sum($adm_cost_arr2)+array_sum($t_opr_cost_arr2)+array_sum($staffing_arr1)+array_sum($goods_cost_arr2)+array_sum($anicillary_arr2)+array_sum($spa_arr2)+$Total_Loan_Temp2),2); ?></td>
+                                                            <td><?php
+                                                                $total_Loan_Temp=0;
+                                                                if(isset($total_loan_arr[0])){ 
+                                                                    $total_Loan_Temp = $total_loan_arr[0]; 
+                                                                }else{$total_Loan_Temp = 0;}
+                                                                echo round((array_sum($accomodation_sale_arr)+array_sum($anicillary_sale_arr)+array_sum($spa_sale_arr)+$Total_Acc_Balance_Temp)-(array_sum($other_costs_arr)+array_sum($bank_charges_arr)+array_sum($taxes_arr)+array_sum($marketing_arr)+array_sum($adm_cost_arr)+array_sum($t_opr_cost_arr)+array_sum($staffing_arr)+array_sum($goods_cost_arr)+array_sum($anicillary_arr)+array_sum($spa_arr)+$total_Loan_Temp),2); ?></td>
                                                             <td></td>
                                                             <td></td>
                                                             <td></td>
