@@ -53,6 +53,7 @@ $last_editby_ip=getIPAddress();
 $last_edit_time=date("Y-m-d H:i:s");
 $last_id=0;
 $sql="";
+$alert_msg="";
 
 $sql_check = "SELECT * FROM `tbl_time_off` WHERE (`date` BETWEEN '$newDate_from' AND '$newDate_to') AND request_by = $employee AND is_active = 1 AND is_delete = 0";
 $result_check = $conn->query($sql_check);
@@ -73,14 +74,18 @@ if ($result_check && $result_check->num_rows > 0) {
     $last_id = mysqli_insert_id($conn);
 
     if($result){
-
-        $alert_msg = $message." Abwesenheitszeit angefordert von ";
+        if ($Create_view_schedules == 1 || $usert_id == 1) { 
+            $alert_msg = "Krankschreibung  Caranovic hinzugefügt (";
+        }else{
+            $alert_msg = $message." Abwesenheitszeit angefordert von (";
+        }
 
         $sql_users_alerts = "SELECT * FROM `tbl_user` WHERE hotel_id = $hotel_id AND user_id = $employee";
 
         $result_users_alerts = $conn->query($sql_users_alerts);
         while ($row_inner = mysqli_fetch_array($result_users_alerts)) {
-            $sql_alert="INSERT INTO `tbl_alert`(`user_id`, `id`, `id_name`, `id_table_name`, `alert_message`, `alert_type`, `hotel_id`, `entrytime`,`priority`) VALUES ('$row_inner[17]','$last_id','tmeo_id','tbl_time_off','$alert_msg.$row_inner[2]','CREATE','$hotel_id','$entry_time',0)";
+            $alert_msg = $alert_msg.$row_inner[2].')';
+            $sql_alert="INSERT INTO `tbl_alert`(`user_id`, `id`, `id_name`, `id_table_name`, `alert_message`, `alert_type`, `hotel_id`, `entrytime`,`priority`) VALUES ('$row_inner[17]','$last_id','tmeo_id','tbl_time_off','$alert_msg','CREATE','$hotel_id','$entry_time',0)";
             $result_alert = $conn->query($sql_alert);
         }
 

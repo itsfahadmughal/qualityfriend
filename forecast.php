@@ -1061,7 +1061,7 @@ function forecast_prediction($conn,$input_data_,$date_forecast_,$i_){
 
                                                         $sql_inner_1="SELECT ROUND(SUM(`accommodation_sale`),2) AS acc_sale, ROUND(SUM(`additionalServices_sale`+`extras_sale`),2) AS ancill_sale, ROUND(SUM(`spa_sale`),2) AS spa_sale, COUNT(frcrrm_id) as total_stay FROM `tbl_forecast_reservations_rooms` WHERE `status` != 'cancelled' AND hotel_id = $hotel_id AND MONTH(`date`) = $month AND YEAR(`date`) =  $year";
                                                         $result_inner_1 = $conn->query($sql_inner_1);
-                                                        if ($result_inner_1 && $result_inner_1->num_rows > 0) {
+                                                        if ($result_inner_1 && $result_inner_1->num_rows > 15) {
                                                             while ($row_inner_1 = mysqli_fetch_array($result_inner_1)) {
                                                                 $accomodation_sale_arr1 = $input_data[$index_forecast_data] = [
                                                                     'period' => $index_forecast_data,
@@ -1261,6 +1261,13 @@ function forecast_prediction($conn,$input_data_,$date_forecast_,$i_){
                                                         </table>
                                                     </div>
                                                 </div>
+                                                <?php }else{ ?>
+                                                <div class="col-lg-12 text-center">
+                                                    <div class="text-center"><img src="assets/images/no-results-cookie.png" width="250" /></div>
+                                                    <h5 class="text-center"><b>Minimum previous 15 months record required please add first.</b></h5>
+                                                </div>
+                                                <?php } ?>
+
                                             </div>
                                         </div>
 
@@ -1395,10 +1402,10 @@ function forecast_prediction($conn,$input_data_,$date_forecast_,$i_){
                                                     <h3 class="forecast_main_color p-3 text-center">Staffing</h3>
                                                 </div>
                                                 <?php
-                                                    $total_gross=$total_net=$total12x_net=0;
-                                                    $sql_staffing_data = "SELECT DISTINCT a.* FROM `tbl_forecast_staffing_department` as a INNER JOIN tbl_forecast_staffing_cost as b on a.frcstfd_id = b.frcstfd_id WHERE a.`hotel_id` = $hotel_id AND a.`is_active` = 1 AND a.`is_delete` = 0 AND b.year = $year_";
-                                                    $result_staffing_data = $conn->query($sql_staffing_data);
-                                                    if ($result_staffing_data && $result_staffing_data->num_rows > 0) {
+                                                $total_gross=$total_net=$total12x_net=0;
+                                                $sql_staffing_data = "SELECT DISTINCT a.* FROM `tbl_forecast_staffing_department` as a INNER JOIN tbl_forecast_staffing_cost as b on a.frcstfd_id = b.frcstfd_id WHERE a.`hotel_id` = $hotel_id AND a.`is_active` = 1 AND a.`is_delete` = 0 AND b.year = $year_";
+                                                $result_staffing_data = $conn->query($sql_staffing_data);
+                                                if ($result_staffing_data && $result_staffing_data->num_rows > 0) {
                                                 ?>
 
                                                 <div class="col-lg-12">
@@ -1427,21 +1434,21 @@ function forecast_prediction($conn,$input_data_,$date_forecast_,$i_){
                                                             <tbody class="text-right">
 
                                                                 <?php
-                                                        while ($row = mysqli_fetch_array($result_staffing_data)) {
-                                                            $doc_id = $row['frcstfd_id'];
+                                                    while ($row = mysqli_fetch_array($result_staffing_data)) {
+                                                        $doc_id = $row['frcstfd_id'];
                                                                 ?>
                                                                 <tr class="forecast_pink_color">
                                                                     <td class="text-bold text-left"><?php echo $row['title']; ?></td>
                                                                     <td colspan="15"></td>
                                                                 </tr>
                                                                 <?php 
-                                                            $sql_inner = "SELECT * FROM `tbl_forecast_staffing_cost` WHERE `hotel_id` = $hotel_id AND `frcstfd_id` = $doc_id AND `year` = $year_";
-                                                            $result_inner = $conn->query($sql_inner);
-                                                            if ($result_inner && $result_inner->num_rows > 0) {
-                                                                while ($row_inner = mysqli_fetch_array($result_inner)) {
-                                                                    $total_gross += $row_inner['gross_salary'];
-                                                                    $total_net += $row_inner['net_salary'];
-                                                                    $total12x_net += $row_inner['net_salary']*12;
+                                                        $sql_inner = "SELECT * FROM `tbl_forecast_staffing_cost` WHERE `hotel_id` = $hotel_id AND `frcstfd_id` = $doc_id AND `year` = $year_";
+                                                        $result_inner = $conn->query($sql_inner);
+                                                        if ($result_inner && $result_inner->num_rows > 0) {
+                                                            while ($row_inner = mysqli_fetch_array($result_inner)) {
+                                                                $total_gross += $row_inner['gross_salary'];
+                                                                $total_net += $row_inner['net_salary'];
+                                                                $total12x_net += $row_inner['net_salary']*12;
                                                                 ?>
                                                                 <tr class="">
                                                                     <td class="text-left"><?php echo $row_inner['staff_name']; ?></td>
@@ -1462,9 +1469,9 @@ function forecast_prediction($conn,$input_data_,$date_forecast_,$i_){
                                                                     <td><?php echo number_format($row_inner['net_salary']*12); ?> €</td>
                                                                 </tr>
                                                                 <?php
-                                                                }
                                                             }
                                                         }
+                                                    }
                                                                 ?>
                                                                 <tr class="forecast_gray_color text-bold">
                                                                     <td class="text-left">Payroll</td>
@@ -1507,9 +1514,9 @@ function forecast_prediction($conn,$input_data_,$date_forecast_,$i_){
                                                     <h3 class="forecast_main_color p-3 text-center">GOODS PURCHASING FOR THE KITCHEN</h3>
                                                 </div>
                                                 <?php
-                                                    $sql_goods_data = "SELECT * FROM `tbl_forecast_goods_cost` WHERE `hotel_id` = $hotel_id ORDER BY date DESC";
-                                                    $result_goods_data = $conn->query($sql_goods_data);
-                                                    if ($result_goods_data && $result_goods_data->num_rows > 0) {
+                                                $sql_goods_data = "SELECT * FROM `tbl_forecast_goods_cost` WHERE `hotel_id` = $hotel_id ORDER BY date DESC";
+                                                $result_goods_data = $conn->query($sql_goods_data);
+                                                if ($result_goods_data && $result_goods_data->num_rows > 0) {
                                                 ?>    
 
                                                 <div class="col-lg-12">
@@ -1537,13 +1544,13 @@ function forecast_prediction($conn,$input_data_,$date_forecast_,$i_){
                                                             <tbody>
 
                                                                 <?php
-                                                        $exit=1; $meat_total=$fruit_total=$bread_total=$frozen_total=$dairy_total=$cons_total=$minus_total=$tea_total=$coffee_total=$cheese_total=$eggs_total=$total_cost_total=$total_nights_total=$Pre_Year_Check=0; 
+                                                    $exit=1; $meat_total=$fruit_total=$bread_total=$frozen_total=$dairy_total=$cons_total=$minus_total=$tea_total=$coffee_total=$cheese_total=$eggs_total=$total_cost_total=$total_nights_total=$Pre_Year_Check=0; 
 
-                                                        while ($row = mysqli_fetch_array($result_goods_data)) {
-                                                            $time=strtotime($row['date']);
-                                                            $Year_check = date("Y",$time);
-                                                            if($exit == 1){
-                                                                $Pre_Year_Check = date("Y",$time);
+                                                    while ($row = mysqli_fetch_array($result_goods_data)) {
+                                                        $time=strtotime($row['date']);
+                                                        $Year_check = date("Y",$time);
+                                                        if($exit == 1){
+                                                            $Pre_Year_Check = date("Y",$time);
                                                                 ?>
                                                                 <tr>
                                                                     <td></td>
@@ -1563,8 +1570,8 @@ function forecast_prediction($conn,$input_data_,$date_forecast_,$i_){
                                                                     <td class="text-bold"><?php echo 'Per Night (€)'; ?></td>
                                                                 </tr>
                                                                 <?php 
-                                                                $exit++; }
-                                                            if($Pre_Year_Check != $Year_check){
+                                                            $exit++; }
+                                                        if($Pre_Year_Check != $Year_check){
                                                                 ?>
                                                                 <tr class="forecast_gray_color">
                                                                     <td class="text-bold"><?php echo 'Total '.$Pre_Year_Check; ?></td>
@@ -1584,22 +1591,22 @@ function forecast_prediction($conn,$input_data_,$date_forecast_,$i_){
                                                                     <td><?php if($total_nights_total != 0){ echo round($total_cost_total/$total_nights_total,2);}else{echo $total_cost_total;} ?></td>
                                                                 </tr>
                                                                 <?php $meat_total=$fruit_total=$bread_total=$frozen_total=$dairy_total=$cons_total=$minus_total=$tea_total=$coffee_total=$cheese_total=$eggs_total=$total_cost_total=$total_nights_total=0;
-                                                                $Pre_Year_Check = date("Y",$time);
-                                                            }
+                                                            $Pre_Year_Check = date("Y",$time);
+                                                        }
 
 
-                                                            $meat_total+=$row['Meat'];
-                                                            $fruit_total+=$row['Fruit_Vegetable'];
-                                                            $bread_total+=$row['Bread'];
-                                                            $frozen_total+=$row['Frozen_Goods'];
-                                                            $dairy_total+=$row['Dairy_Products'];
-                                                            $cons_total+=$row['Cons_Earliest'];
-                                                            $minus_total+=$row['Minus'];
-                                                            $tea_total+=$row['Tea'];
-                                                            $coffee_total+=$row['Coffee'];
-                                                            $cheese_total+=$row['Cheese'];
-                                                            $eggs_total+=$row['Eggs'];
-                                                            $total_cost_total+=$row['total_cost'];
+                                                        $meat_total+=$row['Meat'];
+                                                        $fruit_total+=$row['Fruit_Vegetable'];
+                                                        $bread_total+=$row['Bread'];
+                                                        $frozen_total+=$row['Frozen_Goods'];
+                                                        $dairy_total+=$row['Dairy_Products'];
+                                                        $cons_total+=$row['Cons_Earliest'];
+                                                        $minus_total+=$row['Minus'];
+                                                        $tea_total+=$row['Tea'];
+                                                        $coffee_total+=$row['Coffee'];
+                                                        $cheese_total+=$row['Cheese'];
+                                                        $eggs_total+=$row['Eggs'];
+                                                        $total_cost_total+=$row['total_cost'];
                                                                 ?>
 
                                                                 <tr class="">
@@ -1617,18 +1624,18 @@ function forecast_prediction($conn,$input_data_,$date_forecast_,$i_){
                                                                     <td><?php echo $row['Eggs']; ?></td>
                                                                     <td><?php echo $row['total_cost']; ?></td>
                                                                     <td><?php 
-                                                            $sql_inner = 'SELECT count(*) as num FROM `tbl_forecast_reservations_rooms` WHERE `hotel_id` = '.$hotel_id.' AND MONTH(`date`) = '.date("m",$time).' AND YEAR(`date`) = '.date("Y",$time);
-                                                            $result_inner = $conn->query($sql_inner);
-                                                            $total_nights = 0;
-                                                            if ($result_inner && $result_inner->num_rows > 0) {
-                                                                while ($row_inner = mysqli_fetch_array($result_inner)) {
-                                                                    $total_nights = $row_inner['num'];
-                                                                }
-                                                            }else{
-                                                                $total_nights = 0;
+                                                        $sql_inner = 'SELECT count(*) as num FROM `tbl_forecast_reservations_rooms` WHERE `hotel_id` = '.$hotel_id.' AND MONTH(`date`) = '.date("m",$time).' AND YEAR(`date`) = '.date("Y",$time);
+                                                        $result_inner = $conn->query($sql_inner);
+                                                        $total_nights = 0;
+                                                        if ($result_inner && $result_inner->num_rows > 0) {
+                                                            while ($row_inner = mysqli_fetch_array($result_inner)) {
+                                                                $total_nights = $row_inner['num'];
                                                             }
-                                                            $total_nights_total += $total_nights;
-                                                            echo $total_nights; ?></td>
+                                                        }else{
+                                                            $total_nights = 0;
+                                                        }
+                                                        $total_nights_total += $total_nights;
+                                                        echo $total_nights; ?></td>
                                                                     <td><?php if($total_nights != 0){ echo round($row['total_cost']/$total_nights,2);}else{echo $row['total_cost'];} ?></td>
                                                                 </tr>
 
@@ -2079,16 +2086,16 @@ function forecast_prediction($conn,$input_data_,$date_forecast_,$i_){
                                                                 <select class="form-control display-inline w-47 wm-50" id="department_staffing">
                                                                     <option value="0">Select Staffing Department</option>
                                                                     <?php
-                                                    $sql_depart = "SELECT * FROM `tbl_forecast_staffing_department` WHERE hotel_id = $hotel_id AND is_active = 1 AND is_delete = 0 ORDER BY 1 DESC";
+                                                                    $sql_depart = "SELECT * FROM `tbl_forecast_staffing_department` WHERE hotel_id = $hotel_id AND is_active = 1 AND is_delete = 0 ORDER BY 1 DESC";
 
-                                                    $result_depart = $conn->query($sql_depart);
-                                                    if ($result_depart && $result_depart->num_rows > 0) {
-                                                        while ($row = mysqli_fetch_array($result_depart)) {
+                                                                    $result_depart = $conn->query($sql_depart);
+                                                                    if ($result_depart && $result_depart->num_rows > 0) {
+                                                                        while ($row = mysqli_fetch_array($result_depart)) {
                                                                     ?>
                                                                     <option value="<?php echo $row['frcstfd_id']; ?>"><?php echo $row['title']; ?></option>   
                                                                     <?php 
-                                                        } 
-                                                    }
+                                                                        } 
+                                                                    }
                                                                     ?> 
                                                                 </select>
                                                                 <input type="button" onclick="add_staff_depart();" class="btn w-47 ml-2 btn-secondary" value="Add Staff Department">

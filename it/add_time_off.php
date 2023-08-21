@@ -29,7 +29,7 @@ if(isset($_GET['hours'])){
         <meta name="author" content="">
         <!-- Favicon icon -->
         <link rel="icon" type="image/png" sizes="16x16" href="../assets/images/favicon.png">
-        <title>Tempo scaduto</title>
+        <title>Tempo libero</title>
         <link rel="canonical" href="https://www.wrappixel.com/templates/elegant-admin/" />
 
 
@@ -56,7 +56,7 @@ if(isset($_GET['hours'])){
         <div class="preloader">
             <div class="loader">
                 <div class="loader__figure"></div>
-                <p class="loader__label">Tempo scaduto</p>
+                <p class="loader__label">Tempo libero</p>
             </div>
         </div>
         <!-- ============================================================== -->
@@ -90,7 +90,7 @@ if(isset($_GET['hours'])){
                     <!-- ============================================================== -->
                     <div class="row page-titles heading_style">
                         <div class="col-md-3 align-self-center">
-                            <h4 class="text-themecolor font-weight-title font-size-title">Tempo scaduto</h4>
+                            <h4 class="text-themecolor font-weight-title font-size-title">Tempo libero</h4>
                         </div>
                     </div>
 
