@@ -1667,7 +1667,7 @@ function forecast_prediction($conn,$input_data_,$date_forecast_,$i_){
                                                     </thead>
                                                     <tbody>
                                                         <tr class="forecast_light_gray_color">
-                                                            <td><?php echo 'Betriebserlöse /Operating Revenue'; ?></td>
+                                                            <td class="text-left"><?php echo 'Betriebserlöse /Operating Revenue'; ?></td>
                                                             <td><?php echo round(array_sum($accomodation_sale_arr2)+array_sum($anicillary_sale_arr2)+array_sum($spa_sale_arr2),2); ?></td>
                                                             <td><?php echo 'abc'; ?></td>
                                                             <td></td>
@@ -1677,32 +1677,32 @@ function forecast_prediction($conn,$input_data_,$date_forecast_,$i_){
                                                             <td></td>
                                                         </tr>
                                                         <tr class="">
-                                                            <td><?php echo 'Logisumsätze Netto / Hotel Revenues Net'; ?></td>
+                                                            <td class="text-left"><?php echo 'Logisumsätze Netto / Hotel Revenues Net'; ?></td>
                                                             <td><?php echo round(array_sum($accomodation_sale_arr2),2); ?></td>
                                                             <td><?php echo 'abc'; ?></td>
                                                             <td></td>
                                                             <td></td>
-                                                            <td><?php echo 'Logisumsätze Netto / Hotel Revenues Net'; ?></td>
+                                                            <td class="text-left"><?php echo 'Logisumsätze Netto / Hotel Revenues Net'; ?></td>
                                                             <td><?php echo 'abc'; ?></td>
                                                             <td><?php echo ''; ?></td>
                                                         </tr>
                                                         <tr class="">
-                                                            <td><?php echo 'Nebenerlöse Netto / Ancillary Revenues Net'; ?></td>
+                                                            <td class="text-left"><?php echo 'Nebenerlöse Netto / Ancillary Revenues Net'; ?></td>
                                                             <td><?php echo round(array_sum($anicillary_sale_arr2),2); ?></td>
                                                             <td><?php echo 'abc'; ?></td>
                                                             <td></td>
                                                             <td></td>
-                                                            <td><?php echo 'Nebenerlöse Netto / Ancillary Revenues Net'; ?></td>
+                                                            <td class="text-left"><?php echo 'Nebenerlöse Netto / Ancillary Revenues Net'; ?></td>
                                                             <td><?php echo 'abc'; ?></td>
                                                             <td><?php echo ''; ?></td>
                                                         </tr>
                                                         <tr class="">
-                                                            <td><?php echo 'Spa-Umsätze (22%) Netto/Spa Revenues Net'; ?></td>
+                                                            <td class="text-left"><?php echo 'Spa-Umsätze (22%) Netto/Spa Revenues Net'; ?></td>
                                                             <td><?php echo round(array_sum($spa_sale_arr2),2); ?></td>
                                                             <td><?php echo 'abc'; ?></td>
                                                             <td></td>
                                                             <td></td>
-                                                            <td><?php echo 'Spa-Umsätze (22%) Netto/Spa Revenues Net'; ?></td>
+                                                            <td class="text-left"><?php echo 'Spa-Umsätze (22%) Netto/Spa Revenues Net'; ?></td>
                                                             <td><?php echo 'abc'; ?></td>
                                                             <td><?php echo ''; ?></td>
                                                         </tr>
@@ -1710,7 +1710,7 @@ function forecast_prediction($conn,$input_data_,$date_forecast_,$i_){
                                                         <tr><td class="custom_td_padding" colspan="8"></td></tr>
 
                                                         <tr class="forecast_light_gray_color">
-                                                            <td><?php echo 'Betriebsaufwände /Total Costs'; ?></td>
+                                                            <td class="text-left"><?php echo 'Betriebsaufwände /Total Costs'; ?></td>
                                                             <td><?php echo round(array_sum($other_costs_arr2)+array_sum($bank_charges_arr2)+array_sum($taxes_arr2)+array_sum($marketing_arr2)+array_sum($adm_cost_arr2)+array_sum($t_opr_cost_arr2)+array_sum($staffing_arr1)+array_sum($goods_cost_arr2)+array_sum($anicillary_arr2)+array_sum($spa_arr2),2); ?></td>
                                                             <td><?php echo 'abc'; ?></td>
                                                             <td></td>
@@ -1720,82 +1720,82 @@ function forecast_prediction($conn,$input_data_,$date_forecast_,$i_){
                                                             <td></td>
                                                         </tr>
                                                         <tr class="">
-                                                            <td><?php echo 'Wareneinsätze'; ?></td>
+                                                            <td class="text-left"><?php echo 'Wareneinsätze'; ?></td>
                                                             <td><?php echo round(array_sum($accomodation_sale_arr2)+array_sum($anicillary_sale_arr2)+array_sum($spa_sale_arr2),2); ?></td>
                                                             <td><?php echo 'abc'; ?></td>
                                                             <td></td>
                                                             <td></td>
-                                                            <td><?php echo 'Wareneinsätze'; ?></td>
+                                                            <td class="text-left"><?php echo 'Wareneinsätze'; ?></td>
                                                             <td><?php echo 'abc'; ?></td>
                                                             <td><?php echo ''; ?></td>
                                                         </tr>
                                                         <tr class="">
-                                                            <td><?php echo 'Mitarbeiter/Staffing'; ?></td>
+                                                            <td class="text-left"><?php echo 'Mitarbeiter/Staffing'; ?></td>
                                                             <td><?php echo round(array_sum($staffing_arr1),2); ?></td>
                                                             <td><?php echo 'abc'; ?></td>
                                                             <td></td>
                                                             <td></td>
-                                                            <td><?php echo 'Mitarbeiter/Staffing'; ?></td>
+                                                            <td class="text-left"><?php echo 'Mitarbeiter/Staffing'; ?></td>
                                                             <td><?php echo 'abc'; ?></td>
                                                             <td><?php echo ''; ?></td>
                                                         </tr>
                                                         <tr class="">
-                                                            <td><?php echo 'Betriebskosten Gesamt/Total Cost'; ?></td>
+                                                            <td class="text-left"><?php echo 'Betriebskosten Gesamt/Total Cost'; ?></td>
                                                             <td><?php echo round(array_sum($t_opr_cost_arr2),2); ?></td>
                                                             <td><?php echo 'abc'; ?></td>
                                                             <td></td>
                                                             <td></td>
-                                                            <td><?php echo 'Betriebskosten Gesamt/Total Cost'; ?></td>
+                                                            <td class="text-left"><?php echo 'Betriebskosten Gesamt/Total Cost'; ?></td>
                                                             <td><?php echo 'abc'; ?></td>
                                                             <td><?php echo ''; ?></td>
                                                         </tr>
                                                         <tr class="">
-                                                            <td><?php echo 'Verwaltungskosten /Administration Costs'; ?></td>
+                                                            <td class="text-left"><?php echo 'Verwaltungskosten /Administration Costs'; ?></td>
                                                             <td><?php echo round(array_sum($adm_cost_arr2),2); ?></td>
                                                             <td><?php echo 'abc'; ?></td>
                                                             <td></td>
                                                             <td></td>
-                                                            <td><?php echo 'Verwaltungskosten /Administration Costs'; ?></td>
+                                                            <td class="text-left"><?php echo 'Verwaltungskosten /Administration Costs'; ?></td>
                                                             <td><?php echo 'abc'; ?></td>
                                                             <td><?php echo ''; ?></td>
                                                         </tr>
                                                         <tr class="">
-                                                            <td><?php echo 'Marketing/Marketing'; ?></td>
-                                                            <td><?php echo 'abc'; ?></td>
+                                                            <td class="text-left"><?php echo 'Marketing/Marketing'; ?></td>
+                                                            <td><?php echo round(array_sum($marketing_arr2),2); ?></td>
                                                             <td><?php echo 'abc'; ?></td>
                                                             <td></td>
                                                             <td></td>
-                                                            <td><?php echo 'Marketing/Marketing'; ?></td>
+                                                            <td class="text-left"><?php echo 'Marketing/Marketing'; ?></td>
                                                             <td><?php echo 'abc'; ?></td>
                                                             <td><?php echo ''; ?></td>
                                                         </tr>
                                                         <tr class="">
-                                                            <td><?php echo 'Steuern Und Gebühren/Taxes'; ?></td>
-                                                            <td><?php echo 'abc'; ?></td>
+                                                            <td class="text-left"><?php echo 'Steuern Und Gebühren/Taxes'; ?></td>
+                                                            <td><?php echo round(array_sum($taxes_arr2),2); ?></td>
                                                             <td><?php echo 'abc'; ?></td>
                                                             <td></td>
                                                             <td></td>
-                                                            <td><?php echo 'Steuern Und Gebühren/Taxes'; ?></td>
+                                                            <td class="text-left"><?php echo 'Steuern Und Gebühren/Taxes'; ?></td>
                                                             <td><?php echo 'abc'; ?></td>
                                                             <td><?php echo ''; ?></td>
                                                         </tr>
                                                         <tr class="">
-                                                            <td><?php echo 'Bankspesen, Kk-Gebühren/Bank Charges'; ?></td>
-                                                            <td><?php echo 'abc'; ?></td>
+                                                            <td class="text-left"><?php echo 'Bankspesen, Kk-Gebühren/Bank Charges'; ?></td>
+                                                            <td><?php echo round(array_sum($bank_charges_arr2),2); ?></td>
                                                             <td><?php echo 'abc'; ?></td>
                                                             <td></td>
                                                             <td></td>
-                                                            <td><?php echo 'Bankspesen, Kk-Gebühren/Bank Charges'; ?></td>
+                                                            <td class="text-left"><?php echo 'Bankspesen, Kk-Gebühren/Bank Charges'; ?></td>
                                                             <td><?php echo 'abc'; ?></td>
                                                             <td><?php echo ''; ?></td>
                                                         </tr>
                                                         <tr class="">
-                                                            <td><?php echo 'Sonst. Aufwände /Other Costs'; ?></td>
-                                                            <td><?php echo 'abc'; ?></td>
+                                                            <td class="text-left"><?php echo 'Sonst. Aufwände /Other Costs'; ?></td>
+                                                            <td><?php echo round(array_sum($other_costs_arr2),2); ?></td>
                                                             <td><?php echo 'abc'; ?></td>
                                                             <td></td>
                                                             <td></td>
-                                                            <td><?php echo 'Sonst. Aufwände /Other Costs'; ?></td>
+                                                            <td class="text-left"><?php echo 'Sonst. Aufwände /Other Costs'; ?></td>
                                                             <td><?php echo 'abc'; ?></td>
                                                             <td><?php echo ''; ?></td>
                                                         </tr>
@@ -1803,8 +1803,8 @@ function forecast_prediction($conn,$input_data_,$date_forecast_,$i_){
                                                         <tr><td class="custom_td_padding" colspan="8"></td></tr>
 
                                                         <tr class="forecast_light_gray_color">
-                                                            <td><?php echo 'Gross Operating Profit (Be1)'; ?></td>
-                                                            <td><?php echo 'abc'; ?></td>
+                                                            <td class="text-left"><?php echo 'Gross Operating Profit (Be1)'; ?></td>
+                                                            <td><?php echo round((array_sum($accomodation_sale_arr2)+array_sum($anicillary_sale_arr2)+array_sum($spa_sale_arr2))-(array_sum($other_costs_arr2)+array_sum($bank_charges_arr2)+array_sum($taxes_arr2)+array_sum($marketing_arr2)+array_sum($adm_cost_arr2)+array_sum($t_opr_cost_arr2)+array_sum($staffing_arr1)+array_sum($goods_cost_arr2)+array_sum($anicillary_arr2)+array_sum($spa_arr2)),2); ?></td>
                                                             <td><?php echo 'abc'; ?></td>
                                                             <td></td>
                                                             <td></td>
@@ -1814,8 +1814,12 @@ function forecast_prediction($conn,$input_data_,$date_forecast_,$i_){
                                                         </tr>
 
                                                         <tr>
-                                                            <td><?php echo 'Total BankKonto'; ?></td>
-                                                            <td><b><?php echo 'abc'; ?></b></td>
+                                                            <td class="text-left"><?php echo 'Total BankKonto'; ?></td>
+                                                            <td>
+                                                                <?php
+                                                                if(isset($acc_balance_arr1[0])){ echo $acc_balance_arr1[0];
+                                                                                               }else{echo 0;} ?>
+                                                            </td>
                                                             <td><b><?php echo 'abc'; ?></b></td>
                                                             <td></td>
                                                             <td></td>
@@ -1825,8 +1829,12 @@ function forecast_prediction($conn,$input_data_,$date_forecast_,$i_){
                                                         </tr>
 
                                                         <tr>
-                                                            <td><?php echo 'Total Loan'; ?></td>
-                                                            <td><b><?php echo 'abc'; ?></b></td>
+                                                            <td class="text-left"><?php echo 'Total Loan'; ?></td>
+                                                            <td>
+                                                                <?php
+                                                                if(isset($total_loan_arr1[$index_desired])){ echo $total_loan_arr1[$index_desired];
+                                                                                                           }else{echo 0;} ?>
+                                                            </td>
                                                             <td><b><?php echo 'abc'; ?></b></td>
                                                             <td></td>
                                                             <td></td>
@@ -1836,8 +1844,8 @@ function forecast_prediction($conn,$input_data_,$date_forecast_,$i_){
                                                         </tr>
 
                                                         <tr class="forecast_light_gray_color">
-                                                            <td><?php echo 'Liquidität /Liquidity'; ?></td>
-                                                            <td><?php echo 'abc'; ?></td>
+                                                            <td class="text-left"><?php echo 'Liquidität /Liquidity'; ?></td>
+                                                            <td><?php echo round((array_sum($accomodation_sale_arr2)+array_sum($anicillary_sale_arr2)+array_sum($spa_sale_arr2)+$Total_Acc_Balance_Temp)-(array_sum($other_costs_arr2)+array_sum($bank_charges_arr2)+array_sum($taxes_arr2)+array_sum($marketing_arr2)+array_sum($adm_cost_arr2)+array_sum($t_opr_cost_arr2)+array_sum($staffing_arr1)+array_sum($goods_cost_arr2)+array_sum($anicillary_arr2)+array_sum($spa_arr2)+$Total_Loan_Temp),2); ?></td>
                                                             <td><?php echo 'abc'; ?></td>
                                                             <td></td>
                                                             <td></td>
