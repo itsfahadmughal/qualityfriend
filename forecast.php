@@ -5,11 +5,10 @@ include 'util_session.php';
 
 $year_ = date("Y");
 
+require './forecast_utills/sales-forecasting/vendor/autoload.php';
+use Cozy\ValueObjects\Matrix;
 
 function forecast_prediction($conn){
-
-    require './forecast_utills/sales-forecasting/vendor/autoload.php';
-    use Cozy\ValueObjects\Matrix;
 
 
     // EXTRACT PHASE
@@ -190,7 +189,7 @@ function forecast_prediction($conn){
     print_r($result[0]);
     // LOAD PHASE
 
-    $fp = fopen('../resources/result.csv', 'wb');
+    $fp = fopen('./forecast_utills/sales-forecasting/resources/result.csv', 'wb');
 
     foreach ($result as $data) {
         fputcsv($fp, $data);
