@@ -8,13 +8,13 @@ $year_ = date("Y");
 require './forecast_utills/sales-forecasting/vendor/autoload.php';
 use Cozy\ValueObjects\Matrix;
 
-function forecast_prediction($conn){
+function forecast_prediction($conn,$input_data_,$date_forecast_,$i_){
 
 
     // EXTRACT PHASE
-    $date_forecast = '';
-    $input_data = [];
-    $i = 0;
+    $date_forecast = $date_forecast_;
+    $input_data = $input_data_;
+    $i = $i_;
 
     //$sql="SELECT ROUND(SUM(`accommodation_sale`),2) as total_sale, DATE_FORMAT(`date`, '%m/%d/%Y') as date_final FROM `tbl_forecast_reservations_rooms` WHERE `hotel_id` = 1 GROUP BY MONTH(`date`), YEAR(`date`) ORDER By `date` ASC";
     $sql="SELECT costs_of_ancillary_goods, DATE_FORMAT(`date`, '%m/%d/%Y') as date_final FROM `tbl_forecast_expenses` WHERE `hotel_id` = 1 AND YEAR(`date`) >= 2022 ORDER BY `date` ASC";
@@ -22,10 +22,6 @@ function forecast_prediction($conn){
     $result = $conn->query($sql);
     if ($result && $result->num_rows > 0) {
         while($row = mysqli_fetch_array($result)) {
-
-            echo $row['date_final'].'</br>';
-            echo $row['costs_of_ancillary_goods'].'</br>'.'</br>';
-
             $input_data[$i] = [
                 'period' => $i,
                 'date' => $row['date_final'],
@@ -186,22 +182,23 @@ function forecast_prediction($conn){
     $average_error_rate = round(array_sum($error_rates) / count($error_rates), 1);
 
 
-    print_r($result[0]);
-    // LOAD PHASE
-
-    $fp = fopen('./forecast_utills/sales-forecasting/resources/result.csv', 'wb');
-
-    foreach ($result as $data) {
-        fputcsv($fp, $data);
+    $new_result = array();
+    for($j=0;$j<sizeof($result);$j++){
+        $compy = strtotime($result[$j]['date']);
+        if(date("Y") == date("Y", $compy)){
+            array_push($new_result,$result[$j]['forecast']);
+        }
     }
 
-    echo "\nAverage Error Rate: {$average_error_rate}%\n";
+    return $new_result;
+    //    print_r($new_result);
+    //    exit;
 
 }
 
 
 
-forecast_prediction($conn);
+//forecast_prediction($conn);
 
 
 
