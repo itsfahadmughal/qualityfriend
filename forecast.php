@@ -750,9 +750,6 @@ function forecast_prediction($conn,$input_data_,$date_forecast_,$i_){
 
 
 
-
-
-
                                                                 <tr class="">
                                                                     <td class="text-left"><?php echo 'Mitarbeiter/Staffing'; ?></td>
                                                                     <td><?php echo array_sum($staffing_arr); ?></td>
@@ -1000,12 +997,12 @@ function forecast_prediction($conn,$input_data_,$date_forecast_,$i_){
                                                 </div>
 
                                                 <?php $months_arr1=$staffing_arr1=$goods_cost_arr1=$stay_capacity_arr1=$acc_balance_arr1=$accomodation_sale_arr1=$anicillary_sale_arr1=$total_stay_arr1=$spa_sale_arr1=$anicillary_arr1=$spa_arr1=$t_opr_cost_arr1=$adm_cost_arr1=$marketing_arr1=$taxes_arr1=$bank_charges_arr1=$total_loan_arr1=$other_costs_arr1=$date_cost1=array();
-                                                $pre_year_2 = $year_-2;
+                                                $pre_year_3 = $year_-3;
                                                 $index_forecast_data=0;
                                                 $date_forecast_last = "";
-                                                
-                                                
-                                                $sql_cost_forecast = "SELECT *, DATE_FORMAT(`date`, '%m/%d/%Y') as date_final FROM `tbl_forecast_expenses` WHERE `hotel_id` = $hotel_id AND YEAR(`date`) > $pre_year_2 ORDER BY `date` ASC";
+
+
+                                                $sql_cost_forecast = "SELECT *, DATE_FORMAT(`date`, '%m/%d/%Y') as date_final FROM `tbl_forecast_expenses` WHERE `hotel_id` = $hotel_id AND YEAR(`date`) > $pre_year_3 ORDER BY `date` ASC";
                                                 $result_cost_forecast = $conn->query($sql_cost_forecast);
                                                 if ($result_cost_forecast && $result_cost_forecast->num_rows > 14) {
                                                     while ($row = mysqli_fetch_array($result_cost_forecast)) {
@@ -1054,9 +1051,9 @@ function forecast_prediction($conn,$input_data_,$date_forecast_,$i_){
                                                             'sales' => $row['other_costs'],
                                                         ];
 
-                                                        array_push($date_cost1,$row['date_final']);
+                                                        array_push($date_cost1,$row['date']);
 
-                                                        $time=strtotime($row['date_final']);
+                                                        $time=strtotime($row['date']);
                                                         $month=date("m",$time);
                                                         array_push($months_arr1,$month);
                                                         $year=date("Y",$time);
@@ -1109,16 +1106,6 @@ function forecast_prediction($conn,$input_data_,$date_forecast_,$i_){
                                                             ];
                                                         }
 
-
-                                                        $sql_inner_2="SELECT `bank_account_balance` FROM `tbl_forecast_revenues` WHERE hotel_id = $hotel_id AND MONTH(`date`) = $month AND YEAR(`date`) =  $year";
-                                                        $result_inner_2 = $conn->query($sql_inner_2);
-                                                        if ($result_inner_2 && $result_inner_2->num_rows > 0) {
-                                                            while ($row_inner_2 = mysqli_fetch_array($result_inner_2)) { array_push($acc_balance_arr1,$row_inner_2['bank_account_balance']);
-                                                                                                                       }
-                                                        }else{
-                                                            array_push($acc_balance_arr1,0);
-                                                        }
-
                                                         $sql_inner_3="SELECT `total_stay_capacity` FROM `tbl_forecast_keyfacts` WHERE hotel_id = $hotel_id AND MONTH(`date`) = $month AND YEAR(`date`) =  $year";
                                                         $result_inner_3 = $conn->query($sql_inner_3);
                                                         if ($result_inner_3 && $result_inner_3->num_rows > 0) {
@@ -1155,19 +1142,38 @@ function forecast_prediction($conn,$input_data_,$date_forecast_,$i_){
                                                             ];
                                                         }
 
-                                                        $sql_inner_5="SELECT SUM(`gross_salary`) as salary FROM `tbl_forecast_staffing_cost` WHERE hotel_id = $hotel_id AND `year` = $year";
-                                                        $result_inner_5 = $conn->query($sql_inner_5);
-                                                        if ($result_inner_5 && $result_inner_5->num_rows > 0) {
-                                                            while ($row_inner_5 = mysqli_fetch_array($result_inner_5)) { array_push($staffing_arr1,$row_inner_5['salary']);
-                                                                                                                       }
-                                                        }else{
-                                                            array_push($staffing_arr1,0);
-                                                        }
+
 
 
                                                         $date_forecast_last = $row['date_final'];
                                                         $index_forecast_data++;
 
+                                                    }
+
+                                                    $sql_inner_2="SELECT `bank_account_balance` FROM `tbl_forecast_revenues` WHERE hotel_id = $hotel_id AND YEAR(`date`) =  $year_ ORDER BY date ASC";
+                                                    $result_inner_2 = $conn->query($sql_inner_2);
+                                                    if ($result_inner_2 && $result_inner_2->num_rows > 0) {
+                                                        while ($row_inner_2 = mysqli_fetch_array($result_inner_2)) {
+                                                            array_push($acc_balance_arr1,$row_inner_2['bank_account_balance']);
+                                                        }
+                                                    }else{
+                                                        array_push($acc_balance_arr1,0);
+                                                    }
+
+                                                    $sql_inner_5="SELECT SUM(`gross_salary`) as salary FROM `tbl_forecast_staffing_cost` WHERE hotel_id = $hotel_id AND `year` = $year_";
+                                                    $result_inner_5 = $conn->query($sql_inner_5);
+                                                    $n=0;
+                                                    if ($result_inner_5 && $result_inner_5->num_rows > 0) {
+                                                        $row_inner_5 = mysqli_fetch_array($result_inner_5);
+                                                        while($n < 12) {
+                                                            array_push($staffing_arr1,$row_inner_5['salary']);
+                                                            $n++;
+                                                        }
+                                                    }else{
+                                                        while($n < 12) {
+                                                            array_push($staffing_arr1,0);
+                                                            $n++;
+                                                        }
                                                     }
                                                 ?>
 
@@ -1215,56 +1221,418 @@ function forecast_prediction($conn,$input_data_,$date_forecast_,$i_){
                                                     }
                                                                     ?> 
                                                                 </tr>
-                                                                <tr class="forecast_light_gray_color">
+                                                                <tr><td class="custom_td_padding" colspan="14"></td></tr>
+                                                                <tr><td class="text-left" colspan="14"><b><?php echo 'Betriebserlöse /Operating Revenue'; ?></b></td></tr>
+
+                                                                <tr class="">
+                                                                    <?php 
+                                                    $accomodation_sale_arr2 = forecast_prediction($conn,$accomodation_sale_arr1,$date_forecast_last,$index_forecast_data);
+                                                                    ?>
+
                                                                     <td class="text-left"><?php echo 'Logisumsätze Netto / Hotel Revenues Net'; ?></td>
-                                                                    <td><?php echo 'abc'; ?></td>
-                                                                    <td><?php echo 'abc'; ?></td>
-                                                                    <td><?php echo 'acv'; ?></td>
-                                                                    <td><?php echo 'abc'; ?></td>
-                                                                    <td><?php echo 'abc'; ?></td>
-                                                                    <td><?php echo 'acv'; ?></td>
-                                                                    <td><?php echo 'abc'; ?></td>
-                                                                    <td><?php echo 'abc'; ?></td>
-                                                                    <td><?php echo 'acv'; ?></td>
-                                                                    <td><?php echo 'abc'; ?></td>
-                                                                    <td><?php echo 'abc'; ?></td>
-                                                                    <td><?php echo 'acv'; ?></td>
-                                                                    <td><?php echo 'acv'; ?></td>
+                                                                    <td><?php echo array_sum($accomodation_sale_arr2); ?></td>
+                                                                    <?php
+                                                    for($i=0;$i<12;$i++){
+                                                        if(isset($accomodation_sale_arr2[$i])){
+                                                                    ?>
+                                                                    <td><?php echo $accomodation_sale_arr2[$i]; ?></td>
+                                                                    <?php
+                                                        }else{
+                                                                    ?>
+                                                                    <td><?php echo 0; ?></td>
+                                                                    <?php 
+                                                        }
+                                                    }
+                                                                    ?>
                                                                 </tr>
 
-                                                                <tr class="forecast_light_gray2_color">
-                                                                    <td class="text-left"><?php echo 'Mitarbeiter/Staffing'; ?></td>
-                                                                    <td><?php echo 'abc'; ?></td>
-                                                                    <td><?php echo 'abc'; ?></td>
-                                                                    <td><?php echo 'acv'; ?></td>
-                                                                    <td><?php echo 'abc'; ?></td>
-                                                                    <td><?php echo 'abc'; ?></td>
-                                                                    <td><?php echo 'acv'; ?></td>
-                                                                    <td><?php echo 'abc'; ?></td>
-                                                                    <td><?php echo 'abc'; ?></td>
-                                                                    <td><?php echo 'acv'; ?></td>
-                                                                    <td><?php echo 'abc'; ?></td>
-                                                                    <td><?php echo 'abc'; ?></td>
-                                                                    <td><?php echo 'acv'; ?></td>
-                                                                    <td><?php echo 'acv'; ?></td>
+                                                                <tr class="">
+                                                                    <td class="text-left"><?php echo 'Nebenerlöse Netto / Ancillary Revenues Net'; ?></td>
+                                                                    <?php 
+                                                    $anicillary_sale_arr2 = forecast_prediction($conn,$anicillary_sale_arr1,$date_forecast_last,$index_forecast_data);
+                                                                    ?>
+
+                                                                    <td><?php echo array_sum($anicillary_sale_arr2); ?></td>
+                                                                    <?php
+                                                    for($i=0;$i<12;$i++){
+                                                        if(isset($anicillary_sale_arr2[$i])){
+                                                                    ?>
+                                                                    <td><?php echo $anicillary_sale_arr2[$i]; ?></td>
+                                                                    <?php
+                                                        }else{
+                                                                    ?>
+                                                                    <td><?php echo 0; ?></td>
+                                                                    <?php 
+                                                        }
+                                                    }
+                                                                    ?>
                                                                 </tr>
+
+                                                                <tr class="">
+                                                                    <td class="text-left"><?php echo 'Spa-Umsätze (22%) Netto/Spa Revenues Net'; ?></td>
+                                                                    <?php 
+                                                    $spa_sale_arr2 = forecast_prediction($conn,$spa_sale_arr1,$date_forecast_last,$index_forecast_data);
+                                                                    ?>
+                                                                    <td><?php echo array_sum($spa_sale_arr2); ?></td>
+                                                                    <?php
+                                                    for($i=0;$i<12;$i++){
+                                                        if(isset($spa_sale_arr2[$i])){
+                                                                    ?>
+                                                                    <td><?php echo $spa_sale_arr2[$i]; ?></td>
+                                                                    <?php
+                                                        }else{
+                                                                    ?>
+                                                                    <td><?php echo 0; ?></td>
+                                                                    <?php 
+                                                        }
+                                                    }
+                                                                    ?>
+                                                                </tr>
+                                                                <tr class="forecast_light_gray_color">
+                                                                    <td class="text-left"><?php echo 'Gesamt'; ?></td>
+                                                                    <td><?php echo array_sum($accomodation_sale_arr2)+array_sum($anicillary_sale_arr2)+array_sum($spa_sale_arr2); ?></td>
+                                                                    <?php
+                                                    for($i=0;$i<12;$i++){
+                                                        if(isset($spa_sale_arr2[$i])){
+                                                                    ?>
+                                                                    <td><?php echo $accomodation_sale_arr2[$i]+$spa_sale_arr2[$i]+$anicillary_sale_arr2[$i]; ?></td>
+                                                                    <?php
+                                                        }else{
+                                                                    ?>
+                                                                    <td><?php echo 0; ?></td>
+                                                                    <?php 
+                                                        }
+                                                    }
+                                                                    ?>
+                                                                </tr>
+
+
+                                                                <tr><td class="custom_td_padding" colspan="14"></td></tr>
+                                                                <tr><td class="text-left" colspan="14"><b><?php echo 'Betriebsaufwände/Operating Costs'; ?></b></td></tr>
+                                                                <tr><td class="text-left" colspan="14"><?php echo 'Wareneinsätze'; ?></td></tr>
+                                                                <tr class="">
+                                                                    <td class="text-left"><?php echo 'Wes Hp /Costs Of Goods Halfboard'; ?></td>
+                                                                    <?php 
+                                                    $goods_cost_arr2 = forecast_prediction($conn,$goods_cost_arr1,$date_forecast_last,$index_forecast_data);
+                                                                    ?>
+                                                                    <td><?php echo array_sum($goods_cost_arr2); ?></td>
+                                                                    <?php
+                                                    for($i=0;$i<12;$i++){
+                                                        if(isset($goods_cost_arr2[$i])){
+                                                                    ?>
+                                                                    <td><?php echo $goods_cost_arr2[$i]; ?></td>
+                                                                    <?php
+                                                        }else{
+                                                                    ?>
+                                                                    <td><?php echo 0; ?></td>
+                                                                    <?php 
+                                                        }
+                                                    }
+                                                                    ?>
+                                                                </tr>
+                                                                <tr class="">
+                                                                    <td class="text-left"><?php echo 'Wes Nebenerlöse /Costs Of Ancillary Goods'; ?></td>
+                                                                    <?php 
+                                                    $anicillary_arr2 = forecast_prediction($conn,$anicillary_arr1,$date_forecast_last,$index_forecast_data);
+                                                                    ?>
+                                                                    <td><?php echo array_sum($anicillary_arr2); ?></td>
+                                                                    <?php
+                                                    for($i=0;$i<12;$i++){
+                                                        if(isset($anicillary_arr2[$i])){
+                                                                    ?>
+                                                                    <td><?php echo $anicillary_arr2[$i]; ?></td>
+                                                                    <?php
+                                                        }else{
+                                                                    ?>
+                                                                    <td><?php echo 0; ?></td>
+                                                                    <?php 
+                                                        }
+                                                    }
+                                                                    ?>
+                                                                </tr>
+                                                                <tr class="">
+                                                                    <td class="text-left"><?php echo 'Wes Spa /Costs Of Spa Products'; ?></td>
+                                                                    <?php 
+                                                    $spa_arr2 = forecast_prediction($conn,$spa_arr1,$date_forecast_last,$index_forecast_data);
+                                                                    ?>
+                                                                    <td><?php echo array_sum($spa_arr2); ?></td>
+                                                                    <?php
+                                                    for($i=0;$i<12;$i++){
+                                                        if(isset($spa_arr2[$i])){
+                                                                    ?>
+                                                                    <td><?php echo $spa_arr2[$i]; ?></td>
+                                                                    <?php
+                                                        }else{
+                                                                    ?>
+                                                                    <td><?php echo 0; ?></td>
+                                                                    <?php 
+                                                        }
+                                                    }
+                                                                    ?>
+                                                                </tr>
+                                                                <tr class="forecast_light_gray_color">
+                                                                    <td class="text-left"><?php echo 'Gesamt'; ?></td>
+                                                                    <td><?php echo array_sum($spa_arr2)+array_sum($anicillary_arr2)+array_sum($goods_cost_arr2); ?></td>
+                                                                    <?php
+                                                    for($i=0;$i<12;$i++){
+                                                        if(isset($spa_arr2[$i])){
+                                                                    ?>
+                                                                    <td><?php echo $spa_arr2[$i]+$anicillary_arr2[$i]+$goods_cost_arr2[$i]; ?></td>
+                                                                    <?php
+                                                        }else{
+                                                                    ?>
+                                                                    <td><?php echo 0; ?></td>
+                                                                    <?php 
+                                                        }
+                                                    }
+                                                                    ?>
+                                                                </tr>
+                                                                <tr><td class="custom_td_padding" colspan="14"></td></tr>
+
+
+                                                                <tr class="">
+                                                                    <td class="text-left"><?php echo 'Mitarbeiter/Staffing'; ?></td>
+                                                                    <td><?php echo array_sum($staffing_arr1); ?></td>
+                                                                    <?php
+                                                    for($i=0;$i<sizeof($staffing_arr1);$i++){
+                                                        if(isset($staffing_arr1[$i])){
+                                                                    ?>
+                                                                    <td><?php echo $staffing_arr1[$i]; ?></td>
+                                                                    <?php
+                                                        }else{
+                                                                    ?>
+                                                                    <td><?php echo 0; ?></td>
+                                                                    <?php 
+                                                        }
+                                                    }
+                                                                    ?>
+                                                                </tr>
+                                                                <tr class="">
+                                                                    <td class="text-left"><?php echo 'Betriebskosten Gesamt/Total Cost'; ?></td>
+                                                                    <?php 
+                                                    $t_opr_cost_arr2 = forecast_prediction($conn,$t_opr_cost_arr1,$date_forecast_last,$index_forecast_data);
+                                                                    ?>
+                                                                    <td><?php echo array_sum($t_opr_cost_arr2); ?></td>
+                                                                    <?php
+                                                    for($i=0;$i<12;$i++){
+                                                        if(isset($t_opr_cost_arr2[$i])){
+                                                                    ?>
+                                                                    <td><?php echo $t_opr_cost_arr2[$i]; ?></td>
+                                                                    <?php
+                                                        }else{
+                                                                    ?>
+                                                                    <td><?php echo 0; ?></td>
+                                                                    <?php 
+                                                        }
+                                                    }
+                                                                    ?>
+                                                                </tr>
+                                                                <tr class="">
+                                                                    <td class="text-left"><?php echo 'Verwaltungskosten /Administration Costs'; ?></td>
+                                                                    <?php 
+                                                    $adm_cost_arr2 = forecast_prediction($conn,$adm_cost_arr1,$date_forecast_last,$index_forecast_data);
+                                                                    ?>
+                                                                    <td><?php echo array_sum($adm_cost_arr2); ?></td>
+                                                                    <?php
+                                                    for($i=0;$i<12;$i++){
+                                                        if(isset($adm_cost_arr2[$i])){
+                                                                    ?>
+                                                                    <td><?php echo $adm_cost_arr2[$i]; ?></td>
+                                                                    <?php
+                                                        }else{
+                                                                    ?>
+                                                                    <td><?php echo 0; ?></td>
+                                                                    <?php 
+                                                        }
+                                                    }
+                                                                    ?>
+                                                                </tr>
+                                                                <tr class="">
+                                                                    <td class="text-left"><?php echo 'Marketing/Marketing'; ?></td>
+                                                                    <?php 
+                                                    $marketing_arr2 = forecast_prediction($conn,$marketing_arr1,$date_forecast_last,$index_forecast_data);
+                                                                    ?>
+                                                                    <td><?php echo array_sum($marketing_arr2); ?></td>
+                                                                    <?php
+                                                    for($i=0;$i<12;$i++){
+                                                        if(isset($marketing_arr2[$i])){
+                                                                    ?>
+                                                                    <td><?php echo $marketing_arr2[$i]; ?></td>
+                                                                    <?php
+                                                        }else{
+                                                                    ?>
+                                                                    <td><?php echo 0; ?></td>
+                                                                    <?php 
+                                                        }
+                                                    }
+                                                                    ?>
+                                                                </tr>
+                                                                <tr class="">
+                                                                    <td class="text-left"><?php echo 'Steuern Und Gebühren/Taxes'; ?></td>
+                                                                    <?php 
+                                                    $taxes_arr2 = forecast_prediction($conn,$taxes_arr1,$date_forecast_last,$index_forecast_data);
+                                                                    ?>
+                                                                    <td><?php echo array_sum($taxes_arr2); ?></td>
+                                                                    <?php
+                                                    for($i=0;$i<12;$i++){
+                                                        if(isset($taxes_arr2[$i])){
+                                                                    ?>
+                                                                    <td><?php echo $taxes_arr2[$i]; ?></td>
+                                                                    <?php
+                                                        }else{
+                                                                    ?>
+                                                                    <td><?php echo 0; ?></td>
+                                                                    <?php 
+                                                        }
+                                                    }
+                                                                    ?>
+                                                                </tr>
+                                                                <tr class="">
+                                                                    <td class="text-left"><?php echo 'Bankspesen, Kk-Gebühren/Bank Charges'; ?></td>
+                                                                    <?php 
+                                                    $bank_charges_arr2 = forecast_prediction($conn,$bank_charges_arr1,$date_forecast_last,$index_forecast_data);
+                                                                    ?>
+                                                                    <td><?php echo array_sum($bank_charges_arr2); ?></td>
+                                                                    <?php
+                                                    for($i=0;$i<12;$i++){
+                                                        if(isset($bank_charges_arr2[$i])){
+                                                                    ?>
+                                                                    <td><?php echo $bank_charges_arr2[$i]; ?></td>
+                                                                    <?php
+                                                        }else{
+                                                                    ?>
+                                                                    <td><?php echo 0; ?></td>
+                                                                    <?php 
+                                                        }
+                                                    }
+                                                                    ?>
+                                                                </tr>
+                                                                <tr class="">
+                                                                    <td class="text-left"><?php echo 'Sonst. Aufwände /Other Costs'; ?></td>
+                                                                    <?php 
+                                                    $other_costs_arr2 = forecast_prediction($conn,$other_costs_arr1,$date_forecast_last,$index_forecast_data);
+                                                                    ?>
+                                                                    <td><?php echo array_sum($other_costs_arr2); ?></td>
+                                                                    <?php
+                                                    for($i=0;$i<12;$i++){
+                                                        if(isset($other_costs_arr2[$i])){
+                                                                    ?>
+                                                                    <td><?php echo $other_costs_arr2[$i]; ?></td>
+                                                                    <?php
+                                                        }else{
+                                                                    ?>
+                                                                    <td><?php echo 0; ?></td>
+                                                                    <?php 
+                                                        }
+                                                    }
+                                                                    ?>
+                                                                </tr>
+
+                                                                <tr class="forecast_light_gray_color">
+                                                                    <td class="text-left"><?php echo 'Gesamt'; ?></td>
+                                                                    <td><?php echo array_sum($other_costs_arr2)+array_sum($bank_charges_arr2)+array_sum($taxes_arr2)+array_sum($marketing_arr2)+array_sum($adm_cost_arr2)+array_sum($t_opr_cost_arr2)+array_sum($staffing_arr1)+array_sum($goods_cost_arr2)+array_sum($anicillary_arr2)+array_sum($spa_arr2); ?></td>
+                                                                    <?php
+                                                    for($i=0;$i<12;$i++){
+                                                        if(isset($spa_arr2[$i])){
+                                                                    ?>
+                                                                    <td><?php echo $other_costs_arr2[$i]+$bank_charges_arr2[$i]+$taxes_arr2[$i]+$marketing_arr2[$i]+$adm_cost_arr2[$i]+$t_opr_cost_arr2[$i]+$staffing_arr1[$i]+$goods_cost_arr2[$i]+$anicillary_arr2[$i]+$spa_arr2[$i]; ?></td>
+                                                                    <?php
+                                                        }else{
+                                                                    ?>
+                                                                    <td><?php echo 0; ?></td>
+                                                                    <?php 
+                                                        }
+                                                    }
+                                                                    ?>
+                                                                </tr>
+                                                                <tr><td class="custom_td_padding" colspan="14"></td></tr>
+                                                                <tr class="forecast_light_gray2_color">
+                                                                    <td class="text-left"><?php echo 'Gross Operating Profit (Be1)'; ?></td>
+                                                                    <td><?php echo (array_sum($accomodation_sale_arr2)+array_sum($anicillary_sale_arr2)+array_sum($spa_sale_arr2))-(array_sum($other_costs_arr2)+array_sum($bank_charges_arr2)+array_sum($taxes_arr2)+array_sum($marketing_arr2)+array_sum($adm_cost_arr2)+array_sum($t_opr_cost_arr2)+array_sum($staffing_arr1)+array_sum($goods_cost_arr2)+array_sum($anicillary_arr2)+array_sum($spa_arr2)); ?></td>
+                                                                    <?php
+                                                    for($i=0;$i<12;$i++){
+                                                        if(isset($spa_arr2[$i])){
+                                                                    ?>
+                                                                    <td><?php echo ($accomodation_sale_arr2[$i]+$spa_sale_arr2[$i]+$anicillary_sale_arr2[$i])-($other_costs_arr2[$i]+$bank_charges_arr2[$i]+$taxes_arr2[$i]+$marketing_arr2[$i]+$adm_cost_arr2[$i]+$t_opr_cost_arr2[$i]+$staffing_arr1[$i]+$goods_cost_arr2[$i]+$anicillary_arr2[$i]+$spa_arr2[$i]); ?></td>
+                                                                    <?php
+                                                        }else{
+                                                                    ?>
+                                                                    <td><?php echo 0; ?></td>
+                                                                    <?php 
+                                                        }
+                                                    }
+                                                                    ?>
+                                                                </tr>
+
+                                                                <tr><td class="custom_td_padding" colspan="14"></td></tr>
+                                                                <tr class="">
+                                                                    <td class="text-left"><?php echo 'Total BankKonto'; ?></td>
+                                                                    <td><?php 
+                                                    $Total_Acc_Balance_Temp = 0;
+                                                    if(isset($acc_balance_arr1[0])){ echo $acc_balance_arr1[0];
+                                                                                    $Total_Acc_Balance_Temp = $acc_balance_arr1[0];
+                                                                                   }else{echo 0;} ?></td>
+                                                                    <?php
+                                                    for($i=0;$i<12;$i++){
+                                                        if(isset($acc_balance_arr1[$i]) && $i == 0){
+                                                                    ?>
+                                                                    <td><?php echo $acc_balance_arr1[$i]; ?></td>
+                                                                    <?php
+                                                        }else{
+                                                                    ?>
+                                                                    <td><?php echo 0; ?></td>
+                                                                    <?php 
+                                                        }
+                                                    }
+                                                                    ?>
+                                                                </tr>
+
+                                                                <tr><td class="custom_td_padding" colspan="14"></td></tr>
+                                                                <tr class="">
+                                                                    <td class="text-left"><?php echo 'Total Loan'; ?></td>
+                                                                    <td>
+                                                                        <?php
+                                                    $full_date_loan = date("Y")."-1-28";
+
+                                                    $index_desired=array_search($full_date_loan,$date_cost1);
+                                                    $Total_Loan_Temp = 0;
+                                                    if(isset($total_loan_arr1[$index_desired])){ echo $total_loan_arr1[$index_desired];
+                                                                                                $total_Loan_Temp = $total_loan_arr1[$index_desired];
+                                                                                               }else{echo 0;} ?></td>
+                                                                    <?php
+                                                    for($i=0;$i<12;$i++){
+                                                        if(isset($total_loan_arr1[$index_desired]) && $i == 0){
+                                                                    ?>
+                                                                    <td><?php echo $total_loan_arr1[$index_desired]; ?></td>
+                                                                    <?php
+                                                        }else{
+                                                                    ?>
+                                                                    <td><?php echo 0; ?></td>
+                                                                    <?php 
+                                                        }
+                                                    }
+                                                                    ?>
+                                                                </tr>
+                                                                <tr><td class="custom_td_padding" colspan="14"></td></tr>
 
                                                                 <tr class="forecast_main_color">
                                                                     <td class="text-left"><?php echo 'Liquidität /Liquidity'; ?></td>
-                                                                    <td><?php echo 'abc'; ?></td>
-                                                                    <td><?php echo 'abc'; ?></td>
-                                                                    <td><?php echo 'acv'; ?></td>
-                                                                    <td><?php echo 'abc'; ?></td>
-                                                                    <td><?php echo 'abc'; ?></td>
-                                                                    <td><?php echo 'acv'; ?></td>
-                                                                    <td><?php echo 'abc'; ?></td>
-                                                                    <td><?php echo 'abc'; ?></td>
-                                                                    <td><?php echo 'acv'; ?></td>
-                                                                    <td><?php echo 'abc'; ?></td>
-                                                                    <td><?php echo 'abc'; ?></td>
-                                                                    <td><?php echo 'acv'; ?></td>
-                                                                    <td><?php echo 'acv'; ?></td>
+                                                                    <td><?php echo (array_sum($accomodation_sale_arr2)+array_sum($anicillary_sale_arr2)+array_sum($spa_sale_arr2)+$Total_Acc_Balance_Temp)-(array_sum($other_costs_arr2)+array_sum($bank_charges_arr2)+array_sum($taxes_arr2)+array_sum($marketing_arr2)+array_sum($adm_cost_arr2)+array_sum($t_opr_cost_arr2)+array_sum($staffing_arr1)+array_sum($goods_cost_arr2)+array_sum($anicillary_arr2)+array_sum($spa_arr2)+$Total_Loan_Temp); ?></td>
+                                                                    <?php
+                                                    for($i=0;$i<12;$i++){
+                                                        if($i == 0){
+                                                                    ?>
+                                                                    <td><?php echo ($accomodation_sale_arr2[$i]+$spa_sale_arr2[$i]+$anicillary_sale_arr2[$i]+$Total_Acc_Balance_Temp)-($other_costs_arr2[$i]+$bank_charges_arr2[$i]+$taxes_arr2[$i]+$marketing_arr2[$i]+$adm_cost_arr2[$i]+$t_opr_cost_arr2[$i]+$staffing_arr1[$i]+$goods_cost_arr2[$i]+$anicillary_arr2[$i]+$spa_arr2[$i]+$Total_Loan_Temp); ?></td>
+                                                                    <?php
+                                                        }else{
+                                                                    ?>
+                                                                    <td><?php echo ($accomodation_sale_arr2[$i]+$spa_sale_arr2[$i]+$anicillary_sale_arr2[$i])-($other_costs_arr2[$i]+$bank_charges_arr2[$i]+$taxes_arr2[$i]+$marketing_arr2[$i]+$adm_cost_arr2[$i]+$t_opr_cost_arr2[$i]+$staffing_arr1[$i]+$goods_cost_arr2[$i]+$anicillary_arr2[$i]+$spa_arr2[$i]); ?></td>
+                                                                    <?php
+                                                        }
+                                                    }
+                                                                    ?>
                                                                 </tr>
+
                                                             </tbody>
                                                         </table>
                                                     </div>
