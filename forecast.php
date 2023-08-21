@@ -1677,7 +1677,7 @@ function forecast_prediction($conn,$input_data_,$date_forecast_,$i_){
                                                             <td></td>
                                                         </tr>
                                                         <tr class="">
-                                                            <td><?php echo 'Betriebserlöse /Operating Revenue'; ?></td>
+                                                            <td><?php echo 'Logisumsätze Netto / Hotel Revenues Net'; ?></td>
                                                             <td><?php echo 'abc'; ?></td>
                                                             <td><?php echo 'abc'; ?></td>
                                                             <td></td>
@@ -1686,6 +1686,166 @@ function forecast_prediction($conn,$input_data_,$date_forecast_,$i_){
                                                             <td><?php echo 'abc'; ?></td>
                                                             <td><?php echo ''; ?></td>
                                                         </tr>
+                                                        <tr class="">
+                                                            <td><?php echo 'Nebenerlöse Netto / Ancillary Revenues Net'; ?></td>
+                                                            <td><?php echo 'abc'; ?></td>
+                                                            <td><?php echo 'abc'; ?></td>
+                                                            <td></td>
+                                                            <td></td>
+                                                            <td><?php echo 'Nebenerlöse Netto / Ancillary Revenues Net'; ?></td>
+                                                            <td><?php echo 'abc'; ?></td>
+                                                            <td><?php echo ''; ?></td>
+                                                        </tr>
+                                                        <tr class="">
+                                                            <td><?php echo 'Spa-Umsätze (22%) Netto/Spa Revenues Net'; ?></td>
+                                                            <td><?php echo 'abc'; ?></td>
+                                                            <td><?php echo 'abc'; ?></td>
+                                                            <td></td>
+                                                            <td></td>
+                                                            <td><?php echo 'Spa-Umsätze (22%) Netto/Spa Revenues Net'; ?></td>
+                                                            <td><?php echo 'abc'; ?></td>
+                                                            <td><?php echo ''; ?></td>
+                                                        </tr>
+
+                                                        <tr><td class="custom_td_padding" colspan="8"></td></tr>
+
+                                                        <tr class="forecast_light_gray_color">
+                                                            <td><?php echo 'Betriebsaufwände /Total Costs'; ?></td>
+                                                            <td><?php echo 'abc'; ?></td>
+                                                            <td><?php echo 'abc'; ?></td>
+                                                            <td></td>
+                                                            <td></td>
+                                                            <td></td>
+                                                            <td></td>
+                                                            <td></td>
+                                                        </tr>
+                                                        <tr class="">
+                                                            <td><?php echo 'Wareneinsätze'; ?></td>
+                                                            <td><?php echo 'abc'; ?></td>
+                                                            <td><?php echo 'abc'; ?></td>
+                                                            <td></td>
+                                                            <td></td>
+                                                            <td><?php echo 'Wareneinsätze'; ?></td>
+                                                            <td><?php echo 'abc'; ?></td>
+                                                            <td><?php echo ''; ?></td>
+                                                        </tr>
+                                                        <tr class="">
+                                                            <td><?php echo 'Mitarbeiter/Staffing'; ?></td>
+                                                            <td><?php echo 'abc'; ?></td>
+                                                            <td><?php echo 'abc'; ?></td>
+                                                            <td></td>
+                                                            <td></td>
+                                                            <td><?php echo 'Mitarbeiter/Staffing'; ?></td>
+                                                            <td><?php echo 'abc'; ?></td>
+                                                            <td><?php echo ''; ?></td>
+                                                        </tr>
+                                                        <tr class="">
+                                                            <td><?php echo 'Betriebskosten Gesamt/Total Cost'; ?></td>
+                                                            <td><?php echo 'abc'; ?></td>
+                                                            <td><?php echo 'abc'; ?></td>
+                                                            <td></td>
+                                                            <td></td>
+                                                            <td><?php echo 'Betriebskosten Gesamt/Total Cost'; ?></td>
+                                                            <td><?php echo 'abc'; ?></td>
+                                                            <td><?php echo ''; ?></td>
+                                                        </tr>
+                                                        <tr class="">
+                                                            <td><?php echo 'Verwaltungskosten /Administration Costs'; ?></td>
+                                                            <td><?php echo 'abc'; ?></td>
+                                                            <td><?php echo 'abc'; ?></td>
+                                                            <td></td>
+                                                            <td></td>
+                                                            <td><?php echo 'Verwaltungskosten /Administration Costs'; ?></td>
+                                                            <td><?php echo 'abc'; ?></td>
+                                                            <td><?php echo ''; ?></td>
+                                                        </tr>
+                                                        <tr class="">
+                                                            <td><?php echo 'Marketing/Marketing'; ?></td>
+                                                            <td><?php echo 'abc'; ?></td>
+                                                            <td><?php echo 'abc'; ?></td>
+                                                            <td></td>
+                                                            <td></td>
+                                                            <td><?php echo 'Marketing/Marketing'; ?></td>
+                                                            <td><?php echo 'abc'; ?></td>
+                                                            <td><?php echo ''; ?></td>
+                                                        </tr>
+                                                        <tr class="">
+                                                            <td><?php echo 'Steuern Und Gebühren/Taxes'; ?></td>
+                                                            <td><?php echo 'abc'; ?></td>
+                                                            <td><?php echo 'abc'; ?></td>
+                                                            <td></td>
+                                                            <td></td>
+                                                            <td><?php echo 'Steuern Und Gebühren/Taxes'; ?></td>
+                                                            <td><?php echo 'abc'; ?></td>
+                                                            <td><?php echo ''; ?></td>
+                                                        </tr>
+                                                        <tr class="">
+                                                            <td><?php echo 'Bankspesen, Kk-Gebühren/Bank Charges'; ?></td>
+                                                            <td><?php echo 'abc'; ?></td>
+                                                            <td><?php echo 'abc'; ?></td>
+                                                            <td></td>
+                                                            <td></td>
+                                                            <td><?php echo 'Bankspesen, Kk-Gebühren/Bank Charges'; ?></td>
+                                                            <td><?php echo 'abc'; ?></td>
+                                                            <td><?php echo ''; ?></td>
+                                                        </tr>
+                                                        <tr class="">
+                                                            <td><?php echo 'Sonst. Aufwände /Other Costs'; ?></td>
+                                                            <td><?php echo 'abc'; ?></td>
+                                                            <td><?php echo 'abc'; ?></td>
+                                                            <td></td>
+                                                            <td></td>
+                                                            <td><?php echo 'Sonst. Aufwände /Other Costs'; ?></td>
+                                                            <td><?php echo 'abc'; ?></td>
+                                                            <td><?php echo ''; ?></td>
+                                                        </tr>
+
+                                                        <tr><td class="custom_td_padding" colspan="8"></td></tr>
+
+                                                        <tr class="forecast_light_gray_color">
+                                                            <td><?php echo 'Gross Operating Profit (Be1)'; ?></td>
+                                                            <td><?php echo 'abc'; ?></td>
+                                                            <td><?php echo 'abc'; ?></td>
+                                                            <td></td>
+                                                            <td></td>
+                                                            <td></td>
+                                                            <td></td>
+                                                            <td></td>
+                                                        </tr>
+
+                                                        <tr>
+                                                            <td><?php echo 'Total BankKonto'; ?></td>
+                                                            <td><b><?php echo 'abc'; ?></b></td>
+                                                            <td><b><?php echo 'abc'; ?></b></td>
+                                                            <td></td>
+                                                            <td></td>
+                                                            <td></td>
+                                                            <td></td>
+                                                            <td></td>
+                                                        </tr>
+
+                                                        <tr>
+                                                            <td><?php echo 'Total Loan'; ?></td>
+                                                            <td><b><?php echo 'abc'; ?></b></td>
+                                                            <td><b><?php echo 'abc'; ?></b></td>
+                                                            <td></td>
+                                                            <td></td>
+                                                            <td></td>
+                                                            <td></td>
+                                                            <td></td>
+                                                        </tr>
+                                                        
+                                                         <tr class="forecast_light_gray_color">
+                                                            <td><?php echo 'Liquidität /Liquidity'; ?></td>
+                                                            <td><?php echo 'abc'; ?></td>
+                                                            <td><?php echo 'abc'; ?></td>
+                                                            <td></td>
+                                                            <td></td>
+                                                            <td></td>
+                                                            <td></td>
+                                                            <td></td>
+                                                        </tr>
+
                                                     </tbody>
                                                 </table>
                                             </div>
