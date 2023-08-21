@@ -1,0 +1,336 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Zimmerreservierungen>
+    <Zimmerreservierung Nummer="100" Name="Beauty" Anreise="2012-12-20" Abreise="2013-01-04" Status="occupied" Verpflegung="HB">
+        <Zimmergast NameF="E"/>
+        <Zimmergast NameF="Alber"/>
+        <Zimmergast NameF="Pitocco"/>
+    </Zimmerreservierung>
+    <Zimmerreservierung Nummer="62" Name="Deluxe DZ &quot;JOHANNIS&quot; mit traumhaftem Seeblick" Anreise="2023-06-28" Abreise="2023-07-05" Status="reserved" Verpflegung="HB" Erw.="2" Offer="AKTIV7C"/>
+    <Zimmerreservierung Nummer="44" Name="BIO de luxe DZ &quot;MERL&quot; mit traumhaftem Seeblick" Anreise="2023-06-27" Abreise="2023-07-04" Status="reserved" Verpflegung="HB" Erw.="2" Offer="AKTIV7C">
+        <CombiBemerkungZimmerservice>2x weiche Matratzenauflage / 1x Anatomico classico</CombiBemerkungZimmerservice>
+    </Zimmerreservierung>
+    <Zimmerreservierung Nummer="44" Name="BIO de luxe DZ &quot;MERL&quot; mit traumhaftem Seeblick" Anreise="2023-06-14" Abreise="2023-06-24" Status="occupied" Verpflegung="HB" Erw.="2" Offer="AKTIV7B">
+        <Zimmergast NameF="Lack Rosmarie" GastGeburtsdatum="1952-03-28" Language="de" VIP="0" Stays="16"/>
+        <Zimmergast NameF="Lack Peter" GastGeburtsdatum="1949-12-06" Language="de" VIP="0" Stays="16"/>
+    </Zimmerreservierung>
+    <Zimmerreservierung Nummer="60" Name="Suite &quot;KOBEN&quot; mit traumhaftem Seeblick" Anreise="2023-06-17" Abreise="2023-07-01" Status="occupied" Verpflegung="HB" Erw.="2" Offer="AKTIV7B">
+        <CombiBemerkungZimmerservice>1x Memo Relax</CombiBemerkungZimmerservice>
+        <Zimmergast NameF="Brandt Holger" GastGeburtsdatum="1965-08-15" Language="de" VIP="0" Stays="5"/>
+        <Zimmergast NameF="Brandt Jana" GastGeburtsdatum="1965-11-22" Language="de" VIP="0" Stays="5"/>
+    </Zimmerreservierung>
+    <Zimmerreservierung Nummer="53" Name="Deluxe DZ &quot;JOHANNIS&quot; mit traumhaftem Seeblick" Anreise="2023-06-23" Abreise="2023-06-25" Status="reserved" Verpflegung="HB" Erw.="1" Offer="AKTIV1-3B">
+        <CombiBemerkungZimmerservice>7+9 Jahre, 2+8 Jahre</CombiBemerkungZimmerservice>
+    </Zimmerreservierung>
+    <Zimmerreservierung Nummer="47" Name="Naturdesign DZ &quot;MITTERSTIELER“ mit Seeblick" Anreise="2023-06-23" Abreise="2023-06-25" Status="reserved" Verpflegung="HB" Erw.="1" Offer="AKTIV1-3B">
+        <CombiBemerkungZimmerservice>7+9 Jahre, 2+8 Jahre</CombiBemerkungZimmerservice>
+    </Zimmerreservierung>
+    <Zimmerreservierung Nummer="55" Name="Deluxe DZ &quot;WINDSPIEL&quot; mit traumhaftem Seeblick" Anreise="2023-06-23" Abreise="2023-06-25" Status="reserved" Verpflegung="HB" Erw.="2" K2="1" K3="1" Offer="AKTIV1-3B">
+        <CombiBemerkungZimmerservice>7+9 Jahre, 2+8 Jahre</CombiBemerkungZimmerservice>
+    </Zimmerreservierung>
+    <Zimmerreservierung Nummer="66" Name="Deluxe DZ &quot;WINDSPIEL&quot; mit traumhaftem Seeblick" Anreise="2023-06-23" Abreise="2023-06-25" Status="reserved" Verpflegung="HB" Erw.="2" K1="1" K3="1" Offer="AKTIV1-3B">
+        <CombiBemerkungZimmerservice>7+9 Jahre, 2+8 Jahre</CombiBemerkungZimmerservice>
+    </Zimmerreservierung>
+    <Zimmerreservierung Nummer="57" Name="Deluxe DZ &quot;WINDSPIEL&quot; mit traumhaftem Seeblick" Anreise="2023-06-18" Abreise="2023-06-25" Status="reserved" Verpflegung="HB" Erw.="2" Offer="AKTIV7B">
+        <CombiBemerkungZimmerservice>7+9 Jahre, 2+8 Jahre</CombiBemerkungZimmerservice>
+        <Zimmergast NameF="Rübner Karin" Language="de" VIP="0"/>
+    </Zimmerreservierung>
+    <Zimmerreservierung Nummer="57" Name="Deluxe DZ &quot;WINDSPIEL&quot; mit traumhaftem Seeblick" Anreise="2023-06-11" Abreise="2023-06-18" Status="departed" Verpflegung="HB" Erw.="2" BookingGroup="STAMM" Offer="AKTIV7C">
+        <Zimmergast NameF="Bänziger Paul" GastGeburtsdatum="1946-03-10" Language="de" VIP="1" Stays="7"/>
+        <Zimmergast NameF="Bänziger Silvia" GastGeburtsdatum="1953-02-15" Language="de" VIP="0" Stays="7"/>
+    </Zimmerreservierung>
+    <Zimmerreservierung Nummer="52" Name="Einzelzimmer (teils mit traumhaften Seeblick)" Anreise="2023-06-17" Abreise="2023-06-24" Status="occupied" Verpflegung="HB" Erw.="1" Offer="AKTIV7C">
+        <Zimmergast NameF="Müller Gabriele" GastGeburtsdatum="1964-06-09" Language="de" VIP="0"/>
+    </Zimmerreservierung>
+    <Zimmerreservierung Nummer="43" Name="Naturdesign DZ &quot;MITTERSTIELER“ mit Seeblick" Anreise="2023-06-11" Abreise="2023-06-18" Status="departed" Verpflegung="HB" Erw.="2" BookingGroup="STAMM" Offer="AKTIV7C">
+        <Zimmergast NameF="Seckinger Hildegard" GastGeburtsdatum="1949-06-27" Language="de" VIP="0" Stays="6"/>
+        <Zimmergast NameF="Seckinger Klaus-Peter" GastGeburtsdatum="1954-01-02" Language="de" VIP="0" Stays="6"/>
+    </Zimmerreservierung>
+    <Zimmerreservierung Nummer="53" Name="Deluxe DZ &quot;JOHANNIS&quot; mit traumhaftem Seeblick" Anreise="2023-07-07" Abreise="2023-07-14" Status="reserved" Verpflegung="HB" Erw.="2" BookingGroup="STAMM" Offer="AKTIV7B"/>
+    <Zimmerreservierung Nummer="46" Name="Naturdesign DZ &quot;MITTERSTIELER“ mit Seeblick" Anreise="2023-06-04" Abreise="2023-06-18" Status="request" Verpflegung="HB" Erw.="2" Offer="AKTIV7B"/>
+    <Zimmerreservierung Nummer="62" Name="Deluxe DZ &quot;JOHANNIS&quot; mit traumhaftem Seeblick" Anreise="2023-06-04" Abreise="2023-06-18" Status="request" Verpflegung="HB" Erw.="2" Offer="AKTIV7B"/>
+    <Zimmerreservierung Nummer="42" Name="Naturdesign DZ &quot;MITTERSTIELER“ mit Seeblick" Anreise="2023-07-02" Abreise="2023-07-10" Status="roomFixed" Verpflegung="HB" Erw.="2" Offer="AKTIV7C"/>
+    <Zimmerreservierung Nummer="51" Name="Deluxe DZ &quot;JOHANNIS&quot; mit traumhaftem Seeblick" Anreise="2023-07-02" Abreise="2023-07-10" Status="roomFixed" Verpflegung="HB" Erw.="2" Offer="AKTIV7C"/>
+    <Zimmerreservierung Nummer="55" Name="Deluxe DZ &quot;WINDSPIEL&quot; mit traumhaftem Seeblick" Anreise="2023-06-17" Abreise="2023-06-23" Status="occupied" Verpflegung="HB" Erw.="2" Offer="AKTIV4-6B">
+        <Zimmergast NameF="Englert Peter" GastGeburtsdatum="1957-08-01" Language="de" VIP="0"/>
+        <Zimmergast NameF="Englert Gabriele Maria" GastGeburtsdatum="1957-06-22" Language="de" VIP="0"/>
+    </Zimmerreservierung>
+    <Zimmerreservierung Nummer="64" Name="Deluxe DZ &quot;WINDSPIEL&quot; mit traumhaftem Seeblick" Anreise="2023-06-15" Abreise="2023-06-22" Status="occupied" Verpflegung="HB" Erw.="2" K2="2" Offer="AKTIV7B">
+        <CombiBemerkungZimmerservice>5+5</CombiBemerkungZimmerservice>
+        <Zimmergast NameF="Ankermann Stephan" GastGeburtsdatum="1979-07-14" Language="de" VIP="0" Stays="3"/>
+        <Zimmergast NameF="Kreiner Carmen" GastGeburtsdatum="1981-04-10" Language="de" VIP="0" Stays="3"/>
+        <Zimmergast NameF="Ankermann Lucas" GastGeburtsdatum="2018-05-20" Language="de" VIP="0" Stays="2"/>
+        <Zimmergast NameF="Ankermann David" GastGeburtsdatum="2018-05-20" Language="de" VIP="0" Stays="2"/>
+    </Zimmerreservierung>
+    <Zimmerreservierung Nummer="61" Name="Naturdesign DZ &quot;MITTERSTIELER“ mit Seeblick" Anreise="2023-06-18" Abreise="2023-06-22" Status="reserved" Verpflegung="HB" Erw.="2" Offer="AKTIV4-6B">
+        <CombiBemerkungZimmerservice>5+5</CombiBemerkungZimmerservice>
+        <Zimmergast NameF="Ankermann Gerd Georg" GastGeburtsdatum="1957-06-26" Language="de" VIP="0"/>
+        <Zimmergast NameF="Ankermann Astrid" GastGeburtsdatum="1958-02-09" Language="de" VIP="0"/>
+    </Zimmerreservierung>
+    <Zimmerreservierung Nummer="48" Name="Suite &quot;ROARER&quot; mit traumhaftem Seeblick" Anreise="2023-07-06" Abreise="2023-07-15" Status="reserved" Verpflegung="HB" Erw.="2" K3="2" Offer="AKTIV7C">
+        <CombiBemerkungZimmerservice>11+13 Jahre</CombiBemerkungZimmerservice>
+    </Zimmerreservierung>
+    <Zimmerreservierung Nummer="60" Name="Suite &quot;KOBEN&quot; mit traumhaftem Seeblick" Anreise="2023-07-03" Abreise="2023-07-13" Status="reserved" Verpflegung="HB" Erw.="2" K3="1" ZSB="1" Offer="AKTIV7C">
+        <CombiBemerkungZimmerservice>13+15</CombiBemerkungZimmerservice>
+    </Zimmerreservierung>
+    <Zimmerreservierung Nummer="63" Name="Comfort DZ &quot;OARTL&quot; (ohne Seeblick)" Anreise="2023-07-01" Abreise="2023-07-08" Status="roomFixed" Verpflegung="HB" Erw.="2" Offer="AKTIV7C"/>
+    <Zimmerreservierung Nummer="58" Name="Suite &quot;WALLNER&quot; mit traumhaftem Seeblick" Anreise="2023-07-01" Abreise="2023-07-08" Status="reserved" Verpflegung="HB" Erw.="2" Offer="AKTIV7C"/>
+    <Zimmerreservierung Nummer="61" Name="Naturdesign DZ &quot;MITTERSTIELER“ mit Seeblick" Anreise="2023-06-26" Abreise="2023-07-06" Status="roomFixed" Verpflegung="HB" Erw.="2" K3="1" Offer="FAMILY7C">
+        <CombiBemerkungZimmerservice>10 J.</CombiBemerkungZimmerservice>
+    </Zimmerreservierung>
+    <Zimmerreservierung Nummer="50" Name="Comfort DZ &quot;OARTL&quot; (ohne Seeblick)" Anreise="2023-06-26" Abreise="2023-07-06" Status="reserved" Verpflegung="HB" Erw.="1" Offer="FAMILY7C">
+        <CombiBemerkungZimmerservice>10 J.</CombiBemerkungZimmerservice>
+    </Zimmerreservierung>
+    <Zimmerreservierung Nummer="42" Name="Naturdesign DZ &quot;MITTERSTIELER“ mit Seeblick" Anreise="2023-07-13" Abreise="2023-07-21" Status="roomFixed" Verpflegung="HB" Erw.="2" Offer="AKTIV7C"/>
+    <Zimmerreservierung Nummer="64" Name="Deluxe DZ &quot;WINDSPIEL&quot; mit traumhaftem Seeblick" Anreise="2023-07-03" Abreise="2023-07-08" Status="reserved" Verpflegung="HB" Erw.="2" Offer="AKTIV4-6C">
+        <Zimmergast NameF="Beltrame Vincenzo" GastGeburtsdatum="1967-04-03" Language="de" VIP="0"/>
+        <Zimmergast NameF="Beltrame Cassandra" GastGeburtsdatum="1974-09-01" Language="de" VIP="0"/>
+    </Zimmerreservierung>
+    <Zimmerreservierung Nummer="45" Name="Naturdesign DZ &quot;MITTERSTIELER“ mit Seeblick" Anreise="2023-07-01" Abreise="2023-07-08" Status="reserved" Verpflegung="HB" Erw.="2" Offer="AKTIV7B"/>
+    <Zimmerreservierung Nummer="51" Name="Deluxe DZ &quot;JOHANNIS&quot; mit traumhaftem Seeblick" Anreise="2023-07-16" Abreise="2023-07-30" Status="roomFixed" Verpflegung="HB" Erw.="2" Offer="AKTIV7C"/>
+    <Zimmerreservierung Nummer="65" Name="Deluxe DZ &quot;WINDSPIEL&quot; mit traumhaftem Seeblick" Anreise="2023-06-23" Abreise="2023-06-26" Status="reserved" Verpflegung="HB" Erw.="2" Offer="AKTIV1-3C">
+        <CombiBemerkungZimmerservice>HUND</CombiBemerkungZimmerservice>
+    </Zimmerreservierung>
+    <Zimmerreservierung Nummer="42" Name="Naturdesign DZ &quot;MITTERSTIELER“ mit Seeblick" Anreise="2023-06-28" Abreise="2023-06-30" Status="reserved" Verpflegung="HB" Erw.="2" Offer="AKTIV1-3C"/>
+    <Zimmerreservierung Nummer="43" Name="Naturdesign DZ &quot;MITTERSTIELER“ mit Seeblick" Anreise="2023-06-28" Abreise="2023-06-30" Status="reserved" Verpflegung="HB" Erw.="2" Offer="AKTIV1-3C"/>
+    <Zimmerreservierung Nummer="43" Name="Naturdesign DZ &quot;MITTERSTIELER“ mit Seeblick" Anreise="2023-06-18" Abreise="2023-06-25" Status="reserved" Verpflegung="HB" Erw.="2" Offer="AKTIV7B">
+        <Zimmergast NameF="Schilling Erwin" GastGeburtsdatum="1967-03-27" Language="de" VIP="0" Stays="5"/>
+        <Zimmergast NameF="Schilling Claudia" GastGeburtsdatum="1967-04-24" Language="de" VIP="0" Stays="5"/>
+    </Zimmerreservierung>
+    <Zimmerreservierung Nummer="66" Name="Deluxe DZ &quot;WINDSPIEL&quot; mit traumhaftem Seeblick" Anreise="2023-07-14" Abreise="2023-07-17" Status="reserved" Verpflegung="HB" Erw.="2" K2="1" Offer="AKTIV1-3C">
+        <CombiBemerkungZimmerservice>5j</CombiBemerkungZimmerservice>
+    </Zimmerreservierung>
+    <Zimmerreservierung Nummer="67" Name="Suite &quot;WALLNER&quot; mit traumhaftem Seeblick" Anreise="2023-07-09" Abreise="2023-07-15" Status="reserved" Verpflegung="HB" Erw.="2" ZSB="1" Offer="AKTIV4-6C"/>
+    <Zimmerreservierung Nummer="65" Name="Deluxe DZ &quot;WINDSPIEL&quot; mit traumhaftem Seeblick" Anreise="2023-07-16" Abreise="2023-07-23" Status="reserved" Verpflegung="HB" Erw.="2" K3="2" Offer="AKTIV7C">
+        <CombiBemerkungZimmerservice>#65 13+11+10, #58 letti separati</CombiBemerkungZimmerservice>
+    </Zimmerreservierung>
+    <Zimmerreservierung Nummer="58" Name="Suite &quot;WALLNER&quot; mit traumhaftem Seeblick" Anreise="2023-07-16" Abreise="2023-07-23" Status="reserved" Verpflegung="HB" Erw.="2" Offer="AKTIV7C">
+        <CombiBemerkungZimmerservice>#65 13+11+10, #58 letti separati</CombiBemerkungZimmerservice>
+    </Zimmerreservierung>
+    <Zimmerreservierung Nummer="61" Name="Naturdesign DZ &quot;MITTERSTIELER“ mit Seeblick" Anreise="2023-06-22" Abreise="2023-06-25" Status="reserved" Verpflegung="HB" Erw.="2" Offer="AKTIV1-3B"/>
+    <Zimmerreservierung Nummer="62" Name="Deluxe DZ &quot;JOHANNIS&quot; mit traumhaftem Seeblick" Anreise="2023-06-25" Abreise="2023-06-28" Status="reserved" Verpflegung="HB" Erw.="2" Offer="AKTIV1-3B"/>
+    <Zimmerreservierung Nummer="54" Name="Einzelzimmer (teils mit traumhaften Seeblick)" Anreise="2023-06-17" Abreise="2023-07-01" Status="occupied" Verpflegung="HB" Erw.="1" Offer="AKTIV7B">
+        <CombiBemerkungZimmerservice>Hocker ins Bad stellen - Mann gehbehindert/ im EZ 2. Kissen</CombiBemerkungZimmerservice>
+        <Zimmergast NameF="Klinger Margit" GastGeburtsdatum="1969-05-26" Language="de" VIP="0" Stays="6"/>
+    </Zimmerreservierung>
+    <Zimmerreservierung Nummer="63" Name="Comfort DZ &quot;OARTL&quot; (ohne Seeblick)" Anreise="2023-06-17" Abreise="2023-07-01" Status="occupied" Verpflegung="HB" Erw.="1" Offer="AKTIV7B">
+        <CombiBemerkungZimmerservice>Hocker ins Bad stellen - Mann gehbehindert/ im EZ 2. Kissen</CombiBemerkungZimmerservice>
+        <Zimmergast NameF="Müller Karin" GastGeburtsdatum="1955-12-23" Language="de" VIP="0" Stays="1"/>
+    </Zimmerreservierung>
+    <Zimmerreservierung Nummer="58" Name="Suite &quot;WALLNER&quot; mit traumhaftem Seeblick" Anreise="2023-06-17" Abreise="2023-07-01" Status="occupied" Verpflegung="HB" Erw.="2" Offer="AKTIV7B">
+        <CombiBemerkungZimmerservice>Hocker ins Bad stellen - Mann gehbehindert/ im EZ 2. Kissen</CombiBemerkungZimmerservice>
+        <Zimmergast NameF="Dr. Beck Martin" GastGeburtsdatum="1951-03-06" Language="de" VIP="1" Stays="6"/>
+        <Zimmergast NameF="Beck Barbara" GastGeburtsdatum="1951-11-10" Language="de" VIP="0" Stays="6"/>
+    </Zimmerreservierung>
+    <Zimmerreservierung Nummer="50" Name="Comfort DZ &quot;OARTL&quot; (ohne Seeblick)" Anreise="2023-06-17" Abreise="2023-06-25" Status="occupied" Verpflegung="HB" Erw.="2" Offer="AKTIV7B">
+        <Zimmergast NameF="Wernicke Kathrin" GastGeburtsdatum="1964-12-04" Language="de" VIP="0" Stays="1"/>
+        <Zimmergast NameF="Wernicke Jens" GastGeburtsdatum="1960-05-04" Language="de" VIP="0" Stays="1"/>
+    </Zimmerreservierung>
+    <Zimmerreservierung Nummer="57" Name="Deluxe DZ &quot;WINDSPIEL&quot; mit traumhaftem Seeblick" Anreise="2023-07-07" Abreise="2023-07-12" Status="reserved" Verpflegung="HB" Erw.="2" Offer="AKTIV4-6C"/>
+    <Zimmerreservierung Nummer="62" Name="Deluxe DZ &quot;JOHANNIS&quot; mit traumhaftem Seeblick" Anreise="2023-06-11" Abreise="2023-06-18" Status="departed" Verpflegung="HB" Erw.="2" Offer="AKTIV7B">
+        <CombiBemerkungZimmerservice>1x President, 1x Zirm</CombiBemerkungZimmerservice>
+        <Zimmergast NameF="Steinberg Herma" GastGeburtsdatum="1955-06-25" Language="de" VIP="0" Stays="3"/>
+        <Zimmergast NameF="Steinberg Winrich" GastGeburtsdatum="1952-03-24" Language="de" VIP="0" Stays="1"/>
+    </Zimmerreservierung>
+    <Zimmerreservierung Nummer="44" Name="BIO de luxe DZ &quot;MERL&quot; mit traumhaftem Seeblick" Anreise="2023-07-16" Abreise="2023-07-23" Status="reserved" Verpflegung="HB" Erw.="2" Offer="AKTIV7C"/>
+    <Zimmerreservierung Nummer="200" Name="Beauty" Anreise="2012-12-20" Abreise="2013-01-04" Status="occupied" Verpflegung="HB" Erw.="1">
+        <Zimmergast NameF="Hotelgast" Language="de" VIP="0"/>
+    </Zimmerreservierung>
+    <Zimmerreservierung Nummer="45" Name="Naturdesign DZ &quot;MITTERSTIELER“ mit Seeblick" Anreise="2023-06-11" Abreise="2023-06-25" Status="occupied" Verpflegung="HB" Erw.="1" Offer="AKTIV7B">
+        <CombiBemerkungZimmerservice>1x kommt Mann nach</CombiBemerkungZimmerservice>
+        <Zimmergast NameF="Dr. Sündtgen Mechthild" GastGeburtsdatum="1959-04-23" Language="de" VIP="0"/>
+    </Zimmerreservierung>
+    <Zimmerreservierung Nummer="46" Name="Naturdesign DZ &quot;MITTERSTIELER“ mit Seeblick" Anreise="2023-06-11" Abreise="2023-06-25" Status="occupied" Verpflegung="HB" Erw.="1" Offer="AKTIV7B">
+        <CombiBemerkungZimmerservice>1x kommt Mann nach</CombiBemerkungZimmerservice>
+        <Zimmergast NameF="Sündtgen-Haack Beate" GastGeburtsdatum="1963-03-25" Language="de" VIP="0"/>
+    </Zimmerreservierung>
+    <Zimmerreservierung Nummer="67" Name="Suite &quot;WALLNER&quot; mit traumhaftem Seeblick" Anreise="2023-06-11" Abreise="2023-06-18" Status="request" Verpflegung="HB" Erw.="2" Offer="AKTIV7B">
+        <CombiBemerkungZimmerservice>2xhund</CombiBemerkungZimmerservice>
+    </Zimmerreservierung>
+    <Zimmerreservierung Nummer="65" Name="Deluxe DZ &quot;WINDSPIEL&quot; mit traumhaftem Seeblick" Anreise="2023-06-11" Abreise="2023-06-18" Status="request" Verpflegung="HB" Erw.="2" Offer="AKTIV7B">
+        <CombiBemerkungZimmerservice>2xhund</CombiBemerkungZimmerservice>
+    </Zimmerreservierung>
+    <Zimmerreservierung Nummer="61" Name="Naturdesign DZ &quot;MITTERSTIELER“ mit Seeblick" Anreise="2023-07-06" Abreise="2023-07-09" Status="reserved" Verpflegung="HB" Erw.="2" Offer="AKTIV1-3C"/>
+    <Zimmerreservierung Nummer="52" Name="Einzelzimmer (teils mit traumhaften Seeblick)" Anreise="2023-07-06" Abreise="2023-07-09" Status="roomFixed" Verpflegung="HB" Erw.="1" Offer="AKTIV1-3C"/>
+    <Zimmerreservierung Nummer="64" Name="Deluxe DZ &quot;WINDSPIEL&quot; mit traumhaftem Seeblick" Anreise="2023-06-22" Abreise="2023-06-29" Status="reserved" Verpflegung="HB" Erw.="2" Offer="AKTIV7B"/>
+    <Zimmerreservierung Nummer="47" Name="Naturdesign DZ &quot;MITTERSTIELER“ mit Seeblick" Anreise="2023-06-17" Abreise="2023-06-23" Status="occupied" Verpflegung="HB" Erw.="2" Offer="AKTIV4-6B">
+        <Zimmergast NameF="Willemin Jean Francois" GastGeburtsdatum="1951-08-22" Language="de" VIP="0" Stays="9"/>
+        <Zimmergast NameF="Willemin-Häfliger Verena" GastGeburtsdatum="1956-03-04" Language="de" VIP="0" Stays="9"/>
+    </Zimmerreservierung>
+    <Zimmerreservierung Nummer="43" Name="Naturdesign DZ &quot;MITTERSTIELER“ mit Seeblick" Anreise="2023-07-01" Abreise="2023-07-11" Status="reserved" Verpflegung="HB" Erw.="2" Offer="AKTIV7C">
+        <Zimmergast NameF="Brox Christina" GastGeburtsdatum="1963-01-19" Language="de" VIP="0" Stays="10"/>
+        <Zimmergast NameF="Neumann Uwe" GastGeburtsdatum="1957-11-12" Language="de" VIP="1" Stays="10"/>
+    </Zimmerreservierung>
+    <Zimmerreservierung Nummer="61" Name="Naturdesign DZ &quot;MITTERSTIELER“ mit Seeblick" Anreise="2023-06-11" Abreise="2023-06-18" Status="request" Verpflegung="HB" Erw.="2" Offer="AKTIV7B"/>
+    <Zimmerreservierung Nummer="55" Name="Deluxe DZ &quot;WINDSPIEL&quot; mit traumhaftem Seeblick" Anreise="2023-07-07" Abreise="2023-07-09" Status="reserved" Verpflegung="HB" Erw.="2" ZSB="1" Offer="AKTIV1-3C"/>
+    <Zimmerreservierung Nummer="65" Name="Deluxe DZ &quot;WINDSPIEL&quot; mit traumhaftem Seeblick" Anreise="2023-06-20" Abreise="2023-06-22" Status="reserved" Verpflegung="HB" Erw.="2" Offer="AKTIV1-3B"/>
+    <Zimmerreservierung Nummer="53" Name="Deluxe DZ &quot;JOHANNIS&quot; mit traumhaftem Seeblick" Anreise="2023-07-02" Abreise="2023-07-07" Status="reserved" Verpflegung="HB" Erw.="2" Offer="AKTIV4-6C"/>
+    <Zimmerreservierung Nummer="55" Name="Deluxe DZ &quot;WINDSPIEL&quot; mit traumhaftem Seeblick" Anreise="2023-07-02" Abreise="2023-07-07" Status="reserved" Verpflegung="HB" Erw.="2" Offer="AKTIV4-6C"/>
+    <Zimmerreservierung Nummer="57" Name="Deluxe DZ &quot;WINDSPIEL&quot; mit traumhaftem Seeblick" Anreise="2023-06-25" Abreise="2023-07-04" Status="reserved" Verpflegung="HB" Erw.="2" Offer="AKTIV7B"/>
+    <Zimmerreservierung Nummer="57" Name="Deluxe DZ &quot;WINDSPIEL&quot; mit traumhaftem Seeblick" Anreise="2023-07-04" Abreise="2023-07-07" Status="reserved" Verpflegung="HB" Erw.="2" Offer="AKTIV1-3C"/>
+    <Zimmerreservierung Nummer="67" Name="Suite &quot;WALLNER&quot; mit traumhaftem Seeblick" Anreise="2023-07-16" Abreise="2023-07-23" Status="reserved" Verpflegung="HB" Erw.="2" K2="1" Offer="AKTIV7C">
+        <CombiBemerkungZimmerservice>5 J.</CombiBemerkungZimmerservice>
+    </Zimmerreservierung>
+    <Zimmerreservierung Nummer="50" Name="Comfort DZ &quot;OARTL&quot; (ohne Seeblick)" Anreise="2023-06-11" Abreise="2023-06-18" Status="request" Verpflegung="HB" Erw.="1" K2="1" Offer="AKTIV7B">
+        <CombiBemerkungZimmerservice>5 J.</CombiBemerkungZimmerservice>
+    </Zimmerreservierung>
+    <Zimmerreservierung Nummer="48" Name="Suite &quot;ROARER&quot; mit traumhaftem Seeblick" Anreise="2023-07-01" Abreise="2023-07-06" Status="reserved" Verpflegung="HB" Erw.="1" K3="2" Offer="AKTIV4-6C">
+        <CombiBemerkungZimmerservice>8+12 J.</CombiBemerkungZimmerservice>
+    </Zimmerreservierung>
+    <Zimmerreservierung Nummer="54" Name="Einzelzimmer (teils mit traumhaften Seeblick)" Anreise="2023-07-02" Abreise="2023-07-09" Status="reserved" Verpflegung="HB" Erw.="1" K3="1" Offer="AKTIV7B">
+        <CombiBemerkungZimmerservice>12+14</CombiBemerkungZimmerservice>
+    </Zimmerreservierung>
+    <Zimmerreservierung Nummer="56" Name="Deluxe DZ &quot;WINDSPIEL&quot; mit traumhaftem Seeblick" Anreise="2023-07-02" Abreise="2023-07-09" Status="roomFixed" Verpflegung="HB" Erw.="2" Offer="AKTIV7B">
+        <CombiBemerkungZimmerservice>12+14</CombiBemerkungZimmerservice>
+    </Zimmerreservierung>
+    <Zimmerreservierung Nummer="45" Name="Naturdesign DZ &quot;MITTERSTIELER“ mit Seeblick" Anreise="2023-07-15" Abreise="2023-07-23" Status="reserved" Verpflegung="HB" Erw.="2" Offer="AKTIV7C"/>
+    <Zimmerreservierung Nummer="61" Name="Naturdesign DZ &quot;MITTERSTIELER“ mit Seeblick" Anreise="2023-06-11" Abreise="2023-06-18" Status="request" Verpflegung="HB" Erw.="2" K2="1" Offer="AKTIV7B">
+        <CombiBemerkungZimmerservice>6 J.</CombiBemerkungZimmerservice>
+    </Zimmerreservierung>
+    <Zimmerreservierung Nummer="65" Name="Deluxe DZ &quot;WINDSPIEL&quot; mit traumhaftem Seeblick" Anreise="2023-06-11" Abreise="2023-06-18" Status="request" Verpflegung="HB" Erw.="2" K2="1" Offer="AKTIV7B">
+        <CombiBemerkungZimmerservice>6 J.</CombiBemerkungZimmerservice>
+    </Zimmerreservierung>
+    <Zimmerreservierung Nummer="61" Name="Naturdesign DZ &quot;MITTERSTIELER“ mit Seeblick" Anreise="2023-07-16" Abreise="2023-07-23" Status="reserved" Verpflegung="HB" Erw.="2" Offer="AKTIV7C"/>
+    <Zimmerreservierung Nummer="45" Name="Naturdesign DZ &quot;MITTERSTIELER“ mit Seeblick" Anreise="2023-06-28" Abreise="2023-07-01" Status="reserved" Verpflegung="HB" Erw.="2" Offer="AKTIV1-3B">
+        <CombiBemerkungZimmerservice>flitterwochen</CombiBemerkungZimmerservice>
+    </Zimmerreservierung>
+    <Zimmerreservierung Nummer="67" Name="Suite &quot;WALLNER&quot; mit traumhaftem Seeblick" Anreise="2023-06-18" Abreise="2023-06-25" Status="reserved" Verpflegung="HB" Erw.="2" Offer="AKTIV7B">
+        <Zimmergast NameF="Chen Karina" Language="de" VIP="0"/>
+    </Zimmerreservierung>
+    <Zimmerreservierung Nummer="65" Name="Deluxe DZ &quot;WINDSPIEL&quot; mit traumhaftem Seeblick" Anreise="2023-06-30" Abreise="2023-07-05" Status="reserved" Verpflegung="HB" Erw.="2" Offer="AKTIV4-6C"/>
+    <Zimmerreservierung Nummer="61" Name="Naturdesign DZ &quot;MITTERSTIELER“ mit Seeblick" Anreise="2023-06-11" Abreise="2023-06-18" Status="departed" Verpflegung="HB" Erw.="2" K1="1" Offer="AKTIV7B">
+        <CombiBemerkungZimmerservice>1 J., bambino dorme nel letto matrimoniale</CombiBemerkungZimmerservice>
+        <Zimmergast NameF="Haller Sabrina" GastGeburtsdatum="1990-02-15" Language="de" VIP="0" Stays="3"/>
+        <Zimmergast NameF="Romano Pascal" GastGeburtsdatum="1986-04-05" Language="de" VIP="0" Stays="3"/>
+        <Zimmergast NameF="Romano Lian" GastGeburtsdatum="2022-02-03" Language="de" VIP="0" Stays="2"/>
+    </Zimmerreservierung>
+    <Zimmerreservierung Nummer="50" Name="Comfort DZ &quot;OARTL&quot; (ohne Seeblick)" Anreise="2023-06-11" Abreise="2023-06-18" Status="request" Verpflegung="HB" Erw.="2" Offer="AKTIV7B"/>
+    <Zimmerreservierung Nummer="56" Name="Deluxe DZ &quot;WINDSPIEL&quot; mit traumhaftem Seeblick" Anreise="2023-06-16" Abreise="2023-06-18" Status="request" Verpflegung="HB" Erw.="2" Offer="AKTIV1-3B"/>
+    <Zimmerreservierung Nummer="42" Name="Naturdesign DZ &quot;MITTERSTIELER“ mit Seeblick" Anreise="2023-06-13" Abreise="2023-06-18" Status="request" Verpflegung="HB" Erw.="2" Offer="AKTIV4-6B"/>
+    <Zimmerreservierung Nummer="60" Name="Suite &quot;KOBEN&quot; mit traumhaftem Seeblick" Anreise="2023-07-13" Abreise="2023-07-18" Status="reserved" Verpflegung="HB" Erw.="2" K3="2" Offer="AKTIV4-6C">
+        <CombiBemerkungZimmerservice>11+13 J. (EZ für ältern Sohn zum Preis von 100 € dazugegeben)</CombiBemerkungZimmerservice>
+    </Zimmerreservierung>
+    <Zimmerreservierung Nummer="46" Name="Naturdesign DZ &quot;MITTERSTIELER“ mit Seeblick" Anreise="2023-06-25" Abreise="2023-07-02" Status="reserved" Verpflegung="HB" Erw.="2" Offer="AKTIV7B"/>
+    <Zimmerreservierung Nummer="54" Name="Einzelzimmer (teils mit traumhaften Seeblick)" Anreise="2023-07-13" Abreise="2023-07-18" Status="reserved" Verpflegung="HB" Erw.="1" Offer="AKTIV4-6C">
+        <CombiBemerkungZimmerservice>11+13 J. (EZ für ältern Sohn zum Preis von 100 € dazugegeben)</CombiBemerkungZimmerservice>
+    </Zimmerreservierung>
+    <Zimmerreservierung Nummer="50" Name="Comfort DZ &quot;OARTL&quot; (ohne Seeblick)" Anreise="2023-06-11" Abreise="2023-06-18" Status="request" Verpflegung="HB" Erw.="2" Offer="AKTIV7B"/>
+    <Zimmerreservierung Nummer="65" Name="Deluxe DZ &quot;WINDSPIEL&quot; mit traumhaftem Seeblick" Anreise="2023-07-06" Abreise="2023-07-10" Status="reserved" Verpflegung="HB" Erw.="2" Offer="AKTIV4-6C">
+        <CombiBemerkungZimmerservice>2x President, 2 harte Matratzen</CombiBemerkungZimmerservice>
+    </Zimmerreservierung>
+    <Zimmerreservierung Nummer="53" Name="Deluxe DZ &quot;JOHANNIS&quot; mit traumhaftem Seeblick" Anreise="2023-06-15" Abreise="2023-06-18" Status="request" Verpflegung="HB" Erw.="2" Offer="AKTIV1-3B"/>
+    <Zimmerreservierung Nummer="53" Name="Deluxe DZ &quot;JOHANNIS&quot; mit traumhaftem Seeblick" Anreise="2023-06-26" Abreise="2023-07-01" Status="reserved" Verpflegung="HB" Erw.="2" Offer="AKTIV4-6B">
+        <CombiBemerkungZimmerservice>2x anatomico classico</CombiBemerkungZimmerservice>
+    </Zimmerreservierung>
+    <Zimmerreservierung Nummer="56" Name="Deluxe DZ &quot;WINDSPIEL&quot; mit traumhaftem Seeblick" Anreise="2023-06-16" Abreise="2023-06-18" Status="request" Verpflegung="HB" Erw.="2" Offer="AKTIV1-3B"/>
+    <Zimmerreservierung Nummer="58" Name="Suite &quot;WALLNER&quot; mit traumhaftem Seeblick" Anreise="2023-07-09" Abreise="2023-07-16" Status="reserved" Verpflegung="HB" Erw.="2" K3="1" ZSB="1" Offer="AKTIV7C"/>
+    <Zimmerreservierung Nummer="67" Name="Suite &quot;WALLNER&quot; mit traumhaftem Seeblick" Anreise="2023-06-14" Abreise="2023-06-18" Status="request" Verpflegung="HB" Erw.="2" K3="1" ZSB="1" Offer="AKTIV4-6B">
+        <CombiBemerkungZimmerservice>11+16 J.</CombiBemerkungZimmerservice>
+    </Zimmerreservierung>
+    <Zimmerreservierung Nummer="53" Name="Deluxe DZ &quot;JOHANNIS&quot; mit traumhaftem Seeblick" Anreise="2023-06-14" Abreise="2023-06-18" Status="request" Verpflegung="HB" Erw.="2" Offer="AKTIV4-6B">
+        <CombiBemerkungZimmerservice>11+16 J.</CombiBemerkungZimmerservice>
+    </Zimmerreservierung>
+    <Zimmerreservierung Nummer="42" Name="Naturdesign DZ &quot;MITTERSTIELER“ mit Seeblick" Anreise="2023-06-14" Abreise="2023-06-18" Status="request" Verpflegung="HB" K3="1" ZSB="1" Offer="AKTIV4-6B">
+        <CombiBemerkungZimmerservice>11+16 J.</CombiBemerkungZimmerservice>
+    </Zimmerreservierung>
+    <Zimmerreservierung Nummer="51" Name="Deluxe DZ &quot;JOHANNIS&quot; mit traumhaftem Seeblick" Anreise="2023-06-25" Abreise="2023-07-02" Status="reserved" Verpflegung="HB" Erw.="2" Offer="AKTIV7B">
+        <CombiBemerkungZimmerservice>Hund 66</CombiBemerkungZimmerservice>
+    </Zimmerreservierung>
+    <Zimmerreservierung Nummer="66" Name="Deluxe DZ &quot;WINDSPIEL&quot; mit traumhaftem Seeblick" Anreise="2023-06-25" Abreise="2023-07-01" Status="reserved" Verpflegung="HB" Erw.="2" Offer="AKTIV4-6B">
+        <CombiBemerkungZimmerservice>Hund 66</CombiBemerkungZimmerservice>
+    </Zimmerreservierung>
+    <Zimmerreservierung Nummer="52" Name="Einzelzimmer (teils mit traumhaften Seeblick)" Anreise="2023-07-10" Abreise="2023-07-18" Status="reserved" Verpflegung="HB" Erw.="1" Offer="AKTIV7C"/>
+    <Zimmerreservierung Nummer="66" Name="Deluxe DZ &quot;WINDSPIEL&quot; mit traumhaftem Seeblick" Anreise="2023-06-08" Abreise="2023-06-18" Status="departed" Verpflegung="HB" Erw.="2" Offer="AKTIV7C">
+        <CombiBemerkungZimmerservice>Hund</CombiBemerkungZimmerservice>
+        <Zimmergast NameF="Merz Ulrich" GastGeburtsdatum="1952-11-28" Language="de" VIP="0" Stays="1"/>
+        <Zimmergast NameF="Merz Konny" GastGeburtsdatum="1964-02-12" Language="de" VIP="0" Stays="1"/>
+    </Zimmerreservierung>
+    <Zimmerreservierung Nummer="48" Name="Suite &quot;ROARER&quot; mit traumhaftem Seeblick" Anreise="2023-06-22" Abreise="2023-07-01" Status="reserved" Verpflegung="HB" Erw.="2" Offer="AKTIV7B"/>
+    <Zimmerreservierung Nummer="62" Name="Deluxe DZ &quot;JOHANNIS&quot; mit traumhaftem Seeblick" Anreise="2023-06-18" Abreise="2023-06-25" Status="reserved" Verpflegung="HB" Erw.="2" Offer="AKTIV7B">
+        <Zimmergast NameF="Blumenröder Silke" GastGeburtsdatum="1973-06-16" Language="de" VIP="0"/>
+        <Zimmergast NameF="Junghans Ralph" GastGeburtsdatum="1969-01-06" Language="de" VIP="0"/>
+    </Zimmerreservierung>
+    <Zimmerreservierung Nummer="54" Name="Einzelzimmer (teils mit traumhaften Seeblick)" Anreise="2023-07-10" Abreise="2023-07-13" Status="reserved" Verpflegung="HB" Erw.="1" Offer="AKTIV7C">
+        <NachZimmerreservierung Nummer="63"/>
+    </Zimmerreservierung>
+    <Zimmerreservierung Nummer="63" Name="Comfort DZ &quot;OARTL&quot; (ohne Seeblick)" Anreise="2023-07-13" Abreise="2023-07-18" Status="reserved" Verpflegung="HB" Erw.="1" Offer="AKTIV7C">
+        <VonZimmerreservierung Nummer="54"/>
+    </Zimmerreservierung>
+    <Zimmerreservierung Nummer="56" Name="Deluxe DZ &quot;WINDSPIEL&quot; mit traumhaftem Seeblick" Anreise="2023-07-09" Abreise="2023-07-15" Status="reserved" Verpflegung="HB" Erw.="3" K3="1" Offer="AKTIV4-6C">
+        <CombiBemerkungZimmerservice>13 J.</CombiBemerkungZimmerservice>
+    </Zimmerreservierung>
+    <Zimmerreservierung Nummer="50" Name="Comfort DZ &quot;OARTL&quot; (ohne Seeblick)" Anreise="2023-07-09" Abreise="2023-07-15" Status="reserved" Verpflegung="HB" Erw.="2" Offer="AKTIV4-6C">
+        <CombiBemerkungZimmerservice>13 J.</CombiBemerkungZimmerservice>
+    </Zimmerreservierung>
+    <Zimmerreservierung Nummer="43" Name="Naturdesign DZ &quot;MITTERSTIELER“ mit Seeblick" Anreise="2023-06-25" Abreise="2023-06-28" Status="reserved" Verpflegung="HB" Erw.="2" Offer="AKTIV4-6B"/>
+    <Zimmerreservierung Nummer="62" Name="Deluxe DZ &quot;JOHANNIS&quot; mit traumhaftem Seeblick" Anreise="2023-07-05" Abreise="2023-07-09" Status="roomFixed" Verpflegung="HB" Erw.="2" Offer="AKTIV4-6C"/>
+    <Zimmerreservierung Nummer="67" Name="Suite &quot;WALLNER&quot; mit traumhaftem Seeblick" Anreise="2023-06-17" Abreise="2023-06-18" Status="request" Verpflegung="HB" Erw.="2" ZSB="2" Offer="AKTIV1-3B">
+        <CombiBemerkungZimmerservice>15+15</CombiBemerkungZimmerservice>
+    </Zimmerreservierung>
+    <Zimmerreservierung Nummer="53" Name="Deluxe DZ &quot;JOHANNIS&quot; mit traumhaftem Seeblick" Anreise="2023-06-14" Abreise="2023-06-18" Status="request" Verpflegung="HB" Erw.="2" Offer="AKTIV4-6B"/>
+    <Zimmerreservierung Nummer="53" Name="Deluxe DZ &quot;JOHANNIS&quot; mit traumhaftem Seeblick" Anreise="2023-06-14" Abreise="2023-06-18" Status="request" Verpflegung="HB" Erw.="2" Offer="AKTIV4-6B"/>
+    <Zimmerreservierung Nummer="53" Name="Deluxe DZ &quot;JOHANNIS&quot; mit traumhaftem Seeblick" Anreise="2023-07-16" Abreise="2023-07-23" Status="reserved" Verpflegung="HB" Erw.="2" Offer="AKTIV7C"/>
+    <Zimmerreservierung Nummer="47" Name="Naturdesign DZ &quot;MITTERSTIELER“ mit Seeblick" Anreise="2023-07-03" Abreise="2023-07-10" Status="reserved" Verpflegung="HB" Erw.="2" Offer="AKTIV7B"/>
+    <Zimmerreservierung Nummer="47" Name="Naturdesign DZ &quot;MITTERSTIELER“ mit Seeblick" Anreise="2023-07-16" Abreise="2023-07-23" Status="reserved" Verpflegung="HB" Erw.="2" K2="1" Offer="AKTIV7C">
+        <CombiBemerkungZimmerservice>5 J.</CombiBemerkungZimmerservice>
+    </Zimmerreservierung>
+    <Zimmerreservierung Nummer="55" Name="Deluxe DZ &quot;WINDSPIEL&quot; mit traumhaftem Seeblick" Anreise="2023-07-09" Abreise="2023-07-16" Status="reserved" Verpflegung="HB" Erw.="2" Offer="AKTIV7C">
+        <CombiBemerkungZimmerservice>Hund</CombiBemerkungZimmerservice>
+    </Zimmerreservierung>
+    <Zimmerreservierung Nummer="56" Name="Deluxe DZ &quot;WINDSPIEL&quot; mit traumhaftem Seeblick" Anreise="2023-06-16" Abreise="2023-06-18" Status="request" Verpflegung="HB" Erw.="2" K2="1" Offer="AKTIV1-3B">
+        <CombiBemerkungZimmerservice>7 J.</CombiBemerkungZimmerservice>
+    </Zimmerreservierung>
+    <Zimmerreservierung Nummer="67" Name="Suite &quot;WALLNER&quot; mit traumhaftem Seeblick" Anreise="2023-06-26" Abreise="2023-07-01" Status="reserved" Verpflegung="HB" Erw.="2" K1="1" Offer="AKTIV4-6B">
+        <CombiBemerkungZimmerservice>2j</CombiBemerkungZimmerservice>
+    </Zimmerreservierung>
+    <Zimmerreservierung Nummer="52" Name="Einzelzimmer (teils mit traumhaften Seeblick)" Anreise="2023-06-24" Abreise="2023-07-06" Status="roomFixed" Verpflegung="HB" Erw.="1" Offer="AKTIV7B">
+        <CombiBemerkungZimmerservice>Memo relax</CombiBemerkungZimmerservice>
+    </Zimmerreservierung>
+    <Zimmerreservierung Nummer="51" Name="Deluxe DZ &quot;JOHANNIS&quot; mit traumhaftem Seeblick" Anreise="2023-06-21" Abreise="2023-06-25" Status="reserved" Verpflegung="HB" Erw.="2" Offer="AKTIV4-6B"/>
+    <Zimmerreservierung Nummer="67" Name="Suite &quot;WALLNER&quot; mit traumhaftem Seeblick" Anreise="2023-06-10" Abreise="2023-06-18" Status="request" Verpflegung="HB" Erw.="2" ZSB="1" Offer="AKTIV7B">
+        <CombiBemerkungZimmerservice>15j</CombiBemerkungZimmerservice>
+    </Zimmerreservierung>
+    <Zimmerreservierung Nummer="64" Name="Deluxe DZ &quot;WINDSPIEL&quot; mit traumhaftem Seeblick" Anreise="2023-06-29" Abreise="2023-07-03" Status="reserved" Verpflegung="HB" Erw.="2" Offer="AKTIV4-6B"/>
+    <Zimmerreservierung Nummer="53" Name="Deluxe DZ &quot;JOHANNIS&quot; mit traumhaftem Seeblick" Anreise="2023-06-17" Abreise="2023-06-18" Status="request" Verpflegung="HB" Erw.="2" Offer="AKTIV1-3B"/>
+    <Zimmerreservierung Nummer="67" Name="Suite &quot;WALLNER&quot; mit traumhaftem Seeblick" Anreise="2023-06-17" Abreise="2023-06-18" Status="request" Verpflegung="HB" Erw.="2" Offer="AKTIV1-3B"/>
+    <Zimmerreservierung Nummer="44" Name="BIO de luxe DZ &quot;MERL&quot; mit traumhaftem Seeblick" Anreise="2023-07-05" Abreise="2023-07-10" Status="reserved" Verpflegung="HB" Erw.="2" Offer="AKTIV4-6C"/>
+    <Zimmerreservierung Nummer="65" Name="Deluxe DZ &quot;WINDSPIEL&quot; mit traumhaftem Seeblick" Anreise="2023-06-16" Abreise="2023-06-19" Status="occupied" Verpflegung="HB" Erw.="1" Offer="AKTIV1-3B">
+        <CombiBemerkungZimmerservice>Hund</CombiBemerkungZimmerservice>
+        <Zimmergast NameF="Satalino Stefania" GastGeburtsdatum="1983-05-09" Language="it" VIP="0"/>
+    </Zimmerreservierung>
+    <Zimmerreservierung Nummer="66" Name="Deluxe DZ &quot;WINDSPIEL&quot; mit traumhaftem Seeblick" Anreise="2023-07-03" Abreise="2023-07-14" Status="reserved" Verpflegung="HB" Erw.="2" Offer="AKTIV7C"/>
+    <Zimmerreservierung Nummer="65" Name="Deluxe DZ &quot;WINDSPIEL&quot; mit traumhaftem Seeblick" Anreise="2023-06-27" Abreise="2023-06-30" Status="reserved" Verpflegung="HB" Erw.="2" Offer="AKTIV4-6C">
+        <NachZimmerreservierung Nummer="43"/>
+    </Zimmerreservierung>
+    <Zimmerreservierung Nummer="43" Name="Naturdesign DZ &quot;MITTERSTIELER“ mit Seeblick" Anreise="2023-06-30" Abreise="2023-07-01" Status="reserved" Verpflegung="HB" Erw.="2" Offer="AKTIV4-6C">
+        <VonZimmerreservierung Nummer="65"/>
+    </Zimmerreservierung>
+    <Zimmerreservierung Nummer="46" Name="Naturdesign DZ &quot;MITTERSTIELER“ mit Seeblick" Anreise="2023-07-02" Abreise="2023-07-09" Status="reserved" Verpflegung="HB" Erw.="2" Offer="AKTIV7C"/>
+    <Zimmerreservierung Nummer="57" Name="Deluxe DZ &quot;WINDSPIEL&quot; mit traumhaftem Seeblick" Anreise="2023-06-16" Abreise="2023-06-18" Status="request" Verpflegung="HB" Erw.="2" K3="1" ZSB="1" Offer="AKTIV1-3C">
+        <CombiBemerkungZimmerservice>12+14 J.</CombiBemerkungZimmerservice>
+    </Zimmerreservierung>
+    <Zimmerreservierung Nummer="65" Name="Deluxe DZ &quot;WINDSPIEL&quot; mit traumhaftem Seeblick" Anreise="2023-06-16" Abreise="2023-06-18" Status="request" Verpflegung="HB" Erw.="1" Offer="AKTIV1-3B"/>
+    <Zimmerreservierung Nummer="50" Name="Comfort DZ &quot;OARTL&quot; (ohne Seeblick)" Anreise="2023-07-16" Abreise="2023-07-21" Status="reserved" Verpflegung="HB" Erw.="1" Offer="AKTIV4-6C">
+        <CombiBemerkungZimmerservice>1x Memo Relax</CombiBemerkungZimmerservice>
+    </Zimmerreservierung>
+    <Zimmerreservierung Nummer="53" Name="Deluxe DZ &quot;JOHANNIS&quot; mit traumhaftem Seeblick" Anreise="2023-06-15" Abreise="2023-06-19" Status="occupied" Verpflegung="HB" Erw.="2" Offer="AKTIV7B">
+        <Zimmergast NameF="Berzl Christa" GastGeburtsdatum="1969-08-01" Language="de" VIP="0"/>
+        <Zimmergast NameF="Berzl Albert" GastGeburtsdatum="1970-09-26" Language="de" VIP="0"/>
+    </Zimmerreservierung>
+    <Zimmerreservierung Nummer="62" Name="Deluxe DZ &quot;JOHANNIS&quot; mit traumhaftem Seeblick" Anreise="2023-06-17" Abreise="2023-06-18" Status="request" Verpflegung="HB" Erw.="2" Offer="AKTIV1-3B"/>
+    <Zimmerreservierung Nummer="48" Name="Suite &quot;ROARER&quot; mit traumhaftem Seeblick" Anreise="2023-06-17" Abreise="2023-06-18" Status="request" Verpflegung="HB" Erw.="2" Offer="AKTIV1-3B"/>
+    <Zimmerreservierung Nummer="42" Name="Naturdesign DZ &quot;MITTERSTIELER“ mit Seeblick" Anreise="2023-06-21" Abreise="2023-06-28" Status="reserved" Verpflegung="HB" Erw.="2" Offer="AKTIV7B"/>
+    <Zimmerreservierung Nummer="42" Name="Naturdesign DZ &quot;MITTERSTIELER“ mit Seeblick" Anreise="2023-06-17" Abreise="2023-06-18" Status="departed" Verpflegung="HB" Erw.="2" Offer="AKTIV1-3C">
+        <Zimmergast NameF="Burkhart Leo" GastGeburtsdatum="1964-02-05" Language="de" VIP="0" Stays="4"/>
+        <Zimmergast NameF="Burkhart Bettina" GastGeburtsdatum="1964-01-13" Language="de" VIP="0" Stays="4"/>
+    </Zimmerreservierung>
+    <Zimmerreservierung Nummer="67" Name="Suite &quot;WALLNER&quot; mit traumhaftem Seeblick" Anreise="2023-06-15" Abreise="2023-06-18" Status="occupied" Verpflegung="HB" Erw.="2" Offer="AKTIV4-6B">
+        <NachZimmerreservierung Nummer="56"/>
+        <Zimmergast NameF="Schroer Karl Heinz" GastGeburtsdatum="1947-12-01" Language="de" VIP="0"/>
+        <Zimmergast NameF="Schroer Claudia" GastGeburtsdatum="1949-03-02" Language="de" VIP="0"/>
+    </Zimmerreservierung>
+    <Zimmerreservierung Nummer="56" Name="Deluxe DZ &quot;WINDSPIEL&quot; mit traumhaftem Seeblick" Anreise="2023-06-18" Abreise="2023-06-19" Status="reserved" Verpflegung="HB" Erw.="2">
+        <CombiBemerkungZimmerservice>12+14 J.</CombiBemerkungZimmerservice>
+        <VonZimmerreservierung Nummer="67"/>
+    </Zimmerreservierung>
+    <Zimmerreservierung Nummer="53" Name="Deluxe DZ &quot;JOHANNIS&quot; mit traumhaftem Seeblick" Anreise="2023-06-19" Abreise="2023-06-20" Status="reserved" Verpflegung="HB" Erw.="2" Offer="AKTIV7B"/>
+</Zimmerreservierungen>

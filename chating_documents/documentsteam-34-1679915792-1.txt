@@ -1,0 +1,12 @@
+Handover complete lang + view in handover list 
+Handpver + notice when we select template title is not empty
+select private by default in create notice 
+
+when click on save change in notice it mast go to the list.
+select template is missing in edit notice 
+
+
+ 
+
+
+
