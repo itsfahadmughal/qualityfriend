@@ -1876,12 +1876,12 @@ function forecast_prediction($conn,$input_data_,$date_forecast_,$i_){
                                                                 <tr>
                                                                     <td>Öffnungstage /Opening days</td>
                                                                     <?php
-                                                                    $sum=0;
+                                                                    $sum_open=0;
                                                                     $opening_days2 = forecast_prediction($conn,$opening_days1,$date_forecast_last,$index_forecast_data);
                                                                     for($i=0;$i<12;$i++){
                                                                         if(isset($opening_days2[$i])){
                                                                     ?>
-                                                                    <td><?php echo round($opening_days2[$i]); $sum += round($opening_days2[$i]); ?></td>
+                                                                    <td><?php echo round($opening_days2[$i]); $sum_open += round($opening_days2[$i]); ?></td>
                                                                     <?php
                                                                         }else{?>
                                                                     <td></td>
@@ -1889,7 +1889,7 @@ function forecast_prediction($conn,$input_data_,$date_forecast_,$i_){
                                                                         }
                                                                         if(isset($opening_days[$i])){
                                                                     ?>
-                                                                    <td><?php echo $opening_days[$i]; $sum += round($opening_days[$i]); ?></td>
+                                                                    <td><?php echo $opening_days[$i]; $sum_open += round($opening_days[$i]); ?></td>
                                                                     <?php
                                                                         }else{?>
                                                                     <td></td>
@@ -1897,12 +1897,9 @@ function forecast_prediction($conn,$input_data_,$date_forecast_,$i_){
                                                                         }
                                                                     }
                                                                     ?>
-                                                                    <td><?php echo $sum; ?></td>
+                                                                    <td><?php echo $sum_open; ?></td>
                                                                 </tr>
-
-                                                                <tr>
-                                                                    <td class="custom_td_padding" colspan="26"></td>
-                                                                </tr>
+                                                                <tr><td class="custom_td_padding" colspan="26"></td></tr>
                                                                 <tr>
                                                                     <td><b>BETRIEBSERLÖSE /Operating Revenue</b></td>
                                                                     <td colspan="25"></td>
@@ -1961,6 +1958,55 @@ function forecast_prediction($conn,$input_data_,$date_forecast_,$i_){
                                                                     <td><?php if(isset($sum)){echo $sum;} ?></td>
                                                                 </tr>
 
+                                                                <tr>
+                                                                    <td><small>… Ø Gäste/Tag - Ø guests/day</small></td>
+                                                                    <?php
+                                                                    $sum = 0;
+                                                                    for($i=0;$i<12;$i++){
+                                                                        if(isset($total_stay_arr2[$i])){
+                                                                    ?>
+                                                                    <td><small><?php echo round($total_stay_arr2[$i]/$opening_days2[$i]); $sum += $total_stay_arr2[$i]; ?></small></td>
+                                                                    <?php
+                                                                        }else{?>
+                                                                    <td></td>
+                                                                    <?php }
+                                                                        if(isset($total_stay_arr[$i])){
+                                                                    ?>
+                                                                    <td><small><?php echo round($total_stay_arr[$i]/$opening_days[$i],2); $sum += $total_stay_arr[$i]; ?></small></td>
+                                                                    <?php
+                                                                        }else{?>
+                                                                    <td></td>
+                                                                    <?php
+                                                                        }
+                                                                    }
+                                                                    ?>
+                                                                    <td><small><?php if(isset($sum)){echo round($sum/$sum_open,2);} ?></small></td>
+                                                                </tr>
+
+                                                                <tr><td class="custom_td_padding" colspan="26"></td></tr>
+                                                                <tr>
+                                                                    <td>pP-Umsatz HP /turnover per person</td>
+                                                                    <?php
+                                                                    for($i=0;$i<12;$i++){
+                                                                        if(isset($accomodation_sale_arr2[$i])){
+                                                                    ?>
+                                                                    <td><?php echo round(($accomodation_sale_arr2[$i]+$anicillary_sale_arr2[$i]+$spa_sale_arr2[$i])/$opening_days2[$i],2).' €'; ?></td>
+                                                                    <?php
+                                                                        }else{?>
+                                                                    <td></td>
+                                                                    <?php }
+                                                                        if(isset($accomodation_sale_arr[$i])){
+                                                                    ?>
+                                                                    <td><?php echo round(($accomodation_sale_arr[$i]+$anicillary_sale_arr[$i]+$spa_sale_arr[$i])/$opening_days[$i],2).' €'; ?></td>
+                                                                    <?php
+                                                                        }else{?>
+                                                                    <td></td>
+                                                                    <?php
+                                                                        }
+                                                                    }
+                                                                    ?>
+                                                                    <td><?php if(isset($accomodation_sale_arr2[0])){echo round(array_sum($accomodation_sale_arr)+array_sum($anicillary_sale_arr)+array_sum($spa_sale_arr)+array_sum($accomodation_sale_arr2)+array_sum($anicillary_sale_arr2)+array_sum($spa_sale_arr2),2).' €';} ?></td>
+                                                                </tr>
 
                                                             </tbody>
                                                         </table>
