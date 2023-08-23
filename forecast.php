@@ -1799,27 +1799,27 @@ function forecast_prediction($conn,$input_data_,$date_forecast_,$i_){
                                                                     <th class="">Jan Forecast</th>
                                                                     <th class="">Jan Effective</th>
                                                                     <th class="">Feb Forecast</th>
-                                                                    <th class="">Feb Forecast</th>
+                                                                    <th class="">Feb Effective</th>
                                                                     <th class="">Mar Forecast</th>
-                                                                    <th class="">Mar Forecast</th>
+                                                                    <th class="">Mar Effective</th>
                                                                     <th class="">Apr Forecast</th>
-                                                                    <th class="">Apr Forecast</th>
+                                                                    <th class="">Apr Effective</th>
                                                                     <th class="">May Forecast</th>
-                                                                    <th class="">May Forecast</th>
+                                                                    <th class="">May Effective</th>
                                                                     <th class="">Jun Forecast</th>
-                                                                    <th class="">Jun Forecast</th>
+                                                                    <th class="">Jun Effective</th>
                                                                     <th class="">Jul Forecast</th>
-                                                                    <th class="">Jul Forecast</th>
+                                                                    <th class="">Jul Effective</th>
                                                                     <th class="">Aug Forecast</th>
-                                                                    <th class="">Aug Forecast</th>
+                                                                    <th class="">Aug Effective</th>
                                                                     <th class="">Sep Forecast</th>
-                                                                    <th class="">Sep Forecast</th>
+                                                                    <th class="">Sep Effective</th>
                                                                     <th class="">Oct Forecast</th>
-                                                                    <th class="">Oct Forecast</th>
+                                                                    <th class="">Oct Effective</th>
                                                                     <th class="">Nov Forecast</th>
-                                                                    <th class="">Nov Forecast</th>
+                                                                    <th class="">Nov Effective</th>
                                                                     <th class="">Dec Forecast</th>
-                                                                    <th class="">Dec Forecast</th>
+                                                                    <th class="">Dec Effective</th>
                                                                     <th class="">Total</th>
                                                                 </tr>
                                                                 <tr>
@@ -1903,6 +1903,65 @@ function forecast_prediction($conn,$input_data_,$date_forecast_,$i_){
                                                                 <tr>
                                                                     <td class="custom_td_padding" colspan="26"></td>
                                                                 </tr>
+                                                                <tr>
+                                                                    <td><b>BETRIEBSERLÖSE /Operating Revenue</b></td>
+                                                                    <td colspan="25"></td>
+                                                                </tr>
+                                                                <tr class="text-bold">
+                                                                    <td>Auslastung der ÖT in % /Occupancy rate in %</td>
+                                                                    <?php
+                                                                    $sum=0;
+                                                                    for($i=0;$i<12;$i++){
+                                                                        if(isset($total_stay_arr2[$i])){
+                                                                    ?>
+                                                                    <td><?php echo round(($total_stay_arr2[$i]*100)/$stay_capacity_arr2[$i],2).'%'; ?></td>
+                                                                    <?php
+                                                                        }else{
+                                                                    ?>
+                                                                    <td><?php echo '0.00%'; ?></td>
+                                                                    <?php 
+                                                                        }
+                                                                        if(isset($total_stay_arr[$i])){
+                                                                    ?>
+                                                                    <td><?php echo round(($total_stay_arr[$i]*100)/$stay_capacity_arr[$i],2).'%'; ?></td>
+                                                                    <?php
+                                                                        }else{
+                                                                    ?>
+                                                                    <td><?php echo '0.00%'; ?></td>
+                                                                    <?php 
+                                                                        }
+                                                                    }
+                                                                    ?>
+                                                                    <td><?php echo ((round((array_sum($total_stay_arr2)*100)/array_sum($stay_capacity_arr2),2))+(round((array_sum($total_stay_arr)*100)/array_sum($stay_capacity_arr)))/2).'%'; ?></td>
+                                                                </tr>
+
+
+                                                                <tr>
+                                                                    <td>Nächtigungen in HP /Overnight stays</td>
+                                                                    <?php
+                                                                    $sum = 0;
+                                                                    for($i=0;$i<12;$i++){
+                                                                        if(isset($total_stay_arr2[$i])){
+                                                                    ?>
+                                                                    <td><?php echo round($total_stay_arr2[$i]); $sum += round($total_stay_arr2[$i]); ?></td>
+                                                                    <?php
+                                                                        }else{?>
+                                                                    <td></td>
+                                                                    <?php }
+                                                                        if(isset($total_stay_arr[$i])){
+                                                                    ?>
+                                                                    <td><?php echo $total_stay_arr[$i]; $sum += $total_stay_arr[$i]; ?></td>
+                                                                    <?php
+                                                                        }else{?>
+                                                                    <td></td>
+                                                                    <?php
+                                                                        }
+                                                                    }
+                                                                    ?>
+                                                                    <td><?php if(isset($sum)){echo $sum;} ?></td>
+                                                                </tr>
+
+
                                                             </tbody>
                                                         </table>
                                                     </div>
