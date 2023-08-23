@@ -2032,6 +2032,78 @@ function forecast_prediction($conn,$input_data_,$date_forecast_,$i_){
                                                                     <td><?php if(isset($accomodation_sale_arr2[0])){echo round((array_sum($accomodation_sale_arr)+array_sum($accomodation_sale_arr2))*1.1,2).' €';} ?></td>
                                                                 </tr>
 
+                                                                <tr>
+                                                                    <td class="text-left">Nebenerlöse (Getränke, etc.)/ancillary revenues (drinks, etc.)</td>
+                                                                    <?php
+                                                                    for($i=0;$i<12;$i++){
+                                                                        if(isset($anicillary_sale_arr2[$i])){
+                                                                    ?>
+                                                                    <td><?php echo round(($anicillary_sale_arr2[$i]*1.1),2).' €'; ?></td>
+                                                                    <?php
+                                                                        }else{?>
+                                                                    <td></td>
+                                                                    <?php }
+                                                                        if(isset($anicillary_sale_arr[$i])){
+                                                                    ?>
+                                                                    <td><?php echo round(($anicillary_sale_arr[$i]*1.1),2).' €'; ?></td>
+                                                                    <?php
+                                                                        }else{?>
+                                                                    <td></td>
+                                                                    <?php
+                                                                        }
+                                                                    }
+                                                                    ?>
+                                                                    <td><?php if(isset($anicillary_sale_arr2[0])){echo round((array_sum($anicillary_sale_arr)+array_sum($anicillary_sale_arr2))*1.1,2).' €';} ?></td>
+                                                                </tr>
+
+                                                                <tr>
+                                                                    <td class="text-left">Spa-Umsätze/ Spa turnover</td>
+                                                                    <?php
+                                                                    for($i=0;$i<12;$i++){
+                                                                        if(isset($spa_sale_arr2[$i])){
+                                                                    ?>
+                                                                    <td><?php echo round(($spa_sale_arr2[$i]*1.22),2).' €'; ?></td>
+                                                                    <?php
+                                                                        }else{?>
+                                                                    <td></td>
+                                                                    <?php }
+                                                                        if(isset($spa_sale_arr[$i])){
+                                                                    ?>
+                                                                    <td><?php echo round(($spa_sale_arr[$i]*1.22),2).' €'; ?></td>
+                                                                    <?php
+                                                                        }else{?>
+                                                                    <td></td>
+                                                                    <?php
+                                                                        }
+                                                                    }
+                                                                    ?>
+                                                                    <td><?php if(isset($spa_sale_arr2[0])){echo round((array_sum($spa_sale_arr)+array_sum($spa_sale_arr2))*1.22,2).' €';} ?></td>
+                                                                </tr>
+
+                                                                <tr>
+                                                                    <td class="text-left">Gesamterlöse Hotel brutto /total revenue gross</td>
+                                                                    <?php
+                                                                    for($i=0;$i<12;$i++){
+                                                                        if(isset($spa_sale_arr2[$i])){
+                                                                    ?>
+                                                                    <td><?php echo round(($spa_sale_arr2[$i]*1.22) +($anicillary_sale_arr2[$i]*1.1)+($accomodation_sale_arr2[$i]*1.1),2).' €'; ?></td>
+                                                                    <?php
+                                                                        }else{?>
+                                                                    <td></td>
+                                                                    <?php }
+                                                                        if(isset($spa_sale_arr[$i])){
+                                                                    ?>
+                                                                    <td><?php echo round(($spa_sale_arr[$i]*1.22)+($anicillary_sale_arr[$i]*1.1)+($accomodation_sale_arr[$i]*1.1),2).' €'; ?></td>
+                                                                    <?php
+                                                                        }else{?>
+                                                                    <td></td>
+                                                                    <?php
+                                                                        }
+                                                                    }
+                                                                    ?>
+                                                                    <td><?php if(isset($spa_sale_arr2[0])){echo round((((array_sum($spa_sale_arr)+array_sum($spa_sale_arr2))*1.22)+(array_sum($anicillary_sale_arr)+array_sum($accomodation_sale_arr)+array_sum($anicillary_sale_arr2)+array_sum($accomodation_sale_arr2))*1.1),2).' €';} ?></td>
+                                                                </tr>
+
                                                             </tbody>
                                                         </table>
                                                     </div>
