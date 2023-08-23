@@ -2152,9 +2152,9 @@ function forecast_prediction($conn,$input_data_,$date_forecast_,$i_){
                                                                     <td><small><?php if(isset($spa_sale_arr2[0])){echo round((((array_sum($spa_sale_arr)+array_sum($spa_sale_arr2))*1.22)+(array_sum($anicillary_sale_arr)+array_sum($accomodation_sale_arr)+array_sum($anicillary_sale_arr2)+array_sum($accomodation_sale_arr2))*1.1)/(array_sum($total_stay_arr2)+array_sum($total_stay_arr)),2).' €';} ?></small></td>
                                                                 </tr>
                                                                 <tr><td class="custom_td_padding" colspan="26"></td></tr>
-                                                                
-                                                                
-                                                                
+
+
+
                                                                 <tr>
                                                                     <td class="text-left text-bold">Gesamterlöse Hotel netto /Total Hotel Revenue net</td>
                                                                     <td colspan="25"></td>
@@ -2303,9 +2303,430 @@ function forecast_prediction($conn,$input_data_,$date_forecast_,$i_){
                                                                     <td><small><?php if(isset($spa_sale_arr2[0])){echo round((((array_sum($spa_sale_arr)+array_sum($spa_sale_arr2)))+(array_sum($anicillary_sale_arr)+array_sum($accomodation_sale_arr)+array_sum($anicillary_sale_arr2)+array_sum($accomodation_sale_arr2)))/(array_sum($total_stay_arr2)+array_sum($total_stay_arr)),2).' €';} ?></small></td>
                                                                 </tr>
                                                                 <tr><td class="custom_td_padding" colspan="26"></td></tr>
+                                                                <tr>
+                                                                    <td class="text-left text-bold">BETRIEBSAUFWÄNDE/Operating costs</td>
+                                                                    <td colspan="25"></td>
+                                                                </tr>
+                                                                <tr><td class="custom_td_padding" colspan="26"></td></tr>
+                                                                <tr>
+                                                                    <td class="text-left text-bold">Wareneinsätze</td>
+                                                                    <td colspan="25"></td>
+                                                                </tr>
 
+                                                                <tr>
+                                                                    <td class="text-left">WES HP /Costs of goods halfboard</td>
+                                                                    <?php
+                                                                    for($i=0;$i<12;$i++){
+                                                                        if(isset($goods_cost_arr2[$i])){
+                                                                    ?>
+                                                                    <td><?php echo round(($goods_cost_arr2[$i]),2).' €'; ?></td>
+                                                                    <?php
+                                                                        }else{?>
+                                                                    <td></td>
+                                                                    <?php }
+                                                                        if(isset($goods_cost_arr[$i])){
+                                                                    ?>
+                                                                    <td><?php echo round(($goods_cost_arr[$i]),2).' €'; ?></td>
+                                                                    <?php
+                                                                        }else{?>
+                                                                    <td></td>
+                                                                    <?php
+                                                                        }
+                                                                    }
+                                                                    ?>
+                                                                    <td><?php if(isset($goods_cost_arr2[0])){echo round((array_sum($goods_cost_arr)+array_sum($goods_cost_arr2)),2).' €';} ?></td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td class="text-left">WES Nebenerlöse /Costs of ancillary goods</td>
+                                                                    <?php
+                                                                    for($i=0;$i<12;$i++){
+                                                                        if(isset($anicillary_arr2[$i])){
+                                                                    ?>
+                                                                    <td><?php echo round(($anicillary_arr2[$i]),2).' €'; ?></td>
+                                                                    <?php
+                                                                        }else{?>
+                                                                    <td></td>
+                                                                    <?php }
+                                                                        if(isset($anicillary_arr[$i])){
+                                                                    ?>
+                                                                    <td><?php echo round(($anicillary_arr[$i]),2).' €'; ?></td>
+                                                                    <?php
+                                                                        }else{?>
+                                                                    <td></td>
+                                                                    <?php
+                                                                        }
+                                                                    }
+                                                                    ?>
+                                                                    <td><?php if(isset($anicillary_arr2[0])){echo round((array_sum($anicillary_arr)+array_sum($anicillary_arr2)),2).' €';} ?></td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td class="text-left">WES Spa /Costs of Spa products</td>
+                                                                    <?php
+                                                                    for($i=0;$i<12;$i++){
+                                                                        if(isset($spa_arr2[$i])){
+                                                                    ?>
+                                                                    <td><?php echo round(($spa_arr2[$i]),2).' €'; ?></td>
+                                                                    <?php
+                                                                        }else{?>
+                                                                    <td></td>
+                                                                    <?php }
+                                                                        if(isset($spa_arr[$i])){
+                                                                    ?>
+                                                                    <td><?php echo round(($spa_arr[$i]),2).' €'; ?></td>
+                                                                    <?php
+                                                                        }else{?>
+                                                                    <td></td>
+                                                                    <?php
+                                                                        }
+                                                                    }
+                                                                    ?>
+                                                                    <td><?php if(isset($spa_arr2[0])){echo round((array_sum($spa_arr)+array_sum($spa_arr2)),2).' €';} ?></td>
+                                                                </tr>
 
+                                                                <tr class="text-bold">
+                                                                    <td class="text-left">Wareneinsatz gesamt /Total costs of goods</td>
+                                                                    <?php
+                                                                    for($i=0;$i<12;$i++){
+                                                                        if(isset($spa_sale_arr2[$i])){
+                                                                    ?>
+                                                                    <td><?php echo round(($spa_arr2[$i]) +($anicillary_arr2[$i])+($goods_cost_arr2[$i]),2).' €'; ?></td>
+                                                                    <?php
+                                                                        }else{?>
+                                                                    <td></td>
+                                                                    <?php }
+                                                                        if(isset($spa_sale_arr[$i])){
+                                                                    ?>
+                                                                    <td><?php echo round(($spa_arr[$i])+($anicillary_arr[$i])+($goods_cost_arr[$i]),2).' €'; ?></td>
+                                                                    <?php
+                                                                        }else{?>
+                                                                    <td></td>
+                                                                    <?php
+                                                                        }
+                                                                    }
+                                                                    ?>
+                                                                    <td><?php if(isset($spa_arr2[0])){echo round((((array_sum($spa_arr)+array_sum($spa_arr2)))+(array_sum($anicillary_arr2)+array_sum($goods_cost_arr2)+array_sum($anicillary_arr)+array_sum($goods_cost_arr))),2).' €';} ?></td>
+                                                                </tr>
 
+                                                                <tr class="text-bold">
+                                                                    <td class="text-left"></td>
+                                                                    <?php
+                                                                    for($i=0;$i<12;$i++){
+                                                                        if(isset($spa_sale_arr2[$i])){
+                                                                    ?>
+                                                                    <td><?php echo round((($spa_arr2[$i] +$anicillary_arr2[$i]+($goods_cost_arr2[$i]))*100)/($spa_sale_arr2[$i] +($anicillary_sale_arr2[$i])+$accomodation_sale_arr2[$i]),2).' %'; ?></td>
+                                                                    <?php
+                                                                        }else{?>
+                                                                    <td></td>
+                                                                    <?php }
+                                                                        if(isset($spa_sale_arr[$i])){
+                                                                    ?>
+                                                                    <td><?php echo round((($spa_arr[$i]+$anicillary_arr[$i]+($goods_cost_arr[$i]))*100)/($spa_sale_arr[$i] +($anicillary_sale_arr[$i])+$accomodation_sale_arr[$i]),2).' %'; ?></td>
+                                                                    <?php
+                                                                        }else{?>
+                                                                    <td></td>
+                                                                    <?php
+                                                                        }
+                                                                    }
+                                                                    ?>
+                                                                    <td><?php if(isset($spa_arr2[0])){echo round(((((array_sum($spa_arr)+array_sum($spa_arr2)))+(array_sum($anicillary_arr2)+array_sum($goods_cost_arr2)+array_sum($anicillary_arr)+array_sum($goods_cost_arr)))*100)/(((array_sum($spa_sale_arr)+array_sum($spa_sale_arr2)))+(array_sum($anicillary_sale_arr)+array_sum($accomodation_sale_arr)+array_sum($anicillary_sale_arr2)+array_sum($accomodation_sale_arr2))),2).' %';} ?></td>
+                                                                </tr>
+                                                                <tr><td class="custom_td_padding" colspan="26"></td></tr>
+                                                                <tr class="text-bold">
+                                                                    <td class="text-left">Mitarbeiter/Staffing</td>
+                                                                    <?php
+                                                                    for($i=0;$i<12;$i++){
+                                                                        if(isset($staffing_arr1[$i])){
+                                                                    ?>
+                                                                    <td><?php echo round(($staffing_arr1[$i]),2).' €'; ?></td>
+                                                                    <?php
+                                                                        }else{?>
+                                                                    <td></td>
+                                                                    <?php }
+                                                                        if(isset($staffing_arr[$i])){
+                                                                    ?>
+                                                                    <td><?php echo round(($staffing_arr[$i]),2).' €'; ?></td>
+                                                                    <?php
+                                                                        }else{?>
+                                                                    <td></td>
+                                                                    <?php
+                                                                        }
+                                                                    }
+                                                                    ?>
+                                                                    <td><?php if(isset($staffing_arr[0])){echo round((array_sum($staffing_arr)+array_sum($staffing_arr1)),2).' €';} ?></td>
+                                                                </tr>
+
+                                                                <tr class="text-bold">
+                                                                    <td class="text-left"></td>
+                                                                    <?php
+                                                                    for($i=0;$i<12;$i++){
+                                                                        if(isset($staffing_arr1[$i])){
+                                                                    ?>
+                                                                    <td><?php echo round((($staffing_arr1[$i])*100)/($spa_sale_arr2[$i] +($anicillary_sale_arr2[$i])+$accomodation_sale_arr2[$i]),2).' %'; ?></td>
+                                                                    <?php
+                                                                        }else{?>
+                                                                    <td></td>
+                                                                    <?php }
+                                                                        if(isset($staffing_arr[$i])){
+                                                                    ?>
+                                                                    <td><?php echo round((($staffing_arr[$i])*100)/($spa_sale_arr[$i] +($anicillary_sale_arr[$i])+$accomodation_sale_arr[$i]),2).' %'; ?></td>
+                                                                    <?php
+                                                                        }else{?>
+                                                                    <td></td>
+                                                                    <?php
+                                                                        }
+                                                                    }
+                                                                    ?>
+                                                                    <td><?php if(isset($staffing_arr[0])){echo round(((array_sum($staffing_arr)+array_sum($staffing_arr1))*100)/(((array_sum($spa_sale_arr)+array_sum($spa_sale_arr2)))+(array_sum($anicillary_sale_arr)+array_sum($accomodation_sale_arr)+array_sum($anicillary_sale_arr2)+array_sum($accomodation_sale_arr2))),2).' %';} ?></td>
+                                                                </tr>
+
+                                                                <tr><td class="custom_td_padding" colspan="26"></td></tr>
+                                                                <tr>
+                                                                    <td class="text-left text-bold">Betriebskosten /Running costs</td>
+                                                                    <td colspan="25"></td>
+                                                                </tr>
+                                                                <tr><td class="custom_td_padding" colspan="26"></td></tr>
+                                                                <tr class="text-bold">
+                                                                    <td class="text-left">Betriebskosten gesamt/Total cost</td>
+                                                                    <?php
+                                                                    for($i=0;$i<12;$i++){
+                                                                        if(isset($t_opr_cost_arr2[$i])){
+                                                                    ?>
+                                                                    <td><?php echo round(($t_opr_cost_arr2[$i]),2).' €'; ?></td>
+                                                                    <?php
+                                                                        }else{?>
+                                                                    <td></td>
+                                                                    <?php }
+                                                                        if(isset($t_opr_cost_arr[$i])){
+                                                                    ?>
+                                                                    <td><?php echo round(($t_opr_cost_arr[$i]),2).' €'; ?></td>
+                                                                    <?php
+                                                                        }else{?>
+                                                                    <td></td>
+                                                                    <?php
+                                                                        }
+                                                                    }
+                                                                    ?>
+                                                                    <td><?php if(isset($t_opr_cost_arr2[0])){echo round((array_sum($t_opr_cost_arr)+array_sum($t_opr_cost_arr2)),2).' €';} ?></td>
+                                                                </tr>
+
+                                                                <tr><td class="custom_td_padding" colspan="26"></td></tr>
+                                                                <tr class="text-bold">
+                                                                    <td class="text-left">Verwaltungskosten /Administration costs</td>
+                                                                    <?php
+                                                                    for($i=0;$i<12;$i++){
+                                                                        if(isset($adm_cost_arr2[$i])){
+                                                                    ?>
+                                                                    <td><?php echo round(($adm_cost_arr2[$i]),2).' €'; ?></td>
+                                                                    <?php
+                                                                        }else{?>
+                                                                    <td></td>
+                                                                    <?php }
+                                                                        if(isset($adm_cost_arr[$i])){
+                                                                    ?>
+                                                                    <td><?php echo round(($adm_cost_arr[$i]),2).' €'; ?></td>
+                                                                    <?php
+                                                                        }else{?>
+                                                                    <td></td>
+                                                                    <?php
+                                                                        }
+                                                                    }
+                                                                    ?>
+                                                                    <td><?php if(isset($adm_cost_arr2[0])){echo round((array_sum($adm_cost_arr)+array_sum($adm_cost_arr2)),2).' €';} ?></td>
+                                                                </tr>
+                                                                <tr><td class="custom_td_padding" colspan="26"></td></tr>
+                                                                <tr class="text-bold">
+                                                                    <td class="text-left">Marketing/Marketing</td>
+                                                                    <?php
+                                                                    for($i=0;$i<12;$i++){
+                                                                        if(isset($marketing_arr2[$i])){
+                                                                    ?>
+                                                                    <td><?php echo round(($marketing_arr2[$i]),2).' €'; ?></td>
+                                                                    <?php
+                                                                        }else{?>
+                                                                    <td></td>
+                                                                    <?php }
+                                                                        if(isset($marketing_arr[$i])){
+                                                                    ?>
+                                                                    <td><?php echo round(($marketing_arr[$i]),2).' €'; ?></td>
+                                                                    <?php
+                                                                        }else{?>
+                                                                    <td></td>
+                                                                    <?php
+                                                                        }
+                                                                    }
+                                                                    ?>
+                                                                    <td><?php if(isset($marketing_arr2[0])){echo round((array_sum($marketing_arr)+array_sum($marketing_arr2)),2).' €';} ?></td>
+                                                                </tr>
+                                                                <tr><td class="custom_td_padding" colspan="26"></td></tr>
+                                                                <tr class="text-bold">
+                                                                    <td class="text-left">Steuern und Gebühren/Taxes</td>
+                                                                    <?php
+                                                                    for($i=0;$i<12;$i++){
+                                                                        if(isset($taxes_arr2[$i])){
+                                                                    ?>
+                                                                    <td><?php echo round(($taxes_arr2[$i]),2).' €'; ?></td>
+                                                                    <?php
+                                                                        }else{?>
+                                                                    <td></td>
+                                                                    <?php }
+                                                                        if(isset($taxes_arr[$i])){
+                                                                    ?>
+                                                                    <td><?php echo round(($taxes_arr[$i]),2).' €'; ?></td>
+                                                                    <?php
+                                                                        }else{?>
+                                                                    <td></td>
+                                                                    <?php
+                                                                        }
+                                                                    }
+                                                                    ?>
+                                                                    <td><?php if(isset($taxes_arr2[0])){echo round((array_sum($taxes_arr)+array_sum($taxes_arr2)),2).' €';} ?></td>
+                                                                </tr>
+                                                                <tr><td class="custom_td_padding" colspan="26"></td></tr>
+                                                                <tr class="text-bold">
+                                                                    <td class="text-left">Bankspesen, KK-Gebühren/Bank charges</td>
+                                                                    <?php
+                                                                    for($i=0;$i<12;$i++){
+                                                                        if(isset($bank_charges_arr2[$i])){
+                                                                    ?>
+                                                                    <td><?php echo round(($bank_charges_arr2[$i]),2).' €'; ?></td>
+                                                                    <?php
+                                                                        }else{?>
+                                                                    <td></td>
+                                                                    <?php }
+                                                                        if(isset($bank_charges_arr[$i])){
+                                                                    ?>
+                                                                    <td><?php echo round(($bank_charges_arr[$i]),2).' €'; ?></td>
+                                                                    <?php
+                                                                        }else{?>
+                                                                    <td></td>
+                                                                    <?php
+                                                                        }
+                                                                    }
+                                                                    ?>
+                                                                    <td><?php if(isset($bank_charges_arr2[0])){echo round((array_sum($bank_charges_arr)+array_sum($bank_charges_arr2)),2).' €';} ?></td>
+                                                                </tr>
+                                                                <tr><td class="custom_td_padding" colspan="26"></td></tr>
+                                                                <tr class="text-bold">
+                                                                    <td class="text-left">Sonst. Aufwände /Other costs</td>
+                                                                    <?php
+                                                                    for($i=0;$i<12;$i++){
+                                                                        if(isset($other_costs_arr2[$i])){
+                                                                    ?>
+                                                                    <td><?php echo round(($other_costs_arr2[$i]),2).' €'; ?></td>
+                                                                    <?php
+                                                                        }else{?>
+                                                                    <td></td>
+                                                                    <?php }
+                                                                        if(isset($other_costs_arr[$i])){
+                                                                    ?>
+                                                                    <td><?php echo round(($other_costs_arr[$i]),2).' €'; ?></td>
+                                                                    <?php
+                                                                        }else{?>
+                                                                    <td></td>
+                                                                    <?php
+                                                                        }
+                                                                    }
+                                                                    ?>
+                                                                    <td><?php if(isset($other_costs_arr2[0])){echo round((array_sum($other_costs_arr)+array_sum($other_costs_arr2)),2).' €';} ?></td>
+                                                                </tr>
+
+                                                                <tr><td class="custom_td_padding" colspan="26"></td></tr>
+                                                                <tr class="forecast_pink_color">
+                                                                    <td class="text-left">BETRIEBSAUFWÄNDE /Total costs</td>
+                                                                    <?php
+                                                                    for($i=0;$i<12;$i++){
+                                                                        if(isset($other_costs_arr2[$i])){
+                                                                    ?>
+                                                                    <td><?php echo round($other_costs_arr2[$i]+$bank_charges_arr2[$i]+$taxes_arr2[$i]+$marketing_arr2[$i]+$adm_cost_arr2[$i]+$t_opr_cost_arr2[$i]+$staffing_arr1[$i]+$goods_cost_arr2[$i]+$anicillary_arr2[$i]+$spa_arr2[$i],2).' €'; ?></td>
+                                                                    <?php
+                                                                        }else{?>
+                                                                    <td></td>
+                                                                    <?php }
+                                                                        if(isset($other_costs_arr[$i])){
+                                                                    ?>
+                                                                    <td><?php echo round($other_costs_arr[$i]+$bank_charges_arr[$i]+$taxes_arr[$i]+$marketing_arr[$i]+$adm_cost_arr[$i]+$t_opr_cost_arr[$i]+$staffing_arr[$i]+$goods_cost_arr[$i]+$anicillary_arr[$i]+$spa_arr[$i],2).' €'; ?></td>
+                                                                    <?php
+                                                                        }else{?>
+                                                                    <td></td>
+                                                                    <?php
+                                                                        }
+                                                                    }
+                                                                    ?>
+                                                                    <td><?php echo round(array_sum($other_costs_arr2)+array_sum($bank_charges_arr2)+array_sum($taxes_arr2)+array_sum($marketing_arr2)+array_sum($adm_cost_arr2)+array_sum($t_opr_cost_arr2)+array_sum($staffing_arr1)+array_sum($goods_cost_arr2)+array_sum($anicillary_arr2)+array_sum($spa_arr2) + array_sum($other_costs_arr)+array_sum($bank_charges_arr)+array_sum($taxes_arr)+array_sum($marketing_arr)+array_sum($adm_cost_arr)+array_sum($t_opr_cost_arr)+array_sum($staffing_arr)+array_sum($goods_cost_arr)+array_sum($anicillary_arr)+array_sum($spa_arr),2).' €'; ?></td>
+                                                                </tr>
+
+                                                                <tr>
+                                                                    <td class="text-left"></td>
+                                                                    <?php
+                                                                    for($i=0;$i<12;$i++){
+                                                                        if(isset($other_costs_arr2[$i])){
+                                                                    ?>
+                                                                    <td><?php echo round((($other_costs_arr2[$i]+$bank_charges_arr2[$i]+$taxes_arr2[$i]+$marketing_arr2[$i]+$adm_cost_arr2[$i]+$t_opr_cost_arr2[$i]+$staffing_arr1[$i]+$goods_cost_arr2[$i]+$anicillary_arr2[$i]+$spa_arr2[$i])*100)/($spa_sale_arr2[$i] +($anicillary_sale_arr2[$i])+$accomodation_sale_arr2[$i]),2).' %'; ?></td>
+                                                                    <?php
+                                                                        }else{?>
+                                                                    <td></td>
+                                                                    <?php }
+                                                                        if(isset($other_costs_arr[$i])){
+                                                                    ?>
+                                                                    <td><?php echo round((($other_costs_arr[$i]+$bank_charges_arr[$i]+$taxes_arr[$i]+$marketing_arr[$i]+$adm_cost_arr[$i]+$t_opr_cost_arr[$i]+$staffing_arr[$i]+$goods_cost_arr[$i]+$anicillary_arr[$i]+$spa_arr[$i])*100)/($spa_sale_arr[$i] +($anicillary_sale_arr[$i])+$accomodation_sale_arr[$i]),2).' %'; ?></td>
+                                                                    <?php
+                                                                        }else{?>
+                                                                    <td></td>
+                                                                    <?php
+                                                                        }
+                                                                    }
+                                                                    ?>
+                                                                    <td><?php echo round(((array_sum($other_costs_arr2)+array_sum($bank_charges_arr2)+array_sum($taxes_arr2)+array_sum($marketing_arr2)+array_sum($adm_cost_arr2)+array_sum($t_opr_cost_arr2)+array_sum($staffing_arr1)+array_sum($goods_cost_arr2)+array_sum($anicillary_arr2)+array_sum($spa_arr2) + array_sum($other_costs_arr)+array_sum($bank_charges_arr)+array_sum($taxes_arr)+array_sum($marketing_arr)+array_sum($adm_cost_arr)+array_sum($t_opr_cost_arr)+array_sum($staffing_arr)+array_sum($goods_cost_arr)+array_sum($anicillary_arr)+array_sum($spa_arr))*100)/(((array_sum($spa_sale_arr)+array_sum($spa_sale_arr2)))+(array_sum($anicillary_sale_arr)+array_sum($accomodation_sale_arr)+array_sum($anicillary_sale_arr2)+array_sum($accomodation_sale_arr2))),2).' %'; ?></td>
+                                                                </tr>
+                                                                <tr><td class="custom_td_padding" colspan="26"></td></tr>
+
+                                                                <tr class="forecast_gray_color">
+                                                                    <td class="text-left">Gross Operating Profit (BE1)</td>
+                                                                    <?php
+                                                                    for($i=0;$i<12;$i++){
+                                                                        if(isset($other_costs_arr2[$i])){
+                                                                    ?>
+                                                                    <td><?php echo round(($accomodation_sale_arr2[$i]+$spa_sale_arr2[$i]+$anicillary_sale_arr2[$i])-($other_costs_arr2[$i]+$bank_charges_arr2[$i]+$taxes_arr2[$i]+$marketing_arr2[$i]+$adm_cost_arr2[$i]+$t_opr_cost_arr2[$i]+$staffing_arr1[$i]+$goods_cost_arr2[$i]+$anicillary_arr2[$i]+$spa_arr2[$i]),2).' €'; ?></td>
+                                                                    <?php
+                                                                        }else{?>
+                                                                    <td></td>
+                                                                    <?php }
+                                                                        if(isset($other_costs_arr[$i])){
+                                                                    ?>
+                                                                    <td><?php echo round(($accomodation_sale_arr[$i]+$spa_sale_arr[$i]+$anicillary_sale_arr[$i])-($other_costs_arr[$i]+$bank_charges_arr[$i]+$taxes_arr[$i]+$marketing_arr[$i]+$adm_cost_arr[$i]+$t_opr_cost_arr[$i]+$staffing_arr[$i]+$goods_cost_arr[$i]+$anicillary_arr[$i]+$spa_arr[$i]),2).' €'; ?></td>
+                                                                    <?php
+                                                                        }else{?>
+                                                                    <td></td>
+                                                                    <?php
+                                                                        }
+                                                                    }
+                                                                    ?>
+                                                                    <td><?php echo round(((array_sum($accomodation_sale_arr2)+array_sum($anicillary_sale_arr2)+array_sum($spa_sale_arr2))-(array_sum($other_costs_arr2)+array_sum($bank_charges_arr2)+array_sum($taxes_arr2)+array_sum($marketing_arr2)+array_sum($adm_cost_arr2)+array_sum($t_opr_cost_arr2)+array_sum($staffing_arr1)+array_sum($goods_cost_arr2)+array_sum($anicillary_arr2)+array_sum($spa_arr2)))         +((array_sum($accomodation_sale_arr)+array_sum($anicillary_sale_arr)+array_sum($spa_sale_arr))-(array_sum($other_costs_arr)+array_sum($bank_charges_arr)+array_sum($taxes_arr)+array_sum($marketing_arr)+array_sum($adm_cost_arr)+array_sum($t_opr_cost_arr)+array_sum($staffing_arr)+array_sum($goods_cost_arr)+array_sum($anicillary_arr)+array_sum($spa_arr))),2).' €'; ?></td>
+                                                                </tr>
+
+                                                                <tr>
+                                                                    <td class="text-left"></td>
+                                                                    <?php
+                                                                    for($i=0;$i<12;$i++){
+                                                                        if(isset($other_costs_arr2[$i])){
+                                                                    ?>
+                                                                    <td><?php echo round(((($accomodation_sale_arr2[$i]+$spa_sale_arr2[$i]+$anicillary_sale_arr2[$i])-($other_costs_arr2[$i]+$bank_charges_arr2[$i]+$taxes_arr2[$i]+$marketing_arr2[$i]+$adm_cost_arr2[$i]+$t_opr_cost_arr2[$i]+$staffing_arr1[$i]+$goods_cost_arr2[$i]+$anicillary_arr2[$i]+$spa_arr2[$i]))*100)/($spa_sale_arr2[$i] +($anicillary_sale_arr2[$i])+$accomodation_sale_arr2[$i]),2).' %'; ?></td>
+                                                                    <?php
+                                                                        }else{?>
+                                                                    <td></td>
+                                                                    <?php }
+                                                                        if(isset($other_costs_arr[$i])){
+                                                                    ?>
+                                                                    <td><?php echo round(((($accomodation_sale_arr[$i]+$spa_sale_arr[$i]+$anicillary_sale_arr[$i])-($other_costs_arr[$i]+$bank_charges_arr[$i]+$taxes_arr[$i]+$marketing_arr[$i]+$adm_cost_arr[$i]+$t_opr_cost_arr[$i]+$staffing_arr[$i]+$goods_cost_arr[$i]+$anicillary_arr[$i]+$spa_arr[$i]))*100)/($spa_sale_arr[$i] +($anicillary_sale_arr[$i])+$accomodation_sale_arr[$i]),2).' %'; ?></td>
+                                                                    <?php
+                                                                        }else{?>
+                                                                    <td></td>
+                                                                    <?php
+                                                                        }
+                                                                    }
+                                                                    ?>
+                                                                    <td><?php echo round(((((array_sum($accomodation_sale_arr2)+array_sum($anicillary_sale_arr2)+array_sum($spa_sale_arr2))-(array_sum($other_costs_arr2)+array_sum($bank_charges_arr2)+array_sum($taxes_arr2)+array_sum($marketing_arr2)+array_sum($adm_cost_arr2)+array_sum($t_opr_cost_arr2)+array_sum($staffing_arr1)+array_sum($goods_cost_arr2)+array_sum($anicillary_arr2)+array_sum($spa_arr2)))         +((array_sum($accomodation_sale_arr)+array_sum($anicillary_sale_arr)+array_sum($spa_sale_arr))-(array_sum($other_costs_arr)+array_sum($bank_charges_arr)+array_sum($taxes_arr)+array_sum($marketing_arr)+array_sum($adm_cost_arr)+array_sum($t_opr_cost_arr)+array_sum($staffing_arr)+array_sum($goods_cost_arr)+array_sum($anicillary_arr)+array_sum($spa_arr))))*100)/(((array_sum($spa_sale_arr)+array_sum($spa_sale_arr2)))+(array_sum($anicillary_sale_arr)+array_sum($accomodation_sale_arr)+array_sum($anicillary_sale_arr2)+array_sum($accomodation_sale_arr2))),2).' %'; ?></td>
+                                                                </tr>
 
 
                                                             </tbody>
