@@ -356,7 +356,7 @@ function forecast_prediction($conn,$input_data_,$date_forecast_,$i_){
                                                     <h3 class="forecast_main_color p-3 text-center">Budget Preview (Effective)</h3>
                                                 </div>
 
-                                                <?php $months_arr=$staffing_arr=$goods_cost_arr=$stay_capacity_arr=$acc_balance_arr=$accomodation_sale_arr=$anicillary_sale_arr=$total_stay_arr=$spa_sale_arr=$anicillary_arr=$spa_arr=$t_opr_cost_arr=$adm_cost_arr=$marketing_arr=$taxes_arr=$bank_charges_arr=$total_loan_arr=$other_costs_arr=$date_cost=array();
+                                                <?php $rooms=$beds=$opening_days=$months_arr=$staffing_arr=$goods_cost_arr=$stay_capacity_arr=$acc_balance_arr=$accomodation_sale_arr=$anicillary_sale_arr=$total_stay_arr=$spa_sale_arr=$anicillary_arr=$spa_arr=$t_opr_cost_arr=$adm_cost_arr=$marketing_arr=$taxes_arr=$bank_charges_arr=$total_loan_arr=$other_costs_arr=$date_cost=array();
                                                 $sql_cost_effective = "SELECT * FROM `tbl_forecast_expenses` WHERE `hotel_id` = $hotel_id AND YEAR(`date`) = $year_ ORDER BY `date` ASC";
                                                 $result_cost_effective = $conn->query($sql_cost_effective);
                                                 if ($result_cost_effective && $result_cost_effective->num_rows > 0) {
@@ -403,13 +403,19 @@ function forecast_prediction($conn,$input_data_,$date_forecast_,$i_){
                                                             array_push($acc_balance_arr,0);
                                                         }
 
-                                                        $sql_inner_3="SELECT `total_stay_capacity` FROM `tbl_forecast_keyfacts` WHERE hotel_id = $hotel_id AND MONTH(`date`) = $month AND YEAR(`date`) =  $year";
+                                                        $sql_inner_3="SELECT * FROM `tbl_forecast_keyfacts` WHERE hotel_id = $hotel_id AND MONTH(`date`) = $month AND YEAR(`date`) =  $year";
                                                         $result_inner_3 = $conn->query($sql_inner_3);
                                                         if ($result_inner_3 && $result_inner_3->num_rows > 0) {
                                                             while ($row_inner_3 = mysqli_fetch_array($result_inner_3)) { array_push($stay_capacity_arr,$row_inner_3['total_stay_capacity']);
+                                                                                                                        array_push($rooms,$row_inner_3['rooms']);
+                                                                                                                        array_push($beds,$row_inner_3['beds']);
+                                                                                                                        array_push($opening_days,$row_inner_3['opening_days']);
                                                                                                                        }
                                                         }else{
                                                             array_push($stay_capacity_arr,0);
+                                                            array_push($rooms,0);
+                                                            array_push($beds,0);
+                                                            array_push($opening_days,0);
                                                         }
 
                                                         $sql_inner_4="SELECT SUM(`total_cost`) as total_cost_t FROM `tbl_forecast_goods_cost` WHERE hotel_id = $hotel_id AND MONTH(`date`) = $month AND YEAR(`date`) =  $year";
@@ -875,7 +881,7 @@ function forecast_prediction($conn,$input_data_,$date_forecast_,$i_){
                                                     <h3 class="forecast_main_color p-3 text-center">Budget Preview (Forecast)</h3>
                                                 </div>
 
-                                                <?php $months_arr1=$staffing_arr1=$goods_cost_arr1=$stay_capacity_arr1=$acc_balance_arr1=$accomodation_sale_arr1=$anicillary_sale_arr1=$total_stay_arr1=$spa_sale_arr1=$anicillary_arr1=$spa_arr1=$t_opr_cost_arr1=$adm_cost_arr1=$marketing_arr1=$taxes_arr1=$bank_charges_arr1=$total_loan_arr1=$other_costs_arr1=$date_cost1=array();
+                                                <?php $opening_days1=$months_arr1=$staffing_arr1=$goods_cost_arr1=$stay_capacity_arr1=$acc_balance_arr1=$accomodation_sale_arr1=$anicillary_sale_arr1=$total_stay_arr1=$spa_sale_arr1=$anicillary_arr1=$spa_arr1=$t_opr_cost_arr1=$adm_cost_arr1=$marketing_arr1=$taxes_arr1=$bank_charges_arr1=$total_loan_arr1=$other_costs_arr1=$date_cost1=array();
                                                 $pre_year_3 = $year_-3;
                                                 $index_forecast_data=0;
                                                 $date_forecast_last = "";
@@ -985,7 +991,7 @@ function forecast_prediction($conn,$input_data_,$date_forecast_,$i_){
                                                             ];
                                                         }
 
-                                                        $sql_inner_3="SELECT `total_stay_capacity` FROM `tbl_forecast_keyfacts` WHERE hotel_id = $hotel_id AND MONTH(`date`) = $month AND YEAR(`date`) =  $year";
+                                                        $sql_inner_3="SELECT * FROM `tbl_forecast_keyfacts` WHERE hotel_id = $hotel_id AND MONTH(`date`) = $month AND YEAR(`date`) =  $year";
                                                         $result_inner_3 = $conn->query($sql_inner_3);
                                                         if ($result_inner_3 && $result_inner_3->num_rows > 0) {
                                                             while ($row_inner_3 = mysqli_fetch_array($result_inner_3)) {
@@ -994,9 +1000,19 @@ function forecast_prediction($conn,$input_data_,$date_forecast_,$i_){
                                                                     'date' => $row['date_final'],
                                                                     'sales' => $row_inner_3['total_stay_capacity'],
                                                                 ];
+                                                                $opening_days1[$index_forecast_data] = [
+                                                                    'period' => $index_forecast_data,
+                                                                    'date' => $row['date_final'],
+                                                                    'sales' => $row_inner_3['opening_days'],
+                                                                ];
                                                             }
                                                         }else{
                                                             $stay_capacity_arr1[$index_forecast_data] = [
+                                                                'period' => $index_forecast_data,
+                                                                'date' => $row['date_final'],
+                                                                'sales' => 1,
+                                                            ];
+                                                            $opening_days1[$index_forecast_data] = [
                                                                 'period' => $index_forecast_data,
                                                                 'date' => $row['date_final'],
                                                                 'sales' => 1,
@@ -1078,6 +1094,7 @@ function forecast_prediction($conn,$input_data_,$date_forecast_,$i_){
                                                                 </tr>
                                                             </thead>
                                                             <tbody>
+                                                                <tr><td class="custom_td_padding" colspan="14"></td></tr>
                                                                 <tr class="">
                                                                     <td class="text-left"><?php echo 'Auslastung der ÖT in % /Occupancy rate in %'; ?></td>
                                                                     <?php 
@@ -1813,31 +1830,78 @@ function forecast_prediction($conn,$input_data_,$date_forecast_,$i_){
                                                             <tbody class="text-center">
                                                                 <tr>
                                                                     <td>Gästezimmer /Rooms</td>
-                                                                    <td><?php echo 'abc'; ?></td>
-                                                                    <td><?php echo 'acv'; ?></td>
-                                                                    <td><?php echo 'abc'; ?></td>
-                                                                    <td><?php echo 'acv'; ?></td>
-                                                                    <td><?php echo 'abc'; ?></td>
-                                                                    <td><?php echo 'acv'; ?></td>
-                                                                    <td><?php echo 'abc'; ?></td>
-                                                                    <td><?php echo 'acv'; ?></td>
-                                                                    <td><?php echo 'abc'; ?></td>
-                                                                    <td><?php echo 'acv'; ?></td>
-                                                                    <td><?php echo 'abc'; ?></td>
-                                                                    <td><?php echo 'acv'; ?></td>
-                                                                    <td><?php echo 'abc'; ?></td>
-                                                                    <td><?php echo 'acv'; ?></td>
-                                                                    <td><?php echo 'abc'; ?></td>
-                                                                    <td><?php echo 'acv'; ?></td>
-                                                                    <td><?php echo 'abc'; ?></td>
-                                                                    <td><?php echo 'acv'; ?></td>
-                                                                    <td><?php echo 'abc'; ?></td>
-                                                                    <td><?php echo 'acv'; ?></td>
-                                                                    <td><?php echo 'abc'; ?></td>
-                                                                    <td><?php echo 'acv'; ?></td>
-                                                                    <td><?php echo 'abc'; ?></td>
-                                                                    <td><?php echo 'acv'; ?></td>
-                                                                    <td><?php echo 'acv'; ?></td>
+                                                                    <?php
+                                                                    for($i=0;$i<12;$i++){
+                                                                        if(isset($rooms[0])){
+                                                                    ?>
+                                                                    <td><?php echo $rooms[0]; ?></td>
+                                                                    <?php
+                                                                        }else{?>
+                                                                    <td></td>
+                                                                    <?php }
+                                                                        if(isset($rooms[$i])){
+                                                                    ?>
+                                                                    <td><?php echo $rooms[$i]; ?></td>
+                                                                    <?php
+                                                                        }else{?>
+                                                                    <td></td>
+                                                                    <?php }
+                                                                    }
+                                                                    ?>
+                                                                    <td><?php if(isset($rooms[0])){echo $rooms[0];} ?></td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td>Gästebetten/ Beds</td>
+                                                                    <?php
+                                                                    for($i=0;$i<12;$i++){
+                                                                        if(isset($beds[0])){
+                                                                    ?>
+                                                                    <td><?php echo $beds[0]; ?></td>
+                                                                    <?php
+                                                                        }else{?>
+                                                                    <td></td>
+                                                                    <?php }
+                                                                        if(isset($beds[$i])){
+                                                                    ?>
+                                                                    <td><?php echo $beds[$i]; ?></td>
+                                                                    <?php
+                                                                        }else{?>
+                                                                    <td></td>
+                                                                    <?php
+                                                                        }
+                                                                    }
+                                                                    ?>
+                                                                    <td><?php if(isset($beds[0])){echo $beds[0];} ?></td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td>Öffnungstage /Opening days</td>
+                                                                    <?php
+                                                                    $sum=0;
+                                                                    $opening_days2 = forecast_prediction($conn,$opening_days1,$date_forecast_last,$index_forecast_data);
+                                                                    for($i=0;$i<12;$i++){
+                                                                        if(isset($opening_days2[$i])){
+                                                                    ?>
+                                                                    <td><?php echo round($opening_days2[$i]); $sum += round($opening_days2[$i]); ?></td>
+                                                                    <?php
+                                                                        }else{?>
+                                                                    <td></td>
+                                                                    <?php 
+                                                                        }
+                                                                        if(isset($opening_days[$i])){
+                                                                    ?>
+                                                                    <td><?php echo $opening_days[$i]; $sum += round($opening_days[$i]); ?></td>
+                                                                    <?php
+                                                                        }else{?>
+                                                                    <td></td>
+                                                                    <?php 
+                                                                        }
+                                                                    }
+                                                                    ?>
+                                                                    <td><?php echo $sum; ?></td>
+                                                                </tr>
+
+                                                                <tr>
+                                                                    <td class="custom_td_padding" colspan="26"></td>
                                                                 </tr>
                                                             </tbody>
                                                         </table>
