@@ -1829,7 +1829,7 @@ function forecast_prediction($conn,$input_data_,$date_forecast_,$i_){
                                                             </thead>
                                                             <tbody class="text-center">
                                                                 <tr>
-                                                                    <td>Gästezimmer /Rooms</td>
+                                                                    <td class="text-left">Gästezimmer /Rooms</td>
                                                                     <?php
                                                                     for($i=0;$i<12;$i++){
                                                                         if(isset($rooms[0])){
@@ -1851,7 +1851,7 @@ function forecast_prediction($conn,$input_data_,$date_forecast_,$i_){
                                                                     <td><?php if(isset($rooms[0])){echo $rooms[0];} ?></td>
                                                                 </tr>
                                                                 <tr>
-                                                                    <td>Gästebetten/ Beds</td>
+                                                                    <td class="text-left">Gästebetten/ Beds</td>
                                                                     <?php
                                                                     for($i=0;$i<12;$i++){
                                                                         if(isset($beds[0])){
@@ -1874,7 +1874,7 @@ function forecast_prediction($conn,$input_data_,$date_forecast_,$i_){
                                                                     <td><?php if(isset($beds[0])){echo $beds[0];} ?></td>
                                                                 </tr>
                                                                 <tr>
-                                                                    <td>Öffnungstage /Opening days</td>
+                                                                    <td class="text-left">Öffnungstage /Opening days</td>
                                                                     <?php
                                                                     $sum_open=0;
                                                                     $opening_days2 = forecast_prediction($conn,$opening_days1,$date_forecast_last,$index_forecast_data);
@@ -1901,7 +1901,7 @@ function forecast_prediction($conn,$input_data_,$date_forecast_,$i_){
                                                                 </tr>
                                                                 <tr><td class="custom_td_padding" colspan="26"></td></tr>
                                                                 <tr>
-                                                                    <td><b>BETRIEBSERLÖSE /Operating Revenue</b></td>
+                                                                    <td class="text-left"><b>BETRIEBSERLÖSE /Operating Revenue</b></td>
                                                                     <td colspan="25"></td>
                                                                 </tr>
                                                                 <tr class="text-bold">
@@ -1934,7 +1934,7 @@ function forecast_prediction($conn,$input_data_,$date_forecast_,$i_){
 
 
                                                                 <tr>
-                                                                    <td>Nächtigungen in HP /Overnight stays</td>
+                                                                    <td class="text-left">Nächtigungen in HP /Overnight stays</td>
                                                                     <?php
                                                                     $sum = 0;
                                                                     for($i=0;$i<12;$i++){
@@ -1959,7 +1959,7 @@ function forecast_prediction($conn,$input_data_,$date_forecast_,$i_){
                                                                 </tr>
 
                                                                 <tr>
-                                                                    <td><small>… Ø Gäste/Tag - Ø guests/day</small></td>
+                                                                    <td class="text-left"><small>… Ø Gäste/Tag - Ø guests/day</small></td>
                                                                     <?php
                                                                     $sum = 0;
                                                                     for($i=0;$i<12;$i++){
@@ -1985,19 +1985,19 @@ function forecast_prediction($conn,$input_data_,$date_forecast_,$i_){
 
                                                                 <tr><td class="custom_td_padding" colspan="26"></td></tr>
                                                                 <tr>
-                                                                    <td>pP-Umsatz HP /turnover per person</td>
+                                                                    <td class="text-left">pP-Umsatz HP /turnover per person</td>
                                                                     <?php
                                                                     for($i=0;$i<12;$i++){
                                                                         if(isset($accomodation_sale_arr2[$i])){
                                                                     ?>
-                                                                    <td><?php echo round(($accomodation_sale_arr2[$i]+$anicillary_sale_arr2[$i]+$spa_sale_arr2[$i])/$opening_days2[$i],2).' €'; ?></td>
+                                                                    <td><?php echo round((($accomodation_sale_arr2[$i])*1.1)/$opening_days2[$i],2).' €'; ?></td>
                                                                     <?php
                                                                         }else{?>
                                                                     <td></td>
                                                                     <?php }
                                                                         if(isset($accomodation_sale_arr[$i])){
                                                                     ?>
-                                                                    <td><?php echo round(($accomodation_sale_arr[$i]+$anicillary_sale_arr[$i]+$spa_sale_arr[$i])/$opening_days[$i],2).' €'; ?></td>
+                                                                    <td><?php echo round((($accomodation_sale_arr[$i]))*1.1/$opening_days[$i],2).' €'; ?></td>
                                                                     <?php
                                                                         }else{?>
                                                                     <td></td>
@@ -2005,7 +2005,31 @@ function forecast_prediction($conn,$input_data_,$date_forecast_,$i_){
                                                                         }
                                                                     }
                                                                     ?>
-                                                                    <td><?php if(isset($accomodation_sale_arr2[0])){echo round(array_sum($accomodation_sale_arr)+array_sum($anicillary_sale_arr)+array_sum($spa_sale_arr)+array_sum($accomodation_sale_arr2)+array_sum($anicillary_sale_arr2)+array_sum($spa_sale_arr2),2).' €';} ?></td>
+                                                                    <td><?php if(isset($accomodation_sale_arr2[0])){echo round(((array_sum($accomodation_sale_arr)+array_sum($accomodation_sale_arr2))*1.1)/(array_sum($opening_days2)+array_sum($opening_days)),2).' €';} ?></td>
+                                                                </tr>
+
+                                                                <tr>
+                                                                    <td class="text-left">Logisumsätze HP /accomodation turnover</td>
+                                                                    <?php
+                                                                    for($i=0;$i<12;$i++){
+                                                                        if(isset($accomodation_sale_arr2[$i])){
+                                                                    ?>
+                                                                    <td><?php echo round(($accomodation_sale_arr2[$i]*1.1),2).' €'; ?></td>
+                                                                    <?php
+                                                                        }else{?>
+                                                                    <td></td>
+                                                                    <?php }
+                                                                        if(isset($accomodation_sale_arr[$i])){
+                                                                    ?>
+                                                                    <td><?php echo round(($accomodation_sale_arr[$i]*1.1),2).' €'; ?></td>
+                                                                    <?php
+                                                                        }else{?>
+                                                                    <td></td>
+                                                                    <?php
+                                                                        }
+                                                                    }
+                                                                    ?>
+                                                                    <td><?php if(isset($accomodation_sale_arr2[0])){echo round((array_sum($accomodation_sale_arr)+array_sum($accomodation_sale_arr2))*1.1,2).' €';} ?></td>
                                                                 </tr>
 
                                                             </tbody>
