@@ -326,11 +326,11 @@ function forecast_prediction($conn,$input_data_,$date_forecast_,$i_){
                             <div class="card">
                                 <div class="card-body p-0 pt-1">
                                     <ul class="nav nav-tabs" id="myTab" role="tablist">
+                                        <li class="nav-item"> <a class="nav-link active" id="home-tab" data-toggle="tab" href="#home5" role="tab" aria-controls="home5" aria-expanded="true"><span class="hidden-sm-up"><i class="ti-home"></i></span> <span class="hidden-xs-down">Dashboard</span></a> </li>
+                                        <li class="nav-item"> <a class="nav-link" id="profile-tab1" data-toggle="tab" href="#profile1" role="tab" aria-controls="profile"><span class="hidden-sm-up"><i class="ti-user"></i></span> <span class="hidden-xs-down">Yearly Forecast</span></a></li>
                                         <li class="nav-item"> <a class="nav-link" id="profile-tab2" data-toggle="tab" href="#profile2" role="tab" aria-controls="profile"><span class="hidden-sm-up"><i class="ti-user"></i></span> <span class="hidden-xs-down">Budget Effective</span></a></li>
                                         <li class="nav-item"> <a class="nav-link" id="profile-tab3" data-toggle="tab" href="#profile3" role="tab" aria-controls="profile"><span class="hidden-sm-up"><i class="ti-user"></i></span> <span class="hidden-xs-down">Budget Forecast</span></a></li>
                                         <li class="nav-item"> <a class="nav-link" id="profile-tab4" data-toggle="tab" href="#profile4" role="tab" aria-controls="profile"><span class="hidden-sm-up"><i class="ti-user"></i></span> <span class="hidden-xs-down">Working</span></a></li>
-                                        <li class="nav-item"> <a class="nav-link" id="profile-tab1" data-toggle="tab" href="#profile1" role="tab" aria-controls="profile"><span class="hidden-sm-up"><i class="ti-user"></i></span> <span class="hidden-xs-down">Yearly Forecast</span></a></li>
-                                        <li class="nav-item"> <a class="nav-link active" id="home-tab" data-toggle="tab" href="#home5" role="tab" aria-controls="home5" aria-expanded="true"><span class="hidden-sm-up"><i class="ti-home"></i></span> <span class="hidden-xs-down">Dashboard</span></a> </li>
                                         <li class="nav-item"> <a class="nav-link" id="profile-tab5" data-toggle="tab" href="#profile5" role="tab" aria-controls="profile"><span class="hidden-sm-up"><i class="ti-user"></i></span> <span class="hidden-xs-down">Staffing</span></a></li>
                                         <li class="nav-item"> <a class="nav-link" id="profile-tab6" data-toggle="tab" href="#profile6" role="tab" aria-controls="profile"><span class="hidden-sm-up"><i class="ti-user"></i></span> <span class="hidden-xs-down">Goods Purchasings</span></a></li>
                                         <!--                                        <li class="nav-item"> <a class="nav-link" id="profile-tab7" data-toggle="tab" href="#profile7" role="tab" aria-controls="profile"><span class="hidden-sm-up"><i class="ti-user"></i></span> <span class="hidden-xs-down">Forecast Effective Sale</span></a></li>-->
@@ -1511,21 +1511,12 @@ function forecast_prediction($conn,$input_data_,$date_forecast_,$i_){
                                                                 <tr class="forecast_main_color">
                                                                     <td class="text-left"><?php echo 'Liquidität /Liquidity'; ?></td>
                                                                     <td><?php 
-
-                                                    $full_date_loan = date("Y")."-1-28";
-                                                    $Total_Loan_Temp2 = 0;
-                                                    $index_desired2=array_search($full_date_loan,$date_cost1);
-                                                    if(isset($total_loan_arr1[$index_desired2])){
-                                                        $total_Loan_Temp2 = $total_loan_arr1[$index_desired2];
-                                                    }else{$total_Loan_Temp2 = 0;}
-
-
-                                                    echo round((array_sum($accomodation_sale_arr2)+array_sum($anicillary_sale_arr2)+array_sum($spa_sale_arr2)+$Total_Acc_Balance_Temp2)-(array_sum($other_costs_arr2)+array_sum($bank_charges_arr2)+array_sum($taxes_arr2)+array_sum($marketing_arr2)+array_sum($adm_cost_arr2)+array_sum($t_opr_cost_arr2)+array_sum($staffing_arr1)+array_sum($goods_cost_arr2)+array_sum($anicillary_arr2)+array_sum($spa_arr2)+$Total_Loan_Temp2),2); ?></td>
+                                                    echo round((array_sum($accomodation_sale_arr2)+array_sum($anicillary_sale_arr2)+array_sum($spa_sale_arr2)+$Total_Acc_Balance_Temp2)-(array_sum($other_costs_arr2)+array_sum($bank_charges_arr2)+array_sum($taxes_arr2)+array_sum($marketing_arr2)+array_sum($adm_cost_arr2)+array_sum($t_opr_cost_arr2)+array_sum($staffing_arr1)+array_sum($goods_cost_arr2)+array_sum($anicillary_arr2)+array_sum($spa_arr2)+$total_loan_arr1[$index_desired2]),2); ?></td>
                                                                     <?php
                                                     for($i=0;$i<12;$i++){
                                                         if($i == 0){
                                                                     ?>
-                                                                    <td><?php echo round(($accomodation_sale_arr2[$i]+$spa_sale_arr2[$i]+$anicillary_sale_arr2[$i]+$Total_Acc_Balance_Temp2)-($other_costs_arr2[$i]+$bank_charges_arr2[$i]+$taxes_arr2[$i]+$marketing_arr2[$i]+$adm_cost_arr2[$i]+$t_opr_cost_arr2[$i]+$staffing_arr1[$i]+$goods_cost_arr2[$i]+$anicillary_arr2[$i]+$spa_arr2[$i]+$Total_Loan_Temp2),2); ?></td>
+                                                                    <td><?php echo round(($accomodation_sale_arr2[$i]+$spa_sale_arr2[$i]+$anicillary_sale_arr2[$i]+$Total_Acc_Balance_Temp2)-($other_costs_arr2[$i]+$bank_charges_arr2[$i]+$taxes_arr2[$i]+$marketing_arr2[$i]+$adm_cost_arr2[$i]+$t_opr_cost_arr2[$i]+$staffing_arr1[$i]+$goods_cost_arr2[$i]+$anicillary_arr2[$i]+$spa_arr2[$i]+$total_loan_arr1[$index_desired2]),2); ?></td>
                                                                     <?php
                                                         }else{
                                                                     ?>
@@ -1760,19 +1751,9 @@ function forecast_prediction($conn,$input_data_,$date_forecast_,$i_){
                                                         <tr class="forecast_light_gray_color">
                                                             <td class="text-left"><?php echo 'Liquidität /Liquidity'; ?></td>
                                                             <td><?php
-                                                                $full_date_loan = date("Y")."-1-28";
-                                                                $Total_Loan_Temp2 = 0;
-                                                                $index_desired2=array_search($full_date_loan,$date_cost1);
-                                                                if(isset($total_loan_arr1[$index_desired2])){
-                                                                    $total_Loan_Temp2 = $total_loan_arr1[$index_desired2];
-                                                                }else{$total_Loan_Temp2 = 0;}
-                                                                echo round((array_sum($accomodation_sale_arr2)+array_sum($anicillary_sale_arr2)+array_sum($spa_sale_arr2)+$Total_Acc_Balance_Temp2)-(array_sum($other_costs_arr2)+array_sum($bank_charges_arr2)+array_sum($taxes_arr2)+array_sum($marketing_arr2)+array_sum($adm_cost_arr2)+array_sum($t_opr_cost_arr2)+array_sum($staffing_arr1)+array_sum($goods_cost_arr2)+array_sum($anicillary_arr2)+array_sum($spa_arr2)+$Total_Loan_Temp2),2); ?></td>
+                                                                echo round((array_sum($accomodation_sale_arr2)+array_sum($anicillary_sale_arr2)+array_sum($spa_sale_arr2)+$Total_Acc_Balance_Temp2)-(array_sum($other_costs_arr2)+array_sum($bank_charges_arr2)+array_sum($taxes_arr2)+array_sum($marketing_arr2)+array_sum($adm_cost_arr2)+array_sum($t_opr_cost_arr2)+array_sum($staffing_arr1)+array_sum($goods_cost_arr2)+array_sum($anicillary_arr2)+array_sum($spa_arr2)+$total_loan_arr1[$index_desired2]),2); ?></td>
                                                             <td><?php
-                                                                $total_Loan_Temp=0;
-                                                                if(isset($total_loan_arr[0])){ 
-                                                                    $total_Loan_Temp = $total_loan_arr[0]; 
-                                                                }else{$total_Loan_Temp = 0;}
-                                                                echo round((array_sum($accomodation_sale_arr)+array_sum($anicillary_sale_arr)+array_sum($spa_sale_arr)+$Total_Acc_Balance_Temp)-(array_sum($other_costs_arr)+array_sum($bank_charges_arr)+array_sum($taxes_arr)+array_sum($marketing_arr)+array_sum($adm_cost_arr)+array_sum($t_opr_cost_arr)+array_sum($staffing_arr)+array_sum($goods_cost_arr)+array_sum($anicillary_arr)+array_sum($spa_arr)+$total_Loan_Temp),2); ?></td>
+                                                                echo round((array_sum($accomodation_sale_arr)+array_sum($anicillary_sale_arr)+array_sum($spa_sale_arr)+$Total_Acc_Balance_Temp)-(array_sum($other_costs_arr)+array_sum($bank_charges_arr)+array_sum($taxes_arr)+array_sum($marketing_arr)+array_sum($adm_cost_arr)+array_sum($t_opr_cost_arr)+array_sum($staffing_arr)+array_sum($goods_cost_arr)+array_sum($anicillary_arr)+array_sum($spa_arr)+$total_loan_arr[0]),2); ?></td>
                                                             <td></td>
                                                             <td></td>
                                                             <td></td>
@@ -2728,7 +2709,103 @@ function forecast_prediction($conn,$input_data_,$date_forecast_,$i_){
                                                                     <td><?php echo round(((((array_sum($accomodation_sale_arr2)+array_sum($anicillary_sale_arr2)+array_sum($spa_sale_arr2))-(array_sum($other_costs_arr2)+array_sum($bank_charges_arr2)+array_sum($taxes_arr2)+array_sum($marketing_arr2)+array_sum($adm_cost_arr2)+array_sum($t_opr_cost_arr2)+array_sum($staffing_arr1)+array_sum($goods_cost_arr2)+array_sum($anicillary_arr2)+array_sum($spa_arr2)))         +((array_sum($accomodation_sale_arr)+array_sum($anicillary_sale_arr)+array_sum($spa_sale_arr))-(array_sum($other_costs_arr)+array_sum($bank_charges_arr)+array_sum($taxes_arr)+array_sum($marketing_arr)+array_sum($adm_cost_arr)+array_sum($t_opr_cost_arr)+array_sum($staffing_arr)+array_sum($goods_cost_arr)+array_sum($anicillary_arr)+array_sum($spa_arr))))*100)/(((array_sum($spa_sale_arr)+array_sum($spa_sale_arr2)))+(array_sum($anicillary_sale_arr)+array_sum($accomodation_sale_arr)+array_sum($anicillary_sale_arr2)+array_sum($accomodation_sale_arr2))),2).' %'; ?></td>
                                                                 </tr>
 
+                                                                <tr><td class="custom_td_padding" colspan="26"></td></tr>
+                                                                <tr class="text-bold">
+                                                                    <td class="text-left">Total Bankkonto</td>
+                                                                    <?php
+                                                                    for($i=0;$i<12;$i++){
+                                                                        if(isset($acc_balance_arr1[$i]) && $i == 0){
+                                                                    ?>
+                                                                    <td><?php echo round($acc_balance_arr1[$i],2); ?></td>
+                                                                    <?php
+                                                                        }else{
+                                                                    ?>
+                                                                    <td></td>
+                                                                    <?php 
+                                                                        }
 
+                                                                        if(isset($acc_balance_arr[$i]) && $i == 0){
+                                                                    ?>
+                                                                    <td><?php echo round($acc_balance_arr[$i],2); ?></td>
+                                                                    <?php
+                                                                        }else{
+                                                                    ?>
+                                                                    <td></td>
+                                                                    <?php
+                                                                        }
+                                                                    }
+                                                                    ?>
+                                                                    <td></td>
+                                                                </tr>
+                                                                <tr><td class="custom_td_padding" colspan="26"></td></tr>
+                                                                <tr class="text-bold">
+                                                                    <td class="text-left">Total Loan</td>
+                                                                    <?php
+                                                                    for($i=0;$i<12;$i++){
+                                                                        if(isset($total_loan_arr1[$index_desired2]) && $i == 0){
+                                                                    ?>
+                                                                    <td><?php echo round($total_loan_arr1[$index_desired2],2); ?></td>
+                                                                    <?php
+                                                                        }else{
+                                                                    ?>
+                                                                    <td></td>
+                                                                    <?php 
+                                                                        }
+
+                                                                        if(isset($total_loan_arr[0]) && $i == 0){
+                                                                    ?>
+                                                                    <td><?php echo round($total_loan_arr[0],2); ?></td>
+                                                                    <?php
+                                                                        }else{
+                                                                    ?>
+                                                                    <td></td>                                                            
+                                                                    <?php
+                                                                        }
+                                                                    }
+                                                                    ?>
+                                                                    <td></td>
+                                                                </tr>
+                                                                <tr><td class="custom_td_padding" colspan="26"></td></tr>
+                                                                <tr><td class="custom_td_padding" colspan="26"></td></tr>
+                                                                <tr class="forecast_main_color">
+                                                                    <td class="text-left">Liquidität /Liquidity</td>
+                                                                    <?php
+                                                                    $forecast_acc_balance = 0;
+                                                                    $effective_acc_balance = 0;
+                                                                    $forecast_loan_balance = 0;
+                                                                    $effective_loan_balance = 0;
+                                                                    for($i=0;$i<12;$i++){
+                                                                        if($i == 0){
+                                                                            $forecast_acc_balance = $acc_balance_arr1[$i];
+                                                                            $effective_acc_balance = $acc_balance_arr[$i];
+                                                                            $forecast_loan_balance = $total_loan_arr1[$index_desired2];
+                                                                            $effective_loan_balance = $total_loan_arr[0];
+                                                                        }else{
+                                                                            $forecast_acc_balance = 0;
+                                                                            $effective_acc_balance = 0;
+                                                                            $forecast_loan_balance = 0;
+                                                                            $effective_loan_balance = 0;
+                                                                        }
+
+                                                                        if(isset($other_costs_arr2[$i])){
+                                                                    ?>
+                                                                    <td><?php echo round(($accomodation_sale_arr2[$i]+$spa_sale_arr2[$i]+$anicillary_sale_arr2[$i] + $forecast_acc_balance)-($other_costs_arr2[$i]+$bank_charges_arr2[$i]+$taxes_arr2[$i]+$marketing_arr2[$i]+$adm_cost_arr2[$i]+$t_opr_cost_arr2[$i]+$staffing_arr1[$i]+$goods_cost_arr2[$i]+$anicillary_arr2[$i]+$spa_arr2[$i] + $forecast_loan_balance),2).' €'; ?></td>
+                                                                    <?php
+                                                                        }else{?>
+                                                                    <td></td>
+                                                                    <?php }
+                                                                        if(isset($other_costs_arr[$i])){
+                                                                    ?>
+                                                                    <td><?php echo round(($accomodation_sale_arr[$i]+$spa_sale_arr[$i]+$anicillary_sale_arr[$i] + $effective_acc_balance)-($other_costs_arr[$i]+$bank_charges_arr[$i]+$taxes_arr[$i]+$marketing_arr[$i]+$adm_cost_arr[$i]+$t_opr_cost_arr[$i]+$staffing_arr[$i]+$goods_cost_arr[$i]+$anicillary_arr[$i]+$spa_arr[$i]+$effective_loan_balance),2).' €'; ?></td>
+                                                                    <?php
+                                                                        }else{?>
+                                                                    <td></td>
+                                                                    <?php
+                                                                        }
+                                                                    }
+                                                                    ?>
+                                                                    <td><?php echo round(((array_sum($accomodation_sale_arr2)+array_sum($anicillary_sale_arr2)+array_sum($spa_sale_arr2)+$forecast_acc_balance)-(array_sum($other_costs_arr2)+array_sum($bank_charges_arr2)+array_sum($taxes_arr2)+array_sum($marketing_arr2)+array_sum($adm_cost_arr2)+array_sum($t_opr_cost_arr2)+array_sum($staffing_arr1)+array_sum($goods_cost_arr2)+array_sum($anicillary_arr2)+array_sum($spa_arr2)+$forecast_loan_balance))         +((array_sum($accomodation_sale_arr)+array_sum($anicillary_sale_arr)+array_sum($spa_sale_arr)+$effective_acc_balance)-(array_sum($other_costs_arr)+array_sum($bank_charges_arr)+array_sum($taxes_arr)+array_sum($marketing_arr)+array_sum($adm_cost_arr)+array_sum($t_opr_cost_arr)+array_sum($staffing_arr)+array_sum($goods_cost_arr)+array_sum($anicillary_arr)+array_sum($spa_arr)+$effective_loan_balance)),2).' €'; ?></td>
+                                                                </tr>
                                                             </tbody>
                                                         </table>
                                                     </div>
