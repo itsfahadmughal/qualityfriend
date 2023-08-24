@@ -1773,7 +1773,7 @@ function forecast_prediction($conn,$input_data_,$date_forecast_,$i_){
                                                 </div>
                                                 <div class="col-lg-12">
                                                     <div class="table-responsive">
-                                                        <table class="pb-3 goods_table_responsive table table table-bordered table-hover table-striped">
+                                                        <table class="pb-3 goods_table_responsive table table table-bordered table-hover">
                                                             <thead>
                                                                 <tr class="forecast_pink_color text-center">
                                                                     <th class=""></th>
@@ -2806,6 +2806,29 @@ function forecast_prediction($conn,$input_data_,$date_forecast_,$i_){
                                                                     ?>
                                                                     <td><?php echo round(((array_sum($accomodation_sale_arr2)+array_sum($anicillary_sale_arr2)+array_sum($spa_sale_arr2)+$forecast_acc_balance)-(array_sum($other_costs_arr2)+array_sum($bank_charges_arr2)+array_sum($taxes_arr2)+array_sum($marketing_arr2)+array_sum($adm_cost_arr2)+array_sum($t_opr_cost_arr2)+array_sum($staffing_arr1)+array_sum($goods_cost_arr2)+array_sum($anicillary_arr2)+array_sum($spa_arr2)+$forecast_loan_balance))         +((array_sum($accomodation_sale_arr)+array_sum($anicillary_sale_arr)+array_sum($spa_sale_arr)+$effective_acc_balance)-(array_sum($other_costs_arr)+array_sum($bank_charges_arr)+array_sum($taxes_arr)+array_sum($marketing_arr)+array_sum($adm_cost_arr)+array_sum($t_opr_cost_arr)+array_sum($staffing_arr)+array_sum($goods_cost_arr)+array_sum($anicillary_arr)+array_sum($spa_arr)+$effective_loan_balance)),2).' €'; ?></td>
                                                                 </tr>
+                                                                <tr><td class="custom_td_padding" colspan="26"></td></tr>
+                                                                <tr><td class="custom_td_padding" colspan="26"></td></tr>
+
+                                                                <tr>
+                                                                    <td class="text-left text-bold">Betriebsergebnis-EBIT (Earnings before Taxes)</td>
+                                                                    <td colspan="25"></td>
+                                                                </tr>
+                                                                <tr class="forecast_pink_color">
+                                                                    <td class="text-left">Gross Operating Profit (BE1)</td>
+                                                                    <td><?php echo round(((array_sum($accomodation_sale_arr2)+array_sum($anicillary_sale_arr2)+array_sum($spa_sale_arr2)+$forecast_acc_balance)-(array_sum($other_costs_arr2)+array_sum($bank_charges_arr2)+array_sum($taxes_arr2)+array_sum($marketing_arr2)+array_sum($adm_cost_arr2)+array_sum($t_opr_cost_arr2)+array_sum($staffing_arr1)+array_sum($goods_cost_arr2)+array_sum($anicillary_arr2)+array_sum($spa_arr2)+$forecast_loan_balance))         +((array_sum($accomodation_sale_arr)+array_sum($anicillary_sale_arr)+array_sum($spa_sale_arr)+$effective_acc_balance)-(array_sum($other_costs_arr)+array_sum($bank_charges_arr)+array_sum($taxes_arr)+array_sum($marketing_arr)+array_sum($adm_cost_arr)+array_sum($t_opr_cost_arr)+array_sum($staffing_arr)+array_sum($goods_cost_arr)+array_sum($anicillary_arr)+array_sum($spa_arr)+$effective_loan_balance)),2).' €'; ?></td>
+                                                                    <td colspan="24"></td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td class="text-left">Amortization</td>
+                                                                    <td><?php echo '- €'; ?></td>
+                                                                    <td colspan="24"></td>
+                                                                </tr>
+                                                                <tr class="forecast_main_color">
+                                                                    <td class="text-left">Total</td>
+                                                                    <td><?php echo round(((array_sum($accomodation_sale_arr2)+array_sum($anicillary_sale_arr2)+array_sum($spa_sale_arr2)+$forecast_acc_balance)-(array_sum($other_costs_arr2)+array_sum($bank_charges_arr2)+array_sum($taxes_arr2)+array_sum($marketing_arr2)+array_sum($adm_cost_arr2)+array_sum($t_opr_cost_arr2)+array_sum($staffing_arr1)+array_sum($goods_cost_arr2)+array_sum($anicillary_arr2)+array_sum($spa_arr2)+$forecast_loan_balance))         +((array_sum($accomodation_sale_arr)+array_sum($anicillary_sale_arr)+array_sum($spa_sale_arr)+$effective_acc_balance)-(array_sum($other_costs_arr)+array_sum($bank_charges_arr)+array_sum($taxes_arr)+array_sum($marketing_arr)+array_sum($adm_cost_arr)+array_sum($t_opr_cost_arr)+array_sum($staffing_arr)+array_sum($goods_cost_arr)+array_sum($anicillary_arr)+array_sum($spa_arr)+$effective_loan_balance)),2).' €'; ?></td>
+                                                                    <td colspan="24"></td>
+                                                                </tr>
+
                                                             </tbody>
                                                         </table>
                                                     </div>
