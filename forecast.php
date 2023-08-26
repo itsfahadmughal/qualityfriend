@@ -1608,7 +1608,13 @@ function forecast_prediction($conn,$input_data_,$date_forecast_,$i_){
                                                         <tr class="forecast_light_gray_color">
                                                             <td class="text-left"><?php echo 'Betriebsaufwände /Total Costs'; ?></td>
                                                             <td><?php echo round(array_sum($other_costs_arr2)+array_sum($bank_charges_arr2)+array_sum($taxes_arr2)+array_sum($marketing_arr2)+array_sum($adm_cost_arr2)+array_sum($t_opr_cost_arr2)+array_sum($staffing_arr1)+array_sum($goods_cost_arr2)+array_sum($anicillary_arr2)+array_sum($spa_arr2),2); ?></td>
-                                                            <td><?php echo round(array_sum($other_costs_arr)+array_sum($bank_charges_arr)+array_sum($taxes_arr)+array_sum($marketing_arr)+array_sum($adm_cost_arr)+array_sum($t_opr_cost_arr)+array_sum($staffing_arr)+array_sum($goods_cost_arr)+array_sum($anicillary_arr)+array_sum($spa_arr),2); ?></td>
+                                                            <td>
+                                                                <?php 
+                                                                echo round(array_sum($other_costs_arr)+array_sum($bank_charges_arr)+array_sum($taxes_arr)+array_sum($marketing_arr)+array_sum($adm_cost_arr)+array_sum($t_opr_cost_arr)+array_sum($staffing_arr)+array_sum($goods_cost_arr)+array_sum($anicillary_arr)+array_sum($spa_arr),2);
+
+                                                                $total_costs_chart = round(array_sum($other_costs_arr)+array_sum($bank_charges_arr)+array_sum($taxes_arr)+array_sum($marketing_arr)+array_sum($adm_cost_arr)+array_sum($t_opr_cost_arr)+array_sum($staffing_arr)+array_sum($goods_cost_arr)+array_sum($anicillary_arr)+array_sum($spa_arr),2);
+                                                                ?>
+                                                            </td>
                                                             <td></td>
                                                             <td></td>
                                                             <td></td>
@@ -1618,7 +1624,14 @@ function forecast_prediction($conn,$input_data_,$date_forecast_,$i_){
                                                         <tr class="">
                                                             <td class="text-left"><?php echo 'Wareneinsätze'; ?></td>
                                                             <td><?php echo round(array_sum($accomodation_sale_arr2)+array_sum($anicillary_sale_arr2)+array_sum($spa_sale_arr2),2); ?></td>
-                                                            <td><?php echo round(array_sum($accomodation_sale_arr)+array_sum($anicillary_sale_arr)+array_sum($spa_sale_arr),2); ?></td>
+                                                            <td>
+                                                                <?php
+                                                                echo round(array_sum($accomodation_sale_arr)+array_sum($anicillary_sale_arr)+array_sum($spa_sale_arr),2); 
+
+                                                                $Wareneinsatze_chart = round(array_sum($accomodation_sale_arr)+array_sum($anicillary_sale_arr)+array_sum($spa_sale_arr),2);
+
+                                                                ?>
+                                                            </td>
                                                             <td></td>
                                                             <td></td>
                                                             <td class="text-left"><?php echo 'Wareneinsätze'; ?></td>
@@ -1628,7 +1641,12 @@ function forecast_prediction($conn,$input_data_,$date_forecast_,$i_){
                                                         <tr class="">
                                                             <td class="text-left"><?php echo 'Mitarbeiter/Staffing'; ?></td>
                                                             <td><?php echo round(array_sum($staffing_arr1),2); ?></td>
-                                                            <td><?php echo round(array_sum($staffing_arr),2); ?></td>
+                                                            <td>
+                                                                <?php 
+                                                                echo round(array_sum($staffing_arr),2);
+                                                                $staffing_chart = round(array_sum($staffing_arr),2);
+                                                                ?>
+                                                            </td>
                                                             <td></td>
                                                             <td></td>
                                                             <td class="text-left"><?php echo 'Mitarbeiter/Staffing'; ?></td>
@@ -1638,7 +1656,12 @@ function forecast_prediction($conn,$input_data_,$date_forecast_,$i_){
                                                         <tr class="">
                                                             <td class="text-left"><?php echo 'Betriebskosten Gesamt/Total Cost'; ?></td>
                                                             <td><?php echo round(array_sum($t_opr_cost_arr2),2); ?></td>
-                                                            <td><?php echo round(array_sum($t_opr_cost_arr),2); ?></td>
+                                                            <td>
+                                                                <?php 
+                                                                echo round(array_sum($t_opr_cost_arr),2); 
+                                                                $total_cost_chart = round(array_sum($t_opr_cost_arr),2);
+                                                                ?>
+                                                            </td>
                                                             <td></td>
                                                             <td></td>
                                                             <td class="text-left"><?php echo 'Betriebskosten Gesamt/Total Cost'; ?></td>
@@ -1648,7 +1671,12 @@ function forecast_prediction($conn,$input_data_,$date_forecast_,$i_){
                                                         <tr class="">
                                                             <td class="text-left"><?php echo 'Verwaltungskosten /Administration Costs'; ?></td>
                                                             <td><?php echo round(array_sum($adm_cost_arr2),2); ?></td>
-                                                            <td><?php echo round(array_sum($adm_cost_arr),2); ?></td>
+                                                            <td>
+                                                                <?php 
+                                                                echo round(array_sum($adm_cost_arr),2);
+                                                                $administration_chart = round(array_sum($adm_cost_arr),2);
+                                                                ?>
+                                                            </td>
                                                             <td></td>
                                                             <td></td>
                                                             <td class="text-left"><?php echo 'Verwaltungskosten /Administration Costs'; ?></td>
@@ -1658,7 +1686,12 @@ function forecast_prediction($conn,$input_data_,$date_forecast_,$i_){
                                                         <tr class="">
                                                             <td class="text-left"><?php echo 'Marketing/Marketing'; ?></td>
                                                             <td><?php echo round(array_sum($marketing_arr2),2); ?></td>
-                                                            <td><?php echo round(array_sum($marketing_arr),2); ?></td>
+                                                            <td>
+                                                                <?php 
+                                                                echo round(array_sum($marketing_arr),2);
+                                                                $marketing_chart = round(array_sum($marketing_arr),2);
+                                                                ?>
+                                                            </td>
                                                             <td></td>
                                                             <td></td>
                                                             <td class="text-left"><?php echo 'Marketing/Marketing'; ?></td>
@@ -1668,7 +1701,12 @@ function forecast_prediction($conn,$input_data_,$date_forecast_,$i_){
                                                         <tr class="">
                                                             <td class="text-left"><?php echo 'Steuern Und Gebühren/Taxes'; ?></td>
                                                             <td><?php echo round(array_sum($taxes_arr2),2); ?></td>
-                                                            <td><?php echo round(array_sum($taxes_arr),2); ?></td>
+                                                            <td>
+                                                                <?php 
+                                                                echo round(array_sum($taxes_arr),2); 
+                                                                $taxes_chart = round(array_sum($taxes_arr),2);
+                                                                ?>
+                                                            </td>
                                                             <td></td>
                                                             <td></td>
                                                             <td class="text-left"><?php echo 'Steuern Und Gebühren/Taxes'; ?></td>
@@ -1678,7 +1716,12 @@ function forecast_prediction($conn,$input_data_,$date_forecast_,$i_){
                                                         <tr class="">
                                                             <td class="text-left"><?php echo 'Bankspesen, Kk-Gebühren/Bank Charges'; ?></td>
                                                             <td><?php echo round(array_sum($bank_charges_arr2),2); ?></td>
-                                                            <td><?php echo round(array_sum($bank_charges_arr),2); ?></td>
+                                                            <td>
+                                                                <?php 
+                                                                echo round(array_sum($bank_charges_arr),2); 
+                                                                $bank_charges_chart = round(array_sum($bank_charges_arr),2);
+                                                                ?>
+                                                            </td>
                                                             <td></td>
                                                             <td></td>
                                                             <td class="text-left"><?php echo 'Bankspesen, Kk-Gebühren/Bank Charges'; ?></td>
@@ -1688,7 +1731,12 @@ function forecast_prediction($conn,$input_data_,$date_forecast_,$i_){
                                                         <tr class="">
                                                             <td class="text-left"><?php echo 'Sonst. Aufwände /Other Costs'; ?></td>
                                                             <td><?php echo round(array_sum($other_costs_arr2),2); ?></td>
-                                                            <td><?php echo round(array_sum($other_costs_arr),2); ?></td>
+                                                            <td>
+                                                                <?php 
+                                                                echo round(array_sum($other_costs_arr),2); 
+                                                                $other_costs_chart = round(array_sum($other_costs_arr),2); 
+                                                                ?>
+                                                            </td>
                                                             <td></td>
                                                             <td></td>
                                                             <td class="text-left"><?php echo 'Sonst. Aufwände /Other Costs'; ?></td>
@@ -1700,9 +1748,13 @@ function forecast_prediction($conn,$input_data_,$date_forecast_,$i_){
 
                                                         <tr class="forecast_light_gray_color">
                                                             <td class="text-left"><?php echo 'Gross Operating Profit (Be1)'; ?></td>
-                                                            <td><?php echo round((array_sum($accomodation_sale_arr2)+array_sum($anicillary_sale_arr2)+array_sum($spa_sale_arr2))-(array_sum($other_costs_arr2)+array_sum($bank_charges_arr2)+array_sum($taxes_arr2)+array_sum($marketing_arr2)+array_sum($adm_cost_arr2)+array_sum($t_opr_cost_arr2)+array_sum($staffing_arr1)+array_sum($goods_cost_arr2)+array_sum($anicillary_arr2)+array_sum($spa_arr2)),2); ?></td>
-                                                            <td><?php
-                                                                echo round((array_sum($accomodation_sale_arr)+array_sum($anicillary_sale_arr)+array_sum($spa_sale_arr))-(array_sum($other_costs_arr)+array_sum($bank_charges_arr)+array_sum($taxes_arr)+array_sum($marketing_arr)+array_sum($adm_cost_arr)+array_sum($t_opr_cost_arr)+array_sum($staffing_arr)+array_sum($goods_cost_arr)+array_sum($anicillary_arr)+array_sum($spa_arr)),2); ?></td>
+                                                            <td>
+                                                                <?php echo round((array_sum($accomodation_sale_arr2)+array_sum($anicillary_sale_arr2)+array_sum($spa_sale_arr2))-(array_sum($other_costs_arr2)+array_sum($bank_charges_arr2)+array_sum($taxes_arr2)+array_sum($marketing_arr2)+array_sum($adm_cost_arr2)+array_sum($t_opr_cost_arr2)+array_sum($staffing_arr1)+array_sum($goods_cost_arr2)+array_sum($anicillary_arr2)+array_sum($spa_arr2)),2); ?>
+                                                            </td>
+                                                            <td>
+                                                                <?php
+                                                                echo round((array_sum($accomodation_sale_arr)+array_sum($anicillary_sale_arr)+array_sum($spa_sale_arr))-(array_sum($other_costs_arr)+array_sum($bank_charges_arr)+array_sum($taxes_arr)+array_sum($marketing_arr)+array_sum($adm_cost_arr)+array_sum($t_opr_cost_arr)+array_sum($staffing_arr)+array_sum($goods_cost_arr)+array_sum($anicillary_arr)+array_sum($spa_arr)),2); ?>
+                                                            </td>
                                                             <td></td>
                                                             <td></td>
                                                             <td></td>
@@ -3232,11 +3284,27 @@ function forecast_prediction($conn,$input_data_,$date_forecast_,$i_){
                                                             $ancillary_net = round((array_sum($anicillary_sale_arr)*100) / (array_sum($spa_sale_arr)+array_sum($anicillary_sale_arr)+array_sum($accomodation_sale_arr)),2);
                                                             $spa_net = round((array_sum($spa_sale_arr)*100) / (array_sum($spa_sale_arr)+array_sum($anicillary_sale_arr)+array_sum($accomodation_sale_arr)),2);
                                                             ?>
-
-
-                                                            <h4 class="card-title">Doughnut Chart</h4>
+                                                            <h4 class="card-title">Betriebserlöse Effective</h4>
                                                             <div id="doughnut-chart" style="width:100%; height:400px;"></div>
-                                                            <h4 class="card-title">Bar chart 3</h4>
+
+                                                            <?php
+                                                            $Wareneinsatze_chart_per = round(($Wareneinsatze_chart*100) / ($total_costs_chart),2);
+
+                                                            $staffing_chart_per = round(($staffing_chart*100) / ($total_costs_chart),2);
+
+                                                            $taxes_chart_per = round(($taxes_chart*100) / ($total_costs_chart),2);
+
+                                                            $bank_charges_chart_per = round(($bank_charges_chart*100) / ($total_costs_chart),2);
+
+                                                            $other_costs_chart_per = round(($other_costs_chart*100) / ($total_costs_chart),2);
+
+                                                            $total_cost_chart_per = round(($total_cost_chart*100) / ($total_costs_chart),2);
+
+                                                            $administration_chart_per = round(($administration_chart*100) / ($total_costs_chart),2);
+
+                                                            $marketing_chart_per = round(($marketing_chart*100) / ($total_costs_chart),2);
+                                                            ?>
+                                                            <h4 class="card-title">Betriebsaufwände Effective</h4>
                                                             <div id="bar-chart3" style="width:100%; height:50%;"></div>
                                                         </div>
                                                         <div class="col-lg-6">
@@ -4472,13 +4540,31 @@ function forecast_prediction($conn,$input_data_,$date_forecast_,$i_){
             // ============================================================== 
             var myChart3 = echarts.init(document.getElementById('bar-chart3'));
 
+            var Wareneinsatze_chart_per_ = '<?php echo $Wareneinsatze_chart_per; ?>';
+
+            var staffing_chart_per_ = '<?php echo $staffing_chart_per; ?>';
+
+            var taxes_chart_per_ = '<?php echo $taxes_chart_per; ?>';
+
+            var bank_charges_chart_per_ = '<?php echo $bank_charges_chart_per; ?>';
+
+            var other_costs_chart_per_ = '<?php echo $other_costs_chart_per; ?>';
+
+            var total_cost_chart_per_ = '<?php echo $total_cost_chart_per; ?>';
+
+            var administration_chart_per_ = '<?php echo $administration_chart_per; ?>';
+
+            var marketing_chart_per_ = '<?php echo $marketing_chart_per; ?>';
+            
+            var year_current = '<?php echo $year_; ?>'
+
             // Chart Options
             // ------------------------------
             chartOptions = {
 
                 // Setup grid
                 grid: {
-                    x: 60,
+                    x: 90,
                     x2: 40,
                     y: 45,
                     y2: 25
@@ -4491,7 +4577,7 @@ function forecast_prediction($conn,$input_data_,$date_forecast_,$i_){
 
                 // Add legend
                 legend: {
-                    data: ['2012']
+                    data: [year_current]
                 },
 
                 // Add custom colors
@@ -4506,15 +4592,15 @@ function forecast_prediction($conn,$input_data_,$date_forecast_,$i_){
                 // Vertical axis
                 yAxis: [{
                     type: 'category',
-                    data: ['Apple', 'Samsung', 'HTC', 'Nokia', 'Sony', 'LG']
+                    data: ['Wareneinsätze', 'Staffing', 'Taxes', 'Bank Charges', 'Other Costs', 'Total Cost' , 'Adm Costs' , 'Marketing']
                 }],
 
                 // Add series
                 series : [
                     {
-                        name:'2012',
+                        name:year_current,
                         type:'bar',
-                        data:[780, 689, 468, 174, 436, 482]
+                        data:[Wareneinsatze_chart_per_, staffing_chart_per_, taxes_chart_per_, bank_charges_chart_per_, other_costs_chart_per_, total_cost_chart_per_, administration_chart_per_, marketing_chart_per_]
                     }
                 ]
             };
@@ -4785,7 +4871,7 @@ function forecast_prediction($conn,$input_data_,$date_forecast_,$i_){
                     data:['Logisumsätze Netto / Hotel Revenues Net','Nebenerlöse Netto / Ancillary Revenues Net','Spa-Umsätze (22%) Netto/Spa Revenues Net']
                 },
                 toolbox: {
-                    show : true,
+                    show : false,
                     feature : {
                         saveAsImage : {show: true}
                     }
