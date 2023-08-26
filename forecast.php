@@ -3227,6 +3227,13 @@ function forecast_prediction($conn,$input_data_,$date_forecast_,$i_){
 
                                                     <div class="row mt-5">
                                                         <div class="col-lg-3">
+                                                            <?php 
+                                                            $revenue_net = round((array_sum($accomodation_sale_arr)*100) / (array_sum($spa_sale_arr)+array_sum($anicillary_sale_arr)+array_sum($accomodation_sale_arr)),2);
+                                                            $ancillary_net = round((array_sum($anicillary_sale_arr)*100) / (array_sum($spa_sale_arr)+array_sum($anicillary_sale_arr)+array_sum($accomodation_sale_arr)),2);
+                                                            $spa_net = round((array_sum($spa_sale_arr)*100) / (array_sum($spa_sale_arr)+array_sum($anicillary_sale_arr)+array_sum($accomodation_sale_arr)),2);
+                                                            ?>
+
+
                                                             <h4 class="card-title">Doughnut Chart</h4>
                                                             <div id="doughnut-chart" style="width:100%; height:400px;"></div>
                                                             <h4 class="card-title">Bar chart 3</h4>
@@ -4762,35 +4769,24 @@ function forecast_prediction($conn,$input_data_,$date_forecast_,$i_){
             // ============================================================== 
             var doughnutChart = echarts.init(document.getElementById('doughnut-chart'));
 
+            var revenue_net_ = '<?php echo $revenue_net; ?>';
+            var ancillary_net_ = '<?php echo $ancillary_net; ?>';
+            var spa_net_ = '<?php echo $spa_net; ?>';
             // specify chart configuration item and data
 
             option = {
                 tooltip : {
                     trigger: 'item',
-                    formatter: "{a} <br/>{b} : {c}<br/>({d}%)"
+                    formatter: "{a}<br/>({d}%)"
                 },
                 legend: {
                     orient : 'vertical',
                     x : 'left',
-                    data:['Item A','Item B','Item C']
+                    data:['Logisumsätze Netto / Hotel Revenues Net','Nebenerlöse Netto / Ancillary Revenues Net','Spa-Umsätze (22%) Netto/Spa Revenues Net']
                 },
                 toolbox: {
                     show : true,
                     feature : {
-                        dataView : {show: true, readOnly: false},
-                        magicType : {
-                            show: true, 
-                            type: ['pie', 'funnel'],
-                            option: {
-                                funnel: {
-                                    x: '25%',
-                                    width: '70%',
-                                    funnelAlign: 'center',
-                                    max: 1548
-                                }
-                            }
-                        },
-                        restore : {show: true},
                         saveAsImage : {show: true}
                     }
                 },
@@ -4800,7 +4796,7 @@ function forecast_prediction($conn,$input_data_,$date_forecast_,$i_){
                     {
                         name:'Source',
                         type:'pie',
-                        radius : ['0%', '90%'],
+                        radius : ['0%', '75%'],
                         itemStyle : {
                             normal : {
                                 label : {
@@ -4815,16 +4811,16 @@ function forecast_prediction($conn,$input_data_,$date_forecast_,$i_){
                                     show : true,
                                     position : 'center',
                                     textStyle : {
-                                        fontSize : '30',
+                                        fontSize : '15',
                                         fontWeight : 'bold'
                                     }
                                 }
                             }
                         },
                         data:[
-                            {value:335, name:'Item A'},
-                            {value:310, name:'Item B'},
-                            {value:234, name:'Item C'},
+                            {value:revenue_net_, name:'Logisumsätze Netto / Hotel Revenues Net'},
+                            {value:ancillary_net_, name:'Nebenerlöse Netto / Ancillary Revenues Net'},
+                            {value:spa_net_, name:'Spa-Umsätze (22%) Netto/Spa Revenues Net'},
                         ]
                     }
                 ]
