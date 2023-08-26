@@ -2879,7 +2879,7 @@ function forecast_prediction($conn,$input_data_,$date_forecast_,$i_){
                                                                     <th class="text-left" colspan="14">Budget Overview</th>
                                                                 </tr>
                                                                 <tr class="forecast_main_color">
-                                                                    <th>Month</th>
+                                                                    <th class="text-left">Monate</th>
                                                                     <th>Total</th>
                                                                     <th>Jan</th>
                                                                     <th>Feb</th>
@@ -2897,20 +2897,232 @@ function forecast_prediction($conn,$input_data_,$date_forecast_,$i_){
                                                             </thead>
                                                             <tbody>
                                                                 <tr class="">
-                                                                    <td><?php echo 'Betriebserlöse Forecast'; ?></td>
-                                                                    <td class="forecast_secondary_color"><?php echo 'abewadsaec'; ?></td>
-                                                                    <td><?php echo 'abewadsaec'; ?></td>
-                                                                    <td><?php echo 'abewadsaec'; ?></td>
-                                                                    <td><?php echo 'abewadsaec'; ?></td>
-                                                                    <td><?php echo 'abewadsaec'; ?></td>
-                                                                    <td><?php echo 'abewadsaec'; ?></td>
-                                                                    <td><?php echo 'abewadsaec'; ?></td>
-                                                                    <td><?php echo 'abewadsaec'; ?></td>
-                                                                    <td><?php echo 'abewadsaec'; ?></td>
-                                                                    <td><?php echo 'abewadsaec'; ?></td>
-                                                                    <td><?php echo 'abewadsaec'; ?></td>
-                                                                    <td><?php echo 'abewadsaec'; ?></td>
-                                                                    <td><?php echo 'abewadsaec'; ?></td>
+                                                                    <td class="text-left"><?php echo 'Betriebserlöse Forecast'; ?></td>
+                                                                    <td class="forecast_secondary_color"><?php if(isset($spa_sale_arr2[0])){echo round((((array_sum($spa_sale_arr2)))+(array_sum($anicillary_sale_arr2)+array_sum($accomodation_sale_arr2))),2);} ?></td>
+
+                                                                    <?php
+                                                                    for($i=0;$i<12;$i++){
+                                                                        if(isset($spa_sale_arr2[$i])){
+                                                                    ?>
+                                                                    <td><?php echo round(($spa_sale_arr2[$i]) +($anicillary_sale_arr2[$i])+($accomodation_sale_arr2[$i]),2); ?></td>
+                                                                    <?php
+                                                                        }else{?>
+                                                                    <td>0</td>
+                                                                    <?php }
+                                                                    }
+                                                                    ?>
+                                                                </tr>
+                                                                <tr class="">
+                                                                    <td class="text-left"><?php echo 'Betriebserlöse Effective'; ?></td>
+                                                                    <td class="forecast_secondary_color"><?php if(isset($spa_sale_arr[0])){echo round((((array_sum($spa_sale_arr)))+(array_sum($anicillary_sale_arr)+array_sum($accomodation_sale_arr))),2);} ?></td>
+
+                                                                    <?php
+                                                                    for($i=0;$i<12;$i++){
+                                                                        if(isset($spa_sale_arr[$i])){
+                                                                    ?>
+                                                                    <td><?php echo round(($spa_sale_arr[$i])+($anicillary_sale_arr[$i])+($accomodation_sale_arr[$i]),2); ?></td>
+                                                                    <?php
+                                                                        }else{?>
+                                                                    <td>0</td>
+                                                                    <?php
+                                                                        }
+                                                                    }
+                                                                    ?>
+                                                                </tr>
+
+
+                                                                <tr class="">
+                                                                    <td class="text-left"><?php echo 'Betriebsaufwände Forecast'; ?></td>
+                                                                    <td class="forecast_secondary_color"><?php echo round(array_sum($other_costs_arr2)+array_sum($bank_charges_arr2)+array_sum($taxes_arr2)+array_sum($marketing_arr2)+array_sum($adm_cost_arr2)+array_sum($t_opr_cost_arr2)+array_sum($staffing_arr1)+array_sum($goods_cost_arr2)+array_sum($anicillary_arr2)+array_sum($spa_arr2), 2); ?></td>
+
+                                                                    <?php
+                                                                    for($i=0;$i<12;$i++){
+                                                                        if(isset($other_costs_arr2[$i])){
+                                                                    ?>
+                                                                    <td><?php echo round($other_costs_arr2[$i]+$bank_charges_arr2[$i]+$taxes_arr2[$i]+$marketing_arr2[$i]+$adm_cost_arr2[$i]+$t_opr_cost_arr2[$i]+$staffing_arr1[$i]+$goods_cost_arr2[$i]+$anicillary_arr2[$i]+$spa_arr2[$i], 2); ?></td>
+                                                                    <?php
+                                                                        }else{?>
+                                                                    <td>0</td>
+                                                                    <?php 
+                                                                        }
+                                                                    }
+                                                                    ?>
+                                                                </tr>
+                                                                <tr class="">
+                                                                    <td class="text-left"><?php echo 'Betriebsaufwände Effective'; ?></td>
+                                                                    <td class="forecast_secondary_color"><?php echo round( array_sum($other_costs_arr)+array_sum($bank_charges_arr)+array_sum($taxes_arr)+array_sum($marketing_arr)+array_sum($adm_cost_arr)+array_sum($t_opr_cost_arr)+array_sum($staffing_arr)+array_sum($goods_cost_arr)+array_sum($anicillary_arr)+array_sum($spa_arr), 2); ?></td>
+
+                                                                    <?php
+                                                                    for($i=0;$i<12;$i++){
+                                                                        if(isset($other_costs_arr[$i])){
+                                                                    ?>
+                                                                    <td><?php echo round($other_costs_arr[$i]+$bank_charges_arr[$i]+$taxes_arr[$i]+$marketing_arr[$i]+$adm_cost_arr[$i]+$t_opr_cost_arr[$i]+$staffing_arr[$i]+$goods_cost_arr[$i]+$anicillary_arr[$i]+$spa_arr[$i],2); ?></td>
+                                                                    <?php
+                                                                        }else{?>
+                                                                    <td>0</td>
+                                                                    <?php
+                                                                        }
+                                                                    }
+                                                                    ?>
+                                                                </tr>
+
+
+                                                                <tr class="">
+                                                                    <td class="text-left"><?php echo 'G.O.P Forecast'; ?></td>
+
+                                                                    <td class="forecast_secondary_color"><?php echo round(((array_sum($accomodation_sale_arr2)+array_sum($anicillary_sale_arr2)+array_sum($spa_sale_arr2))-(array_sum($other_costs_arr2)+array_sum($bank_charges_arr2)+array_sum($taxes_arr2)+array_sum($marketing_arr2)+array_sum($adm_cost_arr2)+array_sum($t_opr_cost_arr2)+array_sum($staffing_arr1)+array_sum($goods_cost_arr2)+array_sum($anicillary_arr2)+array_sum($spa_arr2))),2); ?></td>
+
+                                                                    <?php
+                                                                    for($i=0;$i<12;$i++){
+                                                                        if(isset($other_costs_arr2[$i])){
+                                                                    ?>
+                                                                    <td><?php echo round(($accomodation_sale_arr2[$i]+$spa_sale_arr2[$i]+$anicillary_sale_arr2[$i])-($other_costs_arr2[$i]+$bank_charges_arr2[$i]+$taxes_arr2[$i]+$marketing_arr2[$i]+$adm_cost_arr2[$i]+$t_opr_cost_arr2[$i]+$staffing_arr1[$i]+$goods_cost_arr2[$i]+$anicillary_arr2[$i]+$spa_arr2[$i]),2); ?></td>
+                                                                    <?php
+                                                                        }else{?>
+                                                                    <td>0</td>
+                                                                    <?php }
+                                                                    }
+                                                                    ?>
+                                                                </tr>
+                                                                <tr class="">
+                                                                    <td class="text-left"><?php echo 'G.O.P Effective'; ?></td>
+
+                                                                    <td class="forecast_secondary_color"><?php echo round(((array_sum($accomodation_sale_arr)+array_sum($anicillary_sale_arr)+array_sum($spa_sale_arr))-(array_sum($other_costs_arr)+array_sum($bank_charges_arr)+array_sum($taxes_arr)+array_sum($marketing_arr)+array_sum($adm_cost_arr)+array_sum($t_opr_cost_arr)+array_sum($staffing_arr)+array_sum($goods_cost_arr)+array_sum($anicillary_arr)+array_sum($spa_arr))),2); ?></td>
+
+                                                                    <?php
+                                                                    for($i=0;$i<12;$i++){ if(isset($other_costs_arr[$i])){
+                                                                    ?>
+                                                                    <td><?php echo round(($accomodation_sale_arr[$i]+$spa_sale_arr[$i]+$anicillary_sale_arr[$i])-($other_costs_arr[$i]+$bank_charges_arr[$i]+$taxes_arr[$i]+$marketing_arr[$i]+$adm_cost_arr[$i]+$t_opr_cost_arr[$i]+$staffing_arr[$i]+$goods_cost_arr[$i]+$anicillary_arr[$i]+$spa_arr[$i]),2); ?></td>
+                                                                    <?php
+                                                                    }else{?>
+                                                                    <td>0</td>
+                                                                    <?php
+                                                                    }
+                                                                                        }
+                                                                    ?>
+                                                                </tr>
+
+                                                                <tr class="">
+                                                                    <td class="text-left"><?php echo 'Total BankKonto Forecast'; ?></td>
+
+                                                                    <?php
+                                                                    for($i=0;$i<13;$i++){
+                                                                        if(isset($acc_balance_arr1[0]) && $i < 2){
+                                                                    ?>
+                                                                    <td class="<?php if($i==0){echo 'forecast_secondary_color';} ?>" ><?php echo round($acc_balance_arr1[0],2); ?></td>
+                                                                    <?php
+                                                                        }else{
+                                                                    ?>
+                                                                    <td>0</td>
+                                                                    <?php 
+                                                                        }
+                                                                    }
+                                                                    ?>
+                                                                </tr>
+                                                                <tr class="">
+                                                                    <td class="text-left"><?php echo 'Total BankKonto Effective'; ?></td>
+
+                                                                    <?php
+                                                                    for($i=0;$i<13;$i++){
+                                                                        if(isset($acc_balance_arr[0]) && $i < 2){
+                                                                    ?>
+                                                                    <td class="<?php if($i==0){echo 'forecast_secondary_color';} ?>" ><?php echo round($acc_balance_arr[0],2); ?></td>
+                                                                    <?php
+                                                                        }else{
+                                                                    ?>
+                                                                    <td>0</td>
+                                                                    <?php 
+                                                                        }
+                                                                    }
+                                                                    ?>
+                                                                </tr>
+
+                                                                <tr class="">
+                                                                    <td class="text-left"><?php echo 'Total Loan Forecast'; ?></td>
+
+                                                                    <?php
+                                                                    for($i=0;$i<13;$i++){
+                                                                        if(isset($total_loan_arr1[$index_desired2]) && $i < 2){
+                                                                    ?>
+                                                                    <td class="<?php if($i==0){echo 'forecast_secondary_color';} ?>" ><?php echo round($total_loan_arr1[$index_desired2],2); ?></td>
+                                                                    <?php
+                                                                        }else{
+                                                                    ?>
+                                                                    <td>0</td>
+                                                                    <?php 
+                                                                        }
+                                                                    }
+                                                                    ?>
+                                                                </tr>
+                                                                <tr class="">
+                                                                    <td class="text-left"><?php echo 'Total Loan Effective'; ?></td>
+
+                                                                    <?php
+                                                                    for($i=0;$i<13;$i++){
+                                                                        if(isset($total_loan_arr[0]) && $i < 2){
+                                                                    ?>
+                                                                    <td class="<?php if($i==0){echo 'forecast_secondary_color';} ?>" ><?php echo round($total_loan_arr[0],2); ?></td>
+                                                                    <?php
+                                                                        }else{
+                                                                    ?>
+                                                                    <td>0</td>
+                                                                    <?php 
+                                                                        }
+                                                                    }
+                                                                    ?>
+                                                                </tr>
+
+                                                                <tr class="">
+                                                                    <td class="text-left"><?php echo 'Liquidity Forecast'; ?></td>
+
+                                                                    <?php
+                                                                    $forecast_acc_balance = 0;
+                                                                    $effective_acc_balance = 0;
+                                                                    $forecast_loan_balance = 0;
+                                                                    $effective_loan_balance = 0;
+                                                                    for($i=0;$i<12;$i++){
+                                                                        if($i == 0){
+                                                                            $forecast_acc_balance = $acc_balance_arr1[$i];
+                                                                            $effective_acc_balance = $acc_balance_arr[$i];
+                                                                            $forecast_loan_balance = $total_loan_arr1[$index_desired2];
+                                                                            $effective_loan_balance = $total_loan_arr[0];
+
+                                                                    ?>
+                                                                    <td class="forecast_secondary_color"><?php echo round(((array_sum($accomodation_sale_arr2)+array_sum($anicillary_sale_arr2)+array_sum($spa_sale_arr2)+$forecast_acc_balance)-(array_sum($other_costs_arr2)+array_sum($bank_charges_arr2)+array_sum($taxes_arr2)+array_sum($marketing_arr2)+array_sum($adm_cost_arr2)+array_sum($t_opr_cost_arr2)+array_sum($staffing_arr1)+array_sum($goods_cost_arr2)+array_sum($anicillary_arr2)+array_sum($spa_arr2)+$forecast_loan_balance)),2); ?></td>
+                                                                    <?php
+                                                                        }else{
+                                                                            $forecast_acc_balance = 0;
+                                                                            $effective_acc_balance = 0;
+                                                                            $forecast_loan_balance = 0;
+                                                                            $effective_loan_balance = 0;
+                                                                        }
+                                                                        if(isset($other_costs_arr2[$i])){
+                                                                    ?>
+                                                                    <td><?php echo round(($accomodation_sale_arr2[$i]+$spa_sale_arr2[$i]+$anicillary_sale_arr2[$i] + $forecast_acc_balance)-($other_costs_arr2[$i]+$bank_charges_arr2[$i]+$taxes_arr2[$i]+$marketing_arr2[$i]+$adm_cost_arr2[$i]+$t_opr_cost_arr2[$i]+$staffing_arr1[$i]+$goods_cost_arr2[$i]+$anicillary_arr2[$i]+$spa_arr2[$i] + $forecast_loan_balance),2); ?></td>
+                                                                    <?php
+                                                                        }else{?>
+                                                                    <td>0</td>
+                                                                    <?php }
+                                                                    }
+                                                                    ?>
+                                                                </tr>
+                                                                <tr class="">
+                                                                    <td class="text-left"><?php echo 'Liquidity Effective'; ?></td>
+
+                                                                    <td class="forecast_secondary_color"><?php echo round(((array_sum($accomodation_sale_arr)+array_sum($anicillary_sale_arr)+array_sum($spa_sale_arr)+$effective_acc_balance)-(array_sum($other_costs_arr)+array_sum($bank_charges_arr)+array_sum($taxes_arr)+array_sum($marketing_arr)+array_sum($adm_cost_arr)+array_sum($t_opr_cost_arr)+array_sum($staffing_arr)+array_sum($goods_cost_arr)+array_sum($anicillary_arr)+array_sum($spa_arr)+$effective_loan_balance)),2); ?></td>
+
+                                                                    <?php
+                                                                    for($i=0;$i<12;$i++){
+                                                                        if(isset($other_costs_arr[$i])){
+                                                                    ?>
+                                                                    <td><?php echo round(($accomodation_sale_arr[$i]+$spa_sale_arr[$i]+$anicillary_sale_arr[$i] + $effective_acc_balance)-($other_costs_arr[$i]+$bank_charges_arr[$i]+$taxes_arr[$i]+$marketing_arr[$i]+$adm_cost_arr[$i]+$t_opr_cost_arr[$i]+$staffing_arr[$i]+$goods_cost_arr[$i]+$anicillary_arr[$i]+$spa_arr[$i]+$effective_loan_balance),2); ?></td>
+                                                                    <?php
+                                                                        }else{?>
+                                                                    <td>0</td>
+                                                                    <?php
+                                                                        }
+                                                                    }
+                                                                    ?>
                                                                 </tr>
                                                             </tbody>
                                                         </table>
