@@ -353,7 +353,8 @@ function forecast_prediction($conn,$input_data_,$date_forecast_,$i_){
                                         <div class="tab-pane fade" id="profile2" role="tabpanel" aria-labelledby="profile-tab2">
                                             <div class="row"> 
                                                 <div class="col-lg-12">
-                                                    <h3 class="forecast_main_color p-3 text-center">Budget Preview (Effective)</h3>
+                                                    <h3 class="forecast_main_color p-3 text-center">Budget Preview (Effective) 
+                                                        <button class="float-right" id="btnExport" onclick="export_effective(this)">Export</button></h3>
                                                 </div>
 
                                                 <?php $rooms=$beds=$opening_days=$months_arr=$staffing_arr=$goods_cost_arr=$stay_capacity_arr=$acc_balance_arr=$accomodation_sale_arr=$anicillary_sale_arr=$total_stay_arr=$spa_sale_arr=$anicillary_arr=$spa_arr=$t_opr_cost_arr=$adm_cost_arr=$marketing_arr=$taxes_arr=$bank_charges_arr=$total_loan_arr=$other_costs_arr=$date_cost=array();
@@ -878,7 +879,7 @@ function forecast_prediction($conn,$input_data_,$date_forecast_,$i_){
                                         <div class="tab-pane fade" id="profile3" role="tabpanel" aria-labelledby="profile-tab3">
                                             <div class="row"> 
                                                 <div class="col-lg-12">
-                                                    <h3 class="forecast_main_color p-3 text-center">Budget Preview (Forecast)</h3>
+                                                    <h3 class="forecast_main_color p-3 text-center">Budget Preview (Forecast) <button class="float-right" id="btnExport" onclick="export_forecast(this)">Export</button></h3>
                                                 </div>
 
                                                 <?php $opening_days1=$months_arr1=$staffing_arr1=$goods_cost_arr1=$stay_capacity_arr1=$acc_balance_arr1=$accomodation_sale_arr1=$anicillary_sale_arr1=$total_stay_arr1=$spa_sale_arr1=$anicillary_arr1=$spa_arr1=$t_opr_cost_arr1=$adm_cost_arr1=$marketing_arr1=$taxes_arr1=$bank_charges_arr1=$total_loan_arr1=$other_costs_arr1=$date_cost1=array();
@@ -1074,7 +1075,7 @@ function forecast_prediction($conn,$input_data_,$date_forecast_,$i_){
 
                                                 <div class="col-lg-12">
                                                     <div class="table-responsive text-center">
-                                                        <table class="table">
+                                                        <table class="table goods_table_responsive ">
                                                             <thead>
                                                                 <tr class="forecast_gray_color">
                                                                     <th></th>
@@ -1549,6 +1550,8 @@ function forecast_prediction($conn,$input_data_,$date_forecast_,$i_){
                                                             <th class="text-bold text-left">Monthly</th>
                                                             <th class="">Total</th>
                                                             <th class="" colspan="5"></th>
+                                                            <th class="">
+                                                                <button class="float-right" id="btnExport" onclick="export_working(this)">Export</button></th>
                                                         </tr>
                                                         <tr class="">
                                                             <th></th>
@@ -1821,11 +1824,11 @@ function forecast_prediction($conn,$input_data_,$date_forecast_,$i_){
                                         <div class="tab-pane fade" id="profile1" role="tabpanel" aria-labelledby="profile-tab1">
                                             <div class="row"> 
                                                 <div class="col-lg-12">
-                                                    <h3 class="forecast_main_color p-3 text-center">Yearly Budget forecast and effective</h3>
+                                                    <h3 class="forecast_main_color p-3 text-center">Yearly Budget forecast and effective <button class="float-right" id="btnExport" onclick="export_yearly(this)">Export</button> </h3>
                                                 </div>
                                                 <div class="col-lg-12">
                                                     <div class="table-responsive">
-                                                        <table class="pb-3 goods_table_responsive table table table-bordered table-hover">
+                                                        <table class="goods_table_responsive  pb-3 goods_table_responsive table table table-bordered table-hover">
                                                             <thead>
                                                                 <tr class="forecast_pink_color text-center">
                                                                     <th class=""></th>
@@ -2899,10 +2902,10 @@ function forecast_prediction($conn,$input_data_,$date_forecast_,$i_){
                                                 </div>
                                                 <div class="col-lg-3">
                                                     <div class="table-responsive text-center">
-                                                        <table class="table">
+                                                        <table class="table" id="table">
                                                             <thead>
                                                                 <tr>
-                                                                    <th class="" colspan="2"></th>
+                                                                    <th class="" colspan="2"><button id="btnExport" onclick="export_dashboard(this)">Export</button></th>
                                                                     <th class="forecast_secondary_color">Total</th>
                                                                 </tr>
                                                                 <tr class="forecast_gray_color">
@@ -3024,7 +3027,7 @@ function forecast_prediction($conn,$input_data_,$date_forecast_,$i_){
                                                 </div>
                                                 <div class="col-lg-9">
                                                     <div class="table-responsive text-center">
-                                                        <table class="table">
+                                                        <table class="table goods_table_responsive">
                                                             <thead>
                                                                 <tr>
                                                                     <th class="text-left" colspan="14">Budget Overview</th>
@@ -3378,7 +3381,9 @@ function forecast_prediction($conn,$input_data_,$date_forecast_,$i_){
                                         <div class="tab-pane fade" id="profile5" role="tabpanel" aria-labelledby="profile-tab5">
                                             <div class="row"> 
                                                 <div class="col-lg-12">
-                                                    <h3 class="forecast_main_color p-3 text-center">Staffing</h3>
+                                                    <h3 class="forecast_main_color p-3 text-center">Staffing 
+                                                        <button class="float-right" id="btnExport" onclick="export_staffing(this)">Export</button>
+                                                    </h3>
                                                 </div>
                                                 <?php
                                                 $total_gross=$total_net=$total12x_net=0;
@@ -3490,7 +3495,9 @@ function forecast_prediction($conn,$input_data_,$date_forecast_,$i_){
                                         <div class="tab-pane fade" id="profile6" role="tabpanel" aria-labelledby="profile-tab6">
                                             <div class="row"> 
                                                 <div class="col-lg-12">
-                                                    <h3 class="forecast_main_color p-3 text-center">GOODS PURCHASING FOR THE KITCHEN</h3>
+                                                    <h3 class="forecast_main_color p-3 text-center">GOODS PURCHASING FOR THE KITCHEN
+                                                        <button class="float-right" id="btnExport" onclick="export_goods(this)">Export</button>
+                                                    </h3>
                                                 </div>
                                                 <?php
                                                 $sql_goods_data = "SELECT * FROM `tbl_forecast_goods_cost` WHERE `hotel_id` = $hotel_id ORDER BY date DESC";
@@ -3499,7 +3506,7 @@ function forecast_prediction($conn,$input_data_,$date_forecast_,$i_){
                                                 ?>    
 
                                                 <div class="col-lg-12">
-                                                    <div class="table-responsive">
+                                                    <div class="table-responsive goods_table_responsive">
                                                         <table class="pb-3 table text-right table table-bordered table-hover table-striped">
                                                             <thead>
                                                                 <tr class="text-bold">
@@ -5569,6 +5576,147 @@ function forecast_prediction($conn,$input_data_,$date_forecast_,$i_){
                 }
             }
         </script>
+
+
+        <!--        <script type="text/javascript" src="https://unpkg.com/xlsx@0.15.1/dist/xlsx.full.min.js"></script>-->
+
+
+        <!--
+<script type="text/javascript">
+function exportReportToExcel(type = 'xlsx', fn, dl) {
+var elt = document.getElementById('print_excel');
+var wb = XLSX.utils.table_to_book(elt, { sheet: "sheet1" });
+return dl ?
+XLSX.write(wb, { bookType: type, bookSST: true, type: 'base64' }):
+XLSX.writeFile(wb, fn || ('MySheetName.' + (type || 'xlsx')));
+}
+</script>
+-->
+
+        <script src="https://raw.githack.com/eKoopmans/html2pdf/master/dist/html2pdf.bundle.js"></script>
+
+        <script>
+
+            function export_dashboard(){
+                var elementHTML = document.querySelector("#home5");
+
+                var opt = {
+                    margin:       1,
+                    filename:     'myfile.pdf',
+                    image:        { type: 'jpeg', quality: 3 },
+                    html2canvas:  { scale: 3 },
+                    jsPDF:        { unit: 'in', format: 'a1', orientation: 'landscape' }
+                };
+
+                html2pdf()
+                    .set(opt)
+                    .from(elementHTML)
+                    .save();
+
+            }
+
+            function export_yearly(){
+                var elementHTML1 = document.querySelector("#profile1");
+
+                var opt = {
+                    margin:       1,
+                    filename:     'myfile1.pdf',
+                    image:        { type: 'jpeg', quality: 3 },
+                    html2canvas:  { scale: 3 },
+                    jsPDF:        { unit: 'in', format: 'a1', orientation: 'landscape' }
+                };
+
+                html2pdf()
+                    .set(opt)
+                    .from(elementHTML1)
+                    .save();
+            }
+
+            function export_effective(){
+                var elementHTML2 = document.querySelector("#profile2");
+
+                var opt = {
+                    margin:       1,
+                    filename:     'myfile2.pdf',
+                    image:        { type: 'jpeg', quality: 3 },
+                    html2canvas:  { scale: 3 },
+                    jsPDF:        { unit: 'in', format: 'a2', orientation: 'landscape' }
+                };
+
+                html2pdf()
+                    .set(opt)
+                    .from(elementHTML2)
+                    .save();
+            }
+
+            function export_forecast(){
+                var elementHTML3 = document.querySelector("#profile3");
+
+                var opt = {
+                    margin:       1,
+                    filename:     'myfile3.pdf',
+                    image:        { type: 'jpeg', quality: 3 },
+                    html2canvas:  { scale: 3 },
+                    jsPDF:        { unit: 'in', format: 'a2', orientation: 'landscape' }
+                };
+
+                html2pdf()
+                    .set(opt)
+                    .from(elementHTML3)
+                    .save();
+            }
+            function export_working(){
+                var elementHTML4 = document.querySelector("#profile4");
+
+                var opt = {
+                    margin:       1,
+                    filename:     'myfile4.pdf',
+                    image:        { type: 'jpeg', quality: 3 },
+                    html2canvas:  { scale: 3 },
+                    jsPDF:        { unit: 'in', format: 'a2', orientation: 'landscape' }
+                };
+
+                html2pdf()
+                    .set(opt)
+                    .from(elementHTML4)
+                    .save();
+            }
+            function export_staffing(){
+                var elementHTML5 = document.querySelector("#profile5");
+
+                var opt = {
+                    margin:       1,
+                    filename:     'myfile5.pdf',
+                    image:        { type: 'jpeg', quality: 3 },
+                    html2canvas:  { scale: 3 },
+                    jsPDF:        { unit: 'in', format: 'a2', orientation: 'landscape' }
+                };
+
+                html2pdf()
+                    .set(opt)
+                    .from(elementHTML5)
+                    .save();
+            }
+             function export_goods(){
+                var elementHTML6 = document.querySelector("#profile6");
+
+                var opt = {
+                    margin:       1,
+                    filename:     'myfile6.pdf',
+                    image:        { type: 'jpeg', quality: 3 },
+                    html2canvas:  { scale: 3 },
+                    jsPDF:        { unit: 'in', format: 'a2', orientation: 'landscape' }
+                };
+
+                html2pdf()
+                    .set(opt)
+                    .from(elementHTML6)
+                    .save();
+            }
+
+
+        </script>
+
 
     </body>
 </html>
