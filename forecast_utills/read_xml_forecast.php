@@ -2,6 +2,8 @@
 include '../util_config.php';
 include '../util_session.php';
 
+$hotel_id = 2;
+
 $file_name = "";
 $sql_getcustomcode=" SELECT * FROM `tbl_hotel` WHERE`hotel_id` = $hotel_id";
 $result_getcustomcode = $conn->query($sql_getcustomcode);

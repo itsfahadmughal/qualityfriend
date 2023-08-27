@@ -1910,7 +1910,10 @@ function forecast_prediction($conn,$input_data_,$date_forecast_,$i_){
                                                                     <td class="text-left">Öffnungstage /Opening days</td>
                                                                     <?php
                                                                     $sum_open=0;
-                                                                    $opening_days2 = forecast_prediction($conn,$opening_days1,$date_forecast_last,$index_forecast_data);
+                                                                    $opening_days2 = array();
+                                                                    if(sizeof($opening_days1) > 14){
+                                                                        $opening_days2 = forecast_prediction($conn,$opening_days1,$date_forecast_last,$index_forecast_data);
+                                                                    }
                                                                     for($i=0;$i<12;$i++){
                                                                         if(isset($opening_days2[$i])){
                                                                     ?>

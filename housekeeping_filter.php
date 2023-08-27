@@ -377,13 +377,13 @@ $room_id_checklist_array =  array();
         ?>
         <div id="<?php echo $rms_id ?>" class="wm-50 my_rooms col-lg-2 col-md-2  col-sm-2 pt-2 " onclick="doubleclick(this, function(){ window.location.href = 'housekeeping_rooms_detail.php?id='+id+'&rmrs_id=<?php echo $rmrs_id; ?>';}, function(){window.location.href = 'housekeeping_rooms_detail.php?id='+id+'&rmrs_id=<?php echo $rmrs_id; ?>';})">
             <div class="room_box_height <?php echo $room_is; ?> room_box room_box_text pointer row">
-                <div  class="col-md-8  room_box_fix  room_padding_top" >
+                <div  class="col-md-8 wm-50  room_box_fix  room_padding_top" >
                     <?php 
                     ?>
                     <h6 class="room_box_cleanner_font"><?php echo $cleanner_firstname; ?></h6>
                     <?php ?>
                 </div>
-                <div id="inner" class="col-md-4 room_box_fix  room_text_right room_padding_top" >
+                <div id="inner" class="col-md-4 wm-50 room_box_fix  room_text_right room_padding_top" >
                     <?php 
 
                 if($annotation != "" ){
@@ -391,17 +391,17 @@ $room_id_checklist_array =  array();
                     <i class="mdi mdi-message-alert a_icon"></i>
                     <?php }?>
                 </div>
-                <div class="col-md-4 pt-2" >
+                <div class="col-md-4 wm-50 pt-2" >
 
                     <?php if($laundry == "Yes"){ ?>
                     <img src="./assets/images/laundry.png" alt="homepage" width="26" />
                     <?php }?>
                 </div>
-                <div class="col-md-4 padding_top_none" >
+                <div class="col-md-4 wm-50 padding_top_none" >
 
                     <h6 class="room_text_center room_box_fix1 room_no_font pt-3"><?php echo $room_num; ?></h6>
                 </div>
-                <div class="col-md-4 pt-2" >
+                <div class="col-md-4 wm-50 pt-2" >
                     <?php if($from_ != ""){ ?>
 
                     <i class="mdi mdi-arrow-left a_icon_1 pt-4"><?php echo $from_ ?></i>
@@ -410,16 +410,16 @@ $room_id_checklist_array =  array();
                     <?php } ?>
 
                 </div>
-                <div class="col-md-12 pt-1" >
+                <div class="col-md-12 wm-50 pt-1" >
                     <h6 class="room_text_center room_box_fix room_box_ststus_font pt-1"><?php echo $breakfast; ?></h6>
                 </div>
-                <div class="col-md-12 " >
+                <div class="col-md-12  wm-50" >
                     <h6 class="room_text_center room_box_fix room_box_ststus_font pt-1"><?php echo $urgent; ?></h6>
                 </div>
-                <div class="col-md-5 room_box_fix3  room_text_left" >
+                <div class="col-md-5 wm-50 room_box_fix3  room_text_left" >
                     <h6 class="room_box_p_status_font"><?php echo $presence_status; ?></h6>
                 </div>
-                <div class="col-md-3  " >
+                <div class="col-md-3 wm-50  " >
                     <?php if(in_array("departed", $status_arr)){ ?>
 
                     <img src="./assets/images/checkout.png" alt="homepage" width="14" />
@@ -428,14 +428,14 @@ $room_id_checklist_array =  array();
                     <?php }?>
 
                 </div>
-                <div class="col-md-4 room_box_fix3  room_text_right" >
+                <div class="col-md-4 wm-50 room_box_fix3  room_text_right" >
 
 
                     <h6 class="room_text_small"><?php echo $arrival; ?></h6>
 
                 </div>
 
-                <div class="col-md-12 room_box_fix3  room_text_right" >
+                <div class="col-md-12 wm-100 room_box_fix3  room_text_right" >
                     <h6 class="room_text_small"><?php echo $departure; ?></h6>
                 </div>
             </div>
