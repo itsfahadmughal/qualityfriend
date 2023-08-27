@@ -3049,12 +3049,19 @@ function forecast_prediction($conn,$input_data_,$date_forecast_,$i_){
                                                                     <td class="forecast_secondary_color"><?php if(isset($spa_sale_arr2[0])){echo round((((array_sum($spa_sale_arr2)))+(array_sum($anicillary_sale_arr2)+array_sum($accomodation_sale_arr2))),2);} ?></td>
 
                                                                     <?php
+                                                                    $Betriebserlose_Forecast_arry = array();
                                                                     for($i=0;$i<12;$i++){
                                                                         if(isset($spa_sale_arr2[$i])){
                                                                     ?>
-                                                                    <td><?php echo round(($spa_sale_arr2[$i]) +($anicillary_sale_arr2[$i])+($accomodation_sale_arr2[$i]),2); ?></td>
+                                                                    <td><?php echo round(($spa_sale_arr2[$i]) +($anicillary_sale_arr2[$i])+($accomodation_sale_arr2[$i]),2);
+
+                                                                            array_push($Betriebserlose_Forecast_arry,round(($spa_sale_arr2[$i]) +($anicillary_sale_arr2[$i])+($accomodation_sale_arr2[$i]),2));
+
+                                                                        ?></td>
                                                                     <?php
-                                                                        }else{?>
+                                                                        }else{
+                                                                            array_push($Betriebserlose_Forecast_arry,0);
+                                                                    ?>
                                                                     <td>0</td>
                                                                     <?php }
                                                                     }
@@ -3065,12 +3072,18 @@ function forecast_prediction($conn,$input_data_,$date_forecast_,$i_){
                                                                     <td class="forecast_secondary_color"><?php if(isset($spa_sale_arr[0])){echo round((((array_sum($spa_sale_arr)))+(array_sum($anicillary_sale_arr)+array_sum($accomodation_sale_arr))),2);} ?></td>
 
                                                                     <?php
+                                                                    $Betriebserlose_Effective_arry = array();
                                                                     for($i=0;$i<12;$i++){
                                                                         if(isset($spa_sale_arr[$i])){
                                                                     ?>
-                                                                    <td><?php echo round(($spa_sale_arr[$i])+($anicillary_sale_arr[$i])+($accomodation_sale_arr[$i]),2); ?></td>
+                                                                    <td><?php echo round(($spa_sale_arr[$i])+($anicillary_sale_arr[$i])+($accomodation_sale_arr[$i]),2);
+
+                                                                            array_push($Betriebserlose_Effective_arry,round(($spa_sale_arr[$i]) +($anicillary_sale_arr[$i])+($accomodation_sale_arr[$i]),2));
+                                                                        ?></td>
                                                                     <?php
-                                                                        }else{?>
+                                                                        }else{
+                                                                            array_push($Betriebserlose_Effective_arry,0);
+                                                                    ?>
                                                                     <td>0</td>
                                                                     <?php
                                                                         }
@@ -3084,12 +3097,18 @@ function forecast_prediction($conn,$input_data_,$date_forecast_,$i_){
                                                                     <td class="forecast_secondary_color"><?php echo round(array_sum($other_costs_arr2)+array_sum($bank_charges_arr2)+array_sum($taxes_arr2)+array_sum($marketing_arr2)+array_sum($adm_cost_arr2)+array_sum($t_opr_cost_arr2)+array_sum($staffing_arr1)+array_sum($goods_cost_arr2)+array_sum($anicillary_arr2)+array_sum($spa_arr2), 2); ?></td>
 
                                                                     <?php
+                                                                    $Betriebsaufwande_Forecast_arr = array();
                                                                     for($i=0;$i<12;$i++){
                                                                         if(isset($other_costs_arr2[$i])){
                                                                     ?>
-                                                                    <td><?php echo round($other_costs_arr2[$i]+$bank_charges_arr2[$i]+$taxes_arr2[$i]+$marketing_arr2[$i]+$adm_cost_arr2[$i]+$t_opr_cost_arr2[$i]+$staffing_arr1[$i]+$goods_cost_arr2[$i]+$anicillary_arr2[$i]+$spa_arr2[$i], 2); ?></td>
+                                                                    <td><?php echo round($other_costs_arr2[$i]+$bank_charges_arr2[$i]+$taxes_arr2[$i]+$marketing_arr2[$i]+$adm_cost_arr2[$i]+$t_opr_cost_arr2[$i]+$staffing_arr1[$i]+$goods_cost_arr2[$i]+$anicillary_arr2[$i]+$spa_arr2[$i], 2);
+
+                                                                            array_push($Betriebsaufwande_Forecast_arr, round($other_costs_arr2[$i]+$bank_charges_arr2[$i]+$taxes_arr2[$i]+$marketing_arr2[$i]+$adm_cost_arr2[$i]+$t_opr_cost_arr2[$i]+$staffing_arr1[$i]+$goods_cost_arr2[$i]+$anicillary_arr2[$i]+$spa_arr2[$i], 2));
+                                                                        ?></td>
                                                                     <?php
-                                                                        }else{?>
+                                                                        }else{
+                                                                            array_push($Betriebsaufwande_Forecast_arr, 0);
+                                                                    ?>
                                                                     <td>0</td>
                                                                     <?php 
                                                                         }
@@ -3101,12 +3120,18 @@ function forecast_prediction($conn,$input_data_,$date_forecast_,$i_){
                                                                     <td class="forecast_secondary_color"><?php echo round( array_sum($other_costs_arr)+array_sum($bank_charges_arr)+array_sum($taxes_arr)+array_sum($marketing_arr)+array_sum($adm_cost_arr)+array_sum($t_opr_cost_arr)+array_sum($staffing_arr)+array_sum($goods_cost_arr)+array_sum($anicillary_arr)+array_sum($spa_arr), 2); ?></td>
 
                                                                     <?php
+                                                                    $Betriebsaufwande_Effective_arr = array();
                                                                     for($i=0;$i<12;$i++){
                                                                         if(isset($other_costs_arr[$i])){
                                                                     ?>
-                                                                    <td><?php echo round($other_costs_arr[$i]+$bank_charges_arr[$i]+$taxes_arr[$i]+$marketing_arr[$i]+$adm_cost_arr[$i]+$t_opr_cost_arr[$i]+$staffing_arr[$i]+$goods_cost_arr[$i]+$anicillary_arr[$i]+$spa_arr[$i],2); ?></td>
+                                                                    <td><?php echo round($other_costs_arr[$i]+$bank_charges_arr[$i]+$taxes_arr[$i]+$marketing_arr[$i]+$adm_cost_arr[$i]+$t_opr_cost_arr[$i]+$staffing_arr[$i]+$goods_cost_arr[$i]+$anicillary_arr[$i]+$spa_arr[$i],2); 
+
+                                                                            array_push($Betriebsaufwande_Effective_arr, round($other_costs_arr[$i]+$bank_charges_arr[$i]+$taxes_arr[$i]+$marketing_arr[$i]+$adm_cost_arr[$i]+$t_opr_cost_arr[$i]+$staffing_arr[$i]+$goods_cost_arr[$i]+$anicillary_arr[$i]+$spa_arr[$i],2));
+                                                                        ?></td>
                                                                     <?php
-                                                                        }else{?>
+                                                                        }else{
+                                                                            array_push($Betriebsaufwande_Effective_arr, 0);
+                                                                    ?>
                                                                     <td>0</td>
                                                                     <?php
                                                                         }
@@ -3121,12 +3146,19 @@ function forecast_prediction($conn,$input_data_,$date_forecast_,$i_){
                                                                     <td class="forecast_secondary_color"><?php echo round(((array_sum($accomodation_sale_arr2)+array_sum($anicillary_sale_arr2)+array_sum($spa_sale_arr2))-(array_sum($other_costs_arr2)+array_sum($bank_charges_arr2)+array_sum($taxes_arr2)+array_sum($marketing_arr2)+array_sum($adm_cost_arr2)+array_sum($t_opr_cost_arr2)+array_sum($staffing_arr1)+array_sum($goods_cost_arr2)+array_sum($anicillary_arr2)+array_sum($spa_arr2))),2); ?></td>
 
                                                                     <?php
+                                                                    $gop_forecast_arr = array();
                                                                     for($i=0;$i<12;$i++){
                                                                         if(isset($other_costs_arr2[$i])){
                                                                     ?>
-                                                                    <td><?php echo round(($accomodation_sale_arr2[$i]+$spa_sale_arr2[$i]+$anicillary_sale_arr2[$i])-($other_costs_arr2[$i]+$bank_charges_arr2[$i]+$taxes_arr2[$i]+$marketing_arr2[$i]+$adm_cost_arr2[$i]+$t_opr_cost_arr2[$i]+$staffing_arr1[$i]+$goods_cost_arr2[$i]+$anicillary_arr2[$i]+$spa_arr2[$i]),2); ?></td>
+                                                                    <td><?php echo round(($accomodation_sale_arr2[$i]+$spa_sale_arr2[$i]+$anicillary_sale_arr2[$i])-($other_costs_arr2[$i]+$bank_charges_arr2[$i]+$taxes_arr2[$i]+$marketing_arr2[$i]+$adm_cost_arr2[$i]+$t_opr_cost_arr2[$i]+$staffing_arr1[$i]+$goods_cost_arr2[$i]+$anicillary_arr2[$i]+$spa_arr2[$i]),2);
+
+                                                                            array_push($gop_forecast_arr,round(($accomodation_sale_arr2[$i]+$spa_sale_arr2[$i]+$anicillary_sale_arr2[$i])-($other_costs_arr2[$i]+$bank_charges_arr2[$i]+$taxes_arr2[$i]+$marketing_arr2[$i]+$adm_cost_arr2[$i]+$t_opr_cost_arr2[$i]+$staffing_arr1[$i]+$goods_cost_arr2[$i]+$anicillary_arr2[$i]+$spa_arr2[$i]),2));
+
+                                                                        ?></td>
                                                                     <?php
-                                                                        }else{?>
+                                                                        }else{
+                                                                            array_push($gop_forecast_arr,0);
+                                                                    ?>
                                                                     <td>0</td>
                                                                     <?php }
                                                                     }
@@ -3138,11 +3170,17 @@ function forecast_prediction($conn,$input_data_,$date_forecast_,$i_){
                                                                     <td class="forecast_secondary_color"><?php echo round(((array_sum($accomodation_sale_arr)+array_sum($anicillary_sale_arr)+array_sum($spa_sale_arr))-(array_sum($other_costs_arr)+array_sum($bank_charges_arr)+array_sum($taxes_arr)+array_sum($marketing_arr)+array_sum($adm_cost_arr)+array_sum($t_opr_cost_arr)+array_sum($staffing_arr)+array_sum($goods_cost_arr)+array_sum($anicillary_arr)+array_sum($spa_arr))),2); ?></td>
 
                                                                     <?php
+                                                                    $gop_effective_arr = array();
                                                                     for($i=0;$i<12;$i++){ if(isset($other_costs_arr[$i])){
                                                                     ?>
-                                                                    <td><?php echo round(($accomodation_sale_arr[$i]+$spa_sale_arr[$i]+$anicillary_sale_arr[$i])-($other_costs_arr[$i]+$bank_charges_arr[$i]+$taxes_arr[$i]+$marketing_arr[$i]+$adm_cost_arr[$i]+$t_opr_cost_arr[$i]+$staffing_arr[$i]+$goods_cost_arr[$i]+$anicillary_arr[$i]+$spa_arr[$i]),2); ?></td>
+                                                                    <td><?php echo round(($accomodation_sale_arr[$i]+$spa_sale_arr[$i]+$anicillary_sale_arr[$i])-($other_costs_arr[$i]+$bank_charges_arr[$i]+$taxes_arr[$i]+$marketing_arr[$i]+$adm_cost_arr[$i]+$t_opr_cost_arr[$i]+$staffing_arr[$i]+$goods_cost_arr[$i]+$anicillary_arr[$i]+$spa_arr[$i]),2); 
+
+                                                                        array_push($gop_effective_arr,round(($accomodation_sale_arr[$i]+$spa_sale_arr[$i]+$anicillary_sale_arr[$i])-($other_costs_arr[$i]+$bank_charges_arr[$i]+$taxes_arr[$i]+$marketing_arr[$i]+$adm_cost_arr[$i]+$t_opr_cost_arr[$i]+$staffing_arr[$i]+$goods_cost_arr[$i]+$anicillary_arr[$i]+$spa_arr[$i]),2));
+                                                                        ?></td>
                                                                     <?php
-                                                                    }else{?>
+                                                                    }else{
+                                                                        array_push($gop_effective_arr,0);
+                                                                    ?>
                                                                     <td>0</td>
                                                                     <?php
                                                                     }
@@ -3309,17 +3347,22 @@ function forecast_prediction($conn,$input_data_,$date_forecast_,$i_){
                                                         </div>
                                                         <div class="col-lg-6">
 
-                                                            <h4 class="card-title">Line chart</h4>
+                                                            <h4 class="card-title">Betriebserlöse Forecast vs Effective</h4>
                                                             <div id="main" style="width:100%; height:300px;"></div>
 
-                                                            <h4 class="card-title">Line chart 2</h4>
+                                                            <h4 class="card-title">Betriebsaufwände Forecast vs Effective</h4>
                                                             <div id="main2" style="width:100%; height:300px;"></div>
 
-                                                            <h4 class="card-title">Bar chart</h4>
+                                                            <h4 class="card-title">Bruttobetriebsgewinn Forecast vs Effective</h4>
                                                             <div id="bar-chart" style="width:100%; height:300px;"></div>
                                                         </div>
                                                         <div class="col-lg-3">
-                                                            <h4 class="card-title">Bar chart 2</h4>
+                                                            <?php 
+                                                            $ot_per_effective=round((array_sum($total_stay_arr)*100)/array_sum($stay_capacity_arr),2);
+                                                            $ot_per_forecast=round((array_sum($total_stay_arr2)*100)/array_sum($stay_capacity_arr2),2);
+
+                                                            ?>
+                                                            <h4 class="card-title">Auslastung der ÖT in %</h4>
                                                             <div id="bar-chart2" style="width:100%; height:97%;"></div>
                                                         </div>
                                                     </div>
@@ -4370,6 +4413,9 @@ function forecast_prediction($conn,$input_data_,$date_forecast_,$i_){
 
 
         <script>
+
+            var gop_effective_arr_ = <?php echo json_encode($gop_effective_arr); ?>;
+            var gop_forecast_arr_ = <?php echo json_encode($gop_forecast_arr); ?>;
             // ============================================================== 
             // Bar chart option
             // ============================================================== 
@@ -4381,14 +4427,12 @@ function forecast_prediction($conn,$input_data_,$date_forecast_,$i_){
                     trigger: 'axis'
                 },
                 legend: {
-                    data:['Site A','Site B']
+                    data:['Bruttobetriebsgewinn Forecast','Bruttobetriebsgewinn Effective']
                 },
                 toolbox: {
                     show : true,
                     feature : {
-
                         magicType : {show: true, type: ['line', 'bar']},
-                        restore : {show: true},
                         saveAsImage : {show: true}
                     }
                 },
@@ -4407,9 +4451,9 @@ function forecast_prediction($conn,$input_data_,$date_forecast_,$i_){
                 ],
                 series : [
                     {
-                        name:'Site A',
+                        name:'Bruttobetriebsgewinn Forecast',
                         type:'bar',
-                        data:[2.0, 4.9, 7.0, 23.2, 25.6, 76.7, 135.6, 162.2, 32.6, 20.0, 6.4, 3.3],
+                        data:gop_forecast_arr_,
                         markPoint : {
                             data : [
                                 {type : 'max', name: 'Max'},
@@ -4423,13 +4467,13 @@ function forecast_prediction($conn,$input_data_,$date_forecast_,$i_){
                         }
                     },
                     {
-                        name:'Site B',
+                        name:'Bruttobetriebsgewinn Effective',
                         type:'bar',
-                        data:[2.6, 5.9, 9.0, 26.4, 28.7, 70.7, 175.6, 182.2, 48.7, 18.8, 6.0, 2.3],
+                        data:gop_effective_arr_,
                         markPoint : {
                             data : [
-                                {name : 'The highest year', value : 182.2, xAxis: 7, yAxis: 183, symbolSize:18},
-                                {name : 'Year minimum', value : 2.3, xAxis: 11, yAxis: 3}
+                                {type : 'max', name: 'Max'},
+                                {type : 'min', name: 'Min'}
                             ]
                         },
                         markLine : {
@@ -4457,14 +4501,14 @@ function forecast_prediction($conn,$input_data_,$date_forecast_,$i_){
             // ============================================================== 
             var myChart2 = echarts.init(document.getElementById('bar-chart2'));
 
+            var ot_per_effective_ = '<?php echo $ot_per_effective; ?>';
+            var ot_per_forecast_ = '<?php echo $ot_per_forecast; ?>';
             // specify chart configuration item and data
             option = {
                 tooltip : {
                     trigger: 'axis'
                 },
-                legend: {
-                    data:['Site A','Site B']
-                },
+
                 toolbox: {
                     show : true,
                     feature : {
@@ -4479,7 +4523,7 @@ function forecast_prediction($conn,$input_data_,$date_forecast_,$i_){
                 xAxis : [
                     {
                         type : 'category',
-                        data : ['Jan','Feb','Mar','Apr','May','Jun','July','Aug','Sept','Oct','Nov','Dec']
+                        data : ['Forecast','Effective']
                     }
                 ],
                 yAxis : [
@@ -4489,9 +4533,9 @@ function forecast_prediction($conn,$input_data_,$date_forecast_,$i_){
                 ],
                 series : [
                     {
-                        name:'Site A',
+                        name:'OT %',
                         type:'bar',
-                        data:[2.0, 4.9, 7.0, 23.2, 25.6, 76.7, 135.6, 162.2, 32.6, 20.0, 6.4, 3.3],
+                        data:[ot_per_forecast_,0],
                         markPoint : {
                             data : [
                                 {type : 'max', name: 'Max'},
@@ -4505,13 +4549,13 @@ function forecast_prediction($conn,$input_data_,$date_forecast_,$i_){
                         }
                     },
                     {
-                        name:'Site B',
+                        name:'OT %',
                         type:'bar',
-                        data:[2.6, 5.9, 9.0, 26.4, 28.7, 70.7, 175.6, 182.2, 48.7, 18.8, 6.0, 2.3],
+                        data:[0,ot_per_effective_],
                         markPoint : {
                             data : [
-                                {name : 'The highest year', value : 182.2, xAxis: 7, yAxis: 183, symbolSize:18},
-                                {name : 'Year minimum', value : 2.3, xAxis: 11, yAxis: 3}
+                                {type : 'max', name: 'Max'},
+                                {type : 'min', name: 'Min'}
                             ]
                         },
                         markLine : {
@@ -4555,7 +4599,7 @@ function forecast_prediction($conn,$input_data_,$date_forecast_,$i_){
             var administration_chart_per_ = '<?php echo $administration_chart_per; ?>';
 
             var marketing_chart_per_ = '<?php echo $marketing_chart_per; ?>';
-            
+
             var year_current = '<?php echo $year_; ?>'
 
             // Chart Options
@@ -4629,8 +4673,8 @@ function forecast_prediction($conn,$input_data_,$date_forecast_,$i_){
                     }, 200);
                 }
             });
-
-
+            var Betriebserlose_Effective_arry_ = <?php echo json_encode($Betriebserlose_Effective_arry); ?>;
+            var Betriebserlose_forecast_arry_ = <?php echo json_encode($Betriebserlose_Forecast_arry); ?>;
             // ============================================================== 
             // Line chart
             // ============================================================== 
@@ -4644,13 +4688,12 @@ function forecast_prediction($conn,$input_data_,$date_forecast_,$i_){
                     trigger: 'axis'
                 },
                 legend: {
-                    data:['max temp','min temp']
+                    data:['Betriebserlose Forecast','Betriebserlose Effective']
                 },
                 toolbox: {
                     show : true,
                     feature : {
                         magicType : {show: true, type: ['line', 'bar']},
-                        restore : {show: true},
                         saveAsImage : {show: true}
                     }
                 },
@@ -4661,24 +4704,24 @@ function forecast_prediction($conn,$input_data_,$date_forecast_,$i_){
                         type : 'category',
 
                         boundaryGap : false,
-                        data : ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday']
+                        data : ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']
                     }
                 ],
                 yAxis : [
                     {
                         type : 'value',
                         axisLabel : {
-                            formatter: '{value} °C'
+                            formatter: '{value}'
                         }
                     }
                 ],
 
                 series : [
                     {
-                        name:'max temp',
+                        name:'Betriebserlose Forecast',
                         type:'line',
                         color:['#000'],
-                        data:[11, 11, 15, 13, 12, 13, 10],
+                        data:Betriebserlose_forecast_arry_,
                         markPoint : {
                             data : [
                                 {type : 'max', name: 'Max'},
@@ -4702,12 +4745,13 @@ function forecast_prediction($conn,$input_data_,$date_forecast_,$i_){
                         }
                     },
                     {
-                        name:'min temp',
+                        name:'Betriebserlose Effective',
                         type:'line',
-                        data:[1, -2, 2, 5, 3, 2, 0],
+                        data:Betriebserlose_Effective_arry_,
                         markPoint : {
                             data : [
-                                {name : 'Week minimum', value : -2, xAxis: 1, yAxis: -1.5}
+                                {type : 'max', name: 'Max'},
+                                {type : 'min', name: 'Min'}
                             ]
                         },
                         itemStyle: {
@@ -4740,7 +4784,8 @@ function forecast_prediction($conn,$input_data_,$date_forecast_,$i_){
                 });
             }
 
-
+            var Betriebsaufwande_Effective_arr_ = <?php echo json_encode($Betriebsaufwande_Effective_arr); ?>;
+            var Betriebsaufwande_Forecast_arr_ = <?php echo json_encode($Betriebsaufwande_Forecast_arr); ?>;
             // ============================================================== 
             // Line chart 2
             // ============================================================== 
@@ -4754,13 +4799,12 @@ function forecast_prediction($conn,$input_data_,$date_forecast_,$i_){
                     trigger: 'axis'
                 },
                 legend: {
-                    data:['max temp','min temp']
+                    data:['Betriebsaufwande Forecast','Betriebsaufwande Effective']
                 },
                 toolbox: {
                     show : true,
                     feature : {
                         magicType : {show: true, type: ['line', 'bar']},
-                        restore : {show: true},
                         saveAsImage : {show: true}
                     }
                 },
@@ -4771,24 +4815,24 @@ function forecast_prediction($conn,$input_data_,$date_forecast_,$i_){
                         type : 'category',
 
                         boundaryGap : false,
-                        data : ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday']
+                        data : ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']
                     }
                 ],
                 yAxis : [
                     {
                         type : 'value',
                         axisLabel : {
-                            formatter: '{value} °C'
+                            formatter: '{value}'
                         }
                     }
                 ],
 
                 series : [
                     {
-                        name:'max temp',
+                        name:'Betriebsaufwande Forecast',
                         type:'line',
                         color:['#000'],
-                        data:[11, 11, 15, 13, 12, 13, 10],
+                        data:Betriebsaufwande_Forecast_arr_,
                         markPoint : {
                             data : [
                                 {type : 'max', name: 'Max'},
@@ -4812,12 +4856,13 @@ function forecast_prediction($conn,$input_data_,$date_forecast_,$i_){
                         }
                     },
                     {
-                        name:'min temp',
+                        name:'Betriebsaufwande Effective',
                         type:'line',
-                        data:[1, -2, 2, 5, 3, 2, 0],
+                        data:Betriebsaufwande_Effective_arr_,
                         markPoint : {
                             data : [
-                                {name : 'Week minimum', value : -2, xAxis: 1, yAxis: -1.5}
+                                {type : 'max', name: 'Max'},
+                                {type : 'min', name: 'Min'}
                             ]
                         },
                         itemStyle: {
