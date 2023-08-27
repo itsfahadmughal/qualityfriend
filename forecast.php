@@ -4897,7 +4897,7 @@ function forecast_prediction($conn,$input_data_,$date_forecast_,$i_){
                                     show : true,
                                     position : 'center',
                                     textStyle : {
-                                        fontSize : '15',
+                                        fontSize : '10',
                                         fontWeight : 'bold'
                                     }
                                 }
