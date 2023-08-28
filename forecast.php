@@ -3765,7 +3765,7 @@ function forecast_prediction($conn,$input_data_,$date_forecast_,$i_){
                                                                     <td class=""><?php echo $row['Spa_Revenues_Net_22']; ?></td>
                                                                     <td class=""><?php echo $row['other_reveneus']; ?></td>
                                                                     <td class=""><?php echo $row['bank_account_balance']; ?></td>
-                                                                    <td class=""><?php echo $row['date']; ?></td>
+                                                                    <td class=""><?php echo date('M, Y', strtotime($row['date'])); ?></td>
 
                                                                     <td class="font-size-subheading text-center black_color">
                                                                         <a  class="black_color" href="javascript:void(0)" onclick="edit_revenue('<?php echo $row['frcrvs_id']; ?>')"><i class="fas fa-pencil-alt font-size-subheading text-right"></i></a>
@@ -3904,7 +3904,7 @@ function forecast_prediction($conn,$input_data_,$date_forecast_,$i_){
                                                                     <td class=""><?php echo $row['bank_charges']; ?></td>
                                                                     <td class=""><?php echo $row['total_loan']; ?></td>
                                                                     <td class=""><?php echo $row['other_costs']; ?></td>
-                                                                    <td class=""><?php echo $row['date']; ?></td>
+                                                                    <td class=""><?php echo date('M, Y', strtotime($row['date'])); ?></td>
                                                                     <td class="font-size-subheading text-center black_color">
                                                                         <a  class="black_color" href="javascript:void(0)" onclick="edit_expense('<?php echo $row['frcex_id']; ?>')"><i class="fas fa-pencil-alt font-size-subheading text-right"></i></a>
                                                                     </td>
@@ -4012,7 +4012,7 @@ function forecast_prediction($conn,$input_data_,$date_forecast_,$i_){
                                                                     <td><?php echo $row['beds']; ?></td>
                                                                     <td class=""><?php echo $row['opening_days']; ?></td>
                                                                     <td class=""><?php echo $row['total_stay_capacity']; ?></td>
-                                                                    <td class=""><?php echo $row['date']; ?></td>
+                                                                    <td class=""><?php echo date('M, Y', strtotime($row['date'])); ?></td>
                                                                     <td class="font-size-subheading text-center black_color">
                                                                         <a  class="black_color" href="javascript:void(0)" onclick="edit_facts('<?php echo $row['frckfs_id']; ?>')"><i class="fas fa-pencil-alt font-size-subheading text-right"></i></a>
                                                                     </td>
@@ -4331,7 +4331,7 @@ function forecast_prediction($conn,$input_data_,$date_forecast_,$i_){
                                                                     <td class=""><?php echo $row['Eggs']; ?></td>
                                                                     <td class=""><?php echo $row['Minus']; ?></td>
                                                                     <td class=""><?php echo $row['total_cost']; ?></td>
-                                                                    <td class=""><?php echo $row['date']; ?></td>
+                                                                    <td class=""><?php echo date('M, Y', strtotime($row['date'])); ?></td>
                                                                     <td class="font-size-subheading text-center black_color">
                                                                         <a  class="black_color" href="javascript:void(0)" onclick="edit_goods('<?php echo $row['frcgct_id']; ?>')"><i class="fas fa-pencil-alt font-size-subheading text-right"></i></a>
                                                                     </td>
@@ -5292,15 +5292,16 @@ function forecast_prediction($conn,$input_data_,$date_forecast_,$i_){
                             $("#dairy_supplier").val(myArray[9]);
                             $("#cons_cost").val(myArray[10]);
                             $("#cons_supplier").val(myArray[11]);
-                            $("#tea_cost").val(myArray[12]);
-                            $("#tea_supplier").val(myArray[13]);
-                            $("#coffee_cost").val(myArray[14]);
-                            $("#coffee_supplier").val(myArray[15]);
-                            $("#cheese_cost").val(myArray[16]);
-                            $("#cheese_supplier").val(myArray[17]);
-                            $("#eggs_cost").val(myArray[18]);
-                            $("#eggs_supplier").val(myArray[19]);
-                            $("#minus_costs").val(myArray[20]);
+                            $("#minus_costs").val(myArray[12]);
+                            
+                            $("#tea_cost").val(myArray[13]);
+                            $("#tea_supplier").val(myArray[14]);
+                            $("#coffee_cost").val(myArray[15]);
+                            $("#coffee_supplier").val(myArray[16]);
+                            $("#cheese_cost").val(myArray[17]);
+                            $("#cheese_supplier").val(myArray[18]);
+                            $("#eggs_cost").val(myArray[19]);
+                            $("#eggs_supplier").val(myArray[20]);
                             $("#date_year_goods").val(myArray[21]);
                             $("#date_month_goods").val(myArray[22]);
 
@@ -5697,7 +5698,7 @@ XLSX.writeFile(wb, fn || ('MySheetName.' + (type || 'xlsx')));
                     .from(elementHTML5)
                     .save();
             }
-             function export_goods(){
+            function export_goods(){
                 var elementHTML6 = document.querySelector("#profile6");
 
                 var opt = {

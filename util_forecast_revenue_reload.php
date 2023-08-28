@@ -37,7 +37,7 @@ if ($result_revenues && $result_revenues->num_rows > 0) {
                 <td class=""><?php echo $row['Spa_Revenues_Net_22']; ?></td>
                 <td class=""><?php echo $row['other_reveneus']; ?></td>
                 <td class=""><?php echo $row['bank_account_balance']; ?></td>
-                <td class=""><?php echo $row['date']; ?></td>
+                <td class=""><?php echo date('M, Y', strtotime($row['date'])); ?></td>
 
                 <td class="font-size-subheading text-center black_color">
                     <a  class="black_color" href="javascript:void()" onclick="edit_revenue('<?php echo $row['frcrvs_id']; ?>')"><i class="fas fa-pencil-alt font-size-subheading text-right"></i></a>

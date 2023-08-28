@@ -35,7 +35,7 @@ if ($result_facts && $result_facts->num_rows > 0) {
                 <td><?php echo $row['beds']; ?></td>
                 <td class=""><?php echo $row['opening_days']; ?></td>
                 <td class=""><?php echo $row['total_stay_capacity']; ?></td>
-                <td class=""><?php echo $row['date']; ?></td>
+                <td class=""><?php echo date('M, Y', strtotime($row['date'])); ?></td>
                 <td class="font-size-subheading text-center black_color">
                     <a  class="black_color" href="javascript:void(0)" onclick="edit_facts('<?php echo $row['frckfs_id']; ?>')"><i class="fas fa-pencil-alt font-size-subheading text-right"></i></a>
                 </td>

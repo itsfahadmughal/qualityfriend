@@ -45,7 +45,7 @@ if ($result_expenses && $result_expenses->num_rows > 0) {
                 <td class=""><?php echo $row['bank_charges']; ?></td>
                 <td class=""><?php echo $row['total_loan']; ?></td>
                 <td class=""><?php echo $row['other_costs']; ?></td>
-                <td class=""><?php echo $row['date']; ?></td>
+                <td class=""><?php echo date('M, Y', strtotime($row['date'])); ?></td>
                 <td class="font-size-subheading text-center black_color">
                     <a  class="black_color" href="javascript:void(0)" onclick="edit_expense('<?php echo $row['frcex_id']; ?>')"><i class="fas fa-pencil-alt font-size-subheading text-right"></i></a>
                 </td>

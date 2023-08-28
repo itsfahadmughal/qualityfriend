@@ -52,7 +52,7 @@ if ($result_goods && $result_goods->num_rows > 0) {
                 <td class=""><?php echo $row['Eggs']; ?></td>
                 <td class=""><?php echo $row['Minus']; ?></td>
                 <td class=""><?php echo $row['total_cost']; ?></td>
-                <td class=""><?php echo $row['date']; ?></td>
+                <td class=""><?php echo date('M, Y', strtotime($row['date'])); ?></td>
                 <td class="font-size-subheading text-center black_color">
                     <a  class="black_color" href="javascript:void(0)" onclick="edit_goods('<?php echo $row['frcgct_id']; ?>')"><i class="fas fa-pencil-alt font-size-subheading text-right"></i></a>
                 </td>
