@@ -14,7 +14,7 @@ $result_revenues = $conn->query($sql_revenues);
 if ($result_revenues && $result_revenues->num_rows > 0) {
 ?>
 <div class="table-responsive">
-    <table id="demo-foo-addrow" class="table table-bordered m-t-30 table-hover contact-list table-striped" data-paging="true" data-paging-size="25">
+    <table id="demo-foo-addrow" class="table table-bordered m-t-30 table-hover contact-list full-color-table full-primary-table hover-table" data-paging="true" data-paging-size="25">
         <thead>
             <tr>
                 <th class="" >Hotel Revenue</th>
@@ -31,7 +31,7 @@ if ($result_revenues && $result_revenues->num_rows > 0) {
 
     while ($row = mysqli_fetch_array($result_revenues)) {
             ?>
-            <tr class="">
+            <tr class="" id="revenues_<?php echo $row['frcrvs_id']; ?>">
                 <td><?php echo $row['Hotel_Revenues_Net']; ?></td>
                 <td><?php echo $row['Ancillary_Revenues_Net']; ?></td>
                 <td class=""><?php echo $row['Spa_Revenues_Net_22']; ?></td>

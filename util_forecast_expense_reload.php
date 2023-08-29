@@ -14,7 +14,7 @@ $result_expenses = $conn->query($sql_expenses);
 if ($result_expenses && $result_expenses->num_rows > 0) {
 ?>
 <div class="table-responsive">
-    <table id="demo-foo-addrow" class="table table-bordered m-t-30 table-hover contact-list table-striped" data-paging="true" data-paging-size="25">
+    <table id="demo-foo-addrow" class="table table-bordered m-t-30 table-hover contact-list full-color-table full-success-table hover-table" data-paging="true" data-paging-size="25">
         <thead>
             <tr>
                 <th class="" >Ancillary Cost</th>
@@ -35,7 +35,7 @@ if ($result_expenses && $result_expenses->num_rows > 0) {
 
     while ($row = mysqli_fetch_array($result_expenses)) {
             ?>
-            <tr class="">
+            <tr class="" id="expenses_<?php echo $row['frcex_id']; ?>">
                 <td><?php echo $row['costs_of_ancillary_goods']; ?></td>
                 <td><?php echo $row['costs_of_spa_products']; ?></td>
                 <td><?php echo $row['total_operating_cost']; ?></td>

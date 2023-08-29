@@ -15,7 +15,7 @@ $result_goods = $conn->query($sql_goods);
 if ($result_goods && $result_goods->num_rows > 0) {
 ?>
 <div class="table-responsive">
-    <table id="demo-foo-addrow" class="goods_table_responsive table table-bordered m-t-30 table-hover contact-list table-striped" data-paging="true" data-paging-size="25">
+    <table id="demo-foo-addrow" class="goods_table_responsive table table-bordered m-t-30 table-hover contact-list full-color-table full-danger-table hover-table" data-paging="true" data-paging-size="25">
         <thead>
             <tr>
                 <th class="" >Suppliers Group</th>

@@ -3684,13 +3684,11 @@ function forecast_prediction($conn,$input_data_,$date_forecast_,$i_){
                                                 <div class="col-lg-4 right-border-div pr-5">
 
                                                     <div class="mt-4">
-                                                        <h3>Add Revenues</h3>
+                                                        <h3><span id="add_or_edit_revenues_text">Add</span> Revenues <button onclick="clear_revenues_values();" type="button" class="btn btn-primary float-right">Clear Values</button></h3>
                                                     </div>
 
                                                     <div class="row mt-3">
                                                         <div class="col-lg-12">
-
-
                                                             <div class="form-group mb-0">
                                                                 <label class="control-label display-inline w-47 wm-50"><strong>Hotel Revenues Net</strong></label>
                                                                 <label class="control-label display-inline ml-2 w-47 wm-50"><strong>Ancillary Revenues Net</strong></label>
@@ -3725,7 +3723,7 @@ function forecast_prediction($conn,$input_data_,$date_forecast_,$i_){
                                                     </div>
 
                                                     <div class="mt-3 mb-5 pb-5 pbm-0 mbm-0">
-                                                        <input type="button" onclick="save_revenue();" class="btn mt-4 w-100 btn-info" value="Save Revenue">
+                                                        <input type="button" onclick="save_revenue();" class="btn mt-4 w-100 btn-primary" value="Save Revenue">
                                                     </div>
 
 
@@ -3743,7 +3741,7 @@ function forecast_prediction($conn,$input_data_,$date_forecast_,$i_){
                                                     if ($result_revenues && $result_revenues->num_rows > 0) {
                                                     ?>
                                                     <div class="table-responsive">
-                                                        <table id="demo-foo-addrow" class="table table-bordered m-t-30 table-hover contact-list table-striped" data-paging="true" data-paging-size="25">
+                                                        <table id="demo-foo-addrow" class="table table-bordered m-t-30 table-hover contact-list full-color-table full-primary-table hover-table" data-paging="true" data-paging-size="25">
                                                             <thead>
                                                                 <tr>
                                                                     <th class="" >Hotel Revenue</th>
@@ -3760,7 +3758,7 @@ function forecast_prediction($conn,$input_data_,$date_forecast_,$i_){
 
                                                         while ($row = mysqli_fetch_array($result_revenues)) {
                                                                 ?>
-                                                                <tr class="">
+                                                                <tr class="" id="revenues_<?php echo $row['frcrvs_id']; ?>">
                                                                     <td><?php echo $row['Hotel_Revenues_Net']; ?></td>
                                                                     <td><?php echo $row['Ancillary_Revenues_Net']; ?></td>
                                                                     <td class=""><?php echo $row['Spa_Revenues_Net_22']; ?></td>
@@ -3796,7 +3794,7 @@ function forecast_prediction($conn,$input_data_,$date_forecast_,$i_){
                                                 <div class="col-lg-4 right-border-div pr-5">
 
                                                     <div class="mt-4">
-                                                        <h3>Add Expenses</h3>
+                                                        <h3><span id="add_or_edit_expenses_text">Add</span> Expenses <button onclick="clear_expenses_values();" type="button" class="btn btn-success float-right">Clear Values</button></h3>
                                                     </div>
 
                                                     <div class="row mt-3">
@@ -3856,7 +3854,7 @@ function forecast_prediction($conn,$input_data_,$date_forecast_,$i_){
 
 
                                                     <div class="mt-3 mb-5 pb-5 pbm-0 mbm-0">
-                                                        <input type="button" onclick="save_cost();" class="btn mt-4 w-100 btn-info" value="Save Expense">
+                                                        <input type="button" onclick="save_cost();" class="btn mt-4 w-100 btn-success" value="Save Expense">
                                                     </div>
 
 
@@ -3874,7 +3872,7 @@ function forecast_prediction($conn,$input_data_,$date_forecast_,$i_){
                                                     if ($result_expenses && $result_expenses->num_rows > 0) {
                                                     ?>
                                                     <div class="table-responsive">
-                                                        <table id="demo-foo-addrow" class="table table-bordered m-t-30 table-hover contact-list table-striped" data-paging="true" data-paging-size="25">
+                                                        <table id="demo-foo-addrow" class="table table-bordered m-t-30 table-hover contact-list full-color-table full-success-table hover-table" data-paging="true" data-paging-size="25">
                                                             <thead>
                                                                 <tr>
                                                                     <th class="" >Ancillary Cost</th>
@@ -3895,7 +3893,7 @@ function forecast_prediction($conn,$input_data_,$date_forecast_,$i_){
 
                                                         while ($row = mysqli_fetch_array($result_expenses)) {
                                                                 ?>
-                                                                <tr class="">
+                                                                <tr class="" id="expenses_<?php echo $row['frcex_id']; ?>">
                                                                     <td><?php echo $row['costs_of_ancillary_goods']; ?></td>
                                                                     <td><?php echo $row['costs_of_spa_products']; ?></td>
                                                                     <td><?php echo $row['total_operating_cost']; ?></td>
@@ -3933,7 +3931,7 @@ function forecast_prediction($conn,$input_data_,$date_forecast_,$i_){
                                                 <div class="col-lg-4 right-border-div pr-5">
 
                                                     <div class="mt-4">
-                                                        <h3>Add Key Facts</h3>
+                                                        <h3><span id="add_or_edit_key_text">Add</span> Key Facts <button onclick="clear_key_values();" type="button" class="btn btn-info float-right">Clear Values</button></h3>
                                                     </div>
 
                                                     <div class="row mt-3">
@@ -3992,7 +3990,7 @@ function forecast_prediction($conn,$input_data_,$date_forecast_,$i_){
                                                     if ($result_facts && $result_facts->num_rows > 0) {
                                                     ?>
                                                     <div class="table-responsive">
-                                                        <table id="demo-foo-addrow" class="table table-bordered m-t-30 table-hover contact-list table-striped" data-paging="true" data-paging-size="25">
+                                                        <table id="demo-foo-addrow" class="table table-bordered m-t-30 table-hover contact-list full-color-table full-info-table hover-table" data-paging="true" data-paging-size="25">
                                                             <thead>
                                                                 <tr>
                                                                     <th class="" >Available Rooms</th>
@@ -4008,7 +4006,7 @@ function forecast_prediction($conn,$input_data_,$date_forecast_,$i_){
 
                                                         while ($row = mysqli_fetch_array($result_facts)) {
                                                                 ?>
-                                                                <tr class="">
+                                                                <tr class="" id="key_facts_<?php echo $row['frckfs_id']; ?>">
                                                                     <td><?php echo $row['rooms']; ?></td>
                                                                     <td><?php echo $row['beds']; ?></td>
                                                                     <td class=""><?php echo $row['opening_days']; ?></td>
@@ -4041,7 +4039,7 @@ function forecast_prediction($conn,$input_data_,$date_forecast_,$i_){
                                                 <div class="col-lg-4 right-border-div pr-5">
 
                                                     <div class="mt-4">
-                                                        <h3>Add Staffing Cost</h3>
+                                                        <h3><span id="add_or_edit_staffing_text">Add</span> Staffing Cost <button onclick="clear_staffing_values();" type="button" class="btn btn-warning float-right">Clear Values</button></h3>
                                                     </div>
 
                                                     <div class="row mt-3">
@@ -4085,7 +4083,7 @@ function forecast_prediction($conn,$input_data_,$date_forecast_,$i_){
                                                                     }
                                                                     ?> 
                                                                 </select>
-                                                                <input type="button" onclick="add_staff_depart();" class="btn w-47 ml-2 btn-secondary" value="Add Staff Department">
+                                                                <input type="button" onclick="add_staff_depart();" class="btn w-47 ml-2 btn-warning" value="Add Staff Department">
                                                             </div>
 
 
@@ -4095,7 +4093,7 @@ function forecast_prediction($conn,$input_data_,$date_forecast_,$i_){
 
 
                                                     <div class="mt-3 mb-5 pb-5 pbm-0 mbm-0">
-                                                        <input type="button" onclick="save_staff_cost();" class="btn mt-4 w-100 btn-info" value="Save Staff Cost">
+                                                        <input type="button" onclick="save_staff_cost();" class="btn mt-4 w-100 btn-warning" value="Save Staff Cost">
                                                     </div>
 
 
@@ -4113,7 +4111,7 @@ function forecast_prediction($conn,$input_data_,$date_forecast_,$i_){
                                                     if ($result_staffing && $result_staffing->num_rows > 0) {
                                                     ?>
                                                     <div class="table-responsive">
-                                                        <table id="demo-foo-addrow" class="table table-bordered m-t-30 table-hover contact-list table-striped" data-paging="true" data-paging-size="25">
+                                                        <table id="demo-foo-addrow" class="table table-bordered m-t-30 table-hover contact-list full-color-table full-warning-table hover-table" data-paging="true" data-paging-size="25">
                                                             <thead>
                                                                 <tr>
                                                                     <th class="" >Staff Title</th>
@@ -4129,7 +4127,7 @@ function forecast_prediction($conn,$input_data_,$date_forecast_,$i_){
 
                                                         while ($row = mysqli_fetch_array($result_staffing)) {
                                                                 ?>
-                                                                <tr class="">
+                                                                <tr class="" id="staffing_<?php echo $row['frcstfct_id']; ?>">
                                                                     <td><?php echo $row['staff_name']; ?></td>
                                                                     <td><?php echo $row['title']; ?></td>
                                                                     <td class=""><?php echo $row['gross_salary']; ?></td>
@@ -4156,22 +4154,12 @@ function forecast_prediction($conn,$input_data_,$date_forecast_,$i_){
 
                                         </div>
 
-
-
-
-
-
-
-
-
-
-
                                         <div class="tab-pane fade" id="dropdown5" role="tabpanel" aria-labelledby="dropdown5-tab">
                                             <div class="row mtm-0">
                                                 <div class="col-lg-3 right-border-div pr-5">
 
                                                     <div class="mt-4">
-                                                        <h3><span id="add_or_edit_goods_text">Add</span> Goods Cost <button onclick="clear_goods_values();" type="button" class="btn btn-info float-right">Clear Values</button></h3>
+                                                        <h3><span id="add_or_edit_goods_text">Add</span> Goods Cost <button onclick="clear_goods_values();" type="button" class="btn btn-dark float-right">Clear Values</button></h3>
                                                     </div>
 
                                                     <div class="row mt-3">
@@ -4261,7 +4249,7 @@ function forecast_prediction($conn,$input_data_,$date_forecast_,$i_){
 
 
                                                     <div class="mt-3 mb-5 pb-5 pbm-0 mbm-0">
-                                                        <input type="button" onclick="save_goods_cost();" class="btn mt-4 w-100 btn-info" value="Save Goods Purchasing">
+                                                        <input type="button" onclick="save_goods_cost();" class="btn mt-4 w-100 btn-dark" value="Save Goods Purchasing">
                                                     </div>
 
 
@@ -4279,7 +4267,7 @@ function forecast_prediction($conn,$input_data_,$date_forecast_,$i_){
                                                     if ($result_goods && $result_goods->num_rows > 0) {
                                                     ?>
                                                     <div class="table-responsive">
-                                                        <table id="demo-foo-addrow" class=" table table-bordered m-t-30 table-hover contact-list table-striped" data-paging="true" data-paging-size="25">
+                                                        <table id="demo-foo-addrow" class=" table table-bordered m-t-30 table-hover contact-list full-color-table full-dark-table hover-table" data-paging="true" data-paging-size="25">
                                                             <thead>
                                                                 <tr>
                                                                     <th class="" >Suppliers Group</th>
@@ -4347,7 +4335,7 @@ function forecast_prediction($conn,$input_data_,$date_forecast_,$i_){
                                                 <div class="col-lg-4 right-border-div pr-2">
 
                                                     <div class="mt-4">
-                                                        <h3><span id="add_or_edit_suppliers_text">Add</span> Goods Suppliers <button onclick="clear_suppliers_values();" type="button" class="btn btn-info float-right">Clear Values</button></h3>
+                                                        <h3><span id="add_or_edit_suppliers_text">Add</span> Goods Suppliers <button onclick="clear_suppliers_values();" type="button" class="btn btn-danger float-right">Clear Values</button></h3>
                                                     </div>
 
                                                     <div class="row mt-3">
@@ -4411,7 +4399,7 @@ function forecast_prediction($conn,$input_data_,$date_forecast_,$i_){
 
 
                                                     <div class="mt-3 mb-5 pb-5 pbm-0 mbm-0">
-                                                        <input type="button" onclick="save_goods_suppliers();" class="btn mt-4 w-100 btn-info" value="Save Goods Suppliers">
+                                                        <input type="button" onclick="save_goods_suppliers();" class="btn mt-4 w-100 btn-danger" value="Save Goods Suppliers">
                                                     </div>
 
 
@@ -4429,7 +4417,7 @@ function forecast_prediction($conn,$input_data_,$date_forecast_,$i_){
                                                     if ($result_goods && $result_goods->num_rows > 0) {
                                                     ?>
                                                     <div class="table-responsive">
-                                                        <table id="demo-foo-addrow" class="goods_table_responsive table table-bordered m-t-30 table-hover contact-list table-striped" data-paging="true" data-paging-size="25">
+                                                        <table id="demo-foo-addrow" class="goods_table_responsive table table-bordered m-t-30 table-hover contact-list full-color-table full-danger-table hover-table" data-paging="true" data-paging-size="25">
                                                             <thead>
                                                                 <tr>
                                                                     <th class="" >Suppliers Group</th>
@@ -5129,6 +5117,12 @@ function forecast_prediction($conn,$input_data_,$date_forecast_,$i_){
                     contentType: false,
                     success:function(response){
                         if(response != ''){
+
+                            $("#reload_revenues > div > table > tbody > tr").removeClass('forecast_secondary_color');
+
+                            $("#revenues_"+revenue_id).addClass('forecast_secondary_color');
+                            $("#add_or_edit_revenues_text").text("Edit");
+
                             const myArray = response.split(",");
                             $("#hotel_revenues").val(myArray[0]);
                             $("#ancillary_revenues").val(myArray[1]);
@@ -5189,6 +5183,10 @@ function forecast_prediction($conn,$input_data_,$date_forecast_,$i_){
                                 $("#date_year").val(null);
                                 rev_id = 0;
                                 $("#reload_revenues").load("util_forecast_revenue_reload.php");
+
+                                $("#reload_revenues > div > table > tbody > tr").removeClass('forecast_secondary_color');
+
+                                $("#add_or_edit_revenues_text").text("Add");
                             }else{
                                 alert("Revenues not saved.");
                             }
@@ -5200,6 +5198,22 @@ function forecast_prediction($conn,$input_data_,$date_forecast_,$i_){
                 }
             }
 
+
+            function clear_revenues_values(){
+                $("#hotel_revenues").val(null);
+                $("#ancillary_revenues").val(null);
+                $("#spa_revenues").val(null);
+                $("#other_revenues").val(null);
+                $("#account_balance").val(null);
+                $("#date_month").val(null);
+                $("#date_year").val(null);
+                rev_id = 0;
+                $("#reload_revenues").load("util_forecast_revenue_reload.php");
+
+                $("#reload_revenues > div > table > tbody > tr").removeClass('forecast_secondary_color');
+
+                $("#add_or_edit_revenues_text").text("Add");
+            }
 
 
             var expense_id = 0;
@@ -5216,6 +5230,12 @@ function forecast_prediction($conn,$input_data_,$date_forecast_,$i_){
                     contentType: false,
                     success:function(response){
                         if(response != ''){
+
+                            $("#reload_expenses > div > table > tbody > tr").removeClass('forecast_secondary_color');
+
+                            $("#expenses_"+cost_id).addClass('forecast_secondary_color');
+                            $("#add_or_edit_expenses_text").text("Edit");
+
                             const myArray = response.split(",");
                             $("#total_operating_cost").val(myArray[0]);
                             $("#administration_cost").val(myArray[1]);
@@ -5293,6 +5313,8 @@ function forecast_prediction($conn,$input_data_,$date_forecast_,$i_){
                                 $("#date_year_cost").val(null);
                                 expense_id = 0;
                                 $("#reload_expenses").load("util_forecast_expense_reload.php");
+                                $("#reload_expenses > div > table > tbody > tr").removeClass('forecast_secondary_color');
+                                $("#add_or_edit_expenses_text").text("Add");
                             }else{
                                 alert("Expenses not saved.");
                             }
@@ -5307,6 +5329,25 @@ function forecast_prediction($conn,$input_data_,$date_forecast_,$i_){
 
 
 
+            }
+
+
+            function clear_expenses_values(){
+                $("#ancillary_goods_cost").val(null);
+                $("#spa_products_cost").val(null);
+                $("#total_operating_cost").val(null);
+                $("#administration_cost").val(null);
+                $("#marketing").val(null);
+                $("#taxes").val(null);
+                $("#bank_charges").val(null);
+                $("#total_loan").val(null);
+                $("#other_costs").val(null);
+                $("#date_month_cost").val(null);
+                $("#date_year_cost").val(null);
+                expense_id = 0;
+                $("#reload_expenses").load("util_forecast_expense_reload.php");
+                $("#reload_expenses > div > table > tbody > tr").removeClass('forecast_secondary_color');
+                $("#add_or_edit_expenses_text").text("Add");
             }
 
 
@@ -5325,6 +5366,11 @@ function forecast_prediction($conn,$input_data_,$date_forecast_,$i_){
                     contentType: false,
                     success:function(response){
                         if(response != ''){
+                            $("#reload_facts > div > table > tbody > tr").removeClass('forecast_secondary_color');
+
+                            $("#key_facts_"+fact_id).addClass('forecast_secondary_color');
+                            $("#add_or_edit_key_text").text("Edit");
+
                             const myArray = response.split(",");
                             $("#rooms").val(myArray[0]);
                             $("#beds").val(myArray[1]);
@@ -5382,6 +5428,8 @@ function forecast_prediction($conn,$input_data_,$date_forecast_,$i_){
                                 $("#date_year_key").val(null);
                                 facts_id = 0;
                                 $("#reload_facts").load("util_forecast_facts_reload.php");
+                                $("#reload_facts > div > table > tbody > tr").removeClass('forecast_secondary_color');
+                                $("#add_or_edit_key_text").text("Add");
                             }else{
                                 alert("Key Facts not saved.");
                             }
@@ -5393,6 +5441,19 @@ function forecast_prediction($conn,$input_data_,$date_forecast_,$i_){
 
 
                 }
+            }
+
+            function clear_key_values(){
+                $("#rooms").val(null);
+                $("#beds").val(null);
+                $("#opening_days").val(null);
+                $("#total_capacity").val(null);
+                $("#date_month_key").val(null);
+                $("#date_year_key").val(null);
+                facts_id = 0;
+                $("#reload_facts").load("util_forecast_facts_reload.php");
+                $("#reload_facts > div > table > tbody > tr").removeClass('forecast_secondary_color');
+                $("#add_or_edit_key_text").text("Add");
             }
 
 
@@ -5728,7 +5789,7 @@ function forecast_prediction($conn,$input_data_,$date_forecast_,$i_){
                 $.ajax({
                     url:'util_update_status.php',
                     method:'POST',
-                    data:{ tablename:"tbl_forecast_staffing_department", idname:"frcstfd_id ", id:id, statusid:1,statusname: "is_delete"},
+                    data:{ tablename:"tbl_forecast_staffing_department", idname:"frcstfd_id", id:id, statusid:1,statusname: "is_delete"},
                     success:function(response){
                         console.log(response);
                         if(response == "Updated"){
@@ -5774,6 +5835,9 @@ function forecast_prediction($conn,$input_data_,$date_forecast_,$i_){
                     contentType: false,
                     success:function(response){
                         if(response != ''){
+                            $("#reload_staffing > div > table > tbody > tr").removeClass('forecast_secondary_color');
+                            $("#staffing_"+staffing_id).addClass('forecast_secondary_color');
+                            $("#add_or_edit_staffing_text").text("Edit");
                             const myArray = response.split(",");
                             $("#staff_name").val(myArray[0]);
                             $("#year_staffing").val(myArray[1]);
@@ -5829,6 +5893,8 @@ function forecast_prediction($conn,$input_data_,$date_forecast_,$i_){
                                 $("#department_staffing").val(null).change();
                                 staffings_id = 0;
                                 $("#reload_staffing").load("util_forecast_staffing_reload.php");
+                                $("#reload_staffing > div > table > tbody > tr").removeClass('forecast_secondary_color');
+                                $("#add_or_edit_staffing_text").text("Add");
                             }else{
                                 alert("Staff Cost not saved.");
                             }
@@ -5841,6 +5907,20 @@ function forecast_prediction($conn,$input_data_,$date_forecast_,$i_){
 
                 }
             }
+
+
+            function clear_staffing_values(){
+                $("#reload_staffing > div > table > tbody > tr").removeClass('forecast_secondary_color');
+                $("#add_or_edit_staffing_text").text("Add");
+                $("#staff_name").val(null);
+                $("#year_staffing").val(null);
+                $("#gross_salary").val(null);
+                $("#net_salary").val(null);
+                $("#department_staffing").val(0).change();
+                staffings_id = 0;
+                $("#reload_staffing").load("util_forecast_staffing_reload.php");
+            }
+
         </script>
 
 

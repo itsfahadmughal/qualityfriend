@@ -14,7 +14,7 @@ $result_facts = $conn->query($sql_facts);
 if ($result_facts && $result_facts->num_rows > 0) {
 ?>
 <div class="table-responsive">
-    <table id="demo-foo-addrow" class="table table-bordered m-t-30 table-hover contact-list table-striped" data-paging="true" data-paging-size="25">
+    <table id="demo-foo-addrow" class="table table-bordered m-t-30 table-hover contact-list full-color-table full-info-table hover-table" data-paging="true" data-paging-size="25">
         <thead>
             <tr>
                 <th class="" >Available Rooms</th>
@@ -30,7 +30,7 @@ if ($result_facts && $result_facts->num_rows > 0) {
 
     while ($row = mysqli_fetch_array($result_facts)) {
             ?>
-            <tr class="">
+            <tr class="" id="key_facts_<?php echo $row['frckfs_id']; ?>">
                 <td><?php echo $row['rooms']; ?></td>
                 <td><?php echo $row['beds']; ?></td>
                 <td class=""><?php echo $row['opening_days']; ?></td>

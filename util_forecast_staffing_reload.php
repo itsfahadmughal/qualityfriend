@@ -14,7 +14,7 @@ $result_staffing = $conn->query($sql_staffing);
 if ($result_staffing && $result_staffing->num_rows > 0) {
 ?>
 <div class="table-responsive">
-    <table id="demo-foo-addrow" class="table table-bordered m-t-30 table-hover contact-list table-striped" data-paging="true" data-paging-size="25">
+    <table id="demo-foo-addrow" class="table table-bordered m-t-30 table-hover contact-list full-color-table full-warning-table hover-table" data-paging="true" data-paging-size="25">
         <thead>
             <tr>
                 <th class="" >Staff Title</th>
@@ -30,7 +30,7 @@ if ($result_staffing && $result_staffing->num_rows > 0) {
 
     while ($row = mysqli_fetch_array($result_staffing)) {
             ?>
-            <tr class="">
+            <tr class="" id="staffing_<?php echo $row['frcstfct_id']; ?>">
                 <td><?php echo $row['staff_name']; ?></td>
                 <td><?php echo $row['title']; ?></td>
                 <td class=""><?php echo $row['gross_salary']; ?></td>
