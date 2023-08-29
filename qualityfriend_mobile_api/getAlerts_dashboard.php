@@ -55,7 +55,6 @@ if(file_exists("util_config.php") && is_readable("util_config.php") && include("
 
     $result = $conn->query($sql);
 
-
     if ($result && $result->num_rows > 0) {
         while($row = mysqli_fetch_array($result)) {
 
