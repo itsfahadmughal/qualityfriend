@@ -5,11 +5,11 @@ require_once 'util_session.php';
 
 
 <div class="mt-4">
-    <h3>Goods Cost</h3>
+    <h3>Goods Suppliers</h3>
 </div>
 
 <?php
-$sql_goods = "SELECT * FROM `tbl_forecast_goods_cost` WHERE `hotel_id` = $hotel_id ORDER BY date DESC";
+$sql_goods = "SELECT * FROM `tbl_forecast_goods_suppliers` WHERE `hotel_id` = $hotel_id ORDER BY 1 DESC";
 
 $result_goods = $conn->query($sql_goods);
 if ($result_goods && $result_goods->num_rows > 0) {
@@ -18,6 +18,7 @@ if ($result_goods && $result_goods->num_rows > 0) {
     <table id="demo-foo-addrow" class="goods_table_responsive table table-bordered m-t-30 table-hover contact-list table-striped" data-paging="true" data-paging-size="25">
         <thead>
             <tr>
+                <th class="" >Suppliers Group</th>
                 <th class="" >Meat</th>
                 <th class="" >Fruit Vegetable</th>
                 <th class="" >Bread</th>
@@ -28,9 +29,6 @@ if ($result_goods && $result_goods->num_rows > 0) {
                 <th class="" >Coffee</th>
                 <th class="" >Cheese</th>
                 <th class="" >Eggs</th>
-                <th class="" >Minus</th>
-                <th class="" >Total</th>
-                <th class="" >Date</th>
                 <th class="text-center">Action</th>
             </tr>
         </thead>
@@ -39,22 +37,20 @@ if ($result_goods && $result_goods->num_rows > 0) {
 
     while ($row = mysqli_fetch_array($result_goods)) {
             ?>
-            <tr class="">
-                <td><?php echo $row['Meat']; ?></td>
-                <td><?php echo $row['Fruit_Vegetable']; ?></td>
-                <td class=""><?php echo $row['Bread']; ?></td>
-                <td class=""><?php echo $row['Frozen_Goods']; ?></td>
-                <td class=""><?php echo $row['Dairy_Products']; ?></td>
-                <td class=""><?php echo $row['Cons_Earliest']; ?></td>
-                <td class=""><?php echo $row['Tea']; ?></td>
-                <td class=""><?php echo $row['Coffee']; ?></td>
-                <td class=""><?php echo $row['Cheese']; ?></td>
-                <td class=""><?php echo $row['Eggs']; ?></td>
-                <td class=""><?php echo $row['Minus']; ?></td>
-                <td class=""><?php echo $row['total_cost']; ?></td>
-                <td class=""><?php echo date('M, Y', strtotime($row['date'])); ?></td>
+            <tr class="" id="goods_suppliers_<?php echo $row['frcgsl_id']; ?>">
+                <td><?php echo $row['goods_suppliers_group']; ?></td>
+                <td><?php echo $row['Meat_Supplier']; ?></td>
+                <td><?php echo $row['Fruit_Vegetable_Supplier']; ?></td>
+                <td class=""><?php echo $row['Bread_Supplier']; ?></td>
+                <td class=""><?php echo $row['Frozen_Goods_Supplier']; ?></td>
+                <td class=""><?php echo $row['Dairy_Products_Supplier']; ?></td>
+                <td class=""><?php echo $row['Cons_Earliest_Supplier']; ?></td>
+                <td class=""><?php echo $row['Tea_Supplier']; ?></td>
+                <td class=""><?php echo $row['Coffee_Supplier']; ?></td>
+                <td class=""><?php echo $row['Cheese_Supplier']; ?></td>
+                <td class=""><?php echo $row['Eggs_Supplier']; ?></td>
                 <td class="font-size-subheading text-center black_color">
-                    <a  class="black_color" href="javascript:void(0)" onclick="edit_goods('<?php echo $row['frcgct_id']; ?>')"><i class="fas fa-pencil-alt font-size-subheading text-right"></i></a>
+                    <a  class="black_color" href="javascript:void(0)" onclick="edit_goods_suppliers('<?php echo $row['frcgsl_id']; ?>')"><i class="fas fa-pencil-alt font-size-subheading text-right"></i></a>
                 </td>
             </tr>
             <?php 
@@ -66,5 +62,5 @@ if ($result_goods && $result_goods->num_rows > 0) {
 
 <?php }else{ ?>
 <div class="text-center mt-5 pt-4"><img src="assets/images/no-results-cookie.png" width="250" /></div>
-<h5 class="text-center"><b>Goods Cost Not Found.</b></h5>
+<h5 class="text-center"><b>Goods Suppliers Not Found.</b></h5>
 <?php } ?>

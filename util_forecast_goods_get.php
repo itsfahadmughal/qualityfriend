@@ -20,7 +20,7 @@ if($id != 0){
             
             $temp = explode('-',$row['date']);
 
-            echo $row['Meat'].','.$row['Meat_Supplier'].','.$row['Fruit_Vegetable'].','.$row['Fruit_Vegetable_Supplier'].','.$row['Bread'].','.$row['Bread_Supplier'].','.$row['Frozen_Goods'].','.$row['Frozen_Goods_Supplier'].','.$row['Dairy_Products'].','.$row['Dairy_Products_Supplier'].','.$row['Cons_Earliest'].','.$row['Cons_Earliest_Supplier'].','.$row['Minus'].','.$row['Tea'].','.$row['Tea_Supplier'].','.$row['Coffee'].','.$row['Coffee_Supplier'].','.$row['Cheese'].','.$row['Cheese_Supplier'].','.$row['Eggs'].','.$row['Eggs_Supplier'].','.$temp[0].','.$temp[1];
+            echo $row['frcgsl_id'].','.$row['Meat'].','.$row['Fruit_Vegetable'].','.$row['Bread'].','.$row['Frozen_Goods'].','.$row['Dairy_Products'].','.$row['Cons_Earliest'].','.$row['Minus'].','.$row['Tea'].','.$row['Coffee'].','.$row['Cheese'].','.$row['Eggs'].','.$temp[0].','.$temp[1];
         }
     }else{
         echo '';

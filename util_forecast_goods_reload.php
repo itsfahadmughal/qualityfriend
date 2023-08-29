@@ -3,21 +3,21 @@ require_once 'util_config.php';
 require_once 'util_session.php';
 ?>
 
-
 <div class="mt-4">
     <h3>Goods Cost</h3>
 </div>
 
 <?php
-$sql_goods = "SELECT * FROM `tbl_forecast_goods_cost` WHERE `hotel_id` = $hotel_id ORDER BY date DESC";
+$sql_goods = "SELECT a.*, b.goods_suppliers_group FROM `tbl_forecast_goods_cost` as a INNER JOIN tbl_forecast_goods_suppliers as b on a.frcgsl_id = b.frcgsl_id WHERE a.`hotel_id` = $hotel_id ORDER BY date DESC";
 
 $result_goods = $conn->query($sql_goods);
 if ($result_goods && $result_goods->num_rows > 0) {
 ?>
 <div class="table-responsive">
-    <table id="demo-foo-addrow" class="goods_table_responsive table table-bordered m-t-30 table-hover contact-list table-striped" data-paging="true" data-paging-size="25">
+    <table id="demo-foo-addrow" class=" table table-bordered m-t-30 table-hover contact-list table-striped" data-paging="true" data-paging-size="25">
         <thead>
             <tr>
+                <th class="" >Suppliers Group</th>
                 <th class="" >Meat</th>
                 <th class="" >Fruit Vegetable</th>
                 <th class="" >Bread</th>
@@ -39,7 +39,8 @@ if ($result_goods && $result_goods->num_rows > 0) {
 
     while ($row = mysqli_fetch_array($result_goods)) {
             ?>
-            <tr class="">
+            <tr class="" id="goods_cost_<?php echo $row['frcgct_id']; ?>">
+                <td><?php echo $row['goods_suppliers_group']; ?></td>
                 <td><?php echo $row['Meat']; ?></td>
                 <td><?php echo $row['Fruit_Vegetable']; ?></td>
                 <td class=""><?php echo $row['Bread']; ?></td>
