@@ -24,9 +24,6 @@ if(isset($_POST['beds_'])){
 if(isset($_POST['opening_days_'])){
     $opening_days_ = $_POST['opening_days_'];
 }
-if(isset($_POST['total_capacity_'])){
-    $total_capacity_ = $_POST['total_capacity_'];
-}
 
 if(isset($_POST['date_month_key_'])){
     $date_month_key_ = $_POST['date_month_key_'];
@@ -39,6 +36,7 @@ if(isset($_POST['facts_id_'])){
     $facts_id_ = $_POST['facts_id_'];
 }
 
+$total_capacity_ = $opening_days_ * $beds_;
 
 $full_date = $date_year_key_.'-'.$date_month_key_.'-28';
 

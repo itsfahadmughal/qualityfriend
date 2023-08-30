@@ -4,6 +4,7 @@ include 'util_session.php';
 //include 'forecast_utils/read_xml_forecast.php';
 
 $year_ = date("Y");
+$current_month_ = date("m");
 require './forecast_utills/sales-forecasting/vendor/autoload.php';
 use Cozy\ValueObjects\Matrix;
 
@@ -178,11 +179,7 @@ function forecast_prediction($conn,$input_data_,$date_forecast_,$i_){
 
 }
 
-
-
-//forecast_prediction($conn);
-
-
+$months_name_array = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
 
 ?>
 
@@ -344,8 +341,7 @@ function forecast_prediction($conn,$input_data_,$date_forecast_,$i_){
                                                 <a class="dropdown-item" id="dropdown2-tab" href="#dropdown2" role="tab" data-toggle="tab" aria-controls="dropdown2">Expenses</a> 
                                                 <a class="dropdown-item" id="dropdown3-tab" href="#dropdown3" role="tab" data-toggle="tab" aria-controls="dropdown3">Key Facts</a>
                                                 <a class="dropdown-item" id="dropdown4-tab" href="#dropdown4" role="tab" data-toggle="tab" aria-controls="dropdown4">Staffing</a> 
-                                                <a class="dropdown-item" id="dropdown5-tab" href="#dropdown5" role="tab" data-toggle="tab" aria-controls="dropdown5">Goods Purchasings</a> 
-                                                <a class="dropdown-item" id="dropdown6-tab" href="#dropdown6" role="tab" data-toggle="tab" aria-controls="dropdown6">Goods Suppliers</a> 
+                                                <a class="dropdown-item" id="dropdown5-tab" href="#dropdown5" role="tab" data-toggle="tab" aria-controls="dropdown5">Goods Purchasings</a>  
                                             </div>
                                         </li>
                                     </ul>
@@ -3501,7 +3497,7 @@ function forecast_prediction($conn,$input_data_,$date_forecast_,$i_){
                                                     </h3>
                                                 </div>
                                                 <?php
-                                                $sql_goods_data = "SELECT a.*,b.* FROM `tbl_forecast_goods_cost` as a INNER JOIN tbl_forecast_goods_suppliers as b on a.frcgsl_id = b.frcgsl_id WHERE a.`hotel_id` = $hotel_id ORDER BY date DESC";
+                                                $sql_goods_data = "SELECT * FROM `tbl_forecast_goods_cost` WHERE `hotel_id` = $hotel_id ORDER BY date DESC";
                                                 $result_goods_data = $conn->query($sql_goods_data);
                                                 if ($result_goods_data && $result_goods_data->num_rows > 0) {
                                                 ?>    
@@ -3708,16 +3704,36 @@ function forecast_prediction($conn,$input_data_,$date_forecast_,$i_){
                                                             </div>
 
                                                             <div class="form-group mb-0 mt-3">
-                                                                <label class="control-label display-inline w-47 wm-50"><strong>Account Balance (Jan Only)</strong></label>
-                                                                <label class="control-label display-inline ml-2 w-20 wm-50"><strong>Month</strong></label>
-                                                                <label class="control-label display-inline ml-2 w-20 wm-50"><strong>Year</strong></label>
+                                                                <label class="control-label display-inline w-100 wm-100"><strong>Account Balance (Jan Only)</strong></label>
                                                             </div>
                                                             <div class="form-group mb-0">
-                                                                <input type="number" step="any" class="form-control display-inline w-47 wm-50" id="account_balance">
-                                                                <input type="number" min="1" max="12" placeholder="Month" class="form-control display-inline ml-2 w-20 wm-50" id="date_month">
-                                                                <input type="number" min="1980" max="2050" placeholder="Year" class="form-control display-inline ml-2 w-20 wm-50" id="date_year">
+                                                                <input type="number" step="any" class="form-control display-inline w-100 wm-100" id="account_balance">
                                                             </div>
 
+                                                            <div class="form-group mb-0 mt-3">
+                                                                <label class="control-label display-inline ml-2 w-47 wm-50"><strong>Month</strong></label>
+                                                                <label class="control-label display-inline ml-2 w-47 wm-50"><strong>Year</strong></label>
+                                                            </div>
+                                                            <div class="form-group mb-0">
+                                                                <select class="form-control display-inline ml-2 w-47 wm-50" id="date_month">
+                                                                    <?php
+                                                                    for($i=1;$i<13;$i++){
+                                                                    ?>
+                                                                    <option value="<?php echo $i; ?>" <?php if($i == $current_month_){echo 'selected';} ?>><?php echo $months_name_array[$i-1]; ?></option>   
+                                                                    <?php 
+                                                                    } 
+                                                                    ?> 
+                                                                </select>
+                                                                <select class="form-control display-inline ml-2 w-47 wm-50" id="date_year">
+                                                                    <?php
+                                                                    for($i=2030;$i>1999;$i--){
+                                                                    ?>
+                                                                    <option value="<?php echo $i; ?>" <?php if($i == $year_){echo 'selected';} ?> ><?php echo $i; ?></option>   
+                                                                    <?php 
+                                                                    } 
+                                                                    ?> 
+                                                                </select>
+                                                            </div>
 
                                                         </div>
                                                     </div>
@@ -3837,14 +3853,35 @@ function forecast_prediction($conn,$input_data_,$date_forecast_,$i_){
                                                             </div>
 
                                                             <div class="form-group mb-0 mt-3">
-                                                                <label class="control-label display-inline w-47 wm-50"><strong>Other Costs</strong></label>
-                                                                <label class="control-label display-inline ml-2 w-20 wm-50"><strong>Month</strong></label>
-                                                                <label class="control-label display-inline ml-2 w-20 wm-50"><strong>Year</strong></label>
+                                                                <label class="control-label display-inline w-100 wm-100"><strong>Other Costs</strong></label>
                                                             </div>
                                                             <div class="form-group mb-0">
-                                                                <input type="number" step="any" class="form-control display-inline w-47 wm-50" id="other_costs">
-                                                                <input type="number" min="1" max="12" placeholder="Month" class="form-control display-inline ml-2 w-20 wm-50" id="date_month_cost">
-                                                                <input type="number" min="1980" max="2050" placeholder="Year" class="form-control display-inline ml-2 w-20 wm-50" id="date_year_cost">
+                                                                <input type="number" step="any" class="form-control display-inline w-100 wm-100" id="other_costs">
+                                                            </div>
+                                                            
+                                                             <div class="form-group mb-0 mt-3">
+                                                                <label class="control-label display-inline ml-2 w-47 wm-50"><strong>Month</strong></label>
+                                                                <label class="control-label display-inline ml-2 w-47 wm-50"><strong>Year</strong></label>
+                                                            </div>
+                                                            <div class="form-group mb-0">
+                                                                <select class="form-control display-inline ml-2 w-47 wm-50" id="date_month_cost">
+                                                                    <?php
+                                                                    for($i=1;$i<13;$i++){
+                                                                    ?>
+                                                                    <option value="<?php echo $i; ?>" <?php if($i == $current_month_){echo 'selected';} ?>><?php echo $months_name_array[$i-1]; ?></option>   
+                                                                    <?php 
+                                                                    } 
+                                                                    ?> 
+                                                                </select>
+                                                                <select class="form-control display-inline ml-2 w-47 wm-50" id="date_year_cost">
+                                                                    <?php
+                                                                    for($i=2030;$i>1999;$i--){
+                                                                    ?>
+                                                                    <option value="<?php echo $i; ?>" <?php if($i == $year_){echo 'selected';} ?> ><?php echo $i; ?></option>   
+                                                                    <?php 
+                                                                    } 
+                                                                    ?> 
+                                                                </select>
                                                             </div>
 
 
@@ -3925,6 +3962,9 @@ function forecast_prediction($conn,$input_data_,$date_forecast_,$i_){
 
                                         </div>
 
+
+
+
                                         <div class="tab-pane fade" id="dropdown3" role="tabpanel" aria-labelledby="dropdown3-tab">
 
                                             <div class="row mtm-0">
@@ -3948,12 +3988,10 @@ function forecast_prediction($conn,$input_data_,$date_forecast_,$i_){
                                                             </div>
 
                                                             <div class="form-group mb-0 mt-3">
-                                                                <label class="control-label display-inline w-47 wm-50"><strong>Opening Days</strong></label>
-                                                                <label class="control-label display-inline ml-2 w-47 wm-50"><strong>Total Stay Capacity</strong></label>
+                                                                <label class="control-label display-inline w-100 wm-100"><strong>Opening Days</strong></label>
                                                             </div>
                                                             <div class="form-group mb-0">
-                                                                <input type="number" class="form-control display-inline w-47 wm-50" id="opening_days">
-                                                                <input type="number" class="form-control display-inline ml-2 w-47 wm-50" id="total_capacity">
+                                                                <input type="number" class="form-control display-inline w-100 wm-100" id="opening_days">
                                                             </div>
 
                                                             <div class="form-group mb-0 mt-3">
@@ -3961,8 +3999,24 @@ function forecast_prediction($conn,$input_data_,$date_forecast_,$i_){
                                                                 <label class="control-label display-inline ml-2 w-47 wm-50"><strong>Year</strong></label>
                                                             </div>
                                                             <div class="form-group mb-0">
-                                                                <input type="number" min="1" max="12" placeholder="Month" class="form-control display-inline ml-2 w-47 wm-50" id="date_month_key">
-                                                                <input type="number" min="1980" max="2050" placeholder="Year" class="form-control display-inline ml-2 w-47 wm-50" id="date_year_key">
+                                                                <select class="form-control display-inline ml-2 w-47 wm-50" id="date_month_key">
+                                                                    <?php
+                                                                    for($i=1;$i<13;$i++){
+                                                                    ?>
+                                                                    <option value="<?php echo $i; ?>" <?php if($i == $current_month_){echo 'selected';} ?>><?php echo $months_name_array[$i-1]; ?></option>   
+                                                                    <?php 
+                                                                    } 
+                                                                    ?> 
+                                                                </select>
+                                                                <select class="form-control display-inline ml-2 w-47 wm-50" id="date_year_key">
+                                                                    <?php
+                                                                    for($i=2030;$i>1999;$i--){
+                                                                    ?>
+                                                                    <option value="<?php echo $i; ?>" <?php if($i == $year_){echo 'selected';} ?> ><?php echo $i; ?></option>   
+                                                                    <?php 
+                                                                    } 
+                                                                    ?> 
+                                                                </select>
                                                             </div>
 
 
@@ -4047,12 +4101,19 @@ function forecast_prediction($conn,$input_data_,$date_forecast_,$i_){
 
 
                                                             <div class="form-group mb-0">
-                                                                <label class="control-label display-inline w-47 wm-50"><strong>Staff Name</strong></label>
-                                                                <label class="control-label display-inline ml-2 w-47 wm-50"><strong>Year</strong></label>
+                                                                <label class="control-label display-inline w-100 wm-50"><strong>Staff Name</strong></label>
                                                             </div>
                                                             <div class="form-group mb-0">
-                                                                <input type="text" class="form-control display-inline w-47 wm-50" id="staff_name" placeholder="e.g. Reception 1, Operation Mgr, Kitchen 1...">
-                                                                <input type="number" min="1980" max="2050" placeholder="e.g. 2023, 2024, 2025..." class="form-control display-inline ml-2 w-47 wm-50" id="year_staffing">
+                                                                <input type="text" class="form-control display-inline w-100 wm-50" id="staff_name" placeholder="e.g. Reception 1, Operation Mgr, Kitchen 1...">
+                                                            </div>
+
+                                                            <div class="form-group mb-0 mt-3">
+                                                                <label class="control-label display-inline w-47 wm-50"><strong>Start</strong></label>
+                                                                <label class="control-label display-inline ml-2 w-47 wm-50"><strong>End</strong></label>
+                                                            </div>
+                                                            <div class="form-group mb-0">
+                                                                <input type="date" class="form-control display-inline w-47 wm-50" id="start_staffing">
+                                                                <input type="date" class="form-control display-inline ml-2 w-47 wm-50" id="end_staffing">
                                                             </div>
 
                                                             <div class="form-group mb-0 mt-3">
@@ -4156,7 +4217,7 @@ function forecast_prediction($conn,$input_data_,$date_forecast_,$i_){
 
                                         <div class="tab-pane fade" id="dropdown5" role="tabpanel" aria-labelledby="dropdown5-tab">
                                             <div class="row mtm-0">
-                                                <div class="col-lg-3 right-border-div pr-5">
+                                                <div class="col-lg-4 right-border-div pr-3">
 
                                                     <div class="mt-4">
                                                         <h3><span id="add_or_edit_goods_text">Add</span> Goods Cost <button onclick="clear_goods_values();" type="button" class="btn btn-dark float-right">Clear Values</button></h3>
@@ -4165,81 +4226,128 @@ function forecast_prediction($conn,$input_data_,$date_forecast_,$i_){
                                                     <div class="row mt-3">
                                                         <div class="col-lg-12">
 
-                                                            <div class="form-group mb-0">
-                                                                <label class="control-label display-inline w-100 wm-100"><strong>Goods Suppliers Group</strong></label>
-                                                            </div>
-                                                            <div class="form-group mb-0">
-                                                                <select class="form-control display-inline w-100 wm-100" id="goods_suppliers_group">
-                                                                    <option value="0">Select Suppliers Group</option>
-                                                                    <?php
-                                                                    $sql_supp = "SELECT * FROM `tbl_forecast_goods_suppliers` WHERE hotel_id = $hotel_id ORDER BY 1 DESC";
 
-                                                                    $result_supp = $conn->query($sql_supp);
-                                                                    if ($result_supp && $result_supp->num_rows > 0) {
-                                                                        while ($row = mysqli_fetch_array($result_supp)) {
-                                                                    ?>
-                                                                    <option value="<?php echo $row['frcgsl_id']; ?>"><?php echo $row['goods_suppliers_group']; ?></option>   
-                                                                    <?php 
-                                                                        } 
-                                                                    }
-                                                                    ?> 
-                                                                </select>
-                                                            </div>
-
-                                                            <div class="form-group mb-0 mt-3">
+                                                            <div class="form-group mb-0">
                                                                 <label class="control-label display-inline w-47 wm-50"><strong>Meat Cost</strong></label>
-                                                                <label class="control-label display-inline w-47 wm-50"><strong>Fruits &amp; Vegetables</strong></label>
+                                                                <label class="control-label display-inline ml-2 w-47 wm-50"><strong>Meat Supplier</strong></label>
                                                             </div>
                                                             <div class="form-group mb-0">
                                                                 <input step="any" type="number" class="form-control display-inline w-47 wm-50" id="meat_cost">
+                                                                <input type="text" class="form-control display-inline ml-2 w-47 wm-50" id="meat_supplier">
+                                                            </div>
+
+                                                            <div class="form-group mb-0 mt-3">
+                                                                <label class="control-label display-inline w-47 wm-50"><strong>Fruits &amp; Vegetables</strong></label>
+                                                                <label class="control-label display-inline ml-2 w-47 wm-50"><strong>Fruits &amp; Vegetables Supp</strong></label>
+                                                            </div>
+                                                            <div class="form-group mb-0">
                                                                 <input step="any" type="number" class="form-control display-inline w-47 wm-50" id="fruit_cost">
+                                                                <input type="text" class="form-control display-inline ml-2 w-47 wm-50" id="fruit_supplier">
                                                             </div>
 
                                                             <div class="form-group mb-0 mt-3">
                                                                 <label class="control-label display-inline w-47 wm-50"><strong>Bread</strong></label>
-                                                                <label class="control-label display-inline w-47 wm-50"><strong>Frozen Goods</strong></label>
+                                                                <label class="control-label display-inline ml-2 w-47 wm-50"><strong>Bread Supplier</strong></label>
                                                             </div>
                                                             <div class="form-group mb-0">
                                                                 <input step="any" type="number" class="form-control display-inline w-47 wm-50" id="bread_cost">
+                                                                <input type="text" class="form-control display-inline ml-2 w-47 wm-50" id="bread_supplier">
+                                                            </div>
+
+                                                            <div class="form-group mb-0 mt-3">
+                                                                <label class="control-label display-inline w-47 wm-50"><strong>Frozen Goods</strong></label>
+                                                                <label class="control-label display-inline ml-2 w-47 wm-50"><strong>Frozen Goods Supplier</strong></label>
+                                                            </div>
+                                                            <div class="form-group mb-0">
                                                                 <input step="any" type="number" class="form-control display-inline w-47 wm-50" id="frozen_cost">
+                                                                <input type="text" class="form-control display-inline ml-2 w-47 wm-50" id="frozen_supplier">
                                                             </div>
 
                                                             <div class="form-group mb-0 mt-3">
                                                                 <label class="control-label display-inline w-47 wm-50"><strong>Dairy Products</strong></label>
-                                                                <label class="control-label display-inline w-47 wm-50"><strong>Cons Earliast</strong></label>
+                                                                <label class="control-label display-inline ml-2 w-47 wm-50"><strong>Dairy Products Supplier</strong></label>
                                                             </div>
                                                             <div class="form-group mb-0">
                                                                 <input step="any" type="number" class="form-control display-inline w-47 wm-50" id="dairy_cost">
+                                                                <input type="text" class="form-control display-inline ml-2 w-47 wm-50" id="dairy_supplier">
+                                                            </div>
+
+                                                            <div class="form-group mb-0 mt-3">
+                                                                <label class="control-label display-inline w-47 wm-50"><strong>Cons Earliast</strong></label>
+                                                                <label class="control-label display-inline ml-2 w-47 wm-50"><strong>Cons Earliast Supplier</strong></label>
+                                                            </div>
+                                                            <div class="form-group mb-0">
                                                                 <input step="any" type="number" class="form-control display-inline w-47 wm-50" id="cons_cost">
+                                                                <input type="text" class="form-control display-inline ml-2 w-47 wm-50" id="cons_supplier">
                                                             </div>
 
                                                             <div class="form-group mb-0 mt-3">
                                                                 <label class="control-label display-inline w-47 wm-50"><strong>Tea</strong></label>
-                                                                <label class="control-label display-inline w-47 wm-50"><strong>Coffee</strong></label>
+                                                                <label class="control-label display-inline ml-2 w-47 wm-50"><strong>Tea Supplier</strong></label>
                                                             </div>
                                                             <div class="form-group mb-0">
                                                                 <input step="any" type="number" class="form-control display-inline w-47 wm-50" id="tea_cost">
+                                                                <input type="text" class="form-control display-inline ml-2 w-47 wm-50" id="tea_supplier">
+                                                            </div>
+
+                                                            <div class="form-group mb-0 mt-3">
+                                                                <label class="control-label display-inline w-47 wm-50"><strong>Coffee</strong></label>
+                                                                <label class="control-label display-inline ml-2 w-47 wm-50"><strong>Coffee Supplier</strong></label>
+                                                            </div>
+                                                            <div class="form-group mb-0">
                                                                 <input step="any" type="number" class="form-control display-inline w-47 wm-50" id="coffee_cost">
+                                                                <input type="text" class="form-control display-inline ml-2 w-47 wm-50" id="coffee_supplier">
                                                             </div>
 
                                                             <div class="form-group mb-0 mt-3">
                                                                 <label class="control-label display-inline w-47 wm-50"><strong>Cheese</strong></label>
-                                                                <label class="control-label display-inline w-47 wm-50"><strong>Eggs</strong></label>
+                                                                <label class="control-label display-inline ml-2 w-47 wm-50"><strong>Cheese Supplier</strong></label>
                                                             </div>
                                                             <div class="form-group mb-0">
                                                                 <input step="any" type="number" class="form-control display-inline w-47 wm-50" id="cheese_cost">
+                                                                <input type="text" class="form-control display-inline ml-2 w-47 wm-50" id="cheese_supplier">
+                                                            </div>
+
+                                                            <div class="form-group mb-0 mt-3">
+                                                                <label class="control-label display-inline w-47 wm-50"><strong>Eggs</strong></label>
+                                                                <label class="control-label display-inline ml-2 w-47 wm-50"><strong>Eggs Supplier</strong></label>
+                                                            </div>
+                                                            <div class="form-group mb-0">
                                                                 <input step="any" type="number" class="form-control display-inline w-47 wm-50" id="eggs_cost">
+                                                                <input type="text" class="form-control display-inline ml-2 w-47 wm-50" id="eggs_supplier">
                                                             </div>
 
                                                             <div class="form-group mb-0 mt-3 mt-3">
-                                                                <label class="control-label display-inline w-30 wm-50"><strong>Minus</strong></label>
-                                                                <label class="control-label display-inline w-30 wm-50"><strong>Month</strong></label>
-                                                                <label class="control-label display-inline w-30 wm-50"><strong>Year</strong></label>
+                                                                <label class="control-label display-inline w-100 wm-100"><strong>Minus</strong></label>
                                                             </div>
                                                             <div class="form-group mb-0">
-                                                                <input type="number" step="any" class="form-control display-inline w-30 wm-50" id="minus_costs">
-                                                                <input type="number" min="1" max="12" placeholder="Month" class="form-control display-inline w-30 wm-50" id="date_month_goods">
-                                                                <input type="number" min="1980" max="2050" placeholder="Year" class="form-control display-inline w-30 wm-50" id="date_year_goods">
+                                                                <input type="number" step="any" class="form-control display-inline w-100 wm-100" id="minus_costs">
+                                                            </div>
+                                                            
+                                                            
+                                                             <div class="form-group mb-0 mt-3 mt-3">
+                                                                <label class="control-label display-inline ml-2 w-47 wm-50"><strong>Month</strong></label>
+                                                                <label class="control-label display-inline ml-2 w-47 wm-50"><strong>Year</strong></label>
+                                                            </div>
+                                                            <div class="form-group mb-0">
+                                                                <select class="form-control display-inline ml-2 w-47 wm-50" id="date_month_goods">
+                                                                    <?php
+                                                                    for($i=1;$i<13;$i++){
+                                                                    ?>
+                                                                    <option value="<?php echo $i; ?>" <?php if($i == $current_month_){echo 'selected';} ?>><?php echo $months_name_array[$i-1]; ?></option>   
+                                                                    <?php 
+                                                                    } 
+                                                                    ?> 
+                                                                </select>
+                                                                <select class="form-control display-inline ml-2 w-47 wm-50" id="date_year_goods">
+                                                                    <?php
+                                                                    for($i=2030;$i>1999;$i--){
+                                                                    ?>
+                                                                    <option value="<?php echo $i; ?>" <?php if($i == $year_){echo 'selected';} ?> ><?php echo $i; ?></option>   
+                                                                    <?php 
+                                                                    } 
+                                                                    ?> 
+                                                                </select>
                                                             </div>
 
 
@@ -4249,38 +4357,33 @@ function forecast_prediction($conn,$input_data_,$date_forecast_,$i_){
 
 
                                                     <div class="mt-3 mb-5 pb-5 pbm-0 mbm-0">
-                                                        <input type="button" onclick="save_goods_cost();" class="btn mt-4 w-100 btn-dark" value="Save Goods Purchasing">
+                                                        <input type="button" onclick="save_goods_cost();" class="btn mt-4 w-100 btn-info" value="Save Goods Purchasing">
                                                     </div>
 
 
                                                 </div>
 
-                                                <div class="col-lg-9" id="reload_goods">
+                                                <div class="col-lg-8" id="reload_goods">
                                                     <div class="mt-4">
                                                         <h3>Goods Cost</h3>
                                                     </div>
 
                                                     <?php
-                                                    $sql_goods = "SELECT a.*, b.goods_suppliers_group FROM `tbl_forecast_goods_cost` as a INNER JOIN tbl_forecast_goods_suppliers as b on a.frcgsl_id = b.frcgsl_id WHERE a.`hotel_id` = $hotel_id ORDER BY date DESC";
+                                                    $sql_goods = "SELECT * FROM `tbl_forecast_goods_cost` WHERE `hotel_id` = $hotel_id ORDER BY date DESC";
 
                                                     $result_goods = $conn->query($sql_goods);
                                                     if ($result_goods && $result_goods->num_rows > 0) {
                                                     ?>
                                                     <div class="table-responsive">
-                                                        <table id="demo-foo-addrow" class=" table table-bordered m-t-30 table-hover contact-list full-color-table full-dark-table hover-table" data-paging="true" data-paging-size="25">
+                                                        <table id="demo-foo-addrow" class="table table-bordered m-t-30 table-hover contact-list full-color-table full-dark-table hover-table" data-paging="true" data-paging-size="25">
                                                             <thead>
                                                                 <tr>
-                                                                    <th class="" >Suppliers Group</th>
                                                                     <th class="" >Meat</th>
                                                                     <th class="" >Fruit Vegetable</th>
                                                                     <th class="" >Bread</th>
                                                                     <th class="" >Frozen Goods</th>
                                                                     <th class="" >Dairy Products</th>
-                                                                    <th class="" >Cons Earliest</th>
-                                                                    <th class="" >Tea</th>
-                                                                    <th class="" >Coffee</th>
                                                                     <th class="" >Cheese</th>
-                                                                    <th class="" >Eggs</th>
                                                                     <th class="" >Minus</th>
                                                                     <th class="" >Total</th>
                                                                     <th class="" >Date</th>
@@ -4293,17 +4396,12 @@ function forecast_prediction($conn,$input_data_,$date_forecast_,$i_){
                                                         while ($row = mysqli_fetch_array($result_goods)) {
                                                                 ?>
                                                                 <tr class="" id="goods_cost_<?php echo $row['frcgct_id']; ?>">
-                                                                    <td><?php echo $row['goods_suppliers_group']; ?></td>
                                                                     <td><?php echo $row['Meat']; ?></td>
                                                                     <td><?php echo $row['Fruit_Vegetable']; ?></td>
                                                                     <td class=""><?php echo $row['Bread']; ?></td>
                                                                     <td class=""><?php echo $row['Frozen_Goods']; ?></td>
                                                                     <td class=""><?php echo $row['Dairy_Products']; ?></td>
-                                                                    <td class=""><?php echo $row['Cons_Earliest']; ?></td>
-                                                                    <td class=""><?php echo $row['Tea']; ?></td>
-                                                                    <td class=""><?php echo $row['Coffee']; ?></td>
                                                                     <td class=""><?php echo $row['Cheese']; ?></td>
-                                                                    <td class=""><?php echo $row['Eggs']; ?></td>
                                                                     <td class=""><?php echo $row['Minus']; ?></td>
                                                                     <td class=""><?php echo $row['total_cost']; ?></td>
                                                                     <td class=""><?php echo date('M, Y', strtotime($row['date'])); ?></td>
@@ -4326,152 +4424,6 @@ function forecast_prediction($conn,$input_data_,$date_forecast_,$i_){
                                                 </div>
                                             </div>
                                         </div>
-
-
-
-
-                                        <div class="tab-pane fade" id="dropdown6" role="tabpanel" aria-labelledby="dropdown6-tab">
-                                            <div class="row mtm-0">
-                                                <div class="col-lg-4 right-border-div pr-2">
-
-                                                    <div class="mt-4">
-                                                        <h3><span id="add_or_edit_suppliers_text">Add</span> Goods Suppliers <button onclick="clear_suppliers_values();" type="button" class="btn btn-danger float-right">Clear Values</button></h3>
-                                                    </div>
-
-                                                    <div class="row mt-3">
-                                                        <div class="col-lg-12">
-
-
-                                                            <div class="form-group mb-0">
-                                                                <label class="control-label display-inline ml-2 w-47 wm-50"><strong>Meat Supplier</strong></label>
-                                                                <label class="control-label display-inline ml-2 w-47 wm-50"><strong>Fruits &amp; Vegetables Supp</strong></label>
-                                                            </div>
-                                                            <div class="form-group mb-0">
-                                                                <input type="text" class="form-control display-inline ml-2 w-47 wm-50" id="meat_supplier">
-                                                                <input type="text" class="form-control display-inline ml-2 w-47 wm-50" id="fruit_supplier">
-                                                            </div>
-
-                                                            <div class="form-group mb-0 mt-3">
-                                                                <label class="control-label display-inline ml-2 w-47 wm-50"><strong>Bread Supplier</strong></label>
-                                                                <label class="control-label display-inline ml-2 w-47 wm-50"><strong>Frozen Goods Supplier</strong></label>
-                                                            </div>
-                                                            <div class="form-group mb-0">
-                                                                <input type="text" class="form-control display-inline ml-2 w-47 wm-50" id="bread_supplier">
-                                                                <input type="text" class="form-control display-inline ml-2 w-47 wm-50" id="frozen_supplier">
-                                                            </div>
-
-                                                            <div class="form-group mb-0 mt-3">
-                                                                <label class="control-label display-inline ml-2 w-47 wm-50"><strong>Dairy Products Supplier</strong></label>
-                                                                <label class="control-label display-inline ml-2 w-47 wm-50"><strong>Cons Earliast Supplier</strong></label>
-                                                            </div>
-                                                            <div class="form-group mb-0">
-                                                                <input type="text" class="form-control display-inline ml-2 w-47 wm-50" id="dairy_supplier">
-                                                                <input type="text" class="form-control display-inline ml-2 w-47 wm-50" id="cons_supplier">
-                                                            </div>
-
-                                                            <div class="form-group mb-0 mt-3">
-                                                                <label class="control-label display-inline ml-2 w-47 wm-50"><strong>Tea Supplier</strong></label>
-                                                                <label class="control-label display-inline ml-2 w-47 wm-50"><strong>Coffee Supplier</strong></label>
-                                                            </div>
-                                                            <div class="form-group mb-0">
-                                                                <input type="text" class="form-control display-inline ml-2 w-47 wm-50" id="tea_supplier">
-                                                                <input type="text" class="form-control display-inline ml-2 w-47 wm-50" id="coffee_supplier">
-                                                            </div>
-
-                                                            <div class="form-group mb-0 mt-3">
-                                                                <label class="control-label display-inline ml-2 w-47 wm-50"><strong>Cheese Supplier</strong></label>
-                                                                <label class="control-label display-inline ml-2 w-47 wm-50"><strong>Eggs Supplier</strong></label>
-                                                            </div>
-                                                            <div class="form-group mb-0">
-                                                                <input type="text" class="form-control display-inline ml-2 w-47 wm-50" id="cheese_supplier">
-                                                                <input type="text" class="form-control display-inline ml-2 w-47 wm-50" id="eggs_supplier">
-                                                            </div>
-
-                                                            <div class="form-group mb-0 mt-3">
-                                                                <label class="control-label display-inline ml-2 w-100 wm-100"><strong>Suppliers Group Title</strong></label>
-                                                            </div>
-                                                            <div class="form-group mb-0">
-                                                                <input type="text" class="form-control display-inline ml-2 w-100 wm-100" id="supplier_group_title">
-                                                            </div>
-
-                                                        </div>
-                                                    </div>
-
-
-                                                    <div class="mt-3 mb-5 pb-5 pbm-0 mbm-0">
-                                                        <input type="button" onclick="save_goods_suppliers();" class="btn mt-4 w-100 btn-danger" value="Save Goods Suppliers">
-                                                    </div>
-
-
-                                                </div>
-
-                                                <div class="col-lg-8" id="reload_suppliers">
-                                                    <div class="mt-4">
-                                                        <h3>Goods Suppliers</h3>
-                                                    </div>
-
-                                                    <?php
-                                                    $sql_goods = "SELECT * FROM `tbl_forecast_goods_suppliers` WHERE `hotel_id` = $hotel_id ORDER BY 1 DESC";
-
-                                                    $result_goods = $conn->query($sql_goods);
-                                                    if ($result_goods && $result_goods->num_rows > 0) {
-                                                    ?>
-                                                    <div class="table-responsive">
-                                                        <table id="demo-foo-addrow" class="goods_table_responsive table table-bordered m-t-30 table-hover contact-list full-color-table full-danger-table hover-table" data-paging="true" data-paging-size="25">
-                                                            <thead>
-                                                                <tr>
-                                                                    <th class="" >Suppliers Group</th>
-                                                                    <th class="" >Meat</th>
-                                                                    <th class="" >Fruit Vegetable</th>
-                                                                    <th class="" >Bread</th>
-                                                                    <th class="" >Frozen Goods</th>
-                                                                    <th class="" >Dairy Products</th>
-                                                                    <th class="" >Cons Earliest</th>
-                                                                    <th class="" >Tea</th>
-                                                                    <th class="" >Coffee</th>
-                                                                    <th class="" >Cheese</th>
-                                                                    <th class="" >Eggs</th>
-                                                                    <th class="text-center">Action</th>
-                                                                </tr>
-                                                            </thead>
-                                                            <tbody>
-                                                                <?php
-
-                                                        while ($row = mysqli_fetch_array($result_goods)) {
-                                                                ?>
-                                                                <tr class="" id="goods_suppliers_<?php echo $row['frcgsl_id']; ?>">
-                                                                    <td><?php echo $row['goods_suppliers_group']; ?></td>
-                                                                    <td><?php echo $row['Meat_Supplier']; ?></td>
-                                                                    <td><?php echo $row['Fruit_Vegetable_Supplier']; ?></td>
-                                                                    <td class=""><?php echo $row['Bread_Supplier']; ?></td>
-                                                                    <td class=""><?php echo $row['Frozen_Goods_Supplier']; ?></td>
-                                                                    <td class=""><?php echo $row['Dairy_Products_Supplier']; ?></td>
-                                                                    <td class=""><?php echo $row['Cons_Earliest_Supplier']; ?></td>
-                                                                    <td class=""><?php echo $row['Tea_Supplier']; ?></td>
-                                                                    <td class=""><?php echo $row['Coffee_Supplier']; ?></td>
-                                                                    <td class=""><?php echo $row['Cheese_Supplier']; ?></td>
-                                                                    <td class=""><?php echo $row['Eggs_Supplier']; ?></td>
-                                                                    <td class="font-size-subheading text-center black_color">
-                                                                        <a  class="black_color" href="javascript:void(0)" onclick="edit_goods_suppliers('<?php echo $row['frcgsl_id']; ?>')"><i class="fas fa-pencil-alt font-size-subheading text-right"></i></a>
-                                                                    </td>
-                                                                </tr>
-                                                                <?php 
-                                                        } 
-                                                                ?>
-                                                            </tbody>
-                                                        </table>
-                                                    </div>
-
-                                                    <?php }else{ ?>
-                                                    <div class="text-center mt-5 pt-4"><img src="assets/images/no-results-cookie.png" width="250" /></div>
-                                                    <h5 class="text-center"><b>Goods Suppliers Not Found.</b></h5>
-                                                    <?php } ?>
-
-                                                </div>
-                                            </div>
-                                        </div>
-
-
 
                                     </div>
                                 </div>
@@ -5103,6 +5055,9 @@ function forecast_prediction($conn,$input_data_,$date_forecast_,$i_){
 
 
         <script>
+            var current_month = '<?php if($current_month_ < 10){echo ltrim($current_month_,'0');}else{echo $current_month_;} ?>';
+            var current_year = '<?php echo $year_; ?>';
+
             var rev_id = 0;
 
             function edit_revenue(revenue_id){
@@ -5174,19 +5129,7 @@ function forecast_prediction($conn,$input_data_,$date_forecast_,$i_){
                         contentType: false,
                         success:function(response){
                             if(response == 'success'){
-                                $("#hotel_revenues").val(null);
-                                $("#ancillary_revenues").val(null);
-                                $("#spa_revenues").val(null);
-                                $("#other_revenues").val(null);
-                                $("#account_balance").val(null);
-                                $("#date_month").val(null);
-                                $("#date_year").val(null);
-                                rev_id = 0;
-                                $("#reload_revenues").load("util_forecast_revenue_reload.php");
-
-                                $("#reload_revenues > div > table > tbody > tr").removeClass('forecast_secondary_color');
-
-                                $("#add_or_edit_revenues_text").text("Add");
+                                clear_revenues_values();
                             }else{
                                 alert("Revenues not saved.");
                             }
@@ -5205,8 +5148,8 @@ function forecast_prediction($conn,$input_data_,$date_forecast_,$i_){
                 $("#spa_revenues").val(null);
                 $("#other_revenues").val(null);
                 $("#account_balance").val(null);
-                $("#date_month").val(null);
-                $("#date_year").val(null);
+                $("#date_month").val(current_month).change();
+                $("#date_year").val(current_year);
                 rev_id = 0;
                 $("#reload_revenues").load("util_forecast_revenue_reload.php");
 
@@ -5300,21 +5243,7 @@ function forecast_prediction($conn,$input_data_,$date_forecast_,$i_){
                         contentType: false,
                         success:function(response){
                             if(response == 'success'){
-                                $("#ancillary_goods_cost").val(null);
-                                $("#spa_products_cost").val(null);
-                                $("#total_operating_cost").val(null);
-                                $("#administration_cost").val(null);
-                                $("#marketing").val(null);
-                                $("#taxes").val(null);
-                                $("#bank_charges").val(null);
-                                $("#total_loan").val(null);
-                                $("#other_costs").val(null);
-                                $("#date_month_cost").val(null);
-                                $("#date_year_cost").val(null);
-                                expense_id = 0;
-                                $("#reload_expenses").load("util_forecast_expense_reload.php");
-                                $("#reload_expenses > div > table > tbody > tr").removeClass('forecast_secondary_color');
-                                $("#add_or_edit_expenses_text").text("Add");
+                                clear_expenses_values();
                             }else{
                                 alert("Expenses not saved.");
                             }
@@ -5324,10 +5253,7 @@ function forecast_prediction($conn,$input_data_,$date_forecast_,$i_){
                         },
                     });
 
-
                 }
-
-
 
             }
 
@@ -5342,8 +5268,8 @@ function forecast_prediction($conn,$input_data_,$date_forecast_,$i_){
                 $("#bank_charges").val(null);
                 $("#total_loan").val(null);
                 $("#other_costs").val(null);
-                $("#date_month_cost").val(null);
-                $("#date_year_cost").val(null);
+                $("#date_month_cost").val(current_month);
+                $("#date_year_cost").val(current_year);
                 expense_id = 0;
                 $("#reload_expenses").load("util_forecast_expense_reload.php");
                 $("#reload_expenses > div > table > tbody > tr").removeClass('forecast_secondary_color');
@@ -5375,7 +5301,6 @@ function forecast_prediction($conn,$input_data_,$date_forecast_,$i_){
                             $("#rooms").val(myArray[0]);
                             $("#beds").val(myArray[1]);
                             $("#opening_days").val(myArray[2]);
-                            $("#total_capacity").val(myArray[3]);
                             $("#date_year_key").val(myArray[4]);
                             $("#date_month_key").val(myArray[5]);
                             facts_id = fact_id;
@@ -5420,16 +5345,7 @@ function forecast_prediction($conn,$input_data_,$date_forecast_,$i_){
                         contentType: false,
                         success:function(response){
                             if(response == 'success'){
-                                $("#rooms").val(null);
-                                $("#beds").val(null);
-                                $("#opening_days").val(null);
-                                $("#total_capacity").val(null);
-                                $("#date_month_key").val(null);
-                                $("#date_year_key").val(null);
-                                facts_id = 0;
-                                $("#reload_facts").load("util_forecast_facts_reload.php");
-                                $("#reload_facts > div > table > tbody > tr").removeClass('forecast_secondary_color');
-                                $("#add_or_edit_key_text").text("Add");
+                                clear_key_values();
                             }else{
                                 alert("Key Facts not saved.");
                             }
@@ -5448,18 +5364,40 @@ function forecast_prediction($conn,$input_data_,$date_forecast_,$i_){
                 $("#beds").val(null);
                 $("#opening_days").val(null);
                 $("#total_capacity").val(null);
-                $("#date_month_key").val(null);
-                $("#date_year_key").val(null);
+                $("#date_month_key").val(current_month);
+                $("#date_year_key").val(current_year);
                 facts_id = 0;
                 $("#reload_facts").load("util_forecast_facts_reload.php");
                 $("#reload_facts > div > table > tbody > tr").removeClass('forecast_secondary_color');
                 $("#add_or_edit_key_text").text("Add");
+                getkey_Facts_rooms_beds();
             }
 
+            getkey_Facts_rooms_beds();
 
-
-
-
+            function getkey_Facts_rooms_beds(){
+                var fd = new FormData();
+                $.ajax({
+                    url:'util_forecast_facts_rooms_beds_get.php',
+                    type: 'post',
+                    data:fd,
+                    processData: false,
+                    contentType: false,
+                    success:function(response){
+                        if(response != ''){
+                            const myArray = response.split(",");
+                            $("#rooms").val(myArray[0]);
+                            $("#beds").val(myArray[1]);
+                        }else{
+                            $("#rooms").val(0);
+                            $("#beds").val(0);
+                        }
+                    },
+                    error: function(xhr, status, error) {
+                        console.log(error);
+                    },
+                });
+            }
 
             var goods_id = 0;
 
@@ -5476,26 +5414,36 @@ function forecast_prediction($conn,$input_data_,$date_forecast_,$i_){
                     success:function(response){
 
                         if(response != ''){
-                            const myArray = response.split(",");
                             $("#reload_goods > div > table > tbody > tr").removeClass('forecast_secondary_color');
 
                             $("#goods_cost_"+good_id).addClass('forecast_secondary_color');
                             $("#add_or_edit_goods_text").text("Edit");
-                            $("#goods_suppliers_group").val(myArray[0]);
-                            $("#meat_cost").val(myArray[1]);
-                            $("#fruit_cost").val(myArray[2]);
-                            $("#bread_cost").val(myArray[3]);
-                            $("#frozen_cost").val(myArray[4]);
-                            $("#dairy_cost").val(myArray[5]);
-                            $("#cons_cost").val(myArray[6]);
-                            $("#minus_costs").val(myArray[7]);
 
-                            $("#tea_cost").val(myArray[8]);
-                            $("#coffee_cost").val(myArray[9]);
-                            $("#cheese_cost").val(myArray[10]);
-                            $("#eggs_cost").val(myArray[11]);
-                            $("#date_year_goods").val(myArray[12]);
-                            $("#date_month_goods").val(myArray[13]);
+                            const myArray = response.split(",");
+
+                            $("#meat_cost").val(myArray[0]);
+                            $("#meat_supplier").val(myArray[1]);
+                            $("#fruit_cost").val(myArray[2]);
+                            $("#fruit_supplier").val(myArray[3]);
+                            $("#bread_cost").val(myArray[4]);
+                            $("#bread_supplier").val(myArray[5]);
+                            $("#frozen_cost").val(myArray[6]);
+                            $("#frozen_supplier").val(myArray[7]);
+                            $("#dairy_cost").val(myArray[8]);
+                            $("#dairy_supplier").val(myArray[9]);
+                            $("#cons_cost").val(myArray[10]);
+                            $("#cons_supplier").val(myArray[11]);
+                            $("#tea_cost").val(myArray[12]);
+                            $("#tea_supplier").val(myArray[13]);
+                            $("#coffee_cost").val(myArray[14]);
+                            $("#coffee_supplier").val(myArray[15]);
+                            $("#cheese_cost").val(myArray[16]);
+                            $("#cheese_supplier").val(myArray[17]);
+                            $("#eggs_cost").val(myArray[18]);
+                            $("#eggs_supplier").val(myArray[19]);
+                            $("#minus_costs").val(myArray[20]);
+                            $("#date_year_goods").val(myArray[21]);
+                            $("#date_month_goods").val(myArray[22]);
 
                             goods_id = good_id;
                         }else{
@@ -5511,37 +5459,55 @@ function forecast_prediction($conn,$input_data_,$date_forecast_,$i_){
             }
 
             function save_goods_cost(){
-                var supplier_group_id=$("#goods_suppliers_group").val();
                 var meat_cost=$("#meat_cost").val();
+                var meat_supplier=$("#meat_supplier").val();
                 var fruit_cost=$("#fruit_cost").val();
+                var fruit_supplier=$("#fruit_supplier").val();
                 var bread_cost=$("#bread_cost").val();
+                var bread_supplier=$("#bread_supplier").val();
                 var frozen_cost=$("#frozen_cost").val();
+                var frozen_supplier=$("#frozen_supplier").val();
                 var dairy_cost=$("#dairy_cost").val();
+                var dairy_supplier=$("#dairy_supplier").val();
                 var cons_cost=$("#cons_cost").val();
+                var cons_supplier=$("#cons_supplier").val();
                 var tea_cost=$("#tea_cost").val();
+                var tea_supplier=$("#tea_supplier").val();
                 var coffee_cost=$("#coffee_cost").val();
+                var coffee_supplier=$("#coffee_supplier").val();
                 var cheese_cost=$("#cheese_cost").val();
+                var cheese_supplier=$("#cheese_supplier").val();
                 var eggs_cost=$("#eggs_cost").val();
+                var eggs_supplier=$("#eggs_supplier").val();
                 var minus_costs=$("#minus_costs").val();
                 var date_month_goods=$("#date_month_goods").val();
                 var date_year_goods=$("#date_year_goods").val();
 
 
-                if(date_month_goods <= 0 || date_month_goods > 12 || supplier_group_id == 0){
-                    alert("Enter Correct Month Number & Select Supplier Group.");
+                if(date_month_goods <= 0 || date_month_goods > 12){
+                    alert("Enter Correct Month Number.");
                 }else{
                     var fd = new FormData();
-                    fd.append('supplier_group_id_',supplier_group_id);
                     fd.append('meat_cost_',meat_cost);
+                    fd.append('meat_supplier_',meat_supplier);
                     fd.append('fruit_cost_',fruit_cost);
+                    fd.append('fruit_supplier_',fruit_supplier);
                     fd.append('bread_cost_',bread_cost);
+                    fd.append('bread_supplier_',bread_supplier);
                     fd.append('frozen_cost_',frozen_cost);
+                    fd.append('frozen_supplier_',frozen_supplier);
                     fd.append('dairy_cost_',dairy_cost);
+                    fd.append('dairy_supplier_',dairy_supplier);
                     fd.append('cons_cost_',cons_cost);
+                    fd.append('cons_supplier_',cons_supplier);
                     fd.append('tea_cost_',tea_cost);
+                    fd.append('tea_supplier_',tea_supplier);
                     fd.append('coffee_cost_',coffee_cost);
+                    fd.append('coffee_supplier_',coffee_supplier);
                     fd.append('cheese_cost_',cheese_cost);
+                    fd.append('cheese_supplier_',cheese_supplier);
                     fd.append('eggs_cost_',eggs_cost);
+                    fd.append('eggs_supplier_',eggs_supplier);
                     fd.append('minus_costs_',minus_costs);
                     fd.append('date_month_goods_',date_month_goods);
                     fd.append('date_year_goods_',date_year_goods);
@@ -5556,24 +5522,7 @@ function forecast_prediction($conn,$input_data_,$date_forecast_,$i_){
                         success:function(response){
 
                             if(response == 'success'){
-                                $("#reload_goods > div > table > tbody > tr").removeClass('forecast_secondary_color');
-                                $("#goods_suppliers_group").val(0);
-                                $("#meat_cost").val(null);
-                                $("#fruit_cost").val(null);
-                                $("#bread_cost").val(null);
-                                $("#frozen_cost").val(null);
-                                $("#dairy_cost").val(null);
-                                $("#cons_cost").val(null);
-                                $("#tea_cost").val(null);
-                                $("#coffee_cost").val(null);
-                                $("#cheese_cost").val(null);
-                                $("#eggs_cost").val(null);
-                                $("#minus_costs").val(null);
-                                $("#date_month_goods").val(null);
-                                $("#date_year_goods").val(null);
-                                $("#add_or_edit_goods_text").text("Add");
-                                goods_id = 0;
-                                $("#reload_goods").load("util_forecast_goods_reload.php");
+                                clear_goods_values();
                             }else{
                                 alert("Goods Cost not saved.");
                             }
@@ -5589,35 +5538,39 @@ function forecast_prediction($conn,$input_data_,$date_forecast_,$i_){
 
             function clear_goods_values(){
                 $("#reload_goods > div > table > tbody > tr").removeClass('forecast_secondary_color');
-                $("#goods_suppliers_group").val(0);
                 $("#meat_cost").val(null);
+                $("#meat_supplier").val(null);
                 $("#fruit_cost").val(null);
+                $("#fruit_supplier").val(null);
                 $("#bread_cost").val(null);
+                $("#bread_supplier").val(null);
                 $("#frozen_cost").val(null);
+                $("#frozen_supplier").val(null);
                 $("#dairy_cost").val(null);
+                $("#dairy_supplier").val(null);
                 $("#cons_cost").val(null);
+                $("#cons_supplier").val(null);
                 $("#tea_cost").val(null);
+                $("#tea_supplier").val(null);
                 $("#coffee_cost").val(null);
+                $("#coffee_supplier").val(null);
                 $("#cheese_cost").val(null);
+                $("#cheese_supplier").val(null);
                 $("#eggs_cost").val(null);
+                $("#eggs_supplier").val(null);
                 $("#minus_costs").val(null);
-                $("#date_month_goods").val(null);
-                $("#date_year_goods").val(null);
-                $("#add_or_edit_goods_text").text("Add");
+                $("#date_month_goods").val(current_month);
+                $("#date_year_goods").val(current_year);
+                getGoods_suppliers();
+
                 goods_id = 0;
                 $("#reload_goods").load("util_forecast_goods_reload.php");
             }
 
+            getGoods_suppliers();
 
-
-
-
-            var suppliers_id = 0;
-
-            function edit_goods_suppliers(supplier_id){
-
+            function getGoods_suppliers(){
                 var fd = new FormData();
-                fd.append('suppliers_id_',supplier_id);
                 $.ajax({
                     url:'util_forecast_goods_suppliers_get.php',
                     type: 'post',
@@ -5625,125 +5578,26 @@ function forecast_prediction($conn,$input_data_,$date_forecast_,$i_){
                     processData: false,
                     contentType: false,
                     success:function(response){
-
                         if(response != ''){
                             const myArray = response.split(",");
-                            $("#reload_suppliers > div > table > tbody > tr").removeClass('forecast_secondary_color');
-                            $("#goods_suppliers_"+supplier_id).addClass('forecast_secondary_color');
-                            $("#add_or_edit_suppliers_text").text("Edit");
-                            $("#supplier_group_title").val(myArray[0]);
-                            $("#meat_supplier").val(myArray[1]);
-                            $("#fruit_supplier").val(myArray[2]);
-                            $("#bread_supplier").val(myArray[3]);
-                            $("#frozen_supplier").val(myArray[4]);
-                            $("#dairy_supplier").val(myArray[5]);
-                            $("#cons_supplier").val(myArray[6]);
-                            $("#tea_supplier").val(myArray[7]);
-                            $("#coffee_supplier").val(myArray[8]);
-                            $("#cheese_supplier").val(myArray[9]);
-                            $("#eggs_supplier").val(myArray[10]);
-
-                            suppliers_id = supplier_id;
+                            $("#meat_supplier").val(myArray[0]);
+                            $("#fruit_supplier").val(myArray[1]);
+                            $("#bread_supplier").val(myArray[2]);
+                            $("#frozen_supplier").val(myArray[3]);
+                            $("#dairy_supplier").val(myArray[4]);
+                            $("#cons_supplier").val(myArray[5]);
+                            $("#tea_supplier").val(myArray[6]);
+                            $("#coffee_supplier").val(myArray[7]);
+                            $("#cheese_supplier").val(myArray[8]);
+                            $("#eggs_supplier").val(myArray[9]);
                         }else{
-                            alert("Goods Suppliers not Get.");
                         }
                     },
                     error: function(xhr, status, error) {
                         console.log(error);
                     },
                 });
-
-
             }
-
-            function save_goods_suppliers(){
-                var supplier_group_title=$("#supplier_group_title").val();
-                var meat_supplier=$("#meat_supplier").val();
-                var fruit_supplier=$("#fruit_supplier").val();
-                var bread_supplier=$("#bread_supplier").val();
-                var frozen_supplier=$("#frozen_supplier").val();
-                var dairy_supplier=$("#dairy_supplier").val();
-                var cons_supplier=$("#cons_supplier").val();
-                var tea_supplier=$("#tea_supplier").val();
-                var coffee_supplier=$("#coffee_supplier").val();
-                var cheese_supplier=$("#cheese_supplier").val();
-                var eggs_supplier=$("#eggs_supplier").val();
-
-                if(supplier_group_title == ""){
-                    alert("Supplier Group Title is Required.");
-                }else{
-                    var fd = new FormData();
-                    fd.append('supplier_group_title_',supplier_group_title);
-                    fd.append('meat_supplier_',meat_supplier);
-                    fd.append('fruit_supplier_',fruit_supplier);
-                    fd.append('bread_supplier_',bread_supplier);
-                    fd.append('frozen_supplier_',frozen_supplier);
-                    fd.append('dairy_supplier_',dairy_supplier);
-                    fd.append('cons_supplier_',cons_supplier);
-                    fd.append('tea_supplier_',tea_supplier);
-                    fd.append('coffee_supplier_',coffee_supplier);
-                    fd.append('cheese_supplier_',cheese_supplier);
-                    fd.append('eggs_supplier_',eggs_supplier);
-                    fd.append('suppliers_id_',suppliers_id);
-
-                    $.ajax({
-                        url:'util_forecast_goods_suppliers_save_update.php',
-                        type: 'post',
-                        data:fd,
-                        processData: false,
-                        contentType: false,
-                        success:function(response){
-
-                            console.log(response);
-                            if(response == 'success'){
-                                $("#reload_suppliers > div > table > tbody > tr").removeClass('forecast_secondary_color');
-                                $("#supplier_group_title").val(null);
-                                $("#meat_supplier").val(null);
-                                $("#fruit_supplier").val(null);
-                                $("#bread_supplier").val(null);
-                                $("#frozen_supplier").val(null);
-                                $("#dairy_supplier").val(null);
-                                $("#cons_supplier").val(null);
-                                $("#tea_supplier").val(null);
-                                $("#coffee_supplier").val(null);
-                                $("#cheese_supplier").val(null);
-                                $("#eggs_supplier").val(null);
-
-                                suppliers_id = 0;
-                                $("#reload_suppliers").load("util_forecast_goods_suppliers_reload.php");
-                            }else{
-                                alert("Goods Suppliers not saved.");
-                            }
-                        },
-                        error: function(xhr, status, error) {
-                            console.log(error);
-                        },
-                    });
-
-
-                }
-            }
-
-
-            function clear_suppliers_values(){
-                $("#reload_suppliers > div > table > tbody > tr").removeClass('forecast_secondary_color');
-                $("#supplier_group_title").val(null);
-                $("#meat_supplier").val(null);
-                $("#fruit_supplier").val(null);
-                $("#bread_supplier").val(null);
-                $("#frozen_supplier").val(null);
-                $("#dairy_supplier").val(null);
-                $("#cons_supplier").val(null);
-                $("#tea_supplier").val(null);
-                $("#coffee_supplier").val(null);
-                $("#cheese_supplier").val(null);
-                $("#eggs_supplier").val(null);
-
-                suppliers_id = 0;
-                $("#reload_suppliers").load("util_forecast_goods_suppliers_reload.php");
-            }
-
-
 
 
 
@@ -5840,10 +5694,11 @@ function forecast_prediction($conn,$input_data_,$date_forecast_,$i_){
                             $("#add_or_edit_staffing_text").text("Edit");
                             const myArray = response.split(",");
                             $("#staff_name").val(myArray[0]);
-                            $("#year_staffing").val(myArray[1]);
-                            $("#gross_salary").val(myArray[2]);
-                            $("#net_salary").val(myArray[3]);
-                            $("#department_staffing").val(myArray[4]).change();
+                            $("#start_staffing").val(myArray[1]);
+                            $("#end_staffing").val(myArray[2]);
+                            $("#gross_salary").val(myArray[3]);
+                            $("#net_salary").val(myArray[4]);
+                            $("#department_staffing").val(myArray[5]).change();
                             staffings_id = staffing_id;
                         }else{
                             alert("Staff Cost not Get.");
@@ -5860,19 +5715,28 @@ function forecast_prediction($conn,$input_data_,$date_forecast_,$i_){
 
             function save_staff_cost(){
                 var staff_name=$("#staff_name").val();
-                var year_staffing=$("#year_staffing").val();
+                var start_staffing=$("#start_staffing").val();
+                var end_staffing=$("#end_staffing").val();
                 var gross_salary=$("#gross_salary").val();
                 var net_salary=$("#net_salary").val();
                 var department_staffing=$("#department_staffing").val();
 
+                const date1 = new Date(start_staffing);
+                const date2 = new Date(end_staffing);
 
-
-                if(year_staffing <= 0){
-                    alert("Enter Correct Month Number.");
+                if(start_staffing > end_staffing || start_staffing == "" || end_staffing == "" || date1.getMonth() != date2.getMonth()){
+                    if(staffings_id != 0){
+                        alert("Enter Correct Dates/Select Same month for update.");
+                    }else{
+                        alert("Enter Correct Dates.");
+                        $("#start_staffing").val(null);
+                        $("#end_staffing").val(null);
+                    }
                 }else{
                     var fd = new FormData();
                     fd.append('staff_name_',staff_name);
-                    fd.append('year_staffing_',year_staffing);
+                    fd.append('start_staffing_',start_staffing);
+                    fd.append('end_staffing_',end_staffing);
                     fd.append('gross_salary_',gross_salary);
                     fd.append('net_salary_',net_salary);
                     fd.append('department_staffing_',department_staffing);
@@ -5885,16 +5749,11 @@ function forecast_prediction($conn,$input_data_,$date_forecast_,$i_){
                         processData: false,
                         contentType: false,
                         success:function(response){
+
+                            console.log(response);
+
                             if(response == 'success'){
-                                $("#staff_name").val(null);
-                                $("#year_staffing").val(null);
-                                $("#gross_salary").val(null);
-                                $("#net_salary").val(null);
-                                $("#department_staffing").val(null).change();
-                                staffings_id = 0;
-                                $("#reload_staffing").load("util_forecast_staffing_reload.php");
-                                $("#reload_staffing > div > table > tbody > tr").removeClass('forecast_secondary_color');
-                                $("#add_or_edit_staffing_text").text("Add");
+                                clear_staffing_values();
                             }else{
                                 alert("Staff Cost not saved.");
                             }
@@ -5913,7 +5772,8 @@ function forecast_prediction($conn,$input_data_,$date_forecast_,$i_){
                 $("#reload_staffing > div > table > tbody > tr").removeClass('forecast_secondary_color');
                 $("#add_or_edit_staffing_text").text("Add");
                 $("#staff_name").val(null);
-                $("#year_staffing").val(null);
+                $("#start_staffing").val(null);
+                $("#end_staffing").val(null);
                 $("#gross_salary").val(null);
                 $("#net_salary").val(null);
                 $("#department_staffing").val(0).change();

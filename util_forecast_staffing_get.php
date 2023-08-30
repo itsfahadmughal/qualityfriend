@@ -17,7 +17,7 @@ if($id != 0){
     $result = $conn->query($sql);
     if ($result && $result->num_rows > 0) {
         while ($row = mysqli_fetch_array($result)) {
-            echo $row['staff_name'].','.$row['year'].','.$row['gross_salary'].','.$row['net_salary'].','.$row['frcstfd_id'];
+            echo $row['staff_name'].','.$row['start_date'].','.$row['end_date'].','.$row['gross_salary'].','.$row['net_salary'].','.$row['frcstfd_id'];
         }
     }else{
         echo '';
