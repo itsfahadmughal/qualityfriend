@@ -323,18 +323,17 @@ $months_name_array = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct
                             <div class="card">
                                 <div class="card-body p-0 pt-1">
                                     <ul class="nav nav-tabs" id="myTab" role="tablist">
-                                        <li class="nav-item"> <a class="nav-link active" id="home-tab" data-toggle="tab" href="#home5" role="tab" aria-controls="home5" aria-expanded="true"><span class="hidden-sm-up"><i class="ti-home"></i></span> <span class="hidden-xs-down">Dashboard</span></a> </li>
-                                        <li class="nav-item"> <a class="nav-link" id="profile-tab1" data-toggle="tab" href="#profile1" role="tab" aria-controls="profile"><span class="hidden-sm-up"><i class="ti-user"></i></span> <span class="hidden-xs-down">Yearly Forecast</span></a></li>
-                                        <li class="nav-item"> <a class="nav-link" id="profile-tab2" data-toggle="tab" href="#profile2" role="tab" aria-controls="profile"><span class="hidden-sm-up"><i class="ti-user"></i></span> <span class="hidden-xs-down">Budget Effective</span></a></li>
-                                        <li class="nav-item"> <a class="nav-link" id="profile-tab3" data-toggle="tab" href="#profile3" role="tab" aria-controls="profile"><span class="hidden-sm-up"><i class="ti-user"></i></span> <span class="hidden-xs-down">Budget Forecast</span></a></li>
-                                        <li class="nav-item"> <a class="nav-link" id="profile-tab4" data-toggle="tab" href="#profile4" role="tab" aria-controls="profile"><span class="hidden-sm-up"><i class="ti-user"></i></span> <span class="hidden-xs-down">Working</span></a></li>
-                                        <li class="nav-item"> <a class="nav-link" id="profile-tab5" data-toggle="tab" href="#profile5" role="tab" aria-controls="profile"><span class="hidden-sm-up"><i class="ti-user"></i></span> <span class="hidden-xs-down">Staffing</span></a></li>
-                                        <li class="nav-item"> <a class="nav-link" id="profile-tab6" data-toggle="tab" href="#profile6" role="tab" aria-controls="profile"><span class="hidden-sm-up"><i class="ti-user"></i></span> <span class="hidden-xs-down">Goods Purchasings</span></a></li>
-                                        <!--                                        <li class="nav-item"> <a class="nav-link" id="profile-tab7" data-toggle="tab" href="#profile7" role="tab" aria-controls="profile"><span class="hidden-sm-up"><i class="ti-user"></i></span> <span class="hidden-xs-down">Forecast Effective Sale</span></a></li>-->
+                                        <li class="nav-item"> <a class="nav-link active" id="home-tab" data-toggle="tab" href="#home5" role="tab" aria-controls="home5" aria-expanded="true"> <span>Dashboard</span></a> </li>
+                                        <li class="nav-item"> <a class="nav-link" id="profile-tab1" data-toggle="tab" href="#profile1" role="tab" aria-controls="profile"><span>Yearly Forecast</span></a></li>
+                                        <li class="nav-item"> <a class="nav-link" id="profile-tab2" data-toggle="tab" href="#profile2" role="tab" aria-controls="profile"><span>Budget Effective</span></a></li>
+                                        <li class="nav-item"> <a class="nav-link" id="profile-tab3" data-toggle="tab" href="#profile3" role="tab" aria-controls="profile"><span>Budget Forecast</span></a></li>
+                                        <li class="nav-item"> <a class="nav-link" id="profile-tab4" data-toggle="tab" href="#profile4" role="tab" aria-controls="profile"><span>Working</span></a></li>
+                                        <li class="nav-item"> <a class="nav-link" id="profile-tab5" data-toggle="tab" href="#profile5" role="tab" aria-controls="profile"><span>Staffing</span></a></li>
+                                        <li class="nav-item"> <a class="nav-link" id="profile-tab6" data-toggle="tab" href="#profile6" role="tab" aria-controls="profile"><span>Goods Purchasings</span></a></li>
 
                                         <li class="nav-item dropdown">
                                             <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="javascript:void(0)" role="button" aria-haspopup="true" aria-expanded="false">
-                                                <span class="hidden-sm-up"><i class="ti-email"></i></span> <span class="hidden-xs-down">Settings</span>
+                                                <span>Settings</span>
                                             </a>
                                             <div class="dropdown-menu"> 
                                                 <a class="dropdown-item" id="dropdown1-tab" href="#dropdown1" role="tab" data-toggle="tab" aria-controls="dropdown1">Revenues</a> 
@@ -351,7 +350,7 @@ $months_name_array = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct
                                         <div class="tab-pane fade" id="profile5" role="tabpanel" aria-labelledby="profile-tab5">
                                             <div class="row"> 
                                                 <div class="col-lg-12">
-                                                    <h3 class="forecast_main_color p-3 text-center">Staffing 
+                                                    <h3 class="forecast_main_color p-3 text-center font_size_forecast_1rem">Staffing 
                                                         <button class="float-right" id="btnExport" onclick="export_staffing(this)">Export</button>
                                                     </h3>
                                                 </div>
@@ -365,7 +364,7 @@ $months_name_array = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct
 
                                                 <div class="col-lg-12">
                                                     <div class="table-responsive">
-                                                        <table class="pb-3 table table table-bordered table-hover table-striped">
+                                                        <table class="mobile_response_forecast_tables pb-3 table table table-bordered table-hover table-striped">
                                                             <thead>
                                                                 <tr class="text-bold">
                                                                     <th class="text-bold"></th>
@@ -486,13 +485,10 @@ $months_name_array = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct
                                             </div>
                                         </div>
 
-
-
-
                                         <div class="tab-pane fade" id="profile2" role="tabpanel" aria-labelledby="profile-tab2">
                                             <div class="row"> 
                                                 <div class="col-lg-12">
-                                                    <h3 class="forecast_main_color p-3 text-center">Budget Preview (Effective) 
+                                                    <h3 class="forecast_main_color p-3 text-center font_size_forecast_1rem">Budget Preview (Effective) 
                                                         <button class="float-right" id="btnExport" onclick="export_effective(this)">Export</button></h3>
                                                 </div>
 
@@ -582,7 +578,7 @@ $months_name_array = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct
 
                                                 <div class="col-lg-12">
                                                     <div class="table-responsive text-center">
-                                                        <table class="table">
+                                                        <table class="table mobile_response_forecast_tables">
                                                             <thead>
                                                                 <tr class="forecast_gray_color">
                                                                     <th></th>
@@ -1019,7 +1015,7 @@ $months_name_array = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct
                                         <div class="tab-pane fade" id="profile3" role="tabpanel" aria-labelledby="profile-tab3">
                                             <div class="row"> 
                                                 <div class="col-lg-12">
-                                                    <h3 class="forecast_main_color p-3 text-center">Budget Preview (Forecast) <button class="float-right" id="btnExport" onclick="export_forecast(this)">Export</button></h3>
+                                                    <h3 class="forecast_main_color p-3 text-center font_size_forecast_1rem">Budget Preview (Forecast) <button class="float-right" id="btnExport" onclick="export_forecast(this)">Export</button></h3>
                                                 </div>
 
                                                 <?php $opening_days1=$months_arr1=$staffing_arr1=$goods_cost_arr1=$stay_capacity_arr1=$acc_balance_arr1=$accomodation_sale_arr1=$anicillary_sale_arr1=$total_stay_arr1=$spa_sale_arr1=$anicillary_arr1=$spa_arr1=$t_opr_cost_arr1=$adm_cost_arr1=$marketing_arr1=$taxes_arr1=$bank_charges_arr1=$total_loan_arr1=$other_costs_arr1=$date_cost1=array();
@@ -1195,13 +1191,13 @@ $months_name_array = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct
                                                     }else{
                                                         array_push($acc_balance_arr1,0);
                                                     }
-                                                    
-                                                   $staffing_arr1 = $total_staffing_salary_per_month;
+
+                                                    $staffing_arr1 = $total_staffing_salary_per_month;
                                                 ?>
 
                                                 <div class="col-lg-12">
                                                     <div class="table-responsive text-center">
-                                                        <table class="table">
+                                                        <table class="table mobile_response_forecast_tables">
                                                             <thead>
                                                                 <tr class="forecast_gray_color">
                                                                     <th></th>
@@ -1670,7 +1666,7 @@ $months_name_array = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct
 
                                         <div class="tab-pane fade" id="profile4" role="tabpanel" aria-labelledby="profile-tab4">
                                             <div class="table-responsive text-center">
-                                                <table class="table">
+                                                <table class="table mobile_response_forecast_tables">
                                                     <thead>
                                                         <tr>
                                                             <th class="text-bold text-left">Monthly</th>
@@ -1950,7 +1946,7 @@ $months_name_array = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct
                                         <div class="tab-pane fade" id="profile1" role="tabpanel" aria-labelledby="profile-tab1">
                                             <div class="row"> 
                                                 <div class="col-lg-12">
-                                                    <h3 class="forecast_main_color p-3 text-center">Yearly Budget forecast and effective <button class="float-right" id="btnExport" onclick="export_yearly(this)">Export</button> </h3>
+                                                    <h3 class="forecast_main_color p-3 text-center font_size_forecast_1rem">Yearly Budget forecast and effective <button class="float-right" id="btnExport" onclick="export_yearly(this)">Export</button> </h3>
                                                 </div>
                                                 <div class="col-lg-12">
                                                     <div class="table-responsive">
@@ -3020,11 +3016,10 @@ $months_name_array = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct
                                             </div>
                                         </div>
 
-
                                         <div role="tabpanel" class="tab-pane fade show active" id="home5" aria-labelledby="home-tab">
                                             <div class="row">
                                                 <div class="col-lg-12">
-                                                    <h3 class="forecast_main_color p-3">BUDGET PREVIEW [FORECAST VS EFFECTIVE] <button id="btnExport" class="float-right" onclick="export_dashboard(this)">Export</button></h3>
+                                                    <h3 class="forecast_main_color p-3 font_size_forecast_1rem">BUDGET PREVIEW [FORECAST VS EFFECTIVE] <button id="btnExport" class="float-right" onclick="export_dashboard(this)">Export</button></h3>
                                                 </div>
                                                 <div class="col-lg-3">
                                                     <div class="table-responsive text-center">
@@ -3455,7 +3450,7 @@ $months_name_array = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct
                                                             $spa_net = round((array_sum($spa_sale_arr)*100) / (array_sum($spa_sale_arr)+array_sum($anicillary_sale_arr)+array_sum($accomodation_sale_arr)),2);
                                                             ?>
                                                             <h4 class="card-title">Betriebserlöse Effective</h4>
-                                                            <div id="doughnut-chart" style="width:100%; height:400px;"></div>
+                                                            <div id="doughnut-chart" class="height_size_forecast_450px" style="width:100%; height:400px;"></div>
 
                                                             <?php
                                                             $Wareneinsatze_chart_per = round(($Wareneinsatze_chart*100) / ($total_costs_chart),2);
@@ -3475,18 +3470,18 @@ $months_name_array = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct
                                                             $marketing_chart_per = round(($marketing_chart*100) / ($total_costs_chart),2);
                                                             ?>
                                                             <h4 class="card-title">Betriebsaufwände Effective</h4>
-                                                            <div id="bar-chart3" style="width:100%; height:50%;"></div>
+                                                            <div id="bar-chart3" class="height_size_forecast_450px" style="width:100%; height:50%;"></div>
                                                         </div>
                                                         <div class="col-lg-6">
 
-                                                            <h4 class="card-title">Betriebserlöse Forecast vs Effective</h4>
-                                                            <div id="main" style="width:100%; height:300px;"></div>
+                                                            <h4 class="card-title mtm_30">Betriebserlöse Forecast vs Effective</h4>
+                                                            <div id="main" class="height_size_forecast_450px" style="width:100%; height:300px;"></div>
 
-                                                            <h4 class="card-title">Betriebsaufwände Forecast vs Effective</h4>
-                                                            <div id="main2" style="width:100%; height:300px;"></div>
+                                                            <h4 class="card-title mtm_30">Betriebsaufwände Forecast vs Effective</h4>
+                                                            <div id="main2" class="height_size_forecast_450px" style="width:100%; height:300px;"></div>
 
-                                                            <h4 class="card-title">Bruttobetriebsgewinn Forecast vs Effective</h4>
-                                                            <div id="bar-chart" style="width:100%; height:300px;"></div>
+                                                            <h4 class="card-title mtm_30">Bruttobetriebsgewinn Forecast vs Effective</h4>
+                                                            <div id="bar-chart" class="height_size_forecast_450px" style="width:100%; height:300px;"></div>
                                                         </div>
                                                         <div class="col-lg-3">
                                                             <?php 
@@ -3494,18 +3489,13 @@ $months_name_array = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct
                                                             $ot_per_forecast=round((array_sum($total_stay_arr2)*100)/array_sum($stay_capacity_arr2),2);
 
                                                             ?>
-                                                            <h4 class="card-title">Auslastung der ÖT in %</h4>
-                                                            <div id="bar-chart2" style="width:100%; height:97%;"></div>
+                                                            <h4 class="card-title mtm_30">Auslastung der ÖT in %</h4>
+                                                            <div id="bar-chart2" class="height_size_forecast_450px" style="width:100%; height:97%;"></div>
                                                         </div>
                                                     </div>
                                                 </div>
                                             </div>
                                         </div>
-
-
-
-
-
 
                                         <div class="tab-pane fade" id="profile6" role="tabpanel" aria-labelledby="profile-tab6">
                                             <div class="row"> 
@@ -3681,21 +3671,12 @@ $months_name_array = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct
 
 
 
-                                        <!--
-<div class="tab-pane fade" id="profile7" role="tabpanel" aria-labelledby="profile-tab7">
-<p>N/A. 7</p>
-</div>
--->
+                                        <!--                                        Start Settings Screens-->
 
-
-
-                                        <!--                                        Settings Screens-->
-
-                                        <!--                                        Start Revenues-->
                                         <div class="tab-pane fade" id="dropdown1" role="tabpanel" aria-labelledby="dropdown1-tab">
 
                                             <div class="row mtm-0">
-                                                <div class="col-lg-4 right-border-div pr-5">
+                                                <div class="col-lg-4 right-border-div pr-5 prm-0px">
 
                                                     <div class="mt-4">
                                                         <h3><span id="add_or_edit_revenues_text">Add</span> Revenues <button onclick="clear_revenues_values();" type="button" class="btn btn-primary float-right">Clear Values</button></h3>
@@ -3704,36 +3685,36 @@ $months_name_array = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct
                                                     <div class="row mt-3">
                                                         <div class="col-lg-12">
                                                             <div class="form-group mb-0">
-                                                                <label class="control-label display-inline w-47 wm-50"><strong>Hotel Revenues Net</strong></label>
-                                                                <label class="control-label display-inline ml-2 w-47 wm-50"><strong>Ancillary Revenues Net</strong></label>
+                                                                <label class="control-label display-inline w-47 wm-47"><strong>Hotel Revenues Net</strong></label>
+                                                                <label class="control-label display-inline ml-2 w-47 wm-47"><strong>Ancillary Revenues Net</strong></label>
                                                             </div>
                                                             <div class="form-group mb-0">
-                                                                <input step="any" type="number" class="form-control display-inline w-47 wm-50" id="hotel_revenues">
-                                                                <input step="any" type="number" class="form-control display-inline ml-2 w-47 wm-50" id="ancillary_revenues">
+                                                                <input step="any" type="number" class="form-control display-inline w-47 wm-47" id="hotel_revenues">
+                                                                <input step="any" type="number" class="form-control display-inline ml-2 w-47 wm-47" id="ancillary_revenues">
                                                             </div>
 
                                                             <div class="form-group mb-0 mt-3">
-                                                                <label class="control-label display-inline w-47 wm-50"><strong>Spa Revenues Net (22%)</strong></label>
-                                                                <label class="control-label display-inline ml-2 w-47 wm-50"><strong>Other Revenues Net</strong></label>
+                                                                <label class="control-label display-inline w-47 wm-47"><strong>Spa Revenues Net (22%)</strong></label>
+                                                                <label class="control-label display-inline ml-2 w-47 wm-47"><strong>Other Revenues Net</strong></label>
                                                             </div>
                                                             <div class="form-group mb-0">
-                                                                <input step="any" type="number" class="form-control display-inline w-47 wm-50" id="spa_revenues">
-                                                                <input step="any" type="number" class="form-control display-inline ml-2 w-47 wm-50" id="other_revenues">
+                                                                <input step="any" type="number" class="form-control display-inline w-47 wm-47" id="spa_revenues">
+                                                                <input step="any" type="number" class="form-control display-inline ml-2 w-47 wm-47" id="other_revenues">
                                                             </div>
 
-                                                            <div class="form-group mb-0 mt-3">
+                                                            <div class="form-group mb-0 mt-3 mrm-12px">
                                                                 <label class="control-label display-inline w-100 wm-100"><strong>Account Balance (Jan Only)</strong></label>
                                                             </div>
-                                                            <div class="form-group mb-0">
+                                                            <div class="form-group mb-0 mrm-12px">
                                                                 <input type="number" step="any" class="form-control display-inline w-100 wm-100" id="account_balance">
                                                             </div>
 
                                                             <div class="form-group mb-0 mt-3">
-                                                                <label class="control-label display-inline ml-2 w-47 wm-50"><strong>Month</strong></label>
-                                                                <label class="control-label display-inline ml-2 w-47 wm-50"><strong>Year</strong></label>
+                                                                <label class="control-label display-inline w-47 wm-47"><strong>Month</strong></label>
+                                                                <label class="control-label display-inline ml-2 w-47 wm-47"><strong>Year</strong></label>
                                                             </div>
                                                             <div class="form-group mb-0">
-                                                                <select class="form-control display-inline ml-2 w-47 wm-50" id="date_month">
+                                                                <select class="form-control display-inline w-47 wm-47" id="date_month">
                                                                     <?php
                                                                     for($i=1;$i<13;$i++){
                                                                     ?>
@@ -3742,7 +3723,7 @@ $months_name_array = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct
                                                                     } 
                                                                     ?> 
                                                                 </select>
-                                                                <select class="form-control display-inline ml-2 w-47 wm-50" id="date_year">
+                                                                <select class="form-control display-inline ml-2 w-47 wm-47" id="date_year">
                                                                     <?php
                                                                     for($i=2030;$i>1999;$i--){
                                                                     ?>
@@ -3756,14 +3737,14 @@ $months_name_array = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct
                                                         </div>
                                                     </div>
 
-                                                    <div class="mt-3 mb-5 pb-5 pbm-0 mbm-0">
+                                                    <div class="mt-3 mb-5 pb-5 pbm-0 mbm-0 mrm-12px">
                                                         <input type="button" onclick="save_revenue();" class="btn mt-4 w-100 btn-primary" value="Save Revenue">
                                                     </div>
 
 
                                                 </div>
 
-                                                <div class="col-lg-8 pl-5" id="reload_revenues">
+                                                <div class="col-lg-8 pl-5 plm-10px" id="reload_revenues">
                                                     <div class="mt-4">
                                                         <h3>Revenues</h3>
                                                     </div>
@@ -3775,7 +3756,7 @@ $months_name_array = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct
                                                     if ($result_revenues && $result_revenues->num_rows > 0) {
                                                     ?>
                                                     <div class="table-responsive">
-                                                        <table id="demo-foo-addrow" class="table table-bordered m-t-30 table-hover contact-list full-color-table full-primary-table hover-table" data-paging="true" data-paging-size="25">
+                                                        <table id="demo-foo-addrow" class="mobile_response_forecast_tables table table-bordered m-t-30 table-hover contact-list full-color-table full-primary-table hover-table" data-paging="true" data-paging-size="25">
                                                             <thead>
                                                                 <tr>
                                                                     <th class="" >Hotel Revenue</th>
@@ -3820,12 +3801,11 @@ $months_name_array = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct
                                             </div>
 
                                         </div>
-                                        <!--                                        End Revenues-->
 
                                         <div class="tab-pane fade" id="dropdown2" role="tabpanel" aria-labelledby="dropdown2-tab">
 
                                             <div class="row mtm-0">
-                                                <div class="col-lg-4 right-border-div pr-5">
+                                                <div class="col-lg-4 right-border-div pr-5 prm-0px">
 
                                                     <div class="mt-4">
                                                         <h3><span id="add_or_edit_expenses_text">Add</span> Expenses <button onclick="clear_expenses_values();" type="button" class="btn btn-success float-right">Clear Values</button></h3>
@@ -3835,54 +3815,54 @@ $months_name_array = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct
                                                         <div class="col-lg-12">
 
                                                             <div class="form-group mb-0">
-                                                                <label class="control-label display-inline w-47 wm-50"><strong>Ancillary Goods Cost</strong></label>
-                                                                <label class="control-label display-inline ml-2 w-47 wm-50"><strong>Spa Products Cost</strong></label>
+                                                                <label class="control-label display-inline w-47 wm-47"><strong>Ancillary Goods Cost</strong></label>
+                                                                <label class="control-label display-inline ml-2 w-47 wm-47"><strong>Spa Products Cost</strong></label>
                                                             </div>
                                                             <div class="form-group mb-0">
-                                                                <input step="any" type="number" class="form-control display-inline w-47 wm-50" id="ancillary_goods_cost">
-                                                                <input step="any" type="number" class="form-control display-inline ml-2 w-47 wm-50" id="spa_products_cost">
+                                                                <input step="any" type="number" class="form-control display-inline w-47 wm-47" id="ancillary_goods_cost">
+                                                                <input step="any" type="number" class="form-control display-inline ml-2 w-47 wm-47" id="spa_products_cost">
                                                             </div>
 
                                                             <div class="form-group mb-0">
-                                                                <label class="control-label display-inline w-47 wm-50"><strong>Total Operating Cost</strong></label>
-                                                                <label class="control-label display-inline ml-2 w-47 wm-50"><strong>Administration Cost</strong></label>
+                                                                <label class="control-label display-inline w-47 wm-47"><strong>Total Operating Cost</strong></label>
+                                                                <label class="control-label display-inline ml-2 w-47 wm-47"><strong>Administration Cost</strong></label>
                                                             </div>
                                                             <div class="form-group mb-0">
-                                                                <input step="any" type="number" class="form-control display-inline w-47 wm-50" id="total_operating_cost">
-                                                                <input step="any" type="number" class="form-control display-inline ml-2 w-47 wm-50" id="administration_cost">
-                                                            </div>
-
-                                                            <div class="form-group mb-0 mt-3">
-                                                                <label class="control-label display-inline w-47 wm-50"><strong>Marketing</strong></label>
-                                                                <label class="control-label display-inline ml-2 w-47 wm-50"><strong>Taxes</strong></label>
-                                                            </div>
-                                                            <div class="form-group mb-0">
-                                                                <input step="any" type="number" class="form-control display-inline w-47 wm-50" id="marketing">
-                                                                <input step="any" type="number" class="form-control display-inline ml-2 w-47 wm-50" id="taxes">
+                                                                <input step="any" type="number" class="form-control display-inline w-47 wm-47" id="total_operating_cost">
+                                                                <input step="any" type="number" class="form-control display-inline ml-2 w-47 wm-47" id="administration_cost">
                                                             </div>
 
                                                             <div class="form-group mb-0 mt-3">
-                                                                <label class="control-label display-inline w-47 wm-50"><strong>Bank Charges</strong></label>
-                                                                <label class="control-label display-inline w-47 wm-50"><strong>Total Loan (Jan Only)</strong></label>
+                                                                <label class="control-label display-inline w-47 wm-47"><strong>Marketing</strong></label>
+                                                                <label class="control-label display-inline ml-2 w-47 wm-47"><strong>Taxes</strong></label>
                                                             </div>
                                                             <div class="form-group mb-0">
-                                                                <input type="number" step="any" class="form-control display-inline w-47 wm-50" id="bank_charges">
-                                                                <input type="number" step="any" class="form-control display-inline w-47 wm-50" id="total_loan">
+                                                                <input step="any" type="number" class="form-control display-inline w-47 wm-47" id="marketing">
+                                                                <input step="any" type="number" class="form-control display-inline ml-2 w-47 wm-47" id="taxes">
                                                             </div>
 
                                                             <div class="form-group mb-0 mt-3">
+                                                                <label class="control-label display-inline w-47 wm-47"><strong>Bank Charges</strong></label>
+                                                                <label class="control-label display-inline ml-2 w-47 wm-47"><strong>Total Loan (Jan Only)</strong></label>
+                                                            </div>
+                                                            <div class="form-group mb-0">
+                                                                <input type="number" step="any" class="form-control display-inline w-47 wm-47" id="bank_charges">
+                                                                <input type="number" step="any" class="form-control ml-2 display-inline w-47 wm-47" id="total_loan">
+                                                            </div>
+
+                                                            <div class="form-group mb-0 mt-3 mrm-12px">
                                                                 <label class="control-label display-inline w-100 wm-100"><strong>Other Costs</strong></label>
                                                             </div>
-                                                            <div class="form-group mb-0">
+                                                            <div class="form-group mb-0 mrm-12px">
                                                                 <input type="number" step="any" class="form-control display-inline w-100 wm-100" id="other_costs">
                                                             </div>
 
                                                             <div class="form-group mb-0 mt-3">
-                                                                <label class="control-label display-inline ml-2 w-47 wm-50"><strong>Month</strong></label>
-                                                                <label class="control-label display-inline ml-2 w-47 wm-50"><strong>Year</strong></label>
+                                                                <label class="control-label display-inline w-47 wm-47"><strong>Month</strong></label>
+                                                                <label class="control-label display-inline ml-2 w-47 wm-47"><strong>Year</strong></label>
                                                             </div>
                                                             <div class="form-group mb-0">
-                                                                <select class="form-control display-inline ml-2 w-47 wm-50" id="date_month_cost">
+                                                                <select class="form-control display-inline w-47 wm-47" id="date_month_cost">
                                                                     <?php
                                                                     for($i=1;$i<13;$i++){
                                                                     ?>
@@ -3891,7 +3871,7 @@ $months_name_array = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct
                                                                     } 
                                                                     ?> 
                                                                 </select>
-                                                                <select class="form-control display-inline ml-2 w-47 wm-50" id="date_year_cost">
+                                                                <select class="form-control display-inline ml-2 w-47 wm-47" id="date_year_cost">
                                                                     <?php
                                                                     for($i=2030;$i>1999;$i--){
                                                                     ?>
@@ -3908,14 +3888,14 @@ $months_name_array = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct
 
 
 
-                                                    <div class="mt-3 mb-5 pb-5 pbm-0 mbm-0">
+                                                    <div class="mt-3 mb-5 pb-5 pbm-0 mbm-0 mrm-12px">
                                                         <input type="button" onclick="save_cost();" class="btn mt-4 w-100 btn-success" value="Save Expense">
                                                     </div>
 
 
                                                 </div>
 
-                                                <div class="col-lg-8 pl-5" id="reload_expenses">
+                                                <div class="col-lg-8 pl-5 plm-10px" id="reload_expenses">
                                                     <div class="mt-4">
                                                         <h3>Expenses</h3>
                                                     </div>
@@ -3927,7 +3907,7 @@ $months_name_array = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct
                                                     if ($result_expenses && $result_expenses->num_rows > 0) {
                                                     ?>
                                                     <div class="table-responsive">
-                                                        <table id="demo-foo-addrow" class="table table-bordered m-t-30 table-hover contact-list full-color-table full-success-table hover-table" data-paging="true" data-paging-size="25">
+                                                        <table id="demo-foo-addrow" class="mobile_response_forecast_tables table table-bordered m-t-30 table-hover contact-list full-color-table full-success-table hover-table" data-paging="true" data-paging-size="25">
                                                             <thead>
                                                                 <tr>
                                                                     <th class="" >Ancillary Cost</th>
@@ -3980,13 +3960,10 @@ $months_name_array = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct
 
                                         </div>
 
-
-
-
                                         <div class="tab-pane fade" id="dropdown3" role="tabpanel" aria-labelledby="dropdown3-tab">
 
                                             <div class="row mtm-0">
-                                                <div class="col-lg-4 right-border-div pr-5">
+                                                <div class="col-lg-4 right-border-div pr-5 prm-0px">
 
                                                     <div class="mt-4">
                                                         <h3><span id="add_or_edit_key_text">Add</span> Key Facts <button onclick="clear_key_values();" type="button" class="btn btn-info float-right">Clear Values</button></h3>
@@ -3997,27 +3974,27 @@ $months_name_array = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct
 
 
                                                             <div class="form-group mb-0">
-                                                                <label class="control-label display-inline w-47 wm-50"><strong>Rooms</strong></label>
-                                                                <label class="control-label display-inline ml-2 w-47 wm-50"><strong>Beds</strong></label>
+                                                                <label class="control-label display-inline w-47 wm-47"><strong>Rooms</strong></label>
+                                                                <label class="control-label display-inline ml-2 w-47 wm-47"><strong>Beds</strong></label>
                                                             </div>
                                                             <div class="form-group mb-0">
-                                                                <input type="number" class="form-control display-inline w-47 wm-50" id="rooms">
-                                                                <input type="number" class="form-control display-inline ml-2 w-47 wm-50" id="beds">
+                                                                <input type="number" class="form-control display-inline w-47 wm-47" id="rooms">
+                                                                <input type="number" class="form-control display-inline ml-2 w-47 wm-47" id="beds">
                                                             </div>
 
-                                                            <div class="form-group mb-0 mt-3">
+                                                            <div class="form-group mb-0 mt-3 mrm-12px">
                                                                 <label class="control-label display-inline w-100 wm-100"><strong>Opening Days</strong></label>
                                                             </div>
-                                                            <div class="form-group mb-0">
+                                                            <div class="form-group mb-0 mrm-12px">
                                                                 <input type="number" class="form-control display-inline w-100 wm-100" id="opening_days">
                                                             </div>
 
                                                             <div class="form-group mb-0 mt-3">
-                                                                <label class="control-label display-inline ml-2 w-47 wm-50"><strong>Month</strong></label>
-                                                                <label class="control-label display-inline ml-2 w-47 wm-50"><strong>Year</strong></label>
+                                                                <label class="control-label display-inline w-47 wm-47"><strong>Month</strong></label>
+                                                                <label class="control-label display-inline ml-2 w-47 wm-47"><strong>Year</strong></label>
                                                             </div>
                                                             <div class="form-group mb-0">
-                                                                <select class="form-control display-inline ml-2 w-47 wm-50" id="date_month_key">
+                                                                <select class="form-control display-inline w-47 wm-47" id="date_month_key">
                                                                     <?php
                                                                     for($i=1;$i<13;$i++){
                                                                     ?>
@@ -4026,7 +4003,7 @@ $months_name_array = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct
                                                                     } 
                                                                     ?> 
                                                                 </select>
-                                                                <select class="form-control display-inline ml-2 w-47 wm-50" id="date_year_key">
+                                                                <select class="form-control display-inline ml-2 w-47 wm-47" id="date_year_key">
                                                                     <?php
                                                                     for($i=2030;$i>1999;$i--){
                                                                     ?>
@@ -4043,14 +4020,14 @@ $months_name_array = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct
 
 
 
-                                                    <div class="mt-3 mb-5 pb-5 pbm-0 mbm-0">
+                                                    <div class="mt-3 mb-5 pb-5 pbm-0 mbm-0 mrm-12px">
                                                         <input type="button" onclick="save_facts();" class="btn mt-4 w-100 btn-info" value="Save Key Facts">
                                                     </div>
 
 
                                                 </div>
 
-                                                <div class="col-lg-8 pl-5" id="reload_facts">
+                                                <div class="col-lg-8 pl-5 plm-10px" id="reload_facts">
                                                     <div class="mt-4">
                                                         <h3>Key Facts</h3>
                                                     </div>
@@ -4062,7 +4039,7 @@ $months_name_array = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct
                                                     if ($result_facts && $result_facts->num_rows > 0) {
                                                     ?>
                                                     <div class="table-responsive">
-                                                        <table id="demo-foo-addrow" class="table table-bordered m-t-30 table-hover contact-list full-color-table full-info-table hover-table" data-paging="true" data-paging-size="25">
+                                                        <table id="demo-foo-addrow" class="mobile_response_forecast_tables table table-bordered m-t-30 table-hover contact-list full-color-table full-info-table hover-table" data-paging="true" data-paging-size="25">
                                                             <thead>
                                                                 <tr>
                                                                     <th class="" >Available Rooms</th>
@@ -4108,7 +4085,7 @@ $months_name_array = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct
                                         <div class="tab-pane fade" id="dropdown4" role="tabpanel" aria-labelledby="dropdown4-tab">
 
                                             <div class="row mtm-0">
-                                                <div class="col-lg-4 right-border-div pr-5">
+                                                <div class="col-lg-4 right-border-div pr-5 prm-0px">
 
                                                     <div class="mt-4">
                                                         <h3><span id="add_or_edit_staffing_text">Add</span> Staffing Cost <button onclick="clear_staffing_values();" type="button" class="btn btn-warning float-right">Clear Values</button></h3>
@@ -4118,36 +4095,36 @@ $months_name_array = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct
                                                         <div class="col-lg-12">
 
 
-                                                            <div class="form-group mb-0">
-                                                                <label class="control-label display-inline w-100 wm-50"><strong>Staff Name</strong></label>
+                                                            <div class="form-group mb-0 mrm-12px">
+                                                                <label class="control-label display-inline w-100 wm-100"><strong>Staff Name</strong></label>
                                                             </div>
-                                                            <div class="form-group mb-0">
-                                                                <input type="text" class="form-control display-inline w-100 wm-50" id="staff_name" placeholder="e.g. Reception 1, Operation Mgr, Kitchen 1...">
-                                                            </div>
-
-                                                            <div class="form-group mb-0 mt-3">
-                                                                <label class="control-label display-inline w-47 wm-50"><strong>Start</strong></label>
-                                                                <label class="control-label display-inline ml-2 w-47 wm-50"><strong>End</strong></label>
-                                                            </div>
-                                                            <div class="form-group mb-0">
-                                                                <input type="date" class="form-control display-inline w-47 wm-50" id="start_staffing">
-                                                                <input type="date" class="form-control display-inline ml-2 w-47 wm-50" id="end_staffing">
+                                                            <div class="form-group mb-0 mrm-12px">
+                                                                <input type="text" class="form-control display-inline w-100 wm-100" id="staff_name" placeholder="e.g. Reception 1, Operation Mgr, Kitchen 1...">
                                                             </div>
 
                                                             <div class="form-group mb-0 mt-3">
-                                                                <label class="control-label display-inline w-47 wm-50"><strong>Gross Salary/Month (€)</strong></label>
-                                                                <label class="control-label display-inline ml-2 w-47 wm-50"><strong>Net Salary/Month (€)</strong></label>
+                                                                <label class="control-label display-inline w-47 wm-47"><strong>Start</strong></label>
+                                                                <label class="control-label display-inline ml-2 w-47 wm-47"><strong>End</strong></label>
                                                             </div>
                                                             <div class="form-group mb-0">
-                                                                <input type="number" step="any" class="form-control display-inline w-47 wm-50" id="gross_salary">
-                                                                <input type="number" step="any" class="form-control display-inline ml-2 w-47 wm-50" id="net_salary">
+                                                                <input type="date" class="form-control display-inline w-47 wm-47" id="start_staffing">
+                                                                <input type="date" class="form-control display-inline ml-2 w-47 wm-47" id="end_staffing">
                                                             </div>
 
                                                             <div class="form-group mb-0 mt-3">
-                                                                <label class="control-label display-inline ml-2 w-47 wm-50"><strong>Staffing Department</strong></label>
+                                                                <label class="control-label display-inline w-47 wm-47"><strong>Gross Salary/Month (€)</strong></label>
+                                                                <label class="control-label display-inline ml-2 w-47 wm-47"><strong>Net Salary/Month (€)</strong></label>
                                                             </div>
                                                             <div class="form-group mb-0">
-                                                                <select class="form-control display-inline w-47 wm-50" id="department_staffing">
+                                                                <input type="number" step="any" class="form-control display-inline w-47 wm-47" id="gross_salary">
+                                                                <input type="number" step="any" class="form-control display-inline ml-2 w-47 wm-47" id="net_salary">
+                                                            </div>
+
+                                                            <div class="form-group mb-0 mt-3">
+                                                                <label class="control-label display-inline ml-2 w-47 wm-47"><strong>Staffing Department</strong></label>
+                                                            </div>
+                                                            <div class="form-group mb-0">
+                                                                <select class="form-control display-inline w-47 wm-47" id="department_staffing">
                                                                     <option value="0">Select Staffing Department</option>
                                                                     <?php
                                                                     $sql_depart = "SELECT * FROM `tbl_forecast_staffing_department` WHERE hotel_id = $hotel_id AND is_active = 1 AND is_delete = 0 ORDER BY 1 DESC";
@@ -4171,14 +4148,14 @@ $months_name_array = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct
 
 
 
-                                                    <div class="mt-3 mb-5 pb-5 pbm-0 mbm-0">
+                                                    <div class="mt-3 mb-5 pb-5 pbm-0 mbm-0 mrm-12px">
                                                         <input type="button" onclick="save_staff_cost();" class="btn mt-4 w-100 btn-warning" value="Save Staff Cost">
                                                     </div>
 
 
                                                 </div>
 
-                                                <div class="col-lg-8 pl-5" id="reload_staffing">
+                                                <div class="col-lg-8 pl-5 plm-10px" id="reload_staffing">
                                                     <div class="mt-4">
                                                         <h3>Staffing Cost</h3>
                                                     </div>
@@ -4190,7 +4167,7 @@ $months_name_array = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct
                                                     if ($result_staffing && $result_staffing->num_rows > 0) {
                                                     ?>
                                                     <div class="table-responsive">
-                                                        <table id="demo-foo-addrow" class="table table-bordered m-t-30 table-hover contact-list full-color-table full-warning-table hover-table" data-paging="true" data-paging-size="25">
+                                                        <table id="demo-foo-addrow" class="mobile_response_forecast_tables table table-bordered m-t-30 table-hover contact-list full-color-table full-warning-table hover-table" data-paging="true" data-paging-size="25">
                                                             <thead>
                                                                 <tr>
                                                                     <th class="" >Staff Title</th>
@@ -4235,7 +4212,7 @@ $months_name_array = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct
 
                                         <div class="tab-pane fade" id="dropdown5" role="tabpanel" aria-labelledby="dropdown5-tab">
                                             <div class="row mtm-0">
-                                                <div class="col-lg-4 right-border-div pr-3">
+                                                <div class="col-lg-4 right-border-div pr-3 prm-0px">
 
                                                     <div class="mt-4">
                                                         <h3><span id="add_or_edit_goods_text">Add</span> Goods Cost <button onclick="clear_goods_values();" type="button" class="btn btn-dark float-right">Clear Values</button></h3>
@@ -4246,99 +4223,99 @@ $months_name_array = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct
 
 
                                                             <div class="form-group mb-0">
-                                                                <label class="control-label display-inline w-47 wm-50"><strong>Meat Cost</strong></label>
+                                                                <label class="control-label display-inline w-47 wm-47"><strong>Meat Cost</strong></label>
                                                             </div>
                                                             <div class="form-group mb-0">
                                                                 <input step="any" type="number" class="form-control display-inline w-47 wm-50" id="meat_cost">
-                                                                <input type="text" class="form-control display-inline ml-2 w-47 wm-50" id="meat_supplier">
+                                                                <input type="text" class="form-control display-inline ml-2 w-47 wm-47" id="meat_supplier">
                                                             </div>
 
                                                             <div class="form-group mb-0 mt-3">
-                                                                <label class="control-label display-inline w-47 wm-50"><strong>Fruits &amp; Vegetables</strong></label>
+                                                                <label class="control-label display-inline w-47 wm-47"><strong>Fruits &amp; Vegetables</strong></label>
                                                             </div>
                                                             <div class="form-group mb-0">
                                                                 <input step="any" type="number" class="form-control display-inline w-47 wm-50" id="fruit_cost">
-                                                                <input type="text" class="form-control display-inline ml-2 w-47 wm-50" id="fruit_supplier">
+                                                                <input type="text" class="form-control display-inline ml-2 w-47 wm-47" id="fruit_supplier">
                                                             </div>
 
                                                             <div class="form-group mb-0 mt-3">
-                                                                <label class="control-label display-inline w-47 wm-50"><strong>Bread</strong></label>
+                                                                <label class="control-label display-inline w-47 wm-47"><strong>Bread</strong></label>
                                                             </div>
                                                             <div class="form-group mb-0">
                                                                 <input step="any" type="number" class="form-control display-inline w-47 wm-50" id="bread_cost">
-                                                                <input type="text" class="form-control display-inline ml-2 w-47 wm-50" id="bread_supplier">
+                                                                <input type="text" class="form-control display-inline ml-2 w-47 wm-47" id="bread_supplier">
                                                             </div>
 
                                                             <div class="form-group mb-0 mt-3">
-                                                                <label class="control-label display-inline w-47 wm-50"><strong>Frozen Goods</strong></label>
+                                                                <label class="control-label display-inline w-47 wm-47"><strong>Frozen Goods</strong></label>
                                                             </div>
                                                             <div class="form-group mb-0">
                                                                 <input step="any" type="number" class="form-control display-inline w-47 wm-50" id="frozen_cost">
-                                                                <input type="text" class="form-control display-inline ml-2 w-47 wm-50" id="frozen_supplier">
+                                                                <input type="text" class="form-control display-inline ml-2 w-47 wm-47" id="frozen_supplier">
                                                             </div>
 
                                                             <div class="form-group mb-0 mt-3">
-                                                                <label class="control-label display-inline w-47 wm-50"><strong>Dairy Products</strong></label>
+                                                                <label class="control-label display-inline w-47 wm-47"><strong>Dairy Products</strong></label>
                                                             </div>
                                                             <div class="form-group mb-0">
                                                                 <input step="any" type="number" class="form-control display-inline w-47 wm-50" id="dairy_cost">
-                                                                <input type="text" class="form-control display-inline ml-2 w-47 wm-50" id="dairy_supplier">
+                                                                <input type="text" class="form-control display-inline ml-2 w-47 wm-47" id="dairy_supplier">
                                                             </div>
 
                                                             <div class="form-group mb-0 mt-3">
-                                                                <label class="control-label display-inline w-47 wm-50"><strong>Cons Earliast</strong></label>
+                                                                <label class="control-label display-inline w-47 wm-47"><strong>Cons Earliast</strong></label>
                                                             </div>
                                                             <div class="form-group mb-0">
                                                                 <input step="any" type="number" class="form-control display-inline w-47 wm-50" id="cons_cost">
-                                                                <input type="text" class="form-control display-inline ml-2 w-47 wm-50" id="cons_supplier">
+                                                                <input type="text" class="form-control display-inline ml-2 w-47 wm-47" id="cons_supplier">
                                                             </div>
 
                                                             <div class="form-group mb-0 mt-3">
-                                                                <label class="control-label display-inline w-47 wm-50"><strong>Tea</strong></label>
+                                                                <label class="control-label display-inline w-47 wm-47"><strong>Tea</strong></label>
                                                             </div>
                                                             <div class="form-group mb-0">
                                                                 <input step="any" type="number" class="form-control display-inline w-47 wm-50" id="tea_cost">
-                                                                <input type="text" class="form-control display-inline ml-2 w-47 wm-50" id="tea_supplier">
+                                                                <input type="text" class="form-control display-inline ml-2 w-47 wm-47" id="tea_supplier">
                                                             </div>
 
                                                             <div class="form-group mb-0 mt-3">
-                                                                <label class="control-label display-inline w-47 wm-50"><strong>Coffee</strong></label>
+                                                                <label class="control-label display-inline w-47 wm-47"><strong>Coffee</strong></label>
                                                             </div>
                                                             <div class="form-group mb-0">
                                                                 <input step="any" type="number" class="form-control display-inline w-47 wm-50" id="coffee_cost">
-                                                                <input type="text" class="form-control display-inline ml-2 w-47 wm-50" id="coffee_supplier">
+                                                                <input type="text" class="form-control display-inline ml-2 w-47 wm-47" id="coffee_supplier">
                                                             </div>
 
                                                             <div class="form-group mb-0 mt-3">
-                                                                <label class="control-label display-inline w-47 wm-50"><strong>Cheese</strong></label>
+                                                                <label class="control-label display-inline w-47 wm-47"><strong>Cheese</strong></label>
                                                             </div>
                                                             <div class="form-group mb-0">
                                                                 <input step="any" type="number" class="form-control display-inline w-47 wm-50" id="cheese_cost">
-                                                                <input type="text" class="form-control display-inline ml-2 w-47 wm-50" id="cheese_supplier">
+                                                                <input type="text" class="form-control display-inline ml-2 w-47 wm-47" id="cheese_supplier">
                                                             </div>
 
                                                             <div class="form-group mb-0 mt-3">
-                                                                <label class="control-label display-inline w-47 wm-50"><strong>Eggs</strong></label>
+                                                                <label class="control-label display-inline w-47 wm-47"><strong>Eggs</strong></label>
                                                             </div>
                                                             <div class="form-group mb-0">
                                                                 <input step="any" type="number" class="form-control display-inline w-47 wm-50" id="eggs_cost">
-                                                                <input type="text" class="form-control display-inline ml-2 w-47 wm-50" id="eggs_supplier">
+                                                                <input type="text" class="form-control display-inline ml-2 w-47 wm-47" id="eggs_supplier">
                                                             </div>
 
-                                                            <div class="form-group mb-0 mt-3 mt-3">
+                                                            <div class="form-group mb-0 mt-3 mt-3 mrm-12px">
                                                                 <label class="control-label display-inline w-100 wm-100"><strong>Minus</strong></label>
                                                             </div>
-                                                            <div class="form-group mb-0">
+                                                            <div class="form-group mb-0 mrm-12px">
                                                                 <input type="number" step="any" class="form-control display-inline w-100 wm-100" id="minus_costs">
                                                             </div>
 
 
                                                             <div class="form-group mb-0 mt-3 mt-3">
-                                                                <label class="control-label display-inline ml-2 w-47 wm-50"><strong>Month</strong></label>
-                                                                <label class="control-label display-inline ml-2 w-47 wm-50"><strong>Year</strong></label>
+                                                                <label class="control-label display-inline w-47 wm-47"><strong>Month</strong></label>
+                                                                <label class="control-label display-inline ml-2 w-47 wm-47"><strong>Year</strong></label>
                                                             </div>
                                                             <div class="form-group mb-0">
-                                                                <select class="form-control display-inline ml-2 w-47 wm-50" id="date_month_goods">
+                                                                <select class="form-control display-inline w-47 wm-47" id="date_month_goods">
                                                                     <?php
                                                                     for($i=1;$i<13;$i++){
                                                                     ?>
@@ -4347,7 +4324,7 @@ $months_name_array = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct
                                                                     } 
                                                                     ?> 
                                                                 </select>
-                                                                <select class="form-control display-inline ml-2 w-47 wm-50" id="date_year_goods">
+                                                                <select class="form-control display-inline ml-2 w-47 wm-47" id="date_year_goods">
                                                                     <?php
                                                                     for($i=2030;$i>1999;$i--){
                                                                     ?>
@@ -4364,7 +4341,7 @@ $months_name_array = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct
 
 
 
-                                                    <div class="mt-3 mb-5 pb-5 pbm-0 mbm-0">
+                                                    <div class="mt-3 mb-5 pb-5 pbm-0 mbm-0 mrm-12px">
                                                         <input type="button" onclick="save_goods_cost();" class="btn mt-4 w-100 btn-info" value="Save Goods Purchasing">
                                                     </div>
 
@@ -4383,7 +4360,7 @@ $months_name_array = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct
                                                     if ($result_goods && $result_goods->num_rows > 0) {
                                                     ?>
                                                     <div class="table-responsive">
-                                                        <table id="demo-foo-addrow" class="table table-bordered m-t-30 table-hover contact-list full-color-table full-dark-table hover-table" data-paging="true" data-paging-size="25">
+                                                        <table id="demo-foo-addrow" class="mobile_response_forecast_tables table table-bordered m-t-30 table-hover contact-list full-color-table full-dark-table hover-table" data-paging="true" data-paging-size="25">
                                                             <thead>
                                                                 <tr>
                                                                     <th class="" >Meat</th>
@@ -4453,7 +4430,7 @@ $months_name_array = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct
                                                 </div>
                                             </div>
                                         </div>
-
+                                        <!--                                        End Settings Screens-->
                                     </div>
                                 </div>
                             </div>

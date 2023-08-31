@@ -60,3 +60,27 @@
 .custom_td_padding{
     padding: 1rem !important;   
 }
+
+@media only screen and (max-width: 600px) {
+
+    .font_size_forecast_1rem{
+        font-size: 1rem !important;
+    }
+    .height_size_forecast_450px{
+        height: 450px !important;
+    }
+    .mtm_30{
+        margin-top: 30px;
+    }
+    .mobile_response_forecast_tables{
+        display: block;
+        overflow-x: auto;
+        white-space: nowrap;
+    }
+    .prm-0px{
+        padding-right: 0px !important;
+    }
+    .mrm-12px{
+        margin-right: 12px;
+    }
+}
