@@ -109,9 +109,9 @@ for($i=0;$i<sizeof($start_arr);$i++){
     $per_day_net = round($days_arr[$i] * $per_day_net,2);
 
     if($staffings_id_ == 0){
-        $sql="INSERT INTO `tbl_forecast_staffing_cost`( `frcstfd_id`, `staff_name`, `gross_salary`, `net_salary`, `start_date`, `end_date`, `days`, `month`, `year`, `hotel_id`, `lastedittime`, `lasteditbyip`, `lasteditbyid`) VALUES ('$department_staffing_','$staff_name_','$per_day','$per_day_net','$start_arr[$i]','$end_arr[$i]','$days_arr[$i]','$month_arr[$i]','$year_arr[$i]','$hotel_id','$last_edit_time','$last_editby_ip','$last_editby_id')";
+        $sql="INSERT INTO `tbl_forecast_staffing_cost`( `frcstfd_id`, `staff_name`, `gross_salary`, `net_salary`, `gross_salary_daywise`, `net_salary_daywise`, `start_date`, `end_date`, `days`, `month`, `year`, `hotel_id`, `lastedittime`, `lasteditbyip`, `lasteditbyid`) VALUES ('$department_staffing_','$staff_name_','$gross_salary_','$net_salary_','$per_day','$per_day_net','$start_arr[$i]','$end_arr[$i]','$days_arr[$i]','$month_arr[$i]','$year_arr[$i]','$hotel_id','$last_edit_time','$last_editby_ip','$last_editby_id')";
     }else{
-        $sql="UPDATE `tbl_forecast_staffing_cost` SET `frcstfd_id`='$department_staffing_',`staff_name`='$staff_name_',`gross_salary`='$per_day',`net_salary`='$per_day_net',`start_date`='$start_arr[0]',`end_date`='$end_arr[0]',`days`='$days_arr[0]',`month`='$month_arr[0]',`year`='$year_arr[0]',`lastedittime`='$last_edit_time',`lasteditbyip`='$last_editby_ip',`lasteditbyid`='$last_editby_id' WHERE `hotel_id` = $hotel_id AND `frcstfct_id` = $staffings_id_";
+        $sql="UPDATE `tbl_forecast_staffing_cost` SET `frcstfd_id`='$department_staffing_',`staff_name`='$staff_name_',`gross_salary`='$gross_salary_',`net_salary`='$net_salary_',`gross_salary_daywise`='$per_day',`net_salary_daywise`='$per_day_net',`start_date`='$start_arr[0]',`end_date`='$end_arr[0]',`days`='$days_arr[0]',`month`='$month_arr[0]',`year`='$year_arr[0]',`lastedittime`='$last_edit_time',`lasteditbyip`='$last_editby_ip',`lasteditbyid`='$last_editby_id' WHERE `hotel_id` = $hotel_id AND `frcstfct_id` = $staffings_id_";
     }
     $result = $conn->query($sql);
 

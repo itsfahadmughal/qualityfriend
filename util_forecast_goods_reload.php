@@ -32,8 +32,28 @@ if ($result_goods && $result_goods->num_rows > 0) {
         </thead>
         <tbody>
             <?php
-
+    $km = 0;
     while ($row = mysqli_fetch_array($result_goods)) {
+
+        if($km == 0){
+            ?>
+
+            <tr class="">
+                <th><small><?php echo $row['Meat_Supplier']; ?></small></th>
+                <th><small><?php echo $row['Fruit_Vegetable_Supplier']; ?></small></th>
+                <th><small><?php echo $row['Bread_Supplier']; ?></small></th>
+                <th><small><?php echo $row['Frozen_Goods_Supplier']; ?></small></th>
+                <th><small><?php echo $row['Dairy_Products_Supplier']; ?></small></th>
+                <th><small><?php echo $row['Cheese_Supplier']; ?></small></th>
+                <th>-</th>
+                <th>-</th>
+                <th>-</th>
+                <th>-</th>
+            </tr>
+
+            <?php
+        }
+
             ?>
             <tr class="" id="goods_cost_<?php echo $row['frcgct_id']; ?>">
                 <td><?php echo $row['Meat']; ?></td>
@@ -50,6 +70,7 @@ if ($result_goods && $result_goods->num_rows > 0) {
                 </td>
             </tr>
             <?php 
+        $km++;
     } 
             ?>
         </tbody>

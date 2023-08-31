@@ -347,6 +347,148 @@ $months_name_array = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct
                                     </ul>
                                     <div class="tab-content tabcontent-border p-20 pl-0 pr-0" id="myTabContent">
 
+
+                                        <div class="tab-pane fade" id="profile5" role="tabpanel" aria-labelledby="profile-tab5">
+                                            <div class="row"> 
+                                                <div class="col-lg-12">
+                                                    <h3 class="forecast_main_color p-3 text-center">Staffing 
+                                                        <button class="float-right" id="btnExport" onclick="export_staffing(this)">Export</button>
+                                                    </h3>
+                                                </div>
+                                                <?php
+                                                $total_gross=$total_net=$total12x_net=0;
+                                                $total_staffing_salary_per_month = array(0,0,0,0,0,0,0,0,0,0,0,0);
+                                                $sql_staffing_data = "SELECT DISTINCT a.* FROM `tbl_forecast_staffing_department` as a INNER JOIN tbl_forecast_staffing_cost as b on a.frcstfd_id = b.frcstfd_id WHERE a.`hotel_id` = $hotel_id AND a.`is_active` = 1 AND a.`is_delete` = 0 AND b.year = $year_";
+                                                $result_staffing_data = $conn->query($sql_staffing_data);
+                                                if ($result_staffing_data && $result_staffing_data->num_rows > 0) {
+                                                ?>
+
+                                                <div class="col-lg-12">
+                                                    <div class="table-responsive">
+                                                        <table class="pb-3 table table table-bordered table-hover table-striped">
+                                                            <thead>
+                                                                <tr class="text-bold">
+                                                                    <th class="text-bold"></th>
+                                                                    <th class="text-bold">net</th>
+                                                                    <th class="text-bold">gross</th>
+                                                                    <th class="text-bold">Jan</th>
+                                                                    <th class="text-bold">Feb</th>
+                                                                    <th class="text-bold">Mar</th>
+                                                                    <th class="text-bold">Apr</th>
+                                                                    <th class="text-bold">May</th>
+                                                                    <th class="text-bold">Jun</th>
+                                                                    <th class="text-bold">Jul</th>
+                                                                    <th class="text-bold">Aug</th>
+                                                                    <th class="text-bold">Sep</th>
+                                                                    <th class="text-bold">Oct</th>
+                                                                    <th class="text-bold">Nov</th>
+                                                                    <th class="text-bold">Dec</th>
+                                                                    <th class="text-bold">Total Payroll</th>
+                                                                </tr>
+                                                            </thead>
+                                                            <tbody class="text-right">
+
+                                                                <?php
+                                                    while ($row = mysqli_fetch_array($result_staffing_data)) {
+                                                        $doc_id = $row['frcstfd_id'];
+                                                                ?>
+                                                                <tr class="forecast_pink_color">
+                                                                    <td class="text-bold text-left"><?php echo $row['title']; ?></td>
+                                                                    <td colspan="15"></td>
+                                                                </tr>
+                                                                <?php 
+                                                        $sql_inner = "SELECT * FROM `tbl_forecast_staffing_cost` WHERE `hotel_id` = $hotel_id AND `frcstfd_id` = $doc_id AND `year` = $year_";
+                                                        $result_inner = $conn->query($sql_inner);
+                                                        if ($result_inner && $result_inner->num_rows > 0) {
+                                                            while ($row_inner = mysqli_fetch_array($result_inner)) {
+
+                                                                $total_gross += $row_inner['gross_salary'];
+                                                                $total_net += $row_inner['net_salary'];
+                                                                $total12x_net += $row_inner['gross_salary_daywise'];
+
+                                                                ?>
+                                                                <tr class="">
+                                                                    <td class="text-left"><?php echo $row_inner['staff_name']; ?></td>
+                                                                    <td><?php echo number_format($row_inner['net_salary']); ?> €</td>
+                                                                    <td><?php echo number_format($row_inner['gross_salary']); ?> €</td>
+
+                                                                    <td><?php if($row_inner['month'] == 1){ echo number_format($row_inner['gross_salary_daywise']);
+                                                                                                           $total_staffing_salary_per_month[0] += $row_inner['gross_salary_daywise'];
+                                                                                                          }else{echo 0; } ?> €</td>
+                                                                    <td><?php if($row_inner['month'] == 2){ echo number_format($row_inner['gross_salary_daywise']); 
+                                                                                                           $total_staffing_salary_per_month[1] += $row_inner['gross_salary_daywise'];
+                                                                                                          }else{echo 0; } ?> €</td>
+                                                                    <td><?php if($row_inner['month'] == 3){ echo number_format($row_inner['gross_salary_daywise']); 
+                                                                                                           $total_staffing_salary_per_month[2] += $row_inner['gross_salary_daywise'];
+                                                                                                          }else{echo 0; } ?> €</td>
+                                                                    <td><?php if($row_inner['month'] == 4){ echo number_format($row_inner['gross_salary_daywise']); 
+                                                                                                           $total_staffing_salary_per_month[3] += $row_inner['gross_salary_daywise'];
+                                                                                                          }else{echo 0; } ?> €</td>
+                                                                    <td><?php if($row_inner['month'] == 5){ echo number_format($row_inner['gross_salary_daywise']); 
+                                                                                                           $total_staffing_salary_per_month[4] += $row_inner['gross_salary_daywise'];
+                                                                                                          }else{echo 0; } ?> €</td>
+                                                                    <td><?php if($row_inner['month'] == 6){ echo number_format($row_inner['gross_salary_daywise']); 
+                                                                                                           $total_staffing_salary_per_month[5] += $row_inner['gross_salary_daywise'];
+                                                                                                          }else{echo 0; } ?> €</td>
+                                                                    <td><?php if($row_inner['month'] == 7){ echo number_format($row_inner['gross_salary_daywise']); 
+                                                                                                           $total_staffing_salary_per_month[6] += $row_inner['gross_salary_daywise'];
+                                                                                                          }else{echo 0; } ?> €</td>
+                                                                    <td><?php if($row_inner['month'] == 8){ echo number_format($row_inner['gross_salary_daywise']); 
+                                                                                                           $total_staffing_salary_per_month[7] += $row_inner['gross_salary_daywise'];
+                                                                                                          }else{echo 0; } ?> €</td>
+                                                                    <td><?php if($row_inner['month'] == 9){ echo number_format($row_inner['gross_salary_daywise']); 
+                                                                                                           $total_staffing_salary_per_month[8] += $row_inner['gross_salary_daywise'];
+                                                                                                          }else{echo 0; } ?> €</td>
+                                                                    <td><?php if($row_inner['month'] == 10){ echo number_format($row_inner['gross_salary_daywise']); 
+                                                                                                            $total_staffing_salary_per_month[9] += $row_inner['gross_salary_daywise'];
+                                                                                                           }else{echo 0; } ?> €</td>
+                                                                    <td><?php if($row_inner['month'] == 11){ echo number_format($row_inner['gross_salary_daywise']); 
+                                                                                                            $total_staffing_salary_per_month[10] += $row_inner['gross_salary_daywise'];
+                                                                                                           }else{echo 0; } ?> €</td>
+                                                                    <td><?php if($row_inner['month'] == 12){ echo number_format($row_inner['gross_salary_daywise']); 
+                                                                                                            $total_staffing_salary_per_month[11] += $row_inner['gross_salary_daywise'];
+                                                                                                           }else{echo 0; } ?> €</td>
+                                                                    <td><?php echo number_format($row_inner['gross_salary_daywise']); ?> €</td>
+                                                                </tr>
+                                                                <?php
+                                                            }
+                                                        }
+                                                    }
+                                                                ?>
+                                                                <tr class="forecast_gray_color text-bold">
+                                                                    <td class="text-left">Payroll</td>
+                                                                    <td><?php echo number_format($total_gross); ?> €</td>
+                                                                    <td><?php echo number_format($total_net); ?> €</td>
+                                                                    <td><?php echo number_format($total_staffing_salary_per_month[0]); ?> €</td>
+                                                                    <td><?php echo number_format($total_staffing_salary_per_month[1]); ?> €</td>
+                                                                    <td><?php echo number_format($total_staffing_salary_per_month[2]); ?> €</td>
+                                                                    <td><?php echo number_format($total_staffing_salary_per_month[3]); ?> €</td>
+                                                                    <td><?php echo number_format($total_staffing_salary_per_month[4]); ?> €</td>
+                                                                    <td><?php echo number_format($total_staffing_salary_per_month[5]); ?> €</td>
+                                                                    <td><?php echo number_format($total_staffing_salary_per_month[6]); ?> €</td>
+                                                                    <td><?php echo number_format($total_staffing_salary_per_month[7]); ?> €</td>
+                                                                    <td><?php echo number_format($total_staffing_salary_per_month[8]); ?> €</td>
+                                                                    <td><?php echo number_format($total_staffing_salary_per_month[9]); ?> €</td>
+                                                                    <td><?php echo number_format($total_staffing_salary_per_month[10]); ?> €</td>
+                                                                    <td><?php echo number_format($total_staffing_salary_per_month[11]); ?> €</td>
+                                                                    <td><?php echo number_format($total12x_net); ?> €</td>
+                                                                </tr>
+                                                            </tbody>
+                                                        </table>
+                                                    </div>
+                                                </div>
+                                                <?php }else{ ?>
+                                                <div class="col-lg-12 text-center">
+                                                    <div class="text-center"><img src="assets/images/no-results-cookie.png" width="250" /></div>
+                                                    <h5 class="text-center"><b>No Data found.</b></h5>
+                                                </div>
+                                                <?php } ?>
+                                            </div>
+                                        </div>
+
+
+
+
                                         <div class="tab-pane fade" id="profile2" role="tabpanel" aria-labelledby="profile-tab2">
                                             <div class="row"> 
                                                 <div class="col-lg-12">
@@ -425,7 +567,7 @@ $months_name_array = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct
                                                             array_push($goods_cost_arr,0);
                                                         }
 
-                                                        $sql_inner_5="SELECT SUM(`gross_salary`) as salary FROM `tbl_forecast_staffing_cost` WHERE hotel_id = $hotel_id AND `year` = $year";
+                                                        $sql_inner_5="SELECT SUM(`gross_salary_daywise`) as salary FROM `tbl_forecast_staffing_cost` WHERE hotel_id = $hotel_id AND `month` = $month";
                                                         $result_inner_5 = $conn->query($sql_inner_5);
                                                         if ($result_inner_5 && $result_inner_5->num_rows > 0) {
                                                             while ($row_inner_5 = mysqli_fetch_array($result_inner_5)) { array_push($staffing_arr,$row_inner_5['salary']);
@@ -435,6 +577,7 @@ $months_name_array = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct
                                                         }
 
                                                     }
+
                                                 ?>
 
                                                 <div class="col-lg-12">
@@ -1052,27 +1195,13 @@ $months_name_array = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct
                                                     }else{
                                                         array_push($acc_balance_arr1,0);
                                                     }
-
-                                                    $sql_inner_5="SELECT SUM(`gross_salary`) as salary FROM `tbl_forecast_staffing_cost` WHERE hotel_id = $hotel_id AND `year` = $year_";
-                                                    $result_inner_5 = $conn->query($sql_inner_5);
-                                                    $n=0;
-                                                    if ($result_inner_5 && $result_inner_5->num_rows > 0) {
-                                                        $row_inner_5 = mysqli_fetch_array($result_inner_5);
-                                                        while($n < 12) {
-                                                            array_push($staffing_arr1,$row_inner_5['salary']);
-                                                            $n++;
-                                                        }
-                                                    }else{
-                                                        while($n < 12) {
-                                                            array_push($staffing_arr1,0);
-                                                            $n++;
-                                                        }
-                                                    }
+                                                    
+                                                   $staffing_arr1 = $total_staffing_salary_per_month;
                                                 ?>
 
                                                 <div class="col-lg-12">
                                                     <div class="table-responsive text-center">
-                                                        <table class="table goods_table_responsive ">
+                                                        <table class="table">
                                                             <thead>
                                                                 <tr class="forecast_gray_color">
                                                                     <th></th>
@@ -3375,117 +3504,6 @@ $months_name_array = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct
 
 
 
-                                        <div class="tab-pane fade" id="profile5" role="tabpanel" aria-labelledby="profile-tab5">
-                                            <div class="row"> 
-                                                <div class="col-lg-12">
-                                                    <h3 class="forecast_main_color p-3 text-center">Staffing 
-                                                        <button class="float-right" id="btnExport" onclick="export_staffing(this)">Export</button>
-                                                    </h3>
-                                                </div>
-                                                <?php
-                                                $total_gross=$total_net=$total12x_net=0;
-                                                $sql_staffing_data = "SELECT DISTINCT a.* FROM `tbl_forecast_staffing_department` as a INNER JOIN tbl_forecast_staffing_cost as b on a.frcstfd_id = b.frcstfd_id WHERE a.`hotel_id` = $hotel_id AND a.`is_active` = 1 AND a.`is_delete` = 0 AND b.year = $year_";
-                                                $result_staffing_data = $conn->query($sql_staffing_data);
-                                                if ($result_staffing_data && $result_staffing_data->num_rows > 0) {
-                                                ?>
-
-                                                <div class="col-lg-12">
-                                                    <div class="table-responsive">
-                                                        <table class="pb-3 table table table-bordered table-hover table-striped">
-                                                            <thead>
-                                                                <tr class="text-bold">
-                                                                    <th class="text-bold"></th>
-                                                                    <th class="text-bold">net</th>
-                                                                    <th class="text-bold">gross</th>
-                                                                    <th class="text-bold">Jan</th>
-                                                                    <th class="text-bold">Feb</th>
-                                                                    <th class="text-bold">Mar</th>
-                                                                    <th class="text-bold">Apr</th>
-                                                                    <th class="text-bold">May</th>
-                                                                    <th class="text-bold">Jun</th>
-                                                                    <th class="text-bold">Jul</th>
-                                                                    <th class="text-bold">Aug</th>
-                                                                    <th class="text-bold">Sep</th>
-                                                                    <th class="text-bold">Oct</th>
-                                                                    <th class="text-bold">Nov</th>
-                                                                    <th class="text-bold">Dec</th>
-                                                                    <th class="text-bold">Total Payroll</th>
-                                                                </tr>
-                                                            </thead>
-                                                            <tbody class="text-right">
-
-                                                                <?php
-                                                    while ($row = mysqli_fetch_array($result_staffing_data)) {
-                                                        $doc_id = $row['frcstfd_id'];
-                                                                ?>
-                                                                <tr class="forecast_pink_color">
-                                                                    <td class="text-bold text-left"><?php echo $row['title']; ?></td>
-                                                                    <td colspan="15"></td>
-                                                                </tr>
-                                                                <?php 
-                                                        $sql_inner = "SELECT * FROM `tbl_forecast_staffing_cost` WHERE `hotel_id` = $hotel_id AND `frcstfd_id` = $doc_id AND `year` = $year_";
-                                                        $result_inner = $conn->query($sql_inner);
-                                                        if ($result_inner && $result_inner->num_rows > 0) {
-                                                            while ($row_inner = mysqli_fetch_array($result_inner)) {
-                                                                $total_gross += $row_inner['gross_salary'];
-                                                                $total_net += $row_inner['net_salary'];
-                                                                $total12x_net += $row_inner['net_salary']*12;
-                                                                ?>
-                                                                <tr class="">
-                                                                    <td class="text-left"><?php echo $row_inner['staff_name']; ?></td>
-                                                                    <td><?php echo number_format($row_inner['gross_salary']); ?> €</td>
-                                                                    <td><?php echo number_format($row_inner['net_salary']); ?> €</td>
-                                                                    <td><?php echo number_format($row_inner['net_salary']); ?> €</td>
-                                                                    <td><?php echo number_format($row_inner['net_salary']); ?> €</td>
-                                                                    <td><?php echo number_format($row_inner['net_salary']); ?> €</td>
-                                                                    <td><?php echo number_format($row_inner['net_salary']); ?> €</td>
-                                                                    <td><?php echo number_format($row_inner['net_salary']); ?> €</td>
-                                                                    <td><?php echo number_format($row_inner['net_salary']); ?> €</td>
-                                                                    <td><?php echo number_format($row_inner['net_salary']); ?> €</td>
-                                                                    <td><?php echo number_format($row_inner['net_salary']); ?> €</td>
-                                                                    <td><?php echo number_format($row_inner['net_salary']); ?> €</td>
-                                                                    <td><?php echo number_format($row_inner['net_salary']); ?> €</td>
-                                                                    <td><?php echo number_format($row_inner['net_salary']); ?> €</td>
-                                                                    <td><?php echo number_format($row_inner['net_salary']); ?> €</td>
-                                                                    <td><?php echo number_format($row_inner['net_salary']*12); ?> €</td>
-                                                                </tr>
-                                                                <?php
-                                                            }
-                                                        }
-                                                    }
-                                                                ?>
-                                                                <tr class="forecast_gray_color text-bold">
-                                                                    <td class="text-left">Payroll</td>
-                                                                    <td><?php echo number_format($total_gross); ?> €</td>
-                                                                    <td><?php echo number_format($total_net); ?> €</td>
-                                                                    <td><?php echo number_format($total_net); ?> €</td>
-                                                                    <td><?php echo number_format($total_net); ?> €</td>
-                                                                    <td><?php echo number_format($total_net); ?> €</td>
-                                                                    <td><?php echo number_format($total_net); ?> €</td>
-                                                                    <td><?php echo number_format($total_net); ?> €</td>
-                                                                    <td><?php echo number_format($total_net); ?> €</td>
-                                                                    <td><?php echo number_format($total_net); ?> €</td>
-                                                                    <td><?php echo number_format($total_net); ?> €</td>
-                                                                    <td><?php echo number_format($total_net); ?> €</td>
-                                                                    <td><?php echo number_format($total_net); ?> €</td>
-                                                                    <td><?php echo number_format($total_net); ?> €</td>
-                                                                    <td><?php echo number_format($total_net); ?> €</td>
-                                                                    <td><?php echo number_format($total12x_net); ?> €</td>
-                                                                </tr>
-                                                            </tbody>
-                                                        </table>
-                                                    </div>
-                                                </div>
-                                                <?php }else{ ?>
-                                                <div class="col-lg-12 text-center">
-                                                    <div class="text-center"><img src="assets/images/no-results-cookie.png" width="250" /></div>
-                                                    <h5 class="text-center"><b>No Data found.</b></h5>
-                                                </div>
-                                                <?php } ?>
-                                            </div>
-                                        </div>
-
-
 
 
 
@@ -3858,8 +3876,8 @@ $months_name_array = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct
                                                             <div class="form-group mb-0">
                                                                 <input type="number" step="any" class="form-control display-inline w-100 wm-100" id="other_costs">
                                                             </div>
-                                                            
-                                                             <div class="form-group mb-0 mt-3">
+
+                                                            <div class="form-group mb-0 mt-3">
                                                                 <label class="control-label display-inline ml-2 w-47 wm-50"><strong>Month</strong></label>
                                                                 <label class="control-label display-inline ml-2 w-47 wm-50"><strong>Year</strong></label>
                                                             </div>
@@ -4229,7 +4247,6 @@ $months_name_array = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct
 
                                                             <div class="form-group mb-0">
                                                                 <label class="control-label display-inline w-47 wm-50"><strong>Meat Cost</strong></label>
-                                                                <label class="control-label display-inline ml-2 w-47 wm-50"><strong>Meat Supplier</strong></label>
                                                             </div>
                                                             <div class="form-group mb-0">
                                                                 <input step="any" type="number" class="form-control display-inline w-47 wm-50" id="meat_cost">
@@ -4238,7 +4255,6 @@ $months_name_array = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct
 
                                                             <div class="form-group mb-0 mt-3">
                                                                 <label class="control-label display-inline w-47 wm-50"><strong>Fruits &amp; Vegetables</strong></label>
-                                                                <label class="control-label display-inline ml-2 w-47 wm-50"><strong>Fruits &amp; Vegetables Supp</strong></label>
                                                             </div>
                                                             <div class="form-group mb-0">
                                                                 <input step="any" type="number" class="form-control display-inline w-47 wm-50" id="fruit_cost">
@@ -4247,7 +4263,6 @@ $months_name_array = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct
 
                                                             <div class="form-group mb-0 mt-3">
                                                                 <label class="control-label display-inline w-47 wm-50"><strong>Bread</strong></label>
-                                                                <label class="control-label display-inline ml-2 w-47 wm-50"><strong>Bread Supplier</strong></label>
                                                             </div>
                                                             <div class="form-group mb-0">
                                                                 <input step="any" type="number" class="form-control display-inline w-47 wm-50" id="bread_cost">
@@ -4256,7 +4271,6 @@ $months_name_array = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct
 
                                                             <div class="form-group mb-0 mt-3">
                                                                 <label class="control-label display-inline w-47 wm-50"><strong>Frozen Goods</strong></label>
-                                                                <label class="control-label display-inline ml-2 w-47 wm-50"><strong>Frozen Goods Supplier</strong></label>
                                                             </div>
                                                             <div class="form-group mb-0">
                                                                 <input step="any" type="number" class="form-control display-inline w-47 wm-50" id="frozen_cost">
@@ -4265,7 +4279,6 @@ $months_name_array = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct
 
                                                             <div class="form-group mb-0 mt-3">
                                                                 <label class="control-label display-inline w-47 wm-50"><strong>Dairy Products</strong></label>
-                                                                <label class="control-label display-inline ml-2 w-47 wm-50"><strong>Dairy Products Supplier</strong></label>
                                                             </div>
                                                             <div class="form-group mb-0">
                                                                 <input step="any" type="number" class="form-control display-inline w-47 wm-50" id="dairy_cost">
@@ -4274,7 +4287,6 @@ $months_name_array = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct
 
                                                             <div class="form-group mb-0 mt-3">
                                                                 <label class="control-label display-inline w-47 wm-50"><strong>Cons Earliast</strong></label>
-                                                                <label class="control-label display-inline ml-2 w-47 wm-50"><strong>Cons Earliast Supplier</strong></label>
                                                             </div>
                                                             <div class="form-group mb-0">
                                                                 <input step="any" type="number" class="form-control display-inline w-47 wm-50" id="cons_cost">
@@ -4283,7 +4295,6 @@ $months_name_array = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct
 
                                                             <div class="form-group mb-0 mt-3">
                                                                 <label class="control-label display-inline w-47 wm-50"><strong>Tea</strong></label>
-                                                                <label class="control-label display-inline ml-2 w-47 wm-50"><strong>Tea Supplier</strong></label>
                                                             </div>
                                                             <div class="form-group mb-0">
                                                                 <input step="any" type="number" class="form-control display-inline w-47 wm-50" id="tea_cost">
@@ -4292,7 +4303,6 @@ $months_name_array = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct
 
                                                             <div class="form-group mb-0 mt-3">
                                                                 <label class="control-label display-inline w-47 wm-50"><strong>Coffee</strong></label>
-                                                                <label class="control-label display-inline ml-2 w-47 wm-50"><strong>Coffee Supplier</strong></label>
                                                             </div>
                                                             <div class="form-group mb-0">
                                                                 <input step="any" type="number" class="form-control display-inline w-47 wm-50" id="coffee_cost">
@@ -4301,7 +4311,6 @@ $months_name_array = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct
 
                                                             <div class="form-group mb-0 mt-3">
                                                                 <label class="control-label display-inline w-47 wm-50"><strong>Cheese</strong></label>
-                                                                <label class="control-label display-inline ml-2 w-47 wm-50"><strong>Cheese Supplier</strong></label>
                                                             </div>
                                                             <div class="form-group mb-0">
                                                                 <input step="any" type="number" class="form-control display-inline w-47 wm-50" id="cheese_cost">
@@ -4310,7 +4319,6 @@ $months_name_array = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct
 
                                                             <div class="form-group mb-0 mt-3">
                                                                 <label class="control-label display-inline w-47 wm-50"><strong>Eggs</strong></label>
-                                                                <label class="control-label display-inline ml-2 w-47 wm-50"><strong>Eggs Supplier</strong></label>
                                                             </div>
                                                             <div class="form-group mb-0">
                                                                 <input step="any" type="number" class="form-control display-inline w-47 wm-50" id="eggs_cost">
@@ -4323,9 +4331,9 @@ $months_name_array = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct
                                                             <div class="form-group mb-0">
                                                                 <input type="number" step="any" class="form-control display-inline w-100 wm-100" id="minus_costs">
                                                             </div>
-                                                            
-                                                            
-                                                             <div class="form-group mb-0 mt-3 mt-3">
+
+
+                                                            <div class="form-group mb-0 mt-3 mt-3">
                                                                 <label class="control-label display-inline ml-2 w-47 wm-50"><strong>Month</strong></label>
                                                                 <label class="control-label display-inline ml-2 w-47 wm-50"><strong>Year</strong></label>
                                                             </div>
@@ -4392,8 +4400,28 @@ $months_name_array = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct
                                                             </thead>
                                                             <tbody>
                                                                 <?php
-
+                                                        $km=0;
                                                         while ($row = mysqli_fetch_array($result_goods)) {
+
+                                                            if($km == 0){
+                                                                ?>
+
+                                                                <tr class="">
+                                                                    <th><small><?php echo $row['Meat_Supplier']; ?></small></th>
+                                                                    <th><small><?php echo $row['Fruit_Vegetable_Supplier']; ?></small></th>
+                                                                    <th><small><?php echo $row['Bread_Supplier']; ?></small></th>
+                                                                    <th><small><?php echo $row['Frozen_Goods_Supplier']; ?></small></th>
+                                                                    <th><small><?php echo $row['Dairy_Products_Supplier']; ?></small></th>
+                                                                    <th><small><?php echo $row['Cheese_Supplier']; ?></small></th>
+                                                                    <th>-</th>
+                                                                    <th>-</th>
+                                                                    <th>-</th>
+                                                                    <th>-</th>
+                                                                </tr>
+
+                                                                <?php
+                                                            }
+
                                                                 ?>
                                                                 <tr class="" id="goods_cost_<?php echo $row['frcgct_id']; ?>">
                                                                     <td><?php echo $row['Meat']; ?></td>
@@ -4410,6 +4438,7 @@ $months_name_array = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct
                                                                     </td>
                                                                 </tr>
                                                                 <?php 
+                                                            $km++;
                                                         } 
                                                                 ?>
                                                             </tbody>
