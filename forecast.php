@@ -554,7 +554,7 @@ $months_name_array = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct
                                                             array_push($opening_days,0);
                                                         }
 
-                                                        $sql_inner_4="SELECT SUM(`total_cost`) as total_cost_t FROM `tbl_forecast_goods_cost` WHERE hotel_id = $hotel_id AND MONTH(`date`) = $month AND YEAR(`date`) =  $year";
+                                                        $sql_inner_4="SELECT SUM(b.cost) as total_cost_t FROM `tbl_forecast_goods_cost` as a INNER JOIN tbl_forecast_goods_cost_suppliers as b on a.frcgct_id = b.frcgct_id WHERE a.`hotel_id` = $hotel_id AND MONTH(a.`date`) = $month AND YEAR(a.`date`) = $year GROUP BY b.frcgct_id";
                                                         $result_inner_4 = $conn->query($sql_inner_4);
                                                         if ($result_inner_4 && $result_inner_4->num_rows > 0) {
                                                             while ($row_inner_4 = mysqli_fetch_array($result_inner_4)) { array_push($goods_cost_arr,$row_inner_4['total_cost_t']);
@@ -1025,8 +1025,14 @@ $months_name_array = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct
 
 
                                                 $sql_cost_forecast = "SELECT *, DATE_FORMAT(`date`, '%m/%d/%Y') as date_final FROM `tbl_forecast_expenses` WHERE `hotel_id` = $hotel_id AND YEAR(`date`) > $pre_year_3 ORDER BY `date` ASC";
+
+                                                $sql_inner_3="SELECT * FROM `tbl_forecast_keyfacts` WHERE hotel_id = $hotel_id AND YEAR(`date`) > $pre_year_3 ";
+                                                $result_inner_3 = $conn->query($sql_inner_3);
+
+                                                $sql_inner_4="SELECT SUM(b.cost) as total_cost_t FROM `tbl_forecast_goods_cost` as a INNER JOIN tbl_forecast_goods_cost_suppliers as b on a.frcgct_id = b.frcgct_id WHERE a.`hotel_id` = $hotel_id AND YEAR(`date`) > $pre_year_3 GROUP BY b.frcgct_id";
+                                                $result_inner_4 = $conn->query($sql_inner_4);
                                                 $result_cost_forecast = $conn->query($sql_cost_forecast);
-                                                if ($result_cost_forecast && $result_cost_forecast->num_rows > 14) {
+                                                if (($result_cost_forecast && $result_cost_forecast->num_rows > 13) && ($result_inner_3 && $result_inner_3->num_rows > 13) && ($result_inner_4 && $result_inner_4->num_rows > 13)) {
                                                     while ($row = mysqli_fetch_array($result_cost_forecast)) {
 
                                                         $anicillary_arr1[$index_forecast_data] = [
@@ -1156,7 +1162,7 @@ $months_name_array = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct
                                                             ];
                                                         }
 
-                                                        $sql_inner_4="SELECT SUM(`total_cost`) as total_cost_t FROM `tbl_forecast_goods_cost` WHERE hotel_id = $hotel_id AND MONTH(`date`) = $month AND YEAR(`date`) =  $year";
+                                                        $sql_inner_4="SELECT SUM(b.cost) as total_cost_t FROM `tbl_forecast_goods_cost` as a INNER JOIN tbl_forecast_goods_cost_suppliers as b on a.frcgct_id = b.frcgct_id WHERE a.`hotel_id` = $hotel_id AND MONTH(a.`date`) = $month AND YEAR(a.`date`) = $year GROUP BY b.frcgct_id";
                                                         $result_inner_4 = $conn->query($sql_inner_4);
                                                         if ($result_inner_4 && $result_inner_4->num_rows > 0) {
                                                             while ($row_inner_4 = mysqli_fetch_array($result_inner_4)) {
@@ -3505,153 +3511,40 @@ $months_name_array = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct
                                                     </h3>
                                                 </div>
                                                 <?php
-                                                $sql_goods_data = "SELECT * FROM `tbl_forecast_goods_cost` WHERE `hotel_id` = $hotel_id ORDER BY date DESC";
+                                                $sql_goods_data = "SELECT a.*,b.* FROM `tbl_forecast_goods_cost` as a INNER JOIN tbl_forecast_goods_cost_suppliers as b on a.frcgct_id = b.frcgct_id WHERE a.`hotel_id` = $hotel_id and YEAR(a.date) = $year_ ORDER BY a.date DESC";
                                                 $result_goods_data = $conn->query($sql_goods_data);
                                                 if ($result_goods_data && $result_goods_data->num_rows > 0) {
                                                 ?>    
 
                                                 <div class="col-lg-12">
                                                     <div class="table-responsive goods_table_responsive">
-                                                        <table class="pb-3 table text-right table table-bordered table-hover table-striped">
+                                                        <table class="pb-3 table table table-bordered table-hover table-striped">
                                                             <thead>
                                                                 <tr class="text-bold">
-                                                                    <th class="text-bold"></th>
-                                                                    <th class="text-bold text-success">Meat</th>
-                                                                    <th class="text-bold text-success">Fruit Vegetable</th>
-                                                                    <th class="text-bold text-success">Bread</th>
-                                                                    <th class="text-bold text-success">Frozen Goods</th>
-                                                                    <th class="text-bold text-success">Dairy Products</th>
-                                                                    <th class="text-bold text-success">Cons Earliest</th>
-                                                                    <th class="text-bold text-success">Minus</th>
-                                                                    <th class="text-bold text-success">Tea</th>
-                                                                    <th class="text-bold text-success">Coffee</th>
-                                                                    <th class="text-bold text-success">Cheese</th>
-                                                                    <th class="text-bold text-success">Eggs</th>
-                                                                    <th class="text-bold">Total Cost</th>
-                                                                    <th class="text-bold">Nights</th>
-                                                                    <th class="text-bold">WES</th>
+                                                                    <th class="text-bold text-success">Supplier Name</th>
+                                                                    <th class="text-bold text-success">Cost</th>
+                                                                    <th class="text-bold text-success">Date</th>
                                                                 </tr>
                                                             </thead>
                                                             <tbody>
 
                                                                 <?php
-                                                    $exit=1; $meat_total=$fruit_total=$bread_total=$frozen_total=$dairy_total=$cons_total=$minus_total=$tea_total=$coffee_total=$cheese_total=$eggs_total=$total_cost_total=$total_nights_total=$Pre_Year_Check=0; 
-
+                                                    $total_goods_cost=0;
                                                     while ($row = mysqli_fetch_array($result_goods_data)) {
-                                                        $time=strtotime($row['date']);
-                                                        $Year_check = date("Y",$time);
-                                                        if($exit == 1){
-                                                            $Pre_Year_Check = date("Y",$time);
                                                                 ?>
-                                                                <tr>
-                                                                    <td></td>
-                                                                    <td><?php echo $row['Meat_Supplier']; ?></td>
-                                                                    <td><?php echo $row['Fruit_Vegetable_Supplier']; ?></td>
-                                                                    <td><?php echo $row['Bread_Supplier']; ?></td>
-                                                                    <td><?php echo $row['Frozen_Goods_Supplier']; ?></td>
-                                                                    <td><?php echo $row['Dairy_Products_Supplier']; ?></td>
-                                                                    <td><?php echo $row['Cons_Earliest_Supplier']; ?></td>
-                                                                    <td></td>
-                                                                    <td><?php echo $row['Tea_Supplier']; ?></td>
-                                                                    <td><?php echo $row['Coffee_Supplier']; ?></td>
-                                                                    <td><?php echo $row['Cheese_Supplier']; ?></td>
-                                                                    <td><?php echo $row['Eggs_Supplier']; ?></td>
-                                                                    <td class="text-bold"><?php echo 'Per Month (€)'; ?></td>
-                                                                    <td></td>
-                                                                    <td class="text-bold"><?php echo 'Per Night (€)'; ?></td>
-                                                                </tr>
-                                                                <?php 
-                                                            $exit++; }
-                                                        if($Pre_Year_Check != $Year_check){
-                                                                ?>
-                                                                <tr class="forecast_gray_color">
-                                                                    <td class="text-bold"><?php echo 'Total '.$Pre_Year_Check; ?></td>
-                                                                    <td><?php echo number_format($meat_total); ?></td>
-                                                                    <td><?php echo number_format($fruit_total); ?></td>
-                                                                    <td><?php echo number_format($bread_total); ?></td>
-                                                                    <td><?php echo number_format($frozen_total); ?></td>
-                                                                    <td><?php echo number_format($dairy_total); ?></td>
-                                                                    <td><?php echo number_format($cons_total); ?></td>
-                                                                    <td><?php echo number_format($minus_total); ?></td>
-                                                                    <td><?php echo number_format($tea_total); ?></td>
-                                                                    <td><?php echo number_format($coffee_total); ?></td>
-                                                                    <td><?php echo number_format($cheese_total); ?></td>
-                                                                    <td><?php echo number_format($eggs_total); ?></td>
-                                                                    <td><?php echo number_format($total_cost_total); ?></td>
-                                                                    <td><?php echo number_format($total_nights_total); ?></td>
-                                                                    <td><?php if($total_nights_total != 0){ echo number_format(round($total_cost_total/$total_nights_total,2));}else{echo number_format($total_cost_total);} ?></td>
-                                                                </tr>
-                                                                <?php $meat_total=$fruit_total=$bread_total=$frozen_total=$dairy_total=$cons_total=$minus_total=$tea_total=$coffee_total=$cheese_total=$eggs_total=$total_cost_total=$total_nights_total=0;
-                                                            $Pre_Year_Check = date("Y",$time);
-                                                        }
-
-
-                                                        $meat_total+=$row['Meat'];
-                                                        $fruit_total+=$row['Fruit_Vegetable'];
-                                                        $bread_total+=$row['Bread'];
-                                                        $frozen_total+=$row['Frozen_Goods'];
-                                                        $dairy_total+=$row['Dairy_Products'];
-                                                        $cons_total+=$row['Cons_Earliest'];
-                                                        $minus_total+=$row['Minus'];
-                                                        $tea_total+=$row['Tea'];
-                                                        $coffee_total+=$row['Coffee'];
-                                                        $cheese_total+=$row['Cheese'];
-                                                        $eggs_total+=$row['Eggs'];
-                                                        $total_cost_total+=$row['total_cost'];
-                                                                ?>
-
                                                                 <tr class="">
-                                                                    <td class="text-bold"><?php echo date("F",$time).' '.$Year_check; ?></td>
-                                                                    <td><?php echo number_format($row['Meat']); ?></td>
-                                                                    <td><?php echo number_format($row['Fruit_Vegetable']); ?></td>
-                                                                    <td><?php echo number_format($row['Bread']); ?></td>
-                                                                    <td><?php echo number_format($row['Frozen_Goods']); ?></td>
-                                                                    <td><?php echo number_format($row['Dairy_Products']); ?></td>
-                                                                    <td><?php echo number_format($row['Cons_Earliest']); ?></td>
-                                                                    <td><?php echo number_format($row['Minus']); ?></td>
-                                                                    <td><?php echo number_format($row['Tea']); ?></td>
-                                                                    <td><?php echo number_format($row['Coffee']); ?></td>
-                                                                    <td><?php echo number_format($row['Cheese']); ?></td>
-                                                                    <td><?php echo number_format($row['Eggs']); ?></td>
-                                                                    <td><?php echo number_format($row['total_cost']); ?></td>
-                                                                    <td><?php 
-                                                        $sql_inner = 'SELECT count(*) as num FROM `tbl_forecast_reservations_rooms` WHERE `hotel_id` = '.$hotel_id.' AND MONTH(`date`) = '.date("m",$time).' AND YEAR(`date`) = '.date("Y",$time);
-                                                        $result_inner = $conn->query($sql_inner);
-                                                        $total_nights = 0;
-                                                        if ($result_inner && $result_inner->num_rows > 0) {
-                                                            while ($row_inner = mysqli_fetch_array($result_inner)) {
-                                                                $total_nights = $row_inner['num'];
-                                                            }
-                                                        }else{
-                                                            $total_nights = 0;
-                                                        }
-                                                        $total_nights_total += $total_nights;
-                                                        echo $total_nights; ?></td>
-                                                                    <td><?php if($total_nights != 0){ echo round($row['total_cost']/$total_nights,2);}else{echo $row['total_cost'];} ?></td>
+                                                                    <td><?php echo $row['supplier_name']; ?></td>
+                                                                    <td><?php echo number_format($row['cost']); 
+                                                        $total_goods_cost += $row['cost'];
+                                                                        ?></td>
+                                                                    <td class=""><?php echo date('M, Y', strtotime($row['date'])); ?></td>
                                                                 </tr>
-
-
-
-
-
                                                                 <?php } ?>
 
                                                                 <tr class="forecast_gray_color">
-                                                                    <td class="text-bold"><?php echo 'Total '.$Pre_Year_Check; ?></td>
-                                                                    <td><?php echo number_format($meat_total); ?></td>
-                                                                    <td><?php echo number_format($fruit_total); ?></td>
-                                                                    <td><?php echo number_format($bread_total); ?></td>
-                                                                    <td><?php echo number_format($frozen_total); ?></td>
-                                                                    <td><?php echo number_format($dairy_total); ?></td>
-                                                                    <td><?php echo number_format($cons_total); ?></td>
-                                                                    <td><?php echo number_format($minus_total); ?></td>
-                                                                    <td><?php echo number_format($tea_total); ?></td>
-                                                                    <td><?php echo number_format($coffee_total); ?></td>
-                                                                    <td><?php echo number_format($cheese_total); ?></td>
-                                                                    <td><?php echo number_format($eggs_total); ?></td>
-                                                                    <td><?php echo number_format($total_cost_total); ?></td>
-                                                                    <td><?php echo number_format($total_nights_total); ?></td>
-                                                                    <td><?php if($total_nights_total != 0){ echo number_format(round($total_cost_total/$total_nights_total,2));}else{echo number_format($total_cost_total);} ?></td>
+                                                                    <td class="text-bold"><?php echo 'Total '; ?></td>
+                                                                    <td class="text-bold"><?php echo $total_goods_cost; ?></td>
+                                                                    <td class="text-bold"><?php echo $year_; ?></td>
                                                                 </tr>
                                                             </tbody>
                                                         </table>
@@ -3668,7 +3561,6 @@ $months_name_array = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct
 
                                             </div>
                                         </div>
-
 
 
                                         <!--                                        Start Settings Screens-->
@@ -4215,98 +4107,18 @@ $months_name_array = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct
                                                 <div class="col-lg-4 right-border-div pr-3 prm-0px">
 
                                                     <div class="mt-4">
-                                                        <h3><span id="add_or_edit_goods_text">Add</span> Goods Cost <button onclick="clear_goods_values();" type="button" class="btn btn-dark float-right">Clear Values</button></h3>
+                                                        <h3><span id="add_or_edit_goods_text">Add</span> Suppliers Cost <button onclick="clear_goods_values();" type="button" class="btn btn-dark float-right">Clear Values</button></h3>
                                                     </div>
 
                                                     <div class="row mt-3">
                                                         <div class="col-lg-12">
 
+                                                            <div id="multiple_suppliers">
 
-                                                            <div class="form-group mb-0">
-                                                                <label class="control-label display-inline w-47 wm-47"><strong>Meat Cost</strong></label>
-                                                            </div>
-                                                            <div class="form-group mb-0">
-                                                                <input step="any" type="number" class="form-control display-inline w-47 wm-50" id="meat_cost">
-                                                                <input type="text" class="form-control display-inline ml-2 w-47 wm-47" id="meat_supplier">
                                                             </div>
 
-                                                            <div class="form-group mb-0 mt-3">
-                                                                <label class="control-label display-inline w-47 wm-47"><strong>Fruits &amp; Vegetables</strong></label>
-                                                            </div>
-                                                            <div class="form-group mb-0">
-                                                                <input step="any" type="number" class="form-control display-inline w-47 wm-50" id="fruit_cost">
-                                                                <input type="text" class="form-control display-inline ml-2 w-47 wm-47" id="fruit_supplier">
-                                                            </div>
-
-                                                            <div class="form-group mb-0 mt-3">
-                                                                <label class="control-label display-inline w-47 wm-47"><strong>Bread</strong></label>
-                                                            </div>
-                                                            <div class="form-group mb-0">
-                                                                <input step="any" type="number" class="form-control display-inline w-47 wm-50" id="bread_cost">
-                                                                <input type="text" class="form-control display-inline ml-2 w-47 wm-47" id="bread_supplier">
-                                                            </div>
-
-                                                            <div class="form-group mb-0 mt-3">
-                                                                <label class="control-label display-inline w-47 wm-47"><strong>Frozen Goods</strong></label>
-                                                            </div>
-                                                            <div class="form-group mb-0">
-                                                                <input step="any" type="number" class="form-control display-inline w-47 wm-50" id="frozen_cost">
-                                                                <input type="text" class="form-control display-inline ml-2 w-47 wm-47" id="frozen_supplier">
-                                                            </div>
-
-                                                            <div class="form-group mb-0 mt-3">
-                                                                <label class="control-label display-inline w-47 wm-47"><strong>Dairy Products</strong></label>
-                                                            </div>
-                                                            <div class="form-group mb-0">
-                                                                <input step="any" type="number" class="form-control display-inline w-47 wm-50" id="dairy_cost">
-                                                                <input type="text" class="form-control display-inline ml-2 w-47 wm-47" id="dairy_supplier">
-                                                            </div>
-
-                                                            <div class="form-group mb-0 mt-3">
-                                                                <label class="control-label display-inline w-47 wm-47"><strong>Cons Earliast</strong></label>
-                                                            </div>
-                                                            <div class="form-group mb-0">
-                                                                <input step="any" type="number" class="form-control display-inline w-47 wm-50" id="cons_cost">
-                                                                <input type="text" class="form-control display-inline ml-2 w-47 wm-47" id="cons_supplier">
-                                                            </div>
-
-                                                            <div class="form-group mb-0 mt-3">
-                                                                <label class="control-label display-inline w-47 wm-47"><strong>Tea</strong></label>
-                                                            </div>
-                                                            <div class="form-group mb-0">
-                                                                <input step="any" type="number" class="form-control display-inline w-47 wm-50" id="tea_cost">
-                                                                <input type="text" class="form-control display-inline ml-2 w-47 wm-47" id="tea_supplier">
-                                                            </div>
-
-                                                            <div class="form-group mb-0 mt-3">
-                                                                <label class="control-label display-inline w-47 wm-47"><strong>Coffee</strong></label>
-                                                            </div>
-                                                            <div class="form-group mb-0">
-                                                                <input step="any" type="number" class="form-control display-inline w-47 wm-50" id="coffee_cost">
-                                                                <input type="text" class="form-control display-inline ml-2 w-47 wm-47" id="coffee_supplier">
-                                                            </div>
-
-                                                            <div class="form-group mb-0 mt-3">
-                                                                <label class="control-label display-inline w-47 wm-47"><strong>Cheese</strong></label>
-                                                            </div>
-                                                            <div class="form-group mb-0">
-                                                                <input step="any" type="number" class="form-control display-inline w-47 wm-50" id="cheese_cost">
-                                                                <input type="text" class="form-control display-inline ml-2 w-47 wm-47" id="cheese_supplier">
-                                                            </div>
-
-                                                            <div class="form-group mb-0 mt-3">
-                                                                <label class="control-label display-inline w-47 wm-47"><strong>Eggs</strong></label>
-                                                            </div>
-                                                            <div class="form-group mb-0">
-                                                                <input step="any" type="number" class="form-control display-inline w-47 wm-50" id="eggs_cost">
-                                                                <input type="text" class="form-control display-inline ml-2 w-47 wm-47" id="eggs_supplier">
-                                                            </div>
-
-                                                            <div class="form-group mb-0 mt-3 mt-3 mrm-12px">
-                                                                <label class="control-label display-inline w-100 wm-100"><strong>Minus</strong></label>
-                                                            </div>
-                                                            <div class="form-group mb-0 mrm-12px">
-                                                                <input type="number" step="any" class="form-control display-inline w-100 wm-100" id="minus_costs">
+                                                            <div class="mt-3 pbm-0 mbm-0 mrm-12px">
+                                                                <input type="button" onclick="Add_suppliers();" class="btn mt-4 w-100 btn-dark" value="Add More Supplier">
                                                             </div>
 
 
@@ -4342,7 +4154,7 @@ $months_name_array = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct
 
 
                                                     <div class="mt-3 mb-5 pb-5 pbm-0 mbm-0 mrm-12px">
-                                                        <input type="button" onclick="save_goods_cost();" class="btn mt-4 w-100 btn-info" value="Save Goods Purchasing">
+                                                        <input type="button" onclick="save_goods_cost();" class="btn mt-4 w-100 btn-dark" value="Save Suppliers">
                                                     </div>
 
 
@@ -4350,11 +4162,11 @@ $months_name_array = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct
 
                                                 <div class="col-lg-8" id="reload_goods">
                                                     <div class="mt-4">
-                                                        <h3>Goods Cost</h3>
+                                                        <h3>Suppliers Cost</h3>
                                                     </div>
 
                                                     <?php
-                                                    $sql_goods = "SELECT * FROM `tbl_forecast_goods_cost` WHERE `hotel_id` = $hotel_id ORDER BY date DESC";
+                                                    $sql_goods = "SELECT a.*, SUM(b.cost) as total_cost FROM `tbl_forecast_goods_cost` as a INNER JOIN tbl_forecast_goods_cost_suppliers as b on a.frcgct_id = b.frcgct_id WHERE a.`hotel_id` = $hotel_id GROUP BY b.frcgct_id ORDER BY a.date DESC";
 
                                                     $result_goods = $conn->query($sql_goods);
                                                     if ($result_goods && $result_goods->num_rows > 0) {
@@ -4363,62 +4175,29 @@ $months_name_array = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct
                                                         <table id="demo-foo-addrow" class="mobile_response_forecast_tables table table-bordered m-t-30 table-hover contact-list full-color-table full-dark-table hover-table" data-paging="true" data-paging-size="25">
                                                             <thead>
                                                                 <tr>
-                                                                    <th class="" >Meat</th>
-                                                                    <th class="" >Fruit Vegetable</th>
-                                                                    <th class="" >Bread</th>
-                                                                    <th class="" >Frozen Goods</th>
-                                                                    <th class="" >Dairy Products</th>
-                                                                    <th class="" >Cheese</th>
-                                                                    <th class="" >Minus</th>
-                                                                    <th class="" >Total</th>
                                                                     <th class="" >Date</th>
+                                                                    <th class="" >Total</th>
                                                                     <th class="text-center">Action</th>
                                                                 </tr>
                                                             </thead>
+
+                                                            <tbody>
                                                             <tbody>
                                                                 <?php
-                                                        $km=0;
                                                         while ($row = mysqli_fetch_array($result_goods)) {
-
-                                                            if($km == 0){
-                                                                ?>
-
-                                                                <tr class="">
-                                                                    <th><small><?php echo $row['Meat_Supplier']; ?></small></th>
-                                                                    <th><small><?php echo $row['Fruit_Vegetable_Supplier']; ?></small></th>
-                                                                    <th><small><?php echo $row['Bread_Supplier']; ?></small></th>
-                                                                    <th><small><?php echo $row['Frozen_Goods_Supplier']; ?></small></th>
-                                                                    <th><small><?php echo $row['Dairy_Products_Supplier']; ?></small></th>
-                                                                    <th><small><?php echo $row['Cheese_Supplier']; ?></small></th>
-                                                                    <th>-</th>
-                                                                    <th>-</th>
-                                                                    <th>-</th>
-                                                                    <th>-</th>
-                                                                </tr>
-
-                                                                <?php
-                                                            }
-
                                                                 ?>
                                                                 <tr class="" id="goods_cost_<?php echo $row['frcgct_id']; ?>">
-                                                                    <td><?php echo $row['Meat']; ?></td>
-                                                                    <td><?php echo $row['Fruit_Vegetable']; ?></td>
-                                                                    <td class=""><?php echo $row['Bread']; ?></td>
-                                                                    <td class=""><?php echo $row['Frozen_Goods']; ?></td>
-                                                                    <td class=""><?php echo $row['Dairy_Products']; ?></td>
-                                                                    <td class=""><?php echo $row['Cheese']; ?></td>
-                                                                    <td class=""><?php echo $row['Minus']; ?></td>
-                                                                    <td class=""><?php echo $row['total_cost']; ?></td>
                                                                     <td class=""><?php echo date('M, Y', strtotime($row['date'])); ?></td>
+                                                                    <td class=""><?php echo $row['total_cost']; ?></td>
                                                                     <td class="font-size-subheading text-center black_color">
                                                                         <a  class="black_color" href="javascript:void(0)" onclick="edit_goods('<?php echo $row['frcgct_id']; ?>')"><i class="fas fa-pencil-alt font-size-subheading text-right"></i></a>
                                                                     </td>
                                                                 </tr>
                                                                 <?php 
-                                                            $km++;
                                                         } 
                                                                 ?>
                                                             </tbody>
+
                                                         </table>
                                                     </div>
 
@@ -5405,6 +5184,48 @@ $months_name_array = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct
                 });
             }
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+            var supplier_number = 1;
+
+            function Add_suppliers(){
+
+                console.log("clicked");
+
+                var supplier_div = '<div class="form-group mb-0 mt-3"><label class="control-label display-inline w-47 wm-47"><strong>Supplier</strong></label><label class="control-label display-inline ml-2 w-47 wm-47"><strong>Cost</strong></label></div><div class="form-group mb-0"><input type="text" class="form-control display-inline w-47 wm-47" id="supplier_'+supplier_number+'"><input step="any" type="number" class="form-control display-inline ml-2 w-47 wm-50" id="supplier_cost_'+supplier_number+'"></div>';
+
+
+
+                $("#multiple_suppliers").append(supplier_div);
+
+                supplier_number++;
+
+            }
+
+
+
             var goods_id = 0;
 
             function edit_goods(good_id){
@@ -5418,8 +5239,9 @@ $months_name_array = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct
                     processData: false,
                     contentType: false,
                     success:function(response){
-
                         if(response != ''){
+                            supplier_number = 1;
+                            $('#multiple_suppliers').empty();
                             $("#reload_goods > div > table > tbody > tr").removeClass('forecast_secondary_color');
 
                             $("#goods_cost_"+good_id).addClass('forecast_secondary_color');
@@ -5427,29 +5249,21 @@ $months_name_array = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct
 
                             const myArray = response.split(",");
 
-                            $("#meat_cost").val(myArray[0]);
-                            $("#meat_supplier").val(myArray[1]);
-                            $("#fruit_cost").val(myArray[2]);
-                            $("#fruit_supplier").val(myArray[3]);
-                            $("#bread_cost").val(myArray[4]);
-                            $("#bread_supplier").val(myArray[5]);
-                            $("#frozen_cost").val(myArray[6]);
-                            $("#frozen_supplier").val(myArray[7]);
-                            $("#dairy_cost").val(myArray[8]);
-                            $("#dairy_supplier").val(myArray[9]);
-                            $("#cons_cost").val(myArray[10]);
-                            $("#cons_supplier").val(myArray[11]);
-                            $("#tea_cost").val(myArray[12]);
-                            $("#tea_supplier").val(myArray[13]);
-                            $("#coffee_cost").val(myArray[14]);
-                            $("#coffee_supplier").val(myArray[15]);
-                            $("#cheese_cost").val(myArray[16]);
-                            $("#cheese_supplier").val(myArray[17]);
-                            $("#eggs_cost").val(myArray[18]);
-                            $("#eggs_supplier").val(myArray[19]);
-                            $("#minus_costs").val(myArray[20]);
-                            $("#date_year_goods").val(myArray[21]);
-                            $("#date_month_goods").val(myArray[22]);
+                            k=0;
+                            j=0;
+                            l=0;
+                            for(i=0;i<(myArray.length/4);i++){
+                                var supplier_div = '<div class="form-group mb-0 mt-3"><label class="control-label display-inline w-47 wm-47"><strong>Supplier</strong></label><label class="control-label display-inline ml-2 w-47 wm-47"><strong>Cost</strong></label></div><div class="form-group mb-0"><input type="text" class="form-control display-inline w-47 wm-47" id="supplier_'+supplier_number+'" value="'+myArray[i+k+j+l]+'"><input step="any" type="number" class="form-control display-inline ml-2 w-47 wm-50" id="supplier_cost_'+supplier_number+'" value="'+myArray[i+k+j+l+1]+'"></div>';
+                                $("#multiple_suppliers").append(supplier_div);
+                                supplier_number++;
+                                k++;
+                                j++;
+                                l++;
+                            }
+
+
+                            $("#date_year_goods").val(myArray[(myArray.length-2)]);
+                            $("#date_month_goods").val(myArray[(myArray.length-1)]);
 
                             goods_id = good_id;
                         }else{
@@ -5465,56 +5279,31 @@ $months_name_array = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct
             }
 
             function save_goods_cost(){
-                var meat_cost=$("#meat_cost").val();
-                var meat_supplier=$("#meat_supplier").val();
-                var fruit_cost=$("#fruit_cost").val();
-                var fruit_supplier=$("#fruit_supplier").val();
-                var bread_cost=$("#bread_cost").val();
-                var bread_supplier=$("#bread_supplier").val();
-                var frozen_cost=$("#frozen_cost").val();
-                var frozen_supplier=$("#frozen_supplier").val();
-                var dairy_cost=$("#dairy_cost").val();
-                var dairy_supplier=$("#dairy_supplier").val();
-                var cons_cost=$("#cons_cost").val();
-                var cons_supplier=$("#cons_supplier").val();
-                var tea_cost=$("#tea_cost").val();
-                var tea_supplier=$("#tea_supplier").val();
-                var coffee_cost=$("#coffee_cost").val();
-                var coffee_supplier=$("#coffee_supplier").val();
-                var cheese_cost=$("#cheese_cost").val();
-                var cheese_supplier=$("#cheese_supplier").val();
-                var eggs_cost=$("#eggs_cost").val();
-                var eggs_supplier=$("#eggs_supplier").val();
-                var minus_costs=$("#minus_costs").val();
+
                 var date_month_goods=$("#date_month_goods").val();
                 var date_year_goods=$("#date_year_goods").val();
 
+                var suppliers_arr = new Array();
+                var goods_costs_arr = new Array();
+
+                for(i=1;i<supplier_number;i++){
+                    var temp1=$("#supplier_"+i).val();
+                    var temp2=$("#supplier_cost_"+i).val();
+
+                    if(temp1 !== ""){
+                        suppliers_arr.push(temp1);
+                        goods_costs_arr.push(temp2);
+                    }
+
+
+                }
 
                 if(date_month_goods <= 0 || date_month_goods > 12){
                     alert("Enter Correct Month Number.");
                 }else{
                     var fd = new FormData();
-                    fd.append('meat_cost_',meat_cost);
-                    fd.append('meat_supplier_',meat_supplier);
-                    fd.append('fruit_cost_',fruit_cost);
-                    fd.append('fruit_supplier_',fruit_supplier);
-                    fd.append('bread_cost_',bread_cost);
-                    fd.append('bread_supplier_',bread_supplier);
-                    fd.append('frozen_cost_',frozen_cost);
-                    fd.append('frozen_supplier_',frozen_supplier);
-                    fd.append('dairy_cost_',dairy_cost);
-                    fd.append('dairy_supplier_',dairy_supplier);
-                    fd.append('cons_cost_',cons_cost);
-                    fd.append('cons_supplier_',cons_supplier);
-                    fd.append('tea_cost_',tea_cost);
-                    fd.append('tea_supplier_',tea_supplier);
-                    fd.append('coffee_cost_',coffee_cost);
-                    fd.append('coffee_supplier_',coffee_supplier);
-                    fd.append('cheese_cost_',cheese_cost);
-                    fd.append('cheese_supplier_',cheese_supplier);
-                    fd.append('eggs_cost_',eggs_cost);
-                    fd.append('eggs_supplier_',eggs_supplier);
-                    fd.append('minus_costs_',minus_costs);
+                    fd.append('suppliers_arr_',suppliers_arr);
+                    fd.append('goods_costs_arr_',goods_costs_arr);
                     fd.append('date_month_goods_',date_month_goods);
                     fd.append('date_year_goods_',date_year_goods);
                     fd.append('goods_id_',goods_id);
@@ -5526,7 +5315,7 @@ $months_name_array = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct
                         processData: false,
                         contentType: false,
                         success:function(response){
-
+                            console.log(response);
                             if(response == 'success'){
                                 clear_goods_values();
                             }else{
@@ -5544,38 +5333,30 @@ $months_name_array = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct
 
             function clear_goods_values(){
                 $("#reload_goods > div > table > tbody > tr").removeClass('forecast_secondary_color');
-                $("#meat_cost").val(null);
-                $("#meat_supplier").val(null);
-                $("#fruit_cost").val(null);
-                $("#fruit_supplier").val(null);
-                $("#bread_cost").val(null);
-                $("#bread_supplier").val(null);
-                $("#frozen_cost").val(null);
-                $("#frozen_supplier").val(null);
-                $("#dairy_cost").val(null);
-                $("#dairy_supplier").val(null);
-                $("#cons_cost").val(null);
-                $("#cons_supplier").val(null);
-                $("#tea_cost").val(null);
-                $("#tea_supplier").val(null);
-                $("#coffee_cost").val(null);
-                $("#coffee_supplier").val(null);
-                $("#cheese_cost").val(null);
-                $("#cheese_supplier").val(null);
-                $("#eggs_cost").val(null);
-                $("#eggs_supplier").val(null);
-                $("#minus_costs").val(null);
                 $("#date_month_goods").val(current_month);
                 $("#date_year_goods").val(current_year);
+                supplier_number = 1;
                 getGoods_suppliers();
-
                 goods_id = 0;
                 $("#reload_goods").load("util_forecast_goods_reload.php");
             }
 
+
+
+
+            function Add_suppliers(){
+
+                var supplier_div = '<div class="form-group mb-0 mt-3"><label class="control-label display-inline w-47 wm-47"><strong>Supplier</strong></label><label class="control-label display-inline ml-2 w-47 wm-47"><strong>Cost</strong></label></div><div class="form-group mb-0"><input type="text" class="form-control display-inline w-47 wm-47" id="supplier_'+supplier_number+'"><input step="any" type="number" class="form-control display-inline ml-2 w-47 wm-50" id="supplier_cost_'+supplier_number+'"></div>';
+
+                $("#multiple_suppliers").append(supplier_div);
+
+                supplier_number++;
+
+            }
             getGoods_suppliers();
 
             function getGoods_suppliers(){
+                $('#multiple_suppliers').empty();
                 var fd = new FormData();
                 $.ajax({
                     url:'util_forecast_goods_suppliers_get.php',
@@ -5586,17 +5367,16 @@ $months_name_array = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct
                     success:function(response){
                         if(response != ''){
                             const myArray = response.split(",");
-                            $("#meat_supplier").val(myArray[0]);
-                            $("#fruit_supplier").val(myArray[1]);
-                            $("#bread_supplier").val(myArray[2]);
-                            $("#frozen_supplier").val(myArray[3]);
-                            $("#dairy_supplier").val(myArray[4]);
-                            $("#cons_supplier").val(myArray[5]);
-                            $("#tea_supplier").val(myArray[6]);
-                            $("#coffee_supplier").val(myArray[7]);
-                            $("#cheese_supplier").val(myArray[8]);
-                            $("#eggs_supplier").val(myArray[9]);
+                            k=0;
+                            for(i=0;i<(myArray.length/2);i++){
+                                var supplier_div = '<div class="form-group mb-0 mt-3"><label class="control-label display-inline w-47 wm-47"><strong>Supplier</strong></label><label class="control-label display-inline ml-2 w-47 wm-47"><strong>Cost</strong></label></div><div class="form-group mb-0"><input type="text" class="form-control display-inline w-47 wm-47" id="supplier_'+supplier_number+'" value="'+myArray[i+k]+'"><input step="any" type="number" class="form-control display-inline ml-2 w-47 wm-50" id="supplier_cost_'+supplier_number+'"></div>';
+                                $("#multiple_suppliers").append(supplier_div);
+                                supplier_number++;
+                                k++;
+                            }
+
                         }else{
+                            Add_suppliers();
                         }
                     },
                     error: function(xhr, status, error) {
@@ -5604,6 +5384,30 @@ $months_name_array = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct
                     },
                 });
             }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
