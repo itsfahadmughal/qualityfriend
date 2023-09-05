@@ -31,7 +31,6 @@ if(isset($_POST['date_month_key_'])){
 if(isset($_POST['date_year_key_'])){
     $date_year_key_ = $_POST['date_year_key_'];
 }
-
 if(isset($_POST['facts_id_'])){
     $facts_id_ = $_POST['facts_id_'];
 }
@@ -41,7 +40,15 @@ $total_capacity_ = $opening_days_ * $beds_;
 $full_date = $date_year_key_.'-'.$date_month_key_.'-28';
 
 if($facts_id_ == 0){
-    $sql="INSERT INTO `tbl_forecast_keyfacts`( `rooms`, `beds`, `opening_days`, `total_stay_capacity`, `date`, `hotel_id`, `lastedittime`, `lasteditbyip`, `lasteditbyid`)  VALUES ('$rooms_','$beds_','$opening_days_','$total_capacity_','$full_date','$hotel_id','$last_edit_time','$last_editby_ip','$last_editby_id')";
+
+    $sql_check = "SELECT * FROM `tbl_forecast_keyfacts` WHERE `date` = '$full_date' and hotel_id=$hotel_id";
+    $result_check = $conn->query($sql_check);
+    if ($result_check && $result_check->num_rows > 0) {
+        echo 'duplicate';
+        exit;
+    }else{
+        $sql="INSERT INTO `tbl_forecast_keyfacts`( `rooms`, `beds`, `opening_days`, `total_stay_capacity`, `date`, `hotel_id`, `lastedittime`, `lasteditbyip`, `lasteditbyid`)  VALUES ('$rooms_','$beds_','$opening_days_','$total_capacity_','$full_date','$hotel_id','$last_edit_time','$last_editby_ip','$last_editby_id')";
+    }
 }else{
     $sql="UPDATE `tbl_forecast_keyfacts` SET `rooms`='$rooms_',`beds`='$beds_',`opening_days`='$opening_days_',`total_stay_capacity`='$total_capacity_',`date`='$full_date',`lastedittime`='$last_edit_time',`lasteditbyip`='$last_editby_ip',`lasteditbyid`='$last_editby_id' WHERE `frckfs_id` =  $facts_id_ AND hotel_id = $hotel_id";
 }

@@ -513,30 +513,30 @@ $months_name_array = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct
                                                         array_push($months_arr,$month);
                                                         $year=date("Y",$time);
 
-                                                        $sql_inner_1="SELECT ROUND(SUM(`accommodation_sale`),2) AS acc_sale, ROUND(SUM(`additionalServices_sale`+`extras_sale`),2) AS ancill_sale, ROUND(SUM(`spa_sale`),2) AS spa_sale, COUNT(frcrrm_id) as total_stay FROM `tbl_forecast_reservations_rooms` WHERE `status` != 'cancelled' AND hotel_id = $hotel_id AND MONTH(`date`) = $month AND YEAR(`date`) =  $year";
+                                                        $sql_inner_1="SELECT ROUND(SUM(`accommodation_sale`),2) AS acc_sale, COUNT(frcrrm_id) as total_stay FROM `tbl_forecast_reservations_rooms` WHERE `status` != 'cancelled' AND hotel_id = $hotel_id AND MONTH(`date`) = $month AND YEAR(`date`) =  $year";
                                                         $result_inner_1 = $conn->query($sql_inner_1);
                                                         if ($result_inner_1 && $result_inner_1->num_rows > 0) {
                                                             while ($row_inner_1 = mysqli_fetch_array($result_inner_1)) {
                                                                 array_push($accomodation_sale_arr,$row_inner_1['acc_sale']);
-                                                                array_push($anicillary_sale_arr,$row_inner_1['ancill_sale']);
-                                                                array_push($spa_sale_arr,$row_inner_1['spa_sale']);
                                                                 array_push($total_stay_arr,$row_inner_1['total_stay']);
                                                             }
                                                         }else{
                                                             array_push($accomodation_sale_arr,0);
-                                                            array_push($anicillary_sale_arr,0);
-                                                            array_push($spa_sale_arr,0);
                                                             array_push($total_stay_arr,0);
                                                         }
 
 
-                                                        $sql_inner_2="SELECT `bank_account_balance` FROM `tbl_forecast_revenues` WHERE hotel_id = $hotel_id AND MONTH(`date`) = $month AND YEAR(`date`) =  $year";
+                                                        $sql_inner_2="SELECT `bank_account_balance`,Ancillary_Revenues_Net,Spa_Revenues_Net_22 FROM `tbl_forecast_revenues` WHERE hotel_id = $hotel_id AND MONTH(`date`) = $month AND YEAR(`date`) =  $year";
                                                         $result_inner_2 = $conn->query($sql_inner_2);
                                                         if ($result_inner_2 && $result_inner_2->num_rows > 0) {
                                                             while ($row_inner_2 = mysqli_fetch_array($result_inner_2)) { array_push($acc_balance_arr,$row_inner_2['bank_account_balance']);
+                                                                                                                        array_push($anicillary_sale_arr,$row_inner_2['Ancillary_Revenues_Net']);
+                                                                                                                        array_push($spa_sale_arr,$row_inner_2['Spa_Revenues_Net_22']);
                                                                                                                        }
                                                         }else{
                                                             array_push($acc_balance_arr,0);
+                                                            array_push($anicillary_sale_arr,0);
+                                                            array_push($spa_sale_arr,0);
                                                         }
 
                                                         $sql_inner_3="SELECT * FROM `tbl_forecast_keyfacts` WHERE hotel_id = $hotel_id AND MONTH(`date`) = $month AND YEAR(`date`) =  $year";
@@ -1086,7 +1086,7 @@ $months_name_array = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct
                                                         array_push($months_arr1,$month);
                                                         $year=date("Y",$time);
 
-                                                        $sql_inner_1="SELECT ROUND(SUM(`accommodation_sale`),2) AS acc_sale, ROUND(SUM(`additionalServices_sale`+`extras_sale`),2) AS ancill_sale, ROUND(SUM(`spa_sale`),2) AS spa_sale, COUNT(frcrrm_id) as total_stay FROM `tbl_forecast_reservations_rooms` WHERE `status` != 'cancelled' AND hotel_id = $hotel_id AND MONTH(`date`) = $month AND YEAR(`date`) =  $year";
+                                                        $sql_inner_1="SELECT ROUND(SUM(`accommodation_sale`),2) AS acc_sale, COUNT(frcrrm_id) as total_stay FROM `tbl_forecast_reservations_rooms` WHERE `status` != 'cancelled' AND hotel_id = $hotel_id AND MONTH(`date`) = $month AND YEAR(`date`) =  $year";
                                                         $result_inner_1 = $conn->query($sql_inner_1);
                                                         if ($result_inner_1 && $result_inner_1->num_rows > 0) {
                                                             while ($row_inner_1 = mysqli_fetch_array($result_inner_1)) {
@@ -1094,16 +1094,6 @@ $months_name_array = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct
                                                                     'period' => $index_forecast_data,
                                                                     'date' => $row['date_final'],
                                                                     'sales' => $row_inner_1['acc_sale'],
-                                                                ];
-                                                                $anicillary_sale_arr1[$index_forecast_data] = [
-                                                                    'period' => $index_forecast_data,
-                                                                    'date' => $row['date_final'],
-                                                                    'sales' => $row_inner_1['ancill_sale'],
-                                                                ];
-                                                                $spa_sale_arr1[$index_forecast_data] = [
-                                                                    'period' => $index_forecast_data,
-                                                                    'date' => $row['date_final'],
-                                                                    'sales' => $row_inner_1['spa_sale'],
                                                                 ];
                                                                 $total_stay_arr1[$index_forecast_data] = [
                                                                     'period' => $index_forecast_data,
@@ -1117,16 +1107,7 @@ $months_name_array = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct
                                                                 'date' => $row['date_final'],
                                                                 'sales' => 0,
                                                             ];
-                                                            $anicillary_sale_arr1[$index_forecast_data] = [
-                                                                'period' => $index_forecast_data,
-                                                                'date' => $row['date_final'],
-                                                                'sales' => 0,
-                                                            ];
-                                                            $spa_sale_arr1[$index_forecast_data] = [
-                                                                'period' => $index_forecast_data,
-                                                                'date' => $row['date_final'],
-                                                                'sales' => 0,
-                                                            ];
+
                                                             $total_stay_arr1[$index_forecast_data] = [
                                                                 'period' => $index_forecast_data,
                                                                 'date' => $row['date_final'],
@@ -1181,6 +1162,43 @@ $months_name_array = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct
                                                         }
 
 
+                                                        $sql_inner_2="SELECT `bank_account_balance`,`Ancillary_Revenues_Net`,`Spa_Revenues_Net_22` FROM `tbl_forecast_revenues` WHERE hotel_id = $hotel_id AND MONTH(`date`) = $month AND YEAR(`date`) =  $year";
+                                                        $result_inner_2 = $conn->query($sql_inner_2);
+                                                        if ($result_inner_2 && $result_inner_2->num_rows > 0) {
+                                                            while ($row_inner_2 = mysqli_fetch_array($result_inner_2)) {
+
+                                                                if($year == $year_){
+                                                                    array_push($acc_balance_arr1,$row_inner_2['bank_account_balance']);
+                                                                }
+
+                                                                $anicillary_sale_arr1[$index_forecast_data] = [
+                                                                    'period' => $index_forecast_data,
+                                                                    'date' => $row['date_final'],
+                                                                    'sales' => $row_inner_2['Ancillary_Revenues_Net'],
+                                                                ];
+                                                                $spa_sale_arr1[$index_forecast_data] = [
+                                                                    'period' => $index_forecast_data,
+                                                                    'date' => $row['date_final'],
+                                                                    'sales' => $row_inner_2['Spa_Revenues_Net_22'],
+                                                                ];
+                                                            }
+                                                        }else{
+                                                            if($year == $year_){
+                                                                array_push($acc_balance_arr1,0);
+                                                            }
+
+                                                            $anicillary_sale_arr1[$index_forecast_data] = [
+                                                                'period' => $index_forecast_data,
+                                                                'date' => $row['date_final'],
+                                                                'sales' => 0,
+                                                            ];
+                                                            $spa_sale_arr1[$index_forecast_data] = [
+                                                                'period' => $index_forecast_data,
+                                                                'date' => $row['date_final'],
+                                                                'sales' => 0,
+                                                            ];
+                                                        }
+
 
 
                                                         $date_forecast_last = $row['date_final'];
@@ -1188,15 +1206,7 @@ $months_name_array = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct
 
                                                     }
 
-                                                    $sql_inner_2="SELECT `bank_account_balance` FROM `tbl_forecast_revenues` WHERE hotel_id = $hotel_id AND YEAR(`date`) =  $year_ ORDER BY date ASC";
-                                                    $result_inner_2 = $conn->query($sql_inner_2);
-                                                    if ($result_inner_2 && $result_inner_2->num_rows > 0) {
-                                                        while ($row_inner_2 = mysqli_fetch_array($result_inner_2)) {
-                                                            array_push($acc_balance_arr1,$row_inner_2['bank_account_balance']);
-                                                        }
-                                                    }else{
-                                                        array_push($acc_balance_arr1,0);
-                                                    }
+
 
                                                     $staffing_arr1 = $total_staffing_salary_per_month;
                                                 ?>
@@ -1617,7 +1627,7 @@ $months_name_array = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct
                                                                     <td class="text-left"><?php echo 'Total Loan'; ?></td>
                                                                     <td>
                                                                         <?php
-                                                    $full_date_loan = date("Y")."-1-28";
+                                                    $full_date_loan = date("Y")."-01-28";
                                                     $index_desired2=array_search($full_date_loan,$date_cost1);
                                                     if(isset($total_loan_arr1[$index_desired2])){ echo number_format(round($total_loan_arr1[$index_desired2],2));
                                                                                                 }else{echo 0;} ?></td>
@@ -3610,7 +3620,7 @@ $months_name_array = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct
                                                                     <?php
                                                                     for($i=1;$i<13;$i++){
                                                                     ?>
-                                                                    <option value="<?php echo $i; ?>" <?php if($i == $current_month_){echo 'selected';} ?>><?php echo $months_name_array[$i-1]; ?></option>   
+                                                                    <option value="<?php if($i<10){echo '0'.$i;}else{echo $i;} ?>" <?php if($i == $current_month_){echo 'selected';} ?>><?php echo $months_name_array[$i-1]; ?></option>   
                                                                     <?php 
                                                                     } 
                                                                     ?> 
@@ -3715,7 +3725,7 @@ $months_name_array = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct
                                                                 <input step="any" type="number" class="form-control display-inline ml-2 w-47 wm-47" id="spa_products_cost">
                                                             </div>
 
-                                                            <div class="form-group mb-0">
+                                                            <div class="form-group mb-0 mt-3">
                                                                 <label class="control-label display-inline w-47 wm-47"><strong>Total Operating Cost</strong></label>
                                                                 <label class="control-label display-inline ml-2 w-47 wm-47"><strong>Administration Cost</strong></label>
                                                             </div>
@@ -3758,7 +3768,7 @@ $months_name_array = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct
                                                                     <?php
                                                                     for($i=1;$i<13;$i++){
                                                                     ?>
-                                                                    <option value="<?php echo $i; ?>" <?php if($i == $current_month_){echo 'selected';} ?>><?php echo $months_name_array[$i-1]; ?></option>   
+                                                                    <option value="<?php if($i<10){echo '0'.$i;}else{echo $i;} ?>" <?php if($i == $current_month_){echo 'selected';} ?>><?php echo $months_name_array[$i-1]; ?></option>   
                                                                     <?php 
                                                                     } 
                                                                     ?> 
@@ -3890,7 +3900,7 @@ $months_name_array = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct
                                                                     <?php
                                                                     for($i=1;$i<13;$i++){
                                                                     ?>
-                                                                    <option value="<?php echo $i; ?>" <?php if($i == $current_month_){echo 'selected';} ?>><?php echo $months_name_array[$i-1]; ?></option>   
+                                                                    <option value="<?php if($i<10){echo '0'.$i;}else{echo $i;} ?>" <?php if($i == $current_month_){echo 'selected';} ?>><?php echo $months_name_array[$i-1]; ?></option>   
                                                                     <?php 
                                                                     } 
                                                                     ?> 
@@ -4053,7 +4063,7 @@ $months_name_array = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct
                                                     </div>
 
                                                     <?php
-                                                    $sql_staffing = "SELECT a.*,b.* FROM `tbl_forecast_staffing_cost` as a INNER JOIN tbl_forecast_staffing_department as b ON a.frcstfd_id = b.frcstfd_id WHERE a.`hotel_id` = $hotel_id ORDER BY a.year DESC";
+                                                    $sql_staffing = "SELECT a.*,b.* FROM `tbl_forecast_staffing_cost` as a INNER JOIN tbl_forecast_staffing_department as b ON a.frcstfd_id = b.frcstfd_id WHERE a.`hotel_id` = $hotel_id ORDER BY a.end_date DESC";
 
                                                     $result_staffing = $conn->query($sql_staffing);
                                                     if ($result_staffing && $result_staffing->num_rows > 0) {
@@ -4066,7 +4076,7 @@ $months_name_array = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct
                                                                     <th class="" >Staff Department</th>
                                                                     <th class="" >Gross Salary (€)</th>
                                                                     <th class="" >Net Salary (€)</th>
-                                                                    <th class="" >Year</th>
+                                                                    <th class="" >Date</th>
                                                                     <th class="text-center">Action</th>
                                                                 </tr>
                                                             </thead>
@@ -4080,7 +4090,7 @@ $months_name_array = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct
                                                                     <td><?php echo $row['title']; ?></td>
                                                                     <td class=""><?php echo $row['gross_salary']; ?></td>
                                                                     <td class=""><?php echo $row['net_salary']; ?></td>
-                                                                    <td class=""><?php echo $row['year']; ?></td>
+                                                                    <td class=""><?php echo date('M', mktime(0, 0, 0, $row['month'], 10)).', '.$row['year']; ?></td>
                                                                     <td class="font-size-subheading text-center black_color">
                                                                         <a  class="black_color" href="javascript:void(0)" onclick="edit_staff_cost('<?php echo $row['frcstfct_id']; ?>')"><i class="fas fa-pencil-alt font-size-subheading text-right"></i></a>
                                                                     </td>
@@ -4131,7 +4141,7 @@ $months_name_array = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct
                                                                     <?php
                                                                     for($i=1;$i<13;$i++){
                                                                     ?>
-                                                                    <option value="<?php echo $i; ?>" <?php if($i == $current_month_){echo 'selected';} ?>><?php echo $months_name_array[$i-1]; ?></option>   
+                                                                    <option value="<?php if($i<10){echo '0'.$i;}else{echo $i;} ?>" <?php if($i == $current_month_){echo 'selected';} ?>><?php echo $months_name_array[$i-1]; ?></option>   
                                                                     <?php 
                                                                     } 
                                                                     ?> 
@@ -4172,7 +4182,7 @@ $months_name_array = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct
                                                     if ($result_goods && $result_goods->num_rows > 0) {
                                                     ?>
                                                     <div class="table-responsive">
-                                                        <table id="demo-foo-addrow" class="mobile_response_forecast_tables table table-bordered m-t-30 table-hover contact-list full-color-table full-dark-table hover-table" data-paging="true" data-paging-size="25">
+                                                        <table id="demo-foo-addrow" class="table table-bordered m-t-30 table-hover contact-list full-color-table full-dark-table hover-table" data-paging="true" data-paging-size="25">
                                                             <thead>
                                                                 <tr>
                                                                     <th class="" >Date</th>
@@ -4840,9 +4850,8 @@ $months_name_array = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct
 
 
         <script>
-            var current_month = '<?php if($current_month_ < 10){echo ltrim($current_month_,'0');}else{echo $current_month_;} ?>';
+            var current_month = '<?php echo $current_month_; ?>';
             var current_year = '<?php echo $year_; ?>';
-
             var rev_id = 0;
 
             function edit_revenue(revenue_id){
@@ -4857,7 +4866,6 @@ $months_name_array = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct
                     contentType: false,
                     success:function(response){
                         if(response != ''){
-
                             $("#reload_revenues > div > table > tbody > tr").removeClass('forecast_secondary_color');
 
                             $("#revenues_"+revenue_id).addClass('forecast_secondary_color');
@@ -4915,6 +4923,8 @@ $months_name_array = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct
                         success:function(response){
                             if(response == 'success'){
                                 clear_revenues_values();
+                            }else if(response == 'duplicate'){
+                                alert("Selected Month Record Already Entered Try Another Month/Update.");
                             }else{
                                 alert("Revenues not saved.");
                             }
@@ -5027,8 +5037,11 @@ $months_name_array = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct
                         processData: false,
                         contentType: false,
                         success:function(response){
+                            console.log(response);
                             if(response == 'success'){
                                 clear_expenses_values();
+                            }else if(response == 'duplicate'){
+                                alert("Selected Month Record Already Entered Try Another Month/Update.");
                             }else{
                                 alert("Expenses not saved.");
                             }
@@ -5131,6 +5144,8 @@ $months_name_array = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct
                         success:function(response){
                             if(response == 'success'){
                                 clear_key_values();
+                            }else if(response == 'duplicate'){
+                                alert("Selected Month Record Already Entered Try Another Month/Update.");
                             }else{
                                 alert("Key Facts not saved.");
                             }
@@ -5318,6 +5333,8 @@ $months_name_array = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct
                             console.log(response);
                             if(response == 'success'){
                                 clear_goods_values();
+                            }else if(response == 'duplicate'){
+                                alert("Selected Month Record Already Entered Try Another Month/Update.");
                             }else{
                                 alert("Goods Cost not saved.");
                             }
@@ -5534,7 +5551,7 @@ $months_name_array = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct
                 const date1 = new Date(start_staffing);
                 const date2 = new Date(end_staffing);
 
-                if(start_staffing > end_staffing || start_staffing == "" || end_staffing == "" || date1.getMonth() != date2.getMonth()){
+                if(start_staffing > end_staffing || start_staffing == "" || end_staffing == "" || (date1.getMonth() != date2.getMonth() && staffings_id != 0)){
                     if(staffings_id != 0){
                         alert("Enter Correct Dates/Select Same month for update.");
                     }else{

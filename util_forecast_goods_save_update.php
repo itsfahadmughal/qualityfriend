@@ -34,18 +34,23 @@ $full_date = $date_year_goods_.'-'.$date_month_goods_.'-28';
 
 if($goods_id_ == 0){
 
-    $sql = "INSERT INTO `tbl_forecast_goods_cost`(`date`, `hotel_id`, `lastedittime`, `lasteditbyip`, `lasteditbyid`) VALUES ('$full_date','$hotel_id','$last_edit_time','$last_editby_ip','$last_editby_id')";
+    $sql_check = "SELECT * FROM `tbl_forecast_goods_cost` WHERE `date` = '$full_date' and hotel_id=$hotel_id";
+    $result_check = $conn->query($sql_check);
+    if ($result_check && $result_check->num_rows > 0) {
+        echo 'duplicate';
+        exit;
+    }else{
+        $sql = "INSERT INTO `tbl_forecast_goods_cost`(`date`, `hotel_id`, `lastedittime`, `lasteditbyip`, `lasteditbyid`) VALUES ('$full_date','$hotel_id','$last_edit_time','$last_editby_ip','$last_editby_id')";
 
-    $result = $conn->query($sql);
+        $result = $conn->query($sql);
 
-    $last_id = mysqli_insert_id($conn);
+        $last_id = mysqli_insert_id($conn);
 
-    for($i=0;$i<sizeof($suppliers_arr_);$i++){
-        $sql_inner = "INSERT INTO `tbl_forecast_goods_cost_suppliers`(`frcgct_id`, `supplier_name`, `product_name`, `cost`) VALUES ('$last_id','$suppliers_arr_[$i]','','$goods_costs_arr_[$i]')";
-        $result_inner = $conn->query($sql_inner);
+        for($i=0;$i<sizeof($suppliers_arr_);$i++){
+            $sql_inner = "INSERT INTO `tbl_forecast_goods_cost_suppliers`(`frcgct_id`, `supplier_name`, `product_name`, `cost`) VALUES ('$last_id','$suppliers_arr_[$i]','','$goods_costs_arr_[$i]')";
+            $result_inner = $conn->query($sql_inner);
+        }
     }
-
-
 
 }else{
     $sql = "UPDATE `tbl_forecast_goods_cost` SET `date`='$full_date',`lastedittime`='$last_edit_time',`lasteditbyip`='$last_editby_ip',`lasteditbyid`='$last_editby_id' WHERE `frcgct_id` = $goods_id_ AND `hotel_id` = $hotel_id";

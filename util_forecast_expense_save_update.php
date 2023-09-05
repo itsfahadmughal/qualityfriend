@@ -58,7 +58,14 @@ if(isset($_POST['expense_id_'])){
 $full_date = $date_year_cost_.'-'.$date_month_cost_.'-28';
 
 if($expense_id_ == 0){
-    $sql="INSERT INTO `tbl_forecast_expenses`(`costs_of_ancillary_goods`, `costs_of_spa_products`,`total_operating_cost`, `administration_cost`, `marketing`, `taxes`, `bank_charges`, `total_loan`, `other_costs`, `date`, `hotel_id`, `lastedittime`, `lasteditbyip`, `lasteditbyid`) VALUES ('$total_operating_cost_','$administration_cost_','$marketing_','$taxes_','$bank_charges_','$total_loan_','$other_costs_','$full_date','$hotel_id','$last_edit_time','$last_editby_ip','$last_editby_id')";
+    $sql_check = "SELECT * FROM `tbl_forecast_expenses` WHERE `date` = '$full_date' and hotel_id=$hotel_id";
+    $result_check = $conn->query($sql_check);
+    if ($result_check && $result_check->num_rows > 0) {
+        echo 'duplicate';
+        exit;
+    }else{
+        $sql="INSERT INTO `tbl_forecast_expenses`(`costs_of_ancillary_goods`, `costs_of_spa_products`,`total_operating_cost`, `administration_cost`, `marketing`, `taxes`, `bank_charges`, `total_loan`, `other_costs`, `date`, `hotel_id`, `lastedittime`, `lasteditbyip`, `lasteditbyid`) VALUES ('$ancillary_goods_cost_','$spa_products_cost_','$total_operating_cost_','$administration_cost_','$marketing_','$taxes_','$bank_charges_','$total_loan_','$other_costs_','$full_date','$hotel_id','$last_edit_time','$last_editby_ip','$last_editby_id')";
+    }
 }else{
     $sql="UPDATE `tbl_forecast_expenses` SET `costs_of_ancillary_goods`='$ancillary_goods_cost_',`costs_of_spa_products`='$spa_products_cost_',`total_operating_cost`='$total_operating_cost_',`administration_cost`='$administration_cost_',`marketing`='$marketing_',`taxes`='$taxes_',`bank_charges`='$bank_charges_',`total_loan`='$total_loan_',`other_costs`='$other_costs_',`date`='$full_date',`lastedittime`='$last_edit_time',`lasteditbyip`='$last_editby_ip',`lasteditbyid`='$last_editby_id' WHERE `frcex_id` = $expense_id_ AND `hotel_id` = $hotel_id";
 }

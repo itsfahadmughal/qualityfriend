@@ -14,7 +14,7 @@ $result_revenues = $conn->query($sql_revenues);
 if ($result_revenues && $result_revenues->num_rows > 0) {
 ?>
 <div class="table-responsive">
-    <table id="demo-foo-addrow" class="table table-bordered m-t-30 table-hover contact-list full-color-table full-primary-table hover-table" data-paging="true" data-paging-size="25">
+    <table id="demo-foo-addrow" class="mobile_response_forecast_tables table table-bordered m-t-30 table-hover contact-list full-color-table full-primary-table hover-table" data-paging="true" data-paging-size="25">
         <thead>
             <tr>
                 <th class="" >Hotel Revenue</th>
@@ -40,7 +40,7 @@ if ($result_revenues && $result_revenues->num_rows > 0) {
                 <td class=""><?php echo date('M, Y', strtotime($row['date'])); ?></td>
 
                 <td class="font-size-subheading text-center black_color">
-                    <a  class="black_color" href="javascript:void()" onclick="edit_revenue('<?php echo $row['frcrvs_id']; ?>')"><i class="fas fa-pencil-alt font-size-subheading text-right"></i></a>
+                    <a  class="black_color" href="javascript:void(0)" onclick="edit_revenue('<?php echo $row['frcrvs_id']; ?>')"><i class="fas fa-pencil-alt font-size-subheading text-right"></i></a>
                 </td>
             </tr>
             <?php 
