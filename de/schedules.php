@@ -20,6 +20,10 @@ if (isset($_GET['departments'])) {
     $view_departments = $_GET['departments'];
     $view_departments_array = explode(",",$_GET['departments']);
 }
+if (isset($_GET['hotel_id'])) {
+    $hotel_id = $_GET['hotel_id'];
+}
+
 $date_ = strtotime($date_selected);
 $date_ = strtotime("+7 day", $date_);
 $end_date = date('m/d/Y', $date_);

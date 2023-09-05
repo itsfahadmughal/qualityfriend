@@ -14,6 +14,9 @@ if (isset($_GET['slug'])) {
 if (isset($_GET['filter'])) {
     $view_filter_selected = $_GET['filter'];
 }
+if (isset($_GET['hotel_id'])) {
+    $hotel_id = $_GET['hotel_id'];
+}
 
 $date_ = strtotime($date_selected);
 $date_ = strtotime("+7 day", $date_);
