@@ -3,8 +3,10 @@ include 'util_config.php';
 include 'util_session.php';
 //include 'forecast_utils/read_xml_forecast.php';
 
-//$year_ = date("Y");
-$year_ = "2024";
+$year_ = date("Y");
+if(isset($_GET['slug'])){
+    $year_ = $_GET['slug'];
+}
 $current_month_ = date("m");
 require './forecast_utills/sales-forecasting/vendor/autoload.php';
 use Cozy\ValueObjects\Matrix;
@@ -165,7 +167,7 @@ function forecast_prediction($conn,$input_data_,$date_forecast_,$i_,$current_yea
 
     $average_error_rate = round(array_sum($error_rates) / count($error_rates), 1);
 
-    
+
     $new_result = array();
     for($j=0;$j<sizeof($result);$j++){
         $compy = strtotime($result[$j]['date']);
@@ -301,7 +303,7 @@ $months_name_array = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct
                     <!-- ============================================================== -->
                     <div class="row page-titles mobile-container-padding heading_style">
                         <div class="col-md-3 align-self-center">
-                            <h4 class="text-themecolor font-weight-title font-size-title">Budget &amp; Forecast</h4>
+                            <h4 class="text-themecolor font-weight-title font-size-title">Budget &amp; Forecast (<?php echo $year_; ?>)</h4>
                         </div>
                         <div class="col-md-6">
                         </div>
@@ -582,7 +584,7 @@ $months_name_array = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct
 
 
                                                         $sql_inner_2="SELECT `bank_account_balance`,Ancillary_Revenues_Net,Spa_Revenues_Net_22 FROM `tbl_forecast_revenues` WHERE hotel_id = $hotel_id AND MONTH(`date`) = $month AND YEAR(`date`) =  $year";
-                                                        
+
                                                         $result_inner_2 = $conn->query($sql_inner_2);
                                                         if ($result_inner_2 && $result_inner_2->num_rows > 0) {
                                                             while ($row_inner_2 = mysqli_fetch_array($result_inner_2)) { array_push($acc_balance_arr,$row_inner_2['bank_account_balance']);
@@ -1280,11 +1282,11 @@ $months_name_array = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct
                                                         $result_inner_4 = $conn->query($sql_inner_4);
                                                         if ($result_inner_4 && $result_inner_4->num_rows > 0) {
                                                             while ($row_inner_4 = mysqli_fetch_array($result_inner_4)) {
-                                                                
+
                                                                 if($row_inner_4['total_cost_t'] == 0){
                                                                     $row_inner_4['total_cost_t'] = 1;
                                                                 }
-                                                                
+
                                                                 $goods_cost_arr1[$index_forecast_data] = [
                                                                     'period' => $index_forecast_data,
                                                                     'date' => $row['date_final'],
@@ -3195,7 +3197,12 @@ $months_name_array = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct
                                                         <table class="table" id="table">
                                                             <thead>
                                                                 <tr>
-                                                                    <th class="" colspan="2"></th>
+                                                                    <th class="" colspan="2">
+                                                                        <div class="btn-group" role="group" aria-label="Basic example">
+                                                                            <button type="button" onclick="redirect_url('forecast.php?slug=<?php echo date("Y"); ?>');" class="btn btn-info">Current Year Forecast</button>
+                                                                            <button type="button" onclick="redirect_url('forecast.php?slug=<?php echo date('Y', strtotime('+1 year')); ?>');" class="btn btn-info">Next Year Forecast</button>
+                                                                        </div>
+                                                                    </th>
                                                                     <th class="forecast_secondary_color">Total</th>
                                                                 </tr>
                                                                 <tr class="forecast_gray_color">
@@ -5782,6 +5789,10 @@ XLSX.writeFile(wb, fn || ('MySheetName.' + (type || 'xlsx')));
         <script src="https://raw.githack.com/eKoopmans/html2pdf/master/dist/html2pdf.bundle.js"></script>
 
         <script>
+
+            function redirect_url(url){
+                window.location.href = url;
+            }
 
             function export_dashboard(){
                 var elementHTML = document.querySelector("#home5");
