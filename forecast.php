@@ -177,7 +177,7 @@ function forecast_prediction($conn,$input_data_,$date_forecast_,$i_,$current_yea
     }
 
     return $new_result;
-    //    print_r($new_result);
+    //        print_r($result);
     //    exit;
 
 }
@@ -1082,7 +1082,7 @@ $months_name_array = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct
                                                 $date_forecast_last = "";
 
 
-                                                $sql_cost_forecast = "SELECT *, DATE_FORMAT(`date`, '%m/%d/%Y') as date_final FROM `tbl_forecast_expenses` WHERE `hotel_id` = $hotel_id AND YEAR(`date`) > $pre_year_3 ORDER BY `date` ASC";
+                                                $sql_cost_forecast = "SELECT *, DATE_FORMAT(`date`, '%m/%d/%Y') as date_final FROM `tbl_forecast_expenses` WHERE `hotel_id` = $hotel_id AND YEAR(`date`) > $pre_year_3 and YEAR(`date`) <= $year_ ORDER BY `date` ASC";
 
                                                 $sql_inner_3="SELECT * FROM `tbl_forecast_keyfacts` WHERE hotel_id = $hotel_id AND YEAR(`date`) > $pre_year_3 ";
                                                 $result_inner_3 = $conn->query($sql_inner_3);
@@ -1810,11 +1810,11 @@ $months_name_array = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct
                                                     for($i=0;$i<12;$i++){
                                                         if($i == 0){
                                                                     ?>
-                                                                    <td><?php echo number_format(round(($accomodation_sale_arr2[$i]+$spa_sale_arr2[$i]+$anicillary_sale_arr2[$i]+$Total_Acc_Balance_Temp2)-($other_costs_arr2[$i]+$bank_charges_arr2[$i]+$taxes_arr2[$i]+$marketing_arr2[$i]+$adm_cost_arr2[$i]+$t_opr_cost_arr2[$i]+$staffing_arr1[$i]+$goods_cost_arr2[$i]+$anicillary_arr2[$i]+$spa_arr2[$i]+$total_loan_arr1[$index_desired2]),2), 1, ',', '.'); ?></td>
+                                                                    <td><?php if(isset($spa_sale_arr2[$i])){ echo number_format(round(($accomodation_sale_arr2[$i]+$spa_sale_arr2[$i]+$anicillary_sale_arr2[$i]+$Total_Acc_Balance_Temp2)-($other_costs_arr2[$i]+$bank_charges_arr2[$i]+$taxes_arr2[$i]+$marketing_arr2[$i]+$adm_cost_arr2[$i]+$t_opr_cost_arr2[$i]+$staffing_arr1[$i]+$goods_cost_arr2[$i]+$anicillary_arr2[$i]+$spa_arr2[$i]+$total_loan_arr1[$index_desired2]),2), 1, ',', '.'); }else{echo 0;} ?></td>
                                                                     <?php
                                                         }else{
                                                                     ?>
-                                                                    <td><?php echo number_format(round(($accomodation_sale_arr2[$i]+$spa_sale_arr2[$i]+$anicillary_sale_arr2[$i])-($other_costs_arr2[$i]+$bank_charges_arr2[$i]+$taxes_arr2[$i]+$marketing_arr2[$i]+$adm_cost_arr2[$i]+$t_opr_cost_arr2[$i]+$staffing_arr1[$i]+$goods_cost_arr2[$i]+$anicillary_arr2[$i]+$spa_arr2[$i]),2), 1, ',', '.'); ?></td>
+                                                                    <td><?php if(isset($spa_sale_arr2[$i])){ echo number_format(round(($accomodation_sale_arr2[$i]+$spa_sale_arr2[$i]+$anicillary_sale_arr2[$i])-($other_costs_arr2[$i]+$bank_charges_arr2[$i]+$taxes_arr2[$i]+$marketing_arr2[$i]+$adm_cost_arr2[$i]+$t_opr_cost_arr2[$i]+$staffing_arr1[$i]+$goods_cost_arr2[$i]+$anicillary_arr2[$i]+$spa_arr2[$i]),2), 1, ',', '.');}else{echo 0;} ?></td>
                                                                     <?php
                                                         }
                                                     }
@@ -2791,14 +2791,14 @@ $months_name_array = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct
                                                                     <td class="text-left"></td>
                                                                     <?php
                                                                     for($i=0;$i<12;$i++){
-                                                                        if(isset($staffing_arr1[$i])){
+                                                                        if(isset($spa_sale_arr2[$i])){
                                                                     ?>
                                                                     <td><?php echo number_format(round((($staffing_arr1[$i])*100)/($spa_sale_arr2[$i] +($anicillary_sale_arr2[$i])+$accomodation_sale_arr2[$i]),2), 1, ',', '.').' %'; ?></td>
                                                                     <?php
                                                                         }else{?>
                                                                     <td></td>
                                                                     <?php }
-                                                                        if(isset($staffing_arr[$i])){
+                                                                        if(isset($spa_sale_arr[$i])){
                                                                     ?>
                                                                     <td><?php echo number_format(round((($staffing_arr[$i])*100)/($spa_sale_arr[$i] +($anicillary_sale_arr[$i])+$accomodation_sale_arr[$i]),2), 1, ',', '.').' %'; ?></td>
                                                                     <?php
