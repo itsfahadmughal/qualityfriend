@@ -1390,22 +1390,22 @@ $months_name_array = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct
                                                             <tbody>
                                                                 <tr><td class="custom_td_padding" colspan="14"></td></tr>
                                                                 <tr class="">
-                                                                    <td class="text-left"><?php echo 'Auslastung der ÖT in % /Occupancy rate in %'; ?></td>
+                                                                    <td class="text-left"><?php echo 'Auslastung der ÖT in % /Occupancy rate in %'; ?> <span class="float-right">&nbsp;%</span><span class="float-right w-30 wm-23"><input type="number" min="0" class="form-control display-inline" id="ot_percentage_gesamt_total" onchange="ot_percentage_gesamt_change();" /> </span></td>
                                                                     <?php 
                                                     $total_stay_arr2 = forecast_prediction($conn,$total_stay_arr1,$date_forecast_last,$index_forecast_data,$year_);
                                                     $stay_capacity_arr2 = forecast_prediction($conn,$stay_capacity_arr1,$date_forecast_last,$index_forecast_data,$year_);
                                                                     ?>
 
-                                                                    <td><?php echo number_format(round((array_sum($total_stay_arr2)*100)/array_sum($stay_capacity_arr2),2), 1, ',', '.').'%'; ?></td>
+                                                                    <td id="ot_percentage_gesamt_0"><?php echo number_format(round((array_sum($total_stay_arr2)*100)/array_sum($stay_capacity_arr2),2), 1, ',', '.').'%'; ?></td>
                                                                     <?php
                                                     for($i=0;$i<12;$i++){
                                                         if(isset($total_stay_arr2[$i])){
                                                                     ?>
-                                                                    <td><?php echo number_format(round(($total_stay_arr2[$i]*100)/$stay_capacity_arr2[$i],2), 1, ',', '.').'%'; ?></td>
+                                                                    <td id="ot_percentage_gesamt_<?php echo ($i+1); ?>"><?php echo number_format(round(($total_stay_arr2[$i]*100)/$stay_capacity_arr2[$i],2), 1, ',', '.').'%'; ?></td>
                                                                     <?php
                                                         }else{
                                                                     ?>
-                                                                    <td><?php echo '0.00%'; ?></td>
+                                                                    <td id="ot_percentage_gesamt_<?php echo ($i+1); ?>"><?php echo '0,00%'; ?></td>
                                                                     <?php 
                                                         }
                                                     }
@@ -1479,17 +1479,17 @@ $months_name_array = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct
                                                                     ?>
                                                                 </tr>
                                                                 <tr class="forecast_light_gray_color">
-                                                                    <td class="text-left"><?php echo 'Gesamt'; ?></td>
-                                                                    <td><?php echo number_format(round(array_sum($accomodation_sale_arr2)+array_sum($anicillary_sale_arr2)+array_sum($spa_sale_arr2),2), 1, ',', '.'); ?></td>
+                                                                    <td class="text-left"><?php echo 'Gesamt'; ?> <span class="float-right">&nbsp;%</span><span class="float-right wm-23 w-47"><input type="number" min="0" class="form-control display-inline" id="revenues_gesamt_total" onchange="revenues_gesamt_change();" /> </span></td>
+                                                                    <td id="revenues_gesamt_0"><?php echo number_format(round(array_sum($accomodation_sale_arr2)+array_sum($anicillary_sale_arr2)+array_sum($spa_sale_arr2),2), 1, ',', '.'); ?></td>
                                                                     <?php
                                                     for($i=0;$i<12;$i++){
                                                         if(isset($spa_sale_arr2[$i])){
                                                                     ?>
-                                                                    <td><?php echo number_format(round($accomodation_sale_arr2[$i]+$spa_sale_arr2[$i]+$anicillary_sale_arr2[$i],2), 1, ',', '.'); ?></td>
+                                                                    <td id="revenues_gesamt_<?php echo ($i+1); ?>"><?php echo number_format(round($accomodation_sale_arr2[$i]+$spa_sale_arr2[$i]+$anicillary_sale_arr2[$i],2), 1, ',', '.'); ?></td>
                                                                     <?php
                                                         }else{
                                                                     ?>
-                                                                    <td><?php echo 0; ?></td>
+                                                                    <td id="revenues_gesamt_<?php echo ($i+1); ?>"><?php echo 0; ?></td>
                                                                     <?php 
                                                         }
                                                     }
@@ -1561,17 +1561,17 @@ $months_name_array = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct
                                                                     ?>
                                                                 </tr>
                                                                 <tr class="forecast_light_gray_color">
-                                                                    <td class="text-left"><?php echo 'Gesamt'; ?></td>
-                                                                    <td><?php echo number_format(round(array_sum($spa_arr2)+array_sum($anicillary_arr2)+array_sum($goods_cost_arr2),2), 1, ',', '.'); ?></td>
+                                                                    <td class="text-left"><?php echo 'Gesamt'; ?>  <span class="float-right">&nbsp;%</span><span class="float-right wm-23 w-47"><input type="number" min="0" class="form-control display-inline" id="opr_costs_gesamt_total" onchange="opr_costs_gesamt_change();" /> </span></td>
+                                                                    <td id="opr_costs_gesamt_0"><?php echo number_format(round(array_sum($spa_arr2)+array_sum($anicillary_arr2)+array_sum($goods_cost_arr2),2), 1, ',', '.'); ?></td>
                                                                     <?php
                                                     for($i=0;$i<12;$i++){
                                                         if(isset($spa_arr2[$i])){
                                                                     ?>
-                                                                    <td><?php echo number_format(round($spa_arr2[$i]+$anicillary_arr2[$i]+$goods_cost_arr2[$i],2), 1, ',', '.'); ?></td>
+                                                                    <td id="opr_costs_gesamt_<?php echo ($i+1); ?>"><?php echo number_format(round($spa_arr2[$i]+$anicillary_arr2[$i]+$goods_cost_arr2[$i],2), 1, ',', '.'); ?></td>
                                                                     <?php
                                                         }else{
                                                                     ?>
-                                                                    <td><?php echo 0; ?></td>
+                                                                    <td id="opr_costs_gesamt_<?php echo ($i+1); ?>"><?php echo 0; ?></td>
                                                                     <?php 
                                                         }
                                                     }
@@ -1719,17 +1719,17 @@ $months_name_array = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct
                                                                 </tr>
 
                                                                 <tr class="forecast_light_gray_color">
-                                                                    <td class="text-left"><?php echo 'Betriebsaufwände /Total Costs'; ?></td>
-                                                                    <td><?php echo number_format(round(array_sum($other_costs_arr2)+array_sum($bank_charges_arr2)+array_sum($taxes_arr2)+array_sum($marketing_arr2)+array_sum($adm_cost_arr2)+array_sum($t_opr_cost_arr2)+array_sum($staffing_arr1)+array_sum($goods_cost_arr2)+array_sum($anicillary_arr2)+array_sum($spa_arr2),2), 1, ',', '.'); ?></td>
+                                                                    <td class="text-left"><?php echo 'Betriebsaufwände /Total Costs'; ?> <span class="float-right">&nbsp;%</span><span class="float-right wm-23 w-47"><input type="number" min="0" class="form-control display-inline" id="total_costs_gesamt_total" onchange="total_costs_gesamt_change();" /> </span></td>
+                                                                    <td id="total_costs_gesamt_0"><?php echo number_format(round(array_sum($other_costs_arr2)+array_sum($bank_charges_arr2)+array_sum($taxes_arr2)+array_sum($marketing_arr2)+array_sum($adm_cost_arr2)+array_sum($t_opr_cost_arr2)+array_sum($staffing_arr1)+array_sum($goods_cost_arr2)+array_sum($anicillary_arr2)+array_sum($spa_arr2),2), 1, ',', '.'); ?></td>
                                                                     <?php
                                                     for($i=0;$i<12;$i++){
                                                         if(isset($spa_arr2[$i])){
                                                                     ?>
-                                                                    <td><?php echo number_format(round($other_costs_arr2[$i]+$bank_charges_arr2[$i]+$taxes_arr2[$i]+$marketing_arr2[$i]+$adm_cost_arr2[$i]+$t_opr_cost_arr2[$i]+$staffing_arr1[$i]+$goods_cost_arr2[$i]+$anicillary_arr2[$i]+$spa_arr2[$i],2), 1, ',', '.'); ?></td>
+                                                                    <td id="total_costs_gesamt_<?php echo ($i+1); ?>"><?php echo number_format(round($other_costs_arr2[$i]+$bank_charges_arr2[$i]+$taxes_arr2[$i]+$marketing_arr2[$i]+$adm_cost_arr2[$i]+$t_opr_cost_arr2[$i]+$staffing_arr1[$i]+$goods_cost_arr2[$i]+$anicillary_arr2[$i]+$spa_arr2[$i],2), 1, ',', '.'); ?></td>
                                                                     <?php
                                                         }else{
                                                                     ?>
-                                                                    <td><?php echo 0; ?></td>
+                                                                    <td id="total_costs_gesamt_<?php echo ($i+1); ?>"><?php echo 0; ?></td>
                                                                     <?php 
                                                         }
                                                     }
@@ -3200,10 +3200,10 @@ $months_name_array = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct
                                                                     <th class="" colspan="2">
                                                                         <div class="btn-group" role="group" aria-label="Basic example">
                                                                             <button type="button" onclick="redirect_url('forecast.php?slug=<?php echo date("Y"); ?>');" class="btn btn-info">Current Year Forecast</button>
-                                                                            <button type="button" onclick="redirect_url('forecast.php?slug=<?php echo date('Y', strtotime('+1 year')); ?>');" class="btn btn-info">Next Year Forecast</button>
+                                                                            <button type="button" onclick="redirect_url('forecast.php?slug=<?php echo date('Y', strtotime('+1 year')); ?>');" class="border-left-split-buttons btn btn-info">Next Year Forecast</button>
                                                                         </div>
                                                                     </th>
-                                                                    <th class="forecast_secondary_color">Total</th>
+                                                                    <th class="forecast_secondary_color va_m">Total</th>
                                                                 </tr>
                                                                 <tr class="forecast_gray_color">
                                                                     <th>Description</th>
@@ -5770,6 +5770,215 @@ $months_name_array = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct
 
         </script>
 
+        <script>
+            xval0 =  parseFloat($("#revenues_gesamt_0").html().replace(".", "").replace(".", "").replace(",", "."));
+            xval1 =  parseFloat($("#revenues_gesamt_1").html().replace(".", "").replace(".", "").replace(",", "."));
+            xval2 =  parseFloat($("#revenues_gesamt_2").html().replace(".", "").replace(".", "").replace(",", "."));
+            xval3 =  parseFloat($("#revenues_gesamt_3").html().replace(".", "").replace(".", "").replace(",", "."));
+            xval4 =  parseFloat($("#revenues_gesamt_4").html().replace(".", "").replace(".", "").replace(",", "."));
+            xval5 =  parseFloat($("#revenues_gesamt_5").html().replace(".", "").replace(".", "").replace(",", "."));
+            xval6 =  parseFloat($("#revenues_gesamt_6").html().replace(".", "").replace(".", "").replace(",", "."));
+            xval7 =  parseFloat($("#revenues_gesamt_7").html().replace(".", "").replace(".", "").replace(",", "."));
+            xval8 =  parseFloat($("#revenues_gesamt_8").html().replace(".", "").replace(".", "").replace(",", "."));
+            xval9 =  parseFloat($("#revenues_gesamt_9").html().replace(".", "").replace(".", "").replace(",", "."));
+            xval10 =  parseFloat($("#revenues_gesamt_10").html().replace(".", "").replace(".", "").replace(",", "."));
+            xval11 =  parseFloat($("#revenues_gesamt_11").html().replace(".", "").replace(".", "").replace(",", "."));
+            xval12 =  parseFloat($("#revenues_gesamt_12").html().replace(".", "").replace(".", "").replace(",", "."));
+
+            function revenues_gesamt_change(){
+                var per_val = $("#revenues_gesamt_total").val();
+
+                val0_0 = xval0 * ((per_val/100) + 1);
+                val1_1 = xval1 * ((per_val/100) + 1);
+                val2_2 = xval2 * ((per_val/100) + 1);
+                val3_3 = xval3 * ((per_val/100) + 1);
+                val4_4 = xval4 * ((per_val/100) + 1);
+                val5_5 = xval5 * ((per_val/100) + 1);
+                val6_6 = xval6 * ((per_val/100) + 1);
+                val7_7 = xval7 * ((per_val/100) + 1);
+                val8_8 = xval8 * ((per_val/100) + 1);
+                val9_9 = xval9 * ((per_val/100) + 1);
+                val10_10 = xval10 * ((per_val/100) + 1);
+                val11_11 = xval11 * ((per_val/100) + 1);
+                val12_12 = xval12 * ((per_val/100) + 1);
+
+                $("#revenues_gesamt_0").text(Number(val0_0).toLocaleString("es-ES", {maximumFractionDigits: 1}));
+                $("#revenues_gesamt_1").text(Number(val1_1).toLocaleString("es-ES", {maximumFractionDigits: 1}));
+                $("#revenues_gesamt_2").text(Number(val2_2).toLocaleString("es-ES", {maximumFractionDigits: 1}));
+                $("#revenues_gesamt_3").text(Number(val3_3).toLocaleString("es-ES", {maximumFractionDigits: 1}));
+                $("#revenues_gesamt_4").text(Number(val4_4).toLocaleString("es-ES", {maximumFractionDigits: 1}));
+                $("#revenues_gesamt_5").text(Number(val5_5).toLocaleString("es-ES", {maximumFractionDigits: 1}));
+                $("#revenues_gesamt_6").text(Number(val6_6).toLocaleString("es-ES", {maximumFractionDigits: 1}));
+                $("#revenues_gesamt_7").text(Number(val7_7).toLocaleString("es-ES", {maximumFractionDigits: 1}));
+                $("#revenues_gesamt_8").text(Number(val8_8).toLocaleString("es-ES", {maximumFractionDigits: 1}));
+                $("#revenues_gesamt_9").text(Number(val9_9).toLocaleString("es-ES", {maximumFractionDigits: 1}));
+                $("#revenues_gesamt_10").text(Number(val10_10).toLocaleString("es-ES", {maximumFractionDigits: 1}));
+                $("#revenues_gesamt_11").text(Number(val11_11).toLocaleString("es-ES", {maximumFractionDigits: 1}));
+                $("#revenues_gesamt_12").text(Number(val12_12).toLocaleString("es-ES", {maximumFractionDigits: 1}));
+
+            }
+        </script>
+
+
+
+        <script>
+            xxval0 =  parseFloat($("#opr_costs_gesamt_0").html().replace(".", "").replace(".", "").replace(",", "."));
+            xxval1 =  parseFloat($("#opr_costs_gesamt_1").html().replace(".", "").replace(".", "").replace(",", "."));
+            xxval2 =  parseFloat($("#opr_costs_gesamt_2").html().replace(".", "").replace(".", "").replace(",", "."));
+            xxval3 =  parseFloat($("#opr_costs_gesamt_3").html().replace(".", "").replace(".", "").replace(",", "."));
+            xxval4 =  parseFloat($("#opr_costs_gesamt_4").html().replace(".", "").replace(".", "").replace(",", "."));
+            xxval5 =  parseFloat($("#opr_costs_gesamt_5").html().replace(".", "").replace(".", "").replace(",", "."));
+            xxval6 =  parseFloat($("#opr_costs_gesamt_6").html().replace(".", "").replace(".", "").replace(",", "."));
+            xxval7 =  parseFloat($("#opr_costs_gesamt_7").html().replace(".", "").replace(".", "").replace(",", "."));
+            xxval8 =  parseFloat($("#opr_costs_gesamt_8").html().replace(".", "").replace(".", "").replace(",", "."));
+            xxval9 =  parseFloat($("#opr_costs_gesamt_9").html().replace(".", "").replace(".", "").replace(",", "."));
+            xxval10 =  parseFloat($("#opr_costs_gesamt_10").html().replace(".", "").replace(".", "").replace(",", "."));
+            xxval11 =  parseFloat($("#opr_costs_gesamt_11").html().replace(".", "").replace(".", "").replace(",", "."));
+            xxval12 =  parseFloat($("#opr_costs_gesamt_12").html().replace(".", "").replace(".", "").replace(",", "."));
+
+            function opr_costs_gesamt_change(){
+                var per_val = $("#opr_costs_gesamt_total").val();
+
+                val0_0 = xxval0 * ((per_val/100) + 1);
+                val1_1 = xxval1 * ((per_val/100) + 1);
+                val2_2 = xxval2 * ((per_val/100) + 1);
+                val3_3 = xxval3 * ((per_val/100) + 1);
+                val4_4 = xxval4 * ((per_val/100) + 1);
+                val5_5 = xxval5 * ((per_val/100) + 1);
+                val6_6 = xxval6 * ((per_val/100) + 1);
+                val7_7 = xxval7 * ((per_val/100) + 1);
+                val8_8 = xxval8 * ((per_val/100) + 1);
+                val9_9 = xxval9 * ((per_val/100) + 1);
+                val10_10 = xxval10 * ((per_val/100) + 1);
+                val11_11 = xxval11 * ((per_val/100) + 1);
+                val12_12 = xxval12 * ((per_val/100) + 1);
+
+                $("#opr_costs_gesamt_0").text(Number(val0_0).toLocaleString("es-ES", {maximumFractionDigits: 1}));
+                $("#opr_costs_gesamt_1").text(Number(val1_1).toLocaleString("es-ES", {maximumFractionDigits: 1}));
+                $("#opr_costs_gesamt_2").text(Number(val2_2).toLocaleString("es-ES", {maximumFractionDigits: 1}));
+                $("#opr_costs_gesamt_3").text(Number(val3_3).toLocaleString("es-ES", {maximumFractionDigits: 1}));
+                $("#opr_costs_gesamt_4").text(Number(val4_4).toLocaleString("es-ES", {maximumFractionDigits: 1}));
+                $("#opr_costs_gesamt_5").text(Number(val5_5).toLocaleString("es-ES", {maximumFractionDigits: 1}));
+                $("#opr_costs_gesamt_6").text(Number(val6_6).toLocaleString("es-ES", {maximumFractionDigits: 1}));
+                $("#opr_costs_gesamt_7").text(Number(val7_7).toLocaleString("es-ES", {maximumFractionDigits: 1}));
+                $("#opr_costs_gesamt_8").text(Number(val8_8).toLocaleString("es-ES", {maximumFractionDigits: 1}));
+                $("#opr_costs_gesamt_9").text(Number(val9_9).toLocaleString("es-ES", {maximumFractionDigits: 1}));
+                $("#opr_costs_gesamt_10").text(Number(val10_10).toLocaleString("es-ES", {maximumFractionDigits: 1}));
+                $("#opr_costs_gesamt_11").text(Number(val11_11).toLocaleString("es-ES", {maximumFractionDigits: 1}));
+                $("#opr_costs_gesamt_12").text(Number(val12_12).toLocaleString("es-ES", {maximumFractionDigits: 1}));
+
+            }
+
+        </script>
+
+
+        <script>
+            xxxval0 =  parseFloat($("#total_costs_gesamt_0").html().replace(".", "").replace(".", "").replace(",", "."));
+            xxxval1 =  parseFloat($("#total_costs_gesamt_1").html().replace(".", "").replace(".", "").replace(",", "."));
+            xxxval2 =  parseFloat($("#total_costs_gesamt_2").html().replace(".", "").replace(".", "").replace(",", "."));
+            xxxval3 =  parseFloat($("#total_costs_gesamt_3").html().replace(".", "").replace(".", "").replace(",", "."));
+            xxxval4 =  parseFloat($("#total_costs_gesamt_4").html().replace(".", "").replace(".", "").replace(",", "."));
+            xxxval5 =  parseFloat($("#total_costs_gesamt_5").html().replace(".", "").replace(".", "").replace(",", "."));
+            xxxval6 =  parseFloat($("#total_costs_gesamt_6").html().replace(".", "").replace(".", "").replace(",", "."));
+            xxxval7 =  parseFloat($("#total_costs_gesamt_7").html().replace(".", "").replace(".", "").replace(",", "."));
+            xxxval8 =  parseFloat($("#total_costs_gesamt_8").html().replace(".", "").replace(".", "").replace(",", "."));
+            xxxval9 =  parseFloat($("#total_costs_gesamt_9").html().replace(".", "").replace(".", "").replace(",", "."));
+            xxxval10 =  parseFloat($("#total_costs_gesamt_10").html().replace(".", "").replace(".", "").replace(",", "."));
+            xxxval11 =  parseFloat($("#total_costs_gesamt_11").html().replace(".", "").replace(".", "").replace(",", "."));
+            xxxval12 =  parseFloat($("#total_costs_gesamt_12").html().replace(".", "").replace(".", "").replace(",", "."));
+
+            function total_costs_gesamt_change(){
+                var per_val = $("#total_costs_gesamt_total").val();
+
+                val0_0 = xxxval0 * ((per_val/100) + 1);
+                val1_1 = xxxval1 * ((per_val/100) + 1);
+                val2_2 = xxxval2 * ((per_val/100) + 1);
+                val3_3 = xxxval3 * ((per_val/100) + 1);
+                val4_4 = xxxval4 * ((per_val/100) + 1);
+                val5_5 = xxxval5 * ((per_val/100) + 1);
+                val6_6 = xxxval6 * ((per_val/100) + 1);
+                val7_7 = xxxval7 * ((per_val/100) + 1);
+                val8_8 = xxxval8 * ((per_val/100) + 1);
+                val9_9 = xxxval9 * ((per_val/100) + 1);
+                val10_10 = xxxval10 * ((per_val/100) + 1);
+                val11_11 = xxxval11 * ((per_val/100) + 1);
+                val12_12 = xxxval12 * ((per_val/100) + 1);
+
+
+                console.log(per_val,Number(val0_0).toLocaleString("es-ES", {minimumFractionDigits: 2}),val1_1,val2_2,val3_3,val4_4,val5_5,val6_6,val7_7,val8_8,val9_9,val10_10,val11_11,val12_12);
+
+                $("#total_costs_gesamt_0").text(Number(val0_0).toLocaleString("es-ES", {maximumFractionDigits: 1}));
+                $("#total_costs_gesamt_1").text(Number(val1_1).toLocaleString("es-ES", {maximumFractionDigits: 1}));
+                $("#total_costs_gesamt_2").text(Number(val2_2).toLocaleString("es-ES", {maximumFractionDigits: 1}));
+                $("#total_costs_gesamt_3").text(Number(val3_3).toLocaleString("es-ES", {maximumFractionDigits: 1}));
+                $("#total_costs_gesamt_4").text(Number(val4_4).toLocaleString("es-ES", {maximumFractionDigits: 1}));
+                $("#total_costs_gesamt_5").text(Number(val5_5).toLocaleString("es-ES", {maximumFractionDigits: 1}));
+                $("#total_costs_gesamt_6").text(Number(val6_6).toLocaleString("es-ES", {maximumFractionDigits: 1}));
+                $("#total_costs_gesamt_7").text(Number(val7_7).toLocaleString("es-ES", {maximumFractionDigits: 1}));
+                $("#total_costs_gesamt_8").text(Number(val8_8).toLocaleString("es-ES", {maximumFractionDigits: 1}));
+                $("#total_costs_gesamt_9").text(Number(val9_9).toLocaleString("es-ES", {maximumFractionDigits: 1}));
+                $("#total_costs_gesamt_10").text(Number(val10_10).toLocaleString("es-ES", {maximumFractionDigits: 1}));
+                $("#total_costs_gesamt_11").text(Number(val11_11).toLocaleString("es-ES", {maximumFractionDigits: 1}));
+                $("#total_costs_gesamt_12").text(Number(val12_12).toLocaleString("es-ES", {maximumFractionDigits: 1}));
+
+            }
+
+        </script>
+
+
+        <script>
+            val0 =  parseFloat($("#ot_percentage_gesamt_0").html().replace("%", "").replace(",", "."));
+            val1 =  parseFloat($("#ot_percentage_gesamt_1").html().replace("%", "").replace(",", "."));
+            val2 =  parseFloat($("#ot_percentage_gesamt_2").html().replace("%", "").replace(",", "."));
+            val3 =  parseFloat($("#ot_percentage_gesamt_3").html().replace("%", "").replace(",", "."));
+            val4 =  parseFloat($("#ot_percentage_gesamt_4").html().replace("%", "").replace(",", "."));
+            val5 =  parseFloat($("#ot_percentage_gesamt_5").html().replace("%", "").replace(",", "."));
+            val6 =  parseFloat($("#ot_percentage_gesamt_6").html().replace("%", "").replace(",", "."));
+            val7 =  parseFloat($("#ot_percentage_gesamt_7").html().replace("%", "").replace(",", "."));
+            val8 =  parseFloat($("#ot_percentage_gesamt_8").html().replace("%", "").replace(",", "."));
+            val9 =  parseFloat($("#ot_percentage_gesamt_9").html().replace("%", "").replace(",", "."));
+            val10 =  parseFloat($("#ot_percentage_gesamt_10").html().replace("%", "").replace(",", "."));
+            val11 =  parseFloat($("#ot_percentage_gesamt_11").html().replace("%", "").replace(",", "."));
+            val12 =  parseFloat($("#ot_percentage_gesamt_12").html().replace("%", "").replace(",", "."));
+
+            function ot_percentage_gesamt_change(){
+                var per_val = $("#ot_percentage_gesamt_total").val();
+
+                val0_0 = val0 * ((per_val/100) + 1);
+                val1_1 = val1 * ((per_val/100) + 1);
+                val2_2 = val2 * ((per_val/100) + 1);
+                val3_3 = val3 * ((per_val/100) + 1);
+                val4_4 = val4 * ((per_val/100) + 1);
+                val5_5 = val5 * ((per_val/100) + 1);
+                val6_6 = val6 * ((per_val/100) + 1);
+                val7_7 = val7 * ((per_val/100) + 1);
+                val8_8 = val8 * ((per_val/100) + 1);
+                val9_9 = val9 * ((per_val/100) + 1);
+                val10_10 = val10 * ((per_val/100) + 1);
+                val11_11 = val11 * ((per_val/100) + 1);
+                val12_12 = val12 * ((per_val/100) + 1);
+
+
+                console.log(per_val,Number(val0_0).toLocaleString("es-ES", {minimumFractionDigits: 2}),val1_1,val2_2,val3_3,val4_4,val5_5,val6_6,val7_7,val8_8,val9_9,val10_10,val11_11,val12_12);
+
+                $("#ot_percentage_gesamt_0").text(Number(val0_0).toLocaleString("es-ES", {maximumFractionDigits: 1})+"%");
+                $("#ot_percentage_gesamt_1").text(Number(val1_1).toLocaleString("es-ES", {maximumFractionDigits: 1})+"%");
+                $("#ot_percentage_gesamt_2").text(Number(val2_2).toLocaleString("es-ES", {maximumFractionDigits: 1})+"%");
+                $("#ot_percentage_gesamt_3").text(Number(val3_3).toLocaleString("es-ES", {maximumFractionDigits: 1})+"%");
+                $("#ot_percentage_gesamt_4").text(Number(val4_4).toLocaleString("es-ES", {maximumFractionDigits: 1})+"%");
+                $("#ot_percentage_gesamt_5").text(Number(val5_5).toLocaleString("es-ES", {maximumFractionDigits: 1})+"%");
+                $("#ot_percentage_gesamt_6").text(Number(val6_6).toLocaleString("es-ES", {maximumFractionDigits: 1})+"%");
+                $("#ot_percentage_gesamt_7").text(Number(val7_7).toLocaleString("es-ES", {maximumFractionDigits: 1})+"%");
+                $("#ot_percentage_gesamt_8").text(Number(val8_8).toLocaleString("es-ES", {maximumFractionDigits: 1})+"%");
+                $("#ot_percentage_gesamt_9").text(Number(val9_9).toLocaleString("es-ES", {maximumFractionDigits: 1})+"%");
+                $("#ot_percentage_gesamt_10").text(Number(val10_10).toLocaleString("es-ES", {maximumFractionDigits: 1})+"%");
+                $("#ot_percentage_gesamt_11").text(Number(val11_11).toLocaleString("es-ES", {maximumFractionDigits: 1})+"%");
+                $("#ot_percentage_gesamt_12").text(Number(val12_12).toLocaleString("es-ES", {maximumFractionDigits: 1})+"%");
+
+            }
+
+        </script>
+
 
         <!--        <script type="text/javascript" src="https://unpkg.com/xlsx@0.15.1/dist/xlsx.full.min.js"></script>-->
 
@@ -5789,7 +5998,6 @@ XLSX.writeFile(wb, fn || ('MySheetName.' + (type || 'xlsx')));
         <script src="https://raw.githack.com/eKoopmans/html2pdf/master/dist/html2pdf.bundle.js"></script>
 
         <script>
-
             function redirect_url(url){
                 window.location.href = url;
             }
