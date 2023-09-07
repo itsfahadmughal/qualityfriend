@@ -130,15 +130,18 @@ if(file_exists("util_config.php") && is_readable("util_config.php") && include("
     $name  = "";
     $user_device = "";
     $hotel_id = "";
+    $name_employee="";
     $entry_time = date("Y-m-d H:i:s");
     $sql_dob="SELECT * FROM `tbl_applicants_employee` WHERE `dob` like '%$date' OR `dob` like '%$date_current'";
     $result_dob = $conn->query($sql_dob);
-
     if ($result_dob && $result_dob->num_rows > 0) {
         while($row_dob = mysqli_fetch_array($result_dob)) {
             $hotel_id  = $row_dob['hotel_id'];
             $dob  = $row_dob['dob'];
             $hotel_lang = "EN";
+            if($n==0){
+                $name_employee = $row_dob['name'];
+            }
 
             $sql_lang="SELECT hotel_language FROM `tbl_hotel` WHERE hotel_id = $hotel_id";
             $result_lang = $conn->query($sql_lang);
@@ -148,7 +151,7 @@ if(file_exists("util_config.php") && is_readable("util_config.php") && include("
                 }
             }
 
-
+if($name_employee != $row_dob['name'] || $n == 0){
 
             $sql_user_token="SELECT a.* FROM `tbl_user` as a INNER JOIN tbl_rules as b on a.usert_id = b.usert_id Where a.hotel_id = $hotel_id AND b.rule_11 = 1";
             $result_user_token = $conn->query($sql_user_token);
@@ -189,8 +192,7 @@ if(file_exists("util_config.php") && is_readable("util_config.php") && include("
                         $temp1['flag'] = 1;
                         $temp1['message'] = "Successful";
                         
-                        $n++;
-
+                       
                         echo json_encode(array('Status' => $temp1,'Data1' => $data));
                     }else if($user_device == "IOS"){
                         array_push($ios_token_array, $user_token);
@@ -236,6 +238,13 @@ if(file_exists("util_config.php") && is_readable("util_config.php") && include("
 
                 }
             }
+            
+            $name_employee = $row_dob['name'];
+            
+          }
+          
+           $n++;
+          
         }
     }else{
         $temp1['flag'] = 0;
