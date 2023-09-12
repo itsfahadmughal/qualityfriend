@@ -495,7 +495,9 @@ $months_name_array = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct
                                                         <button class="float-right" id="btnExport" onclick="export_effective(this)">Export</button></h3>
                                                 </div>
 
-                                                <?php $rooms=$beds=$opening_days=$months_arr=$staffing_arr=$goods_cost_arr=$stay_capacity_arr=$acc_balance_arr=$accomodation_sale_arr=$anicillary_sale_arr=$total_stay_arr=$spa_sale_arr=$anicillary_arr=$spa_arr=$t_opr_cost_arr=$adm_cost_arr=$marketing_arr=$taxes_arr=$bank_charges_arr=$total_loan_arr=$other_costs_arr=$date_cost=array();
+                                                <?php 
+                                                $today = date("Y-m-d");
+                                                $rooms=$beds=$opening_days=$months_arr=$staffing_arr=$goods_cost_arr=$stay_capacity_arr=$acc_balance_arr=$accomodation_sale_arr=$anicillary_sale_arr=$total_stay_arr=$spa_sale_arr=$anicillary_arr=$spa_arr=$t_opr_cost_arr=$adm_cost_arr=$marketing_arr=$taxes_arr=$bank_charges_arr=$total_loan_arr=$other_costs_arr=$date_cost=array();
                                                 $sql_cost_effective = "SELECT * FROM `tbl_forecast_expenses` WHERE `hotel_id` = $hotel_id AND YEAR(`date`) = $year_ ORDER BY `date` ASC";
                                                 $result_cost_effective = $conn->query($sql_cost_effective);
                                                 if ($result_cost_effective && $result_cost_effective->num_rows > 0) {
@@ -516,14 +518,24 @@ $months_name_array = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct
                                                         array_push($months_arr,$month);
                                                         $year=date("Y",$time);
 
+                                                        //pre month below
+
+                                                        //SELECT `arrival`,`departure`, CASE WHEN MONTH(`arrival`) != MONTH(`departure`) THEN (`accommodation_sale` / (DATEDIFF(`departure`, `arrival`) + 1)) * (DATEDIFF( `departure`,DATE_SUB(`departure`,INTERVAL DAYOFMONTH(`departure`)-1 DAY)) + 1) ELSE 0 END FROM `tbl_forecast_reservations_rooms` WHERE MONTH(`departure`) = 6 AND YEAR(`departure`) = 2023 AND (CASE WHEN `arrival` <= '2023-09-11' THEN `status` IN ('departed','occupied') ELSE `status` IN ('reserved','roomFixed') END)
 
 
+                                                        //SELECT SUM(CASE WHEN MONTH(`arrival`) != MONTH(`departure`) THEN (`accommodation_sale` / (DATEDIFF(`departure`, `arrival`) + 1)) * (DATEDIFF( `departure`,DATE_SUB(`departure`,INTERVAL DAYOFMONTH(`departure`)-1 DAY)) + 1) ELSE 0 END) FROM `tbl_forecast_reservations_rooms` WHERE MONTH(`departure`) = 6 AND YEAR(`departure`) = 2023 AND (CASE WHEN `arrival` <= '2023-09-11' THEN `status` IN ('departed','occupied') ELSE `status` IN ('reserved','roomFixed') END)
+                                                        
+                                                        
 
+                                                        // current month below
 
+                                                        //SELECT  CASE WHEN MONTH(`arrival`) != MONTH(`departure`) THEN (`accommodation_sale` / (DATEDIFF(`departure`, `arrival`) + 1)) * (DATEDIFF( LAST_DAY(`arrival`), `arrival`) + 1) ELSE  `accommodation_sale` END FROM `tbl_forecast_reservations_rooms` WHERE MONTH(`arrival`) = 6 AND YEAR(`arrival`) = 2023 AND (CASE WHEN `arrival` <= '2023-09-11' THEN `status` IN ('departed','occupied') ELSE `status` IN ('reserved','roomFixed') END)
 
+                                                        //SELECT  SUM(CASE WHEN MONTH(`arrival`) != MONTH(`departure`) THEN (`accommodation_sale` / (DATEDIFF(`departure`, `arrival`) + 1)) * (DATEDIFF( LAST_DAY(`arrival`), `arrival`) + 1) ELSE  `accommodation_sale` END) FROM `tbl_forecast_reservations_rooms` WHERE MONTH(`arrival`) = 6 AND YEAR(`arrival`) = 2023 AND (CASE WHEN `arrival` <= '2023-09-11' THEN `status` IN ('departed','occupied') ELSE `status` IN ('reserved','roomFixed') END)
 
-
-                                                        $sql_inner_1="SELECT (adults+infants+children)as total_persons,date,arrival,departure,`accommodation_sale` AS acc_sale, frcrrm_id as total_stay FROM `tbl_forecast_reservations_rooms` WHERE `status` != 'cancelled' AND hotel_id = $hotel_id AND MONTH(`arrival`) = $month AND YEAR(`arrival`) = $year";
+                                                    
+                                                        
+                                                        $sql_inner_1="SELECT (adults+infants+children)as total_persons,date,arrival,departure,`accommodation_sale` AS acc_sale, frcrrm_id as total_stay FROM `tbl_forecast_reservations_rooms` WHERE `status` IN ('departed','occupied') AND hotel_id = $hotel_id AND MONTH(`arrival`) = $month AND YEAR(`arrival`) = $year AND (CASE WHEN `arrival` <= '$today' THEN `status` IN ('departed','occupied') ELSE `status` IN ('reserved','roomFixed') END)";
                                                         $result_inner_1 = $conn->query($sql_inner_1);
 
                                                         $sale_off=0;
