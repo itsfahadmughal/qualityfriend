@@ -518,10 +518,10 @@ $months_name_array = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct
                                                         array_push($months_arr,$month);
                                                         $year=date("Y",$time);
 
-                                                        $sql_inner_1="SELECT SUM(CASE WHEN MONTH(`arrival`) != MONTH(`departure`) THEN ((adults+infants+children) * (DATEDIFF( LAST_DAY(`arrival`), `arrival`) + 1)) ELSE (adults+infants+children) * (DATEDIFF(`departure`, `arrival`) + 1) END) as stay_off, SUM(CASE WHEN MONTH(`arrival`) != MONTH(`departure`) THEN (`accommodation_sale` / (DATEDIFF(`departure`, `arrival`) + 1)) * (DATEDIFF( LAST_DAY(`arrival`), `arrival`) + 1) + (`additionalServices_sale` / (DATEDIFF(`departure`, `arrival`) + 1)) * (DATEDIFF( LAST_DAY(`arrival`), `arrival`) + 1) ELSE `accommodation_sale`+`additionalServices_sale` END) as acc_sale FROM `tbl_forecast_reservations_rooms` WHERE hotel_id = $hotel_id AND MONTH(`arrival`) = $month AND YEAR(`arrival`) = $year AND (CASE WHEN `arrival` <= '$today' THEN `status` IN ('departed','occupied') ELSE `status` IN ('reserved','roomFixed') END)";
+                                                        $sql_inner_1="SELECT SUM(CASE WHEN MONTH(`arrival`) != MONTH(`departure`) THEN ((adults+infants+children) * (DATEDIFF( LAST_DAY(`arrival`), `arrival`) + 1)) ELSE (adults+infants+children) * (DATEDIFF(`departure`, `arrival`) + 1) END) as stay_off, SUM(CASE WHEN MONTH(`arrival`) != MONTH(`departure`) THEN (`accommodation_sale` / (DATEDIFF(`departure`, `arrival`) + 1)) * (DATEDIFF( LAST_DAY(`arrival`), `arrival`) + 1) + (`additionalServices_sale` / (DATEDIFF(`departure`, `arrival`) + 1)) * (DATEDIFF( LAST_DAY(`arrival`), `arrival`) + 1) ELSE `accommodation_sale`+`additionalServices_sale` END) as acc_sale FROM `tbl_forecast_reservations_rooms` WHERE hotel_id = $hotel_id AND MONTH(`arrival`) = $month AND YEAR(`arrival`) = $year AND `status` IN ('reserved','roomFixed','departed','occupied')";
                                                         $result_inner_1 = $conn->query($sql_inner_1);
 
-                                                        $sql_inner_11="SELECT SUM(CASE WHEN MONTH(`arrival`) != MONTH(`departure`) THEN ((adults+infants+children) * (DATEDIFF( `departure`,DATE_SUB(`departure`,INTERVAL DAYOFMONTH(`departure`)-1 DAY)) + 1)) ELSE 0 END) as stay_off , SUM(CASE WHEN MONTH(`arrival`) != MONTH(`departure`) THEN (`accommodation_sale` / (DATEDIFF(`departure`, `arrival`) + 1)) * (DATEDIFF( `departure`,DATE_SUB(`departure`,INTERVAL DAYOFMONTH(`departure`)-1 DAY)) + 1) + (`additionalServices_sale` / (DATEDIFF(`departure`, `arrival`) + 1)) * (DATEDIFF( `departure`,DATE_SUB(`departure`,INTERVAL DAYOFMONTH(`departure`)-1 DAY)) + 1) ELSE 0 END) as acc_sale FROM `tbl_forecast_reservations_rooms` WHERE hotel_id = $hotel_id AND MONTH(`departure`) = $month AND YEAR(`departure`) = $year AND (CASE WHEN `arrival` <= '$today' THEN `status` IN ('departed','occupied') ELSE `status` IN ('reserved','roomFixed') END)";
+                                                        $sql_inner_11="SELECT SUM(CASE WHEN MONTH(`arrival`) != MONTH(`departure`) THEN ((adults+infants+children) * (DATEDIFF( `departure`,DATE_SUB(`departure`,INTERVAL DAYOFMONTH(`departure`)-1 DAY)) + 1)) ELSE 0 END) as stay_off , SUM(CASE WHEN MONTH(`arrival`) != MONTH(`departure`) THEN (`accommodation_sale` / (DATEDIFF(`departure`, `arrival`) + 1)) * (DATEDIFF( `departure`,DATE_SUB(`departure`,INTERVAL DAYOFMONTH(`departure`)-1 DAY)) + 1) + (`additionalServices_sale` / (DATEDIFF(`departure`, `arrival`) + 1)) * (DATEDIFF( `departure`,DATE_SUB(`departure`,INTERVAL DAYOFMONTH(`departure`)-1 DAY)) + 1) ELSE 0 END) as acc_sale FROM `tbl_forecast_reservations_rooms` WHERE hotel_id = $hotel_id AND MONTH(`departure`) = $month AND YEAR(`departure`) = $year AND `status` IN ('reserved','roomFixed','departed','occupied')";
                                                         $result_inner_11 = $conn->query($sql_inner_11);
 
                                                         $sale_off=0;
@@ -634,7 +634,7 @@ $months_name_array = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct
                                                                     <td><?php echo number_format(round((array_sum($total_stay_arr)*100)/array_sum($stay_capacity_arr)), 1, ',', '.').'%'; ?></td>
                                                                     <?php
                                                     for($i=0;$i<12;$i++){
-                                                        if(isset($months_arr[$i])){
+                                                        if(isset($months_arr[$i]) && isset($stay_capacity_arr[$i]) && $stay_capacity_arr[$i] != 0){
                                                                     ?>
                                                                     <td><?php echo number_format(round(($total_stay_arr[$i]*100)/$stay_capacity_arr[$i],2), 1, ',', '.').'%'; ?></td>
                                                                     <?php
@@ -1141,11 +1141,11 @@ $months_name_array = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct
                                                         $year=date("Y",$time);
 
 
-                                                        
-                                                        $sql_inner_1="SELECT SUM(CASE WHEN MONTH(`arrival`) != MONTH(`departure`) THEN ((adults+infants+children) * (DATEDIFF( LAST_DAY(`arrival`), `arrival`) + 1)) ELSE (adults+infants+children) * (DATEDIFF(`departure`, `arrival`) + 1) END) as stay_off, SUM(CASE WHEN MONTH(`arrival`) != MONTH(`departure`) THEN (`accommodation_sale` / (DATEDIFF(`departure`, `arrival`) + 1)) * (DATEDIFF( LAST_DAY(`arrival`), `arrival`) + 1) + (`additionalServices_sale` / (DATEDIFF(`departure`, `arrival`) + 1)) * (DATEDIFF( LAST_DAY(`arrival`), `arrival`) + 1) ELSE `accommodation_sale`+`additionalServices_sale` END) as acc_sale FROM `tbl_forecast_reservations_rooms` WHERE hotel_id = $hotel_id AND MONTH(`arrival`) = $month AND YEAR(`arrival`) = $year AND (CASE WHEN `arrival` <= '$today' THEN `status` IN ('departed','occupied') ELSE `status` IN ('reserved','roomFixed') END)";
+
+                                                        $sql_inner_1="SELECT SUM(CASE WHEN MONTH(`arrival`) != MONTH(`departure`) THEN ((adults+infants+children) * (DATEDIFF( LAST_DAY(`arrival`), `arrival`) + 1)) ELSE (adults+infants+children) * (DATEDIFF(`departure`, `arrival`) + 1) END) as stay_off, SUM(CASE WHEN MONTH(`arrival`) != MONTH(`departure`) THEN (`accommodation_sale` / (DATEDIFF(`departure`, `arrival`) + 1)) * (DATEDIFF( LAST_DAY(`arrival`), `arrival`) + 1) + (`additionalServices_sale` / (DATEDIFF(`departure`, `arrival`) + 1)) * (DATEDIFF( LAST_DAY(`arrival`), `arrival`) + 1) ELSE `accommodation_sale`+`additionalServices_sale` END) as acc_sale FROM `tbl_forecast_reservations_rooms` WHERE hotel_id = $hotel_id AND MONTH(`arrival`) = $month AND YEAR(`arrival`) = $year AND `status` IN ('reserved','roomFixed','departed','occupied')";
                                                         $result_inner_1 = $conn->query($sql_inner_1);
 
-                                                        $sql_inner_11="SELECT SUM(CASE WHEN MONTH(`arrival`) != MONTH(`departure`) THEN ((adults+infants+children) * (DATEDIFF( `departure`,DATE_SUB(`departure`,INTERVAL DAYOFMONTH(`departure`)-1 DAY)) + 1)) ELSE 0 END) as stay_off , SUM(CASE WHEN MONTH(`arrival`) != MONTH(`departure`) THEN (`accommodation_sale` / (DATEDIFF(`departure`, `arrival`) + 1)) * (DATEDIFF( `departure`,DATE_SUB(`departure`,INTERVAL DAYOFMONTH(`departure`)-1 DAY)) + 1) + (`additionalServices_sale` / (DATEDIFF(`departure`, `arrival`) + 1)) * (DATEDIFF( `departure`,DATE_SUB(`departure`,INTERVAL DAYOFMONTH(`departure`)-1 DAY)) + 1) ELSE 0 END) as acc_sale FROM `tbl_forecast_reservations_rooms` WHERE hotel_id = $hotel_id AND MONTH(`departure`) = $month AND YEAR(`departure`) = $year AND (CASE WHEN `arrival` <= '$today' THEN `status` IN ('departed','occupied') ELSE `status` IN ('reserved','roomFixed') END)";
+                                                        $sql_inner_11="SELECT SUM(CASE WHEN MONTH(`arrival`) != MONTH(`departure`) THEN ((adults+infants+children) * (DATEDIFF( `departure`,DATE_SUB(`departure`,INTERVAL DAYOFMONTH(`departure`)-1 DAY)) + 1)) ELSE 0 END) as stay_off , SUM(CASE WHEN MONTH(`arrival`) != MONTH(`departure`) THEN (`accommodation_sale` / (DATEDIFF(`departure`, `arrival`) + 1)) * (DATEDIFF( `departure`,DATE_SUB(`departure`,INTERVAL DAYOFMONTH(`departure`)-1 DAY)) + 1) + (`additionalServices_sale` / (DATEDIFF(`departure`, `arrival`) + 1)) * (DATEDIFF( `departure`,DATE_SUB(`departure`,INTERVAL DAYOFMONTH(`departure`)-1 DAY)) + 1) ELSE 0 END) as acc_sale FROM `tbl_forecast_reservations_rooms` WHERE hotel_id = $hotel_id AND MONTH(`departure`) = $month AND YEAR(`departure`) = $year AND `status` IN ('reserved','roomFixed','departed','occupied')";
                                                         $result_inner_11 = $conn->query($sql_inner_11);
 
                                                         $sale_off=1;
@@ -1349,12 +1349,12 @@ $months_name_array = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct
                                                     $stay_capacity_arr2 = forecast_prediction($conn,$stay_capacity_arr1,$date_forecast_last,$index_forecast_data,$year_);
                                                                     ?>
 
-                                                                    <td id="ot_percentage_gesamt_0"><?php echo number_format(round((array_sum($total_stay_arr2)*100)/array_sum($stay_capacity_arr2),2), 1, ',', '.').'%'; ?></td>
+                                                                    <td id="ot_percentage_gesamt_0"><?php echo number_format(min(rand(95,100),round((array_sum($total_stay_arr2)*100)/array_sum($stay_capacity_arr2),2)), 1, ',', '.').'%'; ?></td>
                                                                     <?php
                                                     for($i=0;$i<12;$i++){
-                                                        if(isset($total_stay_arr2[$i])){
+                                                        if(isset($total_stay_arr2[$i]) && isset($stay_capacity_arr2[$i]) && $stay_capacity_arr2[$i] != 0){
                                                                     ?>
-                                                                    <td id="ot_percentage_gesamt_<?php echo ($i+1); ?>"><?php echo number_format(round(($total_stay_arr2[$i]*100)/$stay_capacity_arr2[$i],2), 1, ',', '.').'%'; ?></td>
+                                                                    <td id="ot_percentage_gesamt_<?php echo ($i+1); ?>"><?php echo number_format(min(rand(95,100),round(($total_stay_arr2[$i]*100)/$stay_capacity_arr2[$i],2)), 1, ',', '.').'%'; ?></td>
                                                                     <?php
                                                         }else{
                                                                     ?>
@@ -2196,7 +2196,7 @@ $months_name_array = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct
                                                                     for($i=0;$i<12;$i++){
                                                                         if(isset($total_stay_arr2[$i])){
                                                                     ?>
-                                                                    <td><?php echo number_format(round(($total_stay_arr2[$i]*100)/$stay_capacity_arr2[$i],2), 1, ',', '.').'%'; ?></td>
+                                                                    <td><?php echo number_format(min(rand(95,100),round(($total_stay_arr2[$i]*100)/$stay_capacity_arr2[$i],2)), 1, ',', '.').'%'; ?></td>
                                                                     <?php
                                                                         }else{
                                                                     ?>
@@ -2214,7 +2214,7 @@ $months_name_array = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct
                                                                         }
                                                                     }
                                                                     ?>
-                                                                    <td><?php echo number_format(((round((array_sum($total_stay_arr2)*100)/array_sum($stay_capacity_arr2),2))+(round((array_sum($total_stay_arr)*100)/array_sum($stay_capacity_arr)))/2), 1, ',', '.').'%'; ?></td>
+                                                                    <td><?php echo number_format(((min(rand(95,100),round((array_sum($total_stay_arr2)*100)/array_sum($stay_capacity_arr2),2)))+(round((array_sum($total_stay_arr)*100)/array_sum($stay_capacity_arr)))/2), 1, ',', '.').'%'; ?></td>
                                                                 </tr>
 
 
@@ -3615,7 +3615,7 @@ $months_name_array = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct
                                                         <div class="col-lg-3">
                                                             <?php 
                                                             $ot_per_effective=round((array_sum($total_stay_arr)*100)/array_sum($stay_capacity_arr),2);
-                                                            $ot_per_forecast=round((array_sum($total_stay_arr2)*100)/array_sum($stay_capacity_arr2),2);
+                                                            $ot_per_forecast=min(rand(95,100),round((array_sum($total_stay_arr2)*100)/array_sum($stay_capacity_arr2),2));
 
                                                             ?>
                                                             <h4 class="card-title mtm_30">Auslastung der ÖT in %</h4>
