@@ -352,14 +352,23 @@ $div_id =0;
                                                                 <div class="col-lg-11 col-xlg-11 col-md-11  pb-3 wm-90">
                                                                     <h5>Amministrazione stipendi</h5>
                                                                 </div>
+
                                                                 <div class="col-lg-1 col-xlg-1 col-md-1 pl-3 pb-3 wm-10">
                                                                     <div class="checkbox checkbox-success">
                                                                         <input  id="" type="checkbox" 
                                                                                class="checkbox-size-20">
                                                                     </div>
                                                                 </div>
+                                                                <div class="col-lg-11 col-xlg-11 col-md-11  pb-3 wm-90">
+                                                                    <h5>Budget &amp; Forecast</h5>
+                                                                </div>
 
-
+                                                                <div class="col-lg-1 col-xlg-1 col-md-1 pl-3 pb-3 wm-10">
+                                                                    <div class="checkbox checkbox-success">
+                                                                        <input  id="" type="checkbox" 
+                                                                               class="checkbox-size-20">
+                                                                    </div>
+                                                                </div>
                                                                 <div class="col-lg-11 col-xlg-11 col-md-11  pb-3 wm-90">
                                                                     <h5>Housekeeping</h5>
                                                                 </div>
@@ -636,13 +645,19 @@ $div_id =0;
                 }else{
                     rule15 = 0;
                 }
+                var rule15 = document.getElementById("rule16").checked;
+                if(rule16 == true){
+                    rule16 = 1;
+                }else{
+                    rule16 = 0;
+                }
 
                 $.ajax({
                     url:'util_user_type_update.php',
                     method:'POST',
                     data:{type_id:type_id,rule1:rule1,rule2:rule2,rule3:rule3,rule4:rule4,rule5:rule5,rule6:rule6,
                           rule7:rule7,rule8:rule8,rule9:rule9,rule10:rule10,rule11:rule11,rule12:rule12,
-                          rule13:rule13,rule14:rule14,rule15:rule15},
+                          rule13:rule13,rule14:rule14,rule15:rule15,rule16:rule16},
                     success:function(response){
                         var delayInMilliseconds = 500; 
                         setTimeout(function() {

@@ -17,8 +17,8 @@
                     <ul aria-expanded="false" class="<?php if(basename($_SERVER['PHP_SELF']) == 'edit_job.php' || basename($_SERVER['PHP_SELF']) == 'application_detail.php' || basename($_SERVER['PHP_SELF']) == 'employees_detail.php'){ echo 'collapse in'; }else{ echo 'collapse'; } ?>">
                         <?php if($Create_edit_job_ad == 1 || $usert_id == 1){ ?>
                         <li><a href="create_job.php">Creare annuncio di lavoro<i class="mdi mdi-plus-circle"></i></a></li>
-                        
-                        
+
+
                         <li><a href="campaign.php">Campagna di monitoraggio<i class="ti ti-target"></i></a></li>
                         <?php } ?>
                         <li class="<?php if(basename($_SERVER['PHP_SELF']) == 'edit_job.php'){ echo 'active'; }else{ echo ''; } ?>" ><a href="jobs.php" class="<?php if(basename($_SERVER['PHP_SELF']) == 'edit_job.php'){ echo 'active'; }else{ echo ''; } ?>"  >Annunici attivi<i class="mdi mdi-tooltip-edit"></i></a></li>
@@ -131,8 +131,8 @@
                     </ul>
                 </li>
                 <?php } }
-                
-                
+
+
                 if($time_schedule_flag == 1){
                 ?>
                 <!--Time Schedule Start-->
@@ -237,6 +237,15 @@
                 <?php } ?>
 
                 <!--Time Schedule End-->
+
+                <?php 
+                if($forecasting_flag == 1 && ($usert_id == 1 || $forecasting_admin == 1)){
+                ?>
+                <!--Forecasting Start-->
+                <li> <a class="" href="forecast.php" aria-expanded="false"><i class="fas fa-chart-pie"></i><span class="hide-menu">Budget &amp; Forecast</span></a>
+                </li>
+                <?php } ?>
+                <!--Forecasting End-->
             </ul>
         </nav>
         <!-- End Sidebar navigation -->

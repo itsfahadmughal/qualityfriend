@@ -240,7 +240,7 @@
                 <!--Time Schedule End-->
 
                 <?php 
-                if($forecasting_flag == 1 && $usert_id == 1){
+                if($forecasting_flag == 1 && ($usert_id == 1 || $forecasting_admin == 1)){
                 ?>
                 <!--Forecasting Start-->
                 <li> <a class="" href="forecast.php" aria-expanded="false"><i class="fas fa-chart-pie"></i><span class="hide-menu">Budget &amp; Forecast</span></a>

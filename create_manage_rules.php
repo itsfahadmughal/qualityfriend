@@ -197,7 +197,7 @@ $div_id =0;
                                                         <div class ="col-lg-2 col-xlg-2 col-md-2 font-size-title fsm-2rem" style="text-align: center; display: flex; justify-content: center;align-items: center;" >
                                                             <a class= "green_color"  data-toggle="modal" data-target="#add-contact" href=""><i class="mdi mdi-plus-circle"></i></a>
                                                         </div>
-                                                        <div id="reloadreload" class="col-lg-12 col-xlg-12 col-md-12 pl-4 pr-4 pb-1 pm-0 ">
+                                                        <div id="reload" class="col-lg-12 col-xlg-12 col-md-12 pl-4 pr-4 pb-1 pm-0 ">
                                                             <div    class="row">
                                                                 <?php
                                                                 $sql1="SELECT * FROM `tbl_usertype` WHERE (`hotel_id` = $hotel_id OR `hotel_id` = 0) and is_delete = '0'";
@@ -355,6 +355,18 @@ $div_id =0;
                                                                 <div class="col-lg-11 col-xlg-11 col-md-11  pb-3 wm-90">
                                                                     <h5>Wage Admin</h5>
                                                                 </div>
+
+                                                                <div class="col-lg-1 col-xlg-1 col-md-1 pl-3 pb-3 wm-10">
+                                                                    <div class="checkbox checkbox-success">
+                                                                        <input  id="" type="checkbox" 
+                                                                               class="checkbox-size-20">
+                                                                    </div>
+                                                                </div>
+                                                                <div class="col-lg-11 col-xlg-11 col-md-11  pb-3 wm-90">
+                                                                    <h5>Forecasting Admin</h5>
+                                                                </div>
+
+
                                                                 <div class="col-lg-1 col-xlg-1 col-md-1 pl-3 pb-3 wm-10">
                                                                     <div class="checkbox checkbox-success">
                                                                         <input  id="" type="checkbox" 
@@ -373,7 +385,6 @@ $div_id =0;
                                                                 <div class="col-lg-11 col-xlg-11 col-md-11  pb-3 wm-90">
                                                                     <h5>Housekeeping Admin</h5>
                                                                 </div>
-
 
                                                             </div>
 
@@ -626,6 +637,12 @@ $div_id =0;
                 }else{
                     rule15 = 0;
                 }
+                var rule16 = document.getElementById("rule16").checked;
+                if(rule16 == true){
+                    rule16 = 1;
+                }else{
+                    rule16 = 0;
+                }
 
 
                 $.ajax({
@@ -633,7 +650,7 @@ $div_id =0;
                     method:'POST',
                     data:{type_id:type_id,rule1:rule1,rule2:rule2,rule3:rule3,rule4:rule4,rule5:rule5,rule6:rule6,
                           rule7:rule7,rule8:rule8,rule9:rule9,rule10:rule10,rule11:rule11,rule12:rule12,
-                          rule13:rule13,rule14:rule14,rule15:rule15},
+                          rule13:rule13,rule14:rule14,rule15:rule15,rule16:rule16},
                     success:function(response){
                         var delayInMilliseconds = 500; 
                         setTimeout(function() {

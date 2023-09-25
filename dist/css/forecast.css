@@ -92,3 +92,42 @@
         width: 23% !important;
     }
 }
+table.top-scrollbars {
+    transform: rotateX(180deg);
+}
+table.top-scrollbars * {
+    transform: rotateX(180deg);
+}
+.forecast_red{
+    background-color: #ff0000;
+}
+.forecast_redl{
+    color: #ffe5e5;
+}
+.forecast_green{
+    background-color: #4ac382;
+}
+.forecast_greenl{
+    color: #daf3e6;
+}
+.forecast_yellow{
+    background-color: #fad12f;
+}
+.forecast_yellowl{
+    color: #FEF5D5;
+}
+.forecast_blue{
+    background-color: #2799fc;
+}
+.forecast_bluel{
+    color: #E9F4FE;
+}
+.forecast_grey{
+    background-color: #B2BEB5;
+}
+.forecast_greyl{
+    color: #EFF2F0;
+}
+.forecast_font_size{
+    font-size: 122px;
+}

@@ -55,6 +55,7 @@ $Create_view_schedules=0;
 $housekeeping=0;
 $housekeeping_admin=0;
 $wage_admin=0;
+$forecasting_admin=0;
 
 $sql="SELECT * FROM `tbl_rules`  WHERE `usert_id` = $usert_id";
 $result = $conn->query($sql);
@@ -78,6 +79,7 @@ if ($result && $result->num_rows > 0) {
         $housekeeping =$row['rule_13'];
         $housekeeping_admin =$row['rule_14'];
         $wage_admin =$row['rule_15'];
+        $forecasting_admin =$row['rule_16'];
 
     } 
 }

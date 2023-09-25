@@ -20,8 +20,9 @@ $rule10 = "";
 $rule11 = "";
 $rule12 = "";
 $rule13 = "";
-$rule14 = "" ;
-$rule15 = "" ;
+$rule14 = "";
+$rule15 = "";
+$rule16 = "";
 $sql="SELECT * FROM `tbl_rules` where usert_id = $type_id";
 $result = $conn->query($sql);
 if ($result && $result->num_rows > 0) {
@@ -42,6 +43,7 @@ if ($result && $result->num_rows > 0) {
         $rule13 = $row['rule_13'];
         $rule14 = $row['rule_14'];
         $rule15 = $row['rule_15'];
+        $rule16 = $row['rule_16'];
     } 
 }
 ?>
@@ -164,6 +166,17 @@ if ($result && $result->num_rows > 0) {
                     </div>
                     <div class="col-lg-11 col-xlg-11 col-md-11  pb-3 wm-90">
                         <h5>Wage Admin</h5>
+                    </div>
+                    
+                     <div class="col-lg-1 col-xlg-1 col-md-1 pl-3 pb-3 wm-10">
+                        <div class="checkbox checkbox-success">
+                            <input  id="rule16" type="checkbox" onclick ="type_update(<?php echo $type_id;?>)"
+
+                                   class="checkbox-size-20 check_box_i" <?php if($rule16 == 1){ echo "checked";} ?>>
+                        </div>
+                    </div>
+                    <div class="col-lg-11 col-xlg-11 col-md-11  pb-3 wm-90">
+                        <h5>Forecasting Admin</h5>
                     </div>
 
 

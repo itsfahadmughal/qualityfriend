@@ -50,10 +50,13 @@ if(isset($_POST['rule14'])){
 if(isset($_POST['rule15'])){
     $rule15 = $_POST['rule15'];
 }
+if(isset($_POST['rule16'])){
+    $rule16 = $_POST['rule16'];
+}
 $entry_time=date("Y-m-d H:i:s");
 $sql1="DELETE FROM `tbl_rules` WHERE  `usert_id` = $type_id";
 $result1 = $conn->query($sql1);
-$sql1="INSERT INTO `tbl_rules`( `usert_id`, `rule_1`, `rule_2`, `rule_3`, `rule_4`, `rule_5`, `rule_6`, `rule_7`, `rule_8`,`rule_9`, `rule_10`,`rule_11`, `rule_12`,`rule_13`,`rule_14`,`rule_15`) VALUES ('$type_id','$rule1','$rule2','$rule3','$rule4','$rule5','$rule6','$rule7','$rule8','$rule9','$rule10','$rule11','$rule12','$rule13','$rule14','$rule15')";
+$sql1="INSERT INTO `tbl_rules`( `usert_id`, `rule_1`, `rule_2`, `rule_3`, `rule_4`, `rule_5`, `rule_6`, `rule_7`, `rule_8`,`rule_9`, `rule_10`,`rule_11`, `rule_12`,`rule_13`,`rule_14`,`rule_15`,`rule_16`) VALUES ('$type_id','$rule1','$rule2','$rule3','$rule4','$rule5','$rule6','$rule7','$rule8','$rule9','$rule10','$rule11','$rule12','$rule13','$rule14','$rule15','$rule16')";
 $result1 = $conn->query($sql1);
 if($result1){
     echo "Good";

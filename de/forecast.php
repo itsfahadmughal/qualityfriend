@@ -1,14 +1,13 @@
 <?php
-include 'util_config.php';
-include 'util_session.php';
-//include 'forecast_utils/read_xml_forecast.php';
+include '../util_config.php';
+include '../util_session.php';
 
 $year_ = date("Y");
 if(isset($_GET['slug'])){
     $year_ = $_GET['slug'];
 }
 $current_month_ = date("m");
-require './forecast_utills/sales-forecasting/vendor/autoload.php';
+require '../forecast_utills/sales-forecasting/vendor/autoload.php';
 use Cozy\ValueObjects\Matrix;
 
 function forecast_prediction($conn,$input_data_,$date_forecast_,$i_,$current_year_working){
@@ -196,19 +195,19 @@ $months_name_array = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct
         <meta name="description" content="">
         <meta name="author" content="">
         <!-- Favicon icon -->
-        <link rel="icon" type="image/png" sizes="16x16" href="./assets/images/favicon.png">
+        <link rel="icon" type="image/png" sizes="16x16" href="../assets/images/favicon.png">
         <title>Budget &amp; Forecast</title>
         <!-- Footable CSS -->
-        <link href="./assets/node_modules/footable/css/footable.bootstrap.min.css" rel="stylesheet">
+        <link href="../assets/node_modules/footable/css/footable.bootstrap.min.css" rel="stylesheet">
         <link href="./assets/node_modules/bootstrap-select/bootstrap-select.min.css" rel="stylesheet" />
 
-        <link href="./dist/css/style.min.css" rel="stylesheet">
-        <link href="./dist/css/forecast.css" rel="stylesheet">
+        <link href="../dist/css/style.min.css" rel="stylesheet">
+        <link href="../dist/css/forecast.css" rel="stylesheet">
 
-        <link href="./assets/node_modules/bootstrap-material-datetimepicker/css/bootstrap-material-datetimepicker.css" rel="stylesheet">
+        <link href="../assets/node_modules/bootstrap-material-datetimepicker/css/bootstrap-material-datetimepicker.css" rel="stylesheet">
 
-        <link href="./assets/node_modules/bootstrap-datepicker/bootstrap-datepicker.min.css" rel="stylesheet" type="text/css" />
-        <link href="./assets/node_modules/select2/dist/css/select2.min.css" rel="stylesheet" type="text/css" />
+        <link href="../assets/node_modules/bootstrap-datepicker/bootstrap-datepicker.min.css" rel="stylesheet" type="text/css" />
+        <link href="../assets/node_modules/select2/dist/css/select2.min.css" rel="stylesheet" type="text/css" />
 
     </head>
     <body class="skin-default-dark fixed-layout">
