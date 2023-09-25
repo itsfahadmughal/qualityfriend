@@ -4512,16 +4512,14 @@ $months_name_array = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct
             });
 
 
+            function show_important_things(){
+                $('#responsive-modal-important-values').show();
+            }
 
-            //
-            //            function show_important_things(){
-            //                $('#responsive-modal-important-values').show();
-            //            }
-            //
-            //            function dismiss_modal_important(){
-            //                $('#responsive-modal-important-values').hide();
-            //            }
-            //
+            function dismiss_modal_important(){
+                $('#responsive-modal-important-values').hide();
+            }
+
             //            $(window).scroll(function() {
             //                var hT = $('#scroll_view_show').offset().top,
             //                    hH = $('#scroll_view_show').outerHeight(),
