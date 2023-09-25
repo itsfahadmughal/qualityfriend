@@ -1,10 +1,10 @@
 <?php
 require_once 'util_config.php';
-require_once 'util_session.php';
+require_once '../util_session.php';
 ?>
 
 <div class="mt-4">
-    <h3>Key Facts</h3>
+    <h3>Aspetti principali</h3>
 </div>
 
 <?php
@@ -17,12 +17,12 @@ if ($result_facts && $result_facts->num_rows > 0) {
     <table id="demo-foo-addrow" class="mobile_response_forecast_tables table table-bordered m-t-30 table-hover contact-list full-color-table full-info-table hover-table" data-paging="true" data-paging-size="25">
         <thead>
             <tr>
-                <th class="" >Available Rooms</th>
-                <th class="" >Available Beds</th>
-                <th class="" >Opening Days</th>
-                <th class="" >Total Stay Capacity</th>
-                <th class="" >Date</th>
-                <th class="text-center">Action</th>
+                <th class="" >Camere disponibili</th>
+                <th class="" >Letti disponibili</th>
+                <th class="" >Giorni di apertura</th>
+                <th class="" >Capacità totale di soggiorno</th>
+                <th class="" >Data</th>
+                <th class="text-center">Azione</th>
             </tr>
         </thead>
         <tbody>
@@ -48,6 +48,6 @@ if ($result_facts && $result_facts->num_rows > 0) {
 </div>
 
 <?php }else{ ?>
-<div class="text-center mt-5 pt-4"><img src="assets/images/no-results-cookie.png" width="250" /></div>
-<h5 class="text-center"><b>Key Facts Not Found.</b></h5>
+<div class="text-center mt-5 pt-4"><img src="../assets/images/no-results-cookie.png" width="250" /></div>
+<h5 class="text-center"><b>Fatti chiave non trovati.</b></h5>
 <?php } ?>

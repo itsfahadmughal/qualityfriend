@@ -1,11 +1,11 @@
 <?php
 require_once 'util_config.php';
-require_once 'util_session.php';
+require_once '../util_session.php';
 ?>
 
 <div class="form-group mb-0">
-    <label class="control-label display-inline w-80 wm-50"><strong>Staff Department Title</strong></label>
-    <label class="control-label display-inline w-18 wm-50"><strong>Action</strong></label>
+    <label class="control-label display-inline w-80 wm-50"><strong>Titolo del dipartimento del personale</strong></label>
+    <label class="control-label display-inline w-18 wm-50"><strong>Azione</strong></label>
 </div>
 <?php
 $sql_depart = "SELECT * FROM `tbl_forecast_staffing_department` WHERE hotel_id = 1 AND is_active = 1 AND is_delete = 0 ORDER BY 1 DESC";

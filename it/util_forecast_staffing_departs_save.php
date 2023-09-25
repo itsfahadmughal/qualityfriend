@@ -1,6 +1,6 @@
 <?php 
 include 'util_config.php';
-include 'util_session.php';
+include '../util_session.php';
 
 
 $depart_title = "";

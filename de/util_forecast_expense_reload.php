@@ -1,10 +1,10 @@
 <?php
 require_once 'util_config.php';
-require_once 'util_session.php';
+require_once '../util_session.php';
 ?>
 
 <div class="mt-4">
-    <h3>Expenses</h3>
+    <h3>Kosten</h3>
 </div>
 
 <?php
@@ -17,17 +17,17 @@ if ($result_expenses && $result_expenses->num_rows > 0) {
     <table id="demo-foo-addrow" class="mobile_response_forecast_tables table table-bordered m-t-30 table-hover contact-list full-color-table full-success-table hover-table" data-paging="true" data-paging-size="25">
         <thead>
             <tr>
-                <th class="" >Ancillary Cost</th>
-                <th class="" >Spa Cost</th>
-                <th class="" >Operating Cost</th>
-                <th class="" >Administration Cost</th>
+                <th class="" >Nebenkosten</th>
+                <th class="" >Spa-Kosten</th>
+                <th class="" >Betriebskosten</th>
+                <th class="" >Administrator kosten</th>
                 <th class="" >Marketing</th>
-                <th class="" >Taxes</th>
-                <th class="" >Bank Charges</th>
-                <th class="" >Total Loan</th>
-                <th class="" >Other Costs</th>
-                <th class="" >Date</th>
-                <th class="text-center">Action</th>
+                <th class="" >Steuern</th>
+                <th class="" >Bankgebühren</th>
+                <th class="" >Gesamtdarlehen</th>
+                <th class="" >Sonstige Kosten</th>
+                <th class="" >Datum</th>
+                <th class="text-center">Aktion</th>
             </tr>
         </thead>
         <tbody>
@@ -58,6 +58,6 @@ if ($result_expenses && $result_expenses->num_rows > 0) {
 </div>
 
 <?php }else{ ?>
-<div class="text-center mt-5 pt-4"><img src="assets/images/no-results-cookie.png" width="250" /></div>
-<h5 class="text-center"><b>Expenses Not Found.</b></h5>
+<div class="text-center mt-5 pt-4"><img src="../assets/images/no-results-cookie.png" width="250" /></div>
+<h5 class="text-center"><b>Ausgaben nicht gefunden.</b></h5>
 <?php } ?>

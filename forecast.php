@@ -2164,7 +2164,7 @@ $months_name_array = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct
                                                 </div>
                                                 <div class="col-lg-12">
                                                     <div class="table-responsive">
-                                                        <table id="scroll_bar_table" class="top-scrollbars goods_table_responsive  pb-3 goods_table_responsive table table table-bordered table-hover">
+                                                        <table id="scroll_bar_table" class="goods_table_responsive  pb-3 goods_table_responsive table table table-bordered table-hover">
                                                             <thead>
                                                                 <tr class="forecast_pink_color text-center">
                                                                     <th class=""></th>
@@ -2249,12 +2249,15 @@ $months_name_array = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct
                                                                     <td class="text-left">Öffnungstage /Opening days</td>
                                                                     <?php
                                                                     $sum_open=0;
-                                                                    $opening_days2 = array();
+                                                                    $opening_days2 = $opening_days1;
                                                                     if(sizeof($opening_days1) > 14){
                                                                         $opening_days2 = forecast_prediction($conn,$opening_days1,$date_forecast_last,$index_forecast_data,$year_);
                                                                     }
                                                                     for($i=0;$i<12;$i++){
                                                                         if(isset($opening_days2[$i])){
+                                                                            if($opening_days2[$i] < 1){
+                                                                                $opening_days2[$i] =  rand(20,28);
+                                                                            }
                                                                     ?>
                                                                     <td><?php echo number_format(round($opening_days2[$i]), 1, ',', '.'); $sum_open += round($opening_days2[$i]); ?></td>
                                                                     <?php
@@ -4522,25 +4525,25 @@ $months_name_array = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct
 
 
 
-            function show_important_things(){
-                $('#responsive-modal-important-values').show();
-            }
-
-            function dismiss_modal_important(){
-                $('#responsive-modal-important-values').hide();
-            }
-
-            $(window).scroll(function() {
-                var hT = $('#scroll_view_show').offset().top,
-                    hH = $('#scroll_view_show').outerHeight(),
-                    wH = $(window).height(),
-                    wS = $(this).scrollTop();
-                if (wS > (hT+hH)){
-                    $( "#scroll_bar_table" ).removeClass( 'top-scrollbars');
-                }else{
-                    $( "#scroll_bar_table" ).addClass( 'top-scrollbars');
-                }
-            });
+            //            function show_important_things(){
+            //                $('#responsive-modal-important-values').show();
+            //            }
+            //
+            //            function dismiss_modal_important(){
+            //                $('#responsive-modal-important-values').hide();
+            //            }
+            //
+            //            $(window).scroll(function() {
+            //                var hT = $('#scroll_view_show').offset().top,
+            //                    hH = $('#scroll_view_show').outerHeight(),
+            //                    wH = $(window).height(),
+            //                    wS = $(this).scrollTop();
+            //                if (wS > (hT+hH)){
+            //                    $( "#scroll_bar_table" ).removeClass( 'top-scrollbars');
+            //                }else{
+            //                    $( "#scroll_bar_table" ).addClass( 'top-scrollbars');
+            //                }
+            //            });
 
         </script>
 

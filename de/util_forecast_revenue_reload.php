@@ -1,10 +1,10 @@
 <?php
 require_once 'util_config.php';
-require_once 'util_session.php';
+require_once '../util_session.php';
 ?>
 
 <div class="mt-4">
-    <h3>Revenues</h3>
+    <h3>Erlöse</h3>
 </div>
 
 <?php
@@ -17,13 +17,13 @@ if ($result_revenues && $result_revenues->num_rows > 0) {
     <table id="demo-foo-addrow" class="mobile_response_forecast_tables table table-bordered m-t-30 table-hover contact-list full-color-table full-primary-table hover-table" data-paging="true" data-paging-size="25">
         <thead>
             <tr>
-                <th class="" >Hotel Revenue</th>
-                <th class="" >Ancillary Revenue</th>
-                <th class="" >Spa Revenue 22%</th>
-                <th class="" >Other Reveneus</th>
-                <th class="" >Account Balance</th>
-                <th class="" >Date</th>
-                <th class="text-center">Action</th>
+                <th class="" >Hoteleinnahmen</th>
+                <th class="" >Nebeneinnahmen</th>
+                <th class="" >Spa-Einnahmen 22%</th>
+                <th class="" >Andere Einnahmen</th>
+                <th class="" >Kontostand</th>
+                <th class="" >Datum</th>
+                <th class="text-center">Aktion</th>
             </tr>
         </thead>
         <tbody>
@@ -51,6 +51,6 @@ if ($result_revenues && $result_revenues->num_rows > 0) {
 </div>
 
 <?php }else{ ?>
-<div class="text-center mt-5 pt-4"><img src="assets/images/no-results-cookie.png" width="250" /></div>
-<h5 class="text-center"><b>Revenues Not Found.</b></h5>
+<div class="text-center mt-5 pt-4"><img src="../assets/images/no-results-cookie.png" width="250" /></div>
+<h5 class="text-center"><b>Einnahmen nicht gefunden.</b></h5>
 <?php } ?>

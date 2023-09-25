@@ -1,6 +1,6 @@
 <?php 
 include 'util_config.php';
-include 'util_session.php';
+include '../util_session.php';
 
 
 $hotel_rev_ = 0;

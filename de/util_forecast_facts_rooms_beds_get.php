@@ -1,6 +1,6 @@
 <?php 
 include 'util_config.php';
-include 'util_session.php';
+include '../util_session.php';
 
 
 $sql = "SELECT * FROM `tbl_forecast_keyfacts` WHERE `hotel_id` = $hotel_id ORDER BY date DESC LIMIT 1";
