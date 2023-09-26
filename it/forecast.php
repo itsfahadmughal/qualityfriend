@@ -2245,7 +2245,9 @@ $months_name_array = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct
                                                                     for($i=0;$i<12;$i++){
                                                                         if(isset($opening_days2[$i])){
                                                                             if($opening_days2[$i] < 1){
-                                                                                $opening_days2[$i] =  rand(20,28);
+                                                                                $opening_days2[$i] =  rand(1,5);
+                                                                            }else if($opening_days2[$i] > 30){
+                                                                                $opening_days2[$i] =  rand(25,30);
                                                                             }
                                                                     ?>
                                                                     <td><?php echo number_format(round($opening_days2[$i]), 1, ',', '.'); $sum_open += round($opening_days2[$i]); ?></td>
@@ -2285,7 +2287,7 @@ $months_name_array = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct
                                                                     <td><?php echo '0.00%'; ?></td>
                                                                     <?php 
                                                                         }
-                                                                        if(isset($total_stay_arr[$i])){
+                                                                        if(isset($total_stay_arr[$i]) && $stay_capacity_arr[$i] != 0){
                                                                     ?>
                                                                     <td><?php echo number_format(round(($total_stay_arr[$i]*100)/$stay_capacity_arr[$i],2), 1, ',', '.').'%'; ?></td>
                                                                     <?php
