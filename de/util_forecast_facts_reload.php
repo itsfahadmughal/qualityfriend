@@ -4,7 +4,7 @@ require_once '../util_session.php';
 ?>
 
 <div class="mt-4">
-    <h3>Wichtige Fakten</h3>
+    <h3>Verfügbarkeit nach Monat</h3>
 </div>
 
 <?php
@@ -17,10 +17,10 @@ if ($result_facts && $result_facts->num_rows > 0) {
     <table id="demo-foo-addrow" class="mobile_response_forecast_tables table table-bordered m-t-30 table-hover contact-list full-color-table full-info-table hover-table" data-paging="true" data-paging-size="25">
         <thead>
             <tr>
-                <th class="" >Verfügbare Zimmer</th>
-                <th class="" >Verfügbare Betten</th>
-                <th class="" >Eröffnungstage</th>
-                <th class="" >Gesamtaufenthaltskapazität</th>
+                <th class="" >Zimmer</th>
+                <th class="" >Betten</th>
+                <th class="" >Offenthaltetage</th>
+                <th class="" >Gesamtkapazität</th>
                 <th class="" >Datum</th>
                 <th class="text-center">Aktion</th>
             </tr>

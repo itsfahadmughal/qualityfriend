@@ -4,7 +4,7 @@ require_once '../util_session.php';
 ?>
 
 <div class="mt-4">
-    <h3>Ricavi</h3>
+    <h3>Ricavi al mese</h3>
 </div>
 
 <?php

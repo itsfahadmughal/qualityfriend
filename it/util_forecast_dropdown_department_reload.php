@@ -3,7 +3,7 @@ require_once 'util_config.php';
 require_once '../util_session.php';
 ?>
 
-<option value="0">Seleziona Dipartimento del personale</option>
+<option value="0">Seleziona reparto</option>
 <?php
 $sql_depart = "SELECT * FROM `tbl_forecast_staffing_department` WHERE hotel_id = $hotel_id AND is_active = 1 AND is_delete = 0 ORDER BY 1 DESC";
 

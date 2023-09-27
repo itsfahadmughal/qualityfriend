@@ -229,13 +229,13 @@ $months_name_array = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct
                 <div class="modal-dialog">
                     <div class="modal-content">
                         <div class="modal-header">
-                            <h3 class="display-inline text-left">Dipartimenti del personale</h3>
+                            <h3 class="display-inline text-left">Dipartimenti del Dipendenti</h3>
                             <button type="button" class="close" data-dismiss="modal" onclick="dismiss_modal_delete_department();" aria-hidden="true">×</button>
                         </div>
                         <div class="modal-body">
                             <form>
                                 <div class="form-group" id="delete_shift_date_form">
-                                    <label for="message-text" class="control-label ml-1"><b>Titolo del dipartimento del personale</b></label>
+                                    <label for="message-text" class="control-label ml-1"><b>Titolo del dipartimento del Dipendenti</b></label>
 
                                     <input type="text" class="form-control w-80" placeholder="e.g. Reception, Mgmt/Adm, Kitchen..." id="depart_title_modal" />
                                     <input type="button" onclick="add_department();" class="btn w-18 btn-success" value="Aggiungere">
@@ -244,7 +244,7 @@ $months_name_array = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct
                                 <div class="form-group">
                                     <div class="p-2 h-400px" id="reload_departments">
                                         <div class="form-group mb-0">
-                                            <label class="control-label display-inline w-80 wm-50"><strong>Titolo del dipartimento del personale</strong></label>
+                                            <label class="control-label display-inline w-80 wm-50"><strong>Titolo del dipartimento del Dipendenti</strong></label>
                                             <label class="control-label display-inline w-18 wm-50"><strong>Azione</strong></label>
                                         </div>
                                         <?php
@@ -289,7 +289,7 @@ $months_name_array = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct
                                     <div class="row">
                                         <div class="col-lg-8 p-3">
                                             <span>OGGI <?php echo date("g:i A", strtotime('-1 hour')); ?></span>
-                                            <h3 class="text-center">Ritiro questo mese</h3>
+                                            <h3 class="text-center">Pickup questo mese</h3>
                                             <h2 class="text-center"><b id="text_important1">0</b></h2>
                                             <div class="text-center"><small>Vendita superiore all'obiettivo questo mese</small></div>
                                         </div>
@@ -306,7 +306,7 @@ $months_name_array = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct
                                         </div>
                                         <div class="col-lg-8 p-3">
                                             <span>OGGI <?php echo date("g:i A" ,strtotime('-2 hour')); ?></span>
-                                            <h3 class="text-center">Tasso di occupazione questo mese (OCC)</h3>
+                                            <h3 class="text-center">Occupazione questo mese (OCC)</h3>
                                             <h2 class="text-center"><b id="text_important2">0</b></h2>
                                             <div class="text-center"><small>Tasso di occupazione superiore al target</small></div>
                                         </div>
@@ -318,7 +318,7 @@ $months_name_array = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct
                                     <div class="row">
                                         <div class="col-lg-8 p-3">
                                             <span>OGGI <?php echo date("g:i A",strtotime('-2 hour')); ?></span>
-                                            <h3 class="text-center">Tariffa media giornaliera per persona quest'anno (ADR)</h3>
+                                            <h3 class="text-center">Prezzo medio giornaliero annuale (ADR)</h3>
                                             <h2 class="text-center"><b id="text_important3">0</b></h2>
                                             <div class="text-center"><small>Buona tariffa media giornaliera</small></div>
                                         </div>
@@ -335,7 +335,7 @@ $months_name_array = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct
                                         </div>
                                         <div class="col-lg-8 p-3">
                                             <span>OGGI <?php echo date("g:i A",strtotime('-3 hour')); ?></span>
-                                            <h3 class="text-center">Ritiro di ieri</h3>
+                                            <h3 class="text-center">Pickup ieri</h3>
                                             <h2 class="text-center"><b id="text_important4">0</b></h2>
                                             <div class="text-center"><small>Saldi dell'ultimo giorno</small></div>
                                         </div>
@@ -346,7 +346,7 @@ $months_name_array = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct
                                     <div class="row">
                                         <div class="col-lg-8 p-3">
                                             <span>OGGI <?php echo date("g:i A",strtotime('-3 hour')); ?></span>
-                                            <h3 class="text-center">Sui libri (anno di ritiro)</h3>
+                                            <h3 class="text-center">On the books (Pickup annuale)</h3>
                                             <h3 class="text-center"><b id="text_important5">0</b></h3>
                                             <div class="text-center"><small>Previsioni per l'anno corrente e precedente</small></div>
                                         </div>
@@ -429,9 +429,9 @@ $months_name_array = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct
                                             </a>
                                             <div class="dropdown-menu"> 
                                                 <a class="dropdown-item" id="dropdown1-tab" href="#dropdown1" role="tab" data-toggle="tab" aria-controls="dropdown1">Ricavi</a> 
-                                                <a class="dropdown-item" id="dropdown2-tab" href="#dropdown2" role="tab" data-toggle="tab" aria-controls="dropdown2">Spese</a> 
-                                                <a class="dropdown-item" id="dropdown3-tab" href="#dropdown3" role="tab" data-toggle="tab" aria-controls="dropdown3">Aspetti principali</a>
-                                                <a class="dropdown-item" id="dropdown4-tab" href="#dropdown4" role="tab" data-toggle="tab" aria-controls="dropdown4">Personale</a> 
+                                                <a class="dropdown-item" id="dropdown2-tab" href="#dropdown2" role="tab" data-toggle="tab" aria-controls="dropdown2">Costi</a> 
+                                                <a class="dropdown-item" id="dropdown3-tab" href="#dropdown3" role="tab" data-toggle="tab" aria-controls="dropdown3">Apertura</a>
+                                                <a class="dropdown-item" id="dropdown4-tab" href="#dropdown4" role="tab" data-toggle="tab" aria-controls="dropdown4">Dipendenti</a> 
                                                 <a class="dropdown-item" id="dropdown5-tab" href="#dropdown5" role="tab" data-toggle="tab" aria-controls="dropdown5">Acquisto di beni</a>  
                                             </div>
                                         </li>
@@ -442,7 +442,7 @@ $months_name_array = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct
                                         <div class="tab-pane fade" id="profile5" role="tabpanel" aria-labelledby="profile-tab5">
                                             <div class="row"> 
                                                 <div class="col-lg-12">
-                                                    <h3 class="forecast_main_color p-3 text-center font_size_forecast_1rem">Personale 
+                                                    <h3 class="forecast_main_color p-3 text-center font_size_forecast_1rem">Dipendenti 
                                                         <button class="float-right" id="btnExport" onclick="export_staffing(this)">Esportare</button>
                                                     </h3>
                                                 </div>
@@ -1967,7 +1967,7 @@ $months_name_array = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct
                                                             <td><?php echo ''; ?></td>
                                                         </tr>
                                                         <tr class="">
-                                                            <td class="text-left"><?php echo 'Personale'; ?></td>
+                                                            <td class="text-left"><?php echo 'Dipendenti'; ?></td>
                                                             <td><?php echo number_format(round(array_sum($staffing_arr1),2), 1, ',', '.'); ?></td>
                                                             <td>
                                                                 <?php 
@@ -1977,7 +1977,7 @@ $months_name_array = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct
                                                             </td>
                                                             <td></td>
                                                             <td></td>
-                                                            <td class="text-left"><?php echo 'Personale'; ?></td>
+                                                            <td class="text-left"><?php echo 'Dipendenti'; ?></td>
                                                             <td><?php echo number_format(round((array_sum($staffing_arr)*100)/($total_costs_chart),2), 1, ',', '.').'%'; ?></td>
                                                             <td><?php echo ''; ?></td>
                                                         </tr>
@@ -3778,14 +3778,14 @@ $months_name_array = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct
                                                 <div class="col-lg-4 right-border-div pr-5 prm-0px">
 
                                                     <div class="mt-4">
-                                                        <h3><span id="add_or_edit_revenues_text">Aggiungere</span> Ricavi <button onclick="clear_revenues_values();" type="button" class="btn btn-primary float-right">Valori chiari</button></h3>
+                                                        <h3><span id="add_or_edit_revenues_text">Aggiungere</span> Ricavi <button onclick="clear_revenues_values();" type="button" class="btn btn-primary float-right">Cancella</button></h3>
                                                     </div>
 
                                                     <div class="row mt-3">
                                                         <div class="col-lg-12">
                                                             <div class="form-group mb-0">
-                                                                <label class="control-label display-inline w-47 wm-47"><strong>Ricavi alberghieri netti</strong></label>
-                                                                <label class="control-label display-inline ml-2 w-47 wm-47"><strong>Ricavi accessori netti</strong></label>
+                                                                <label class="control-label display-inline w-47 wm-47"><strong>Revenue</strong></label>
+                                                                <label class="control-label display-inline ml-2 w-47 wm-47"><strong>Ricavi aggiuntivi</strong></label>
                                                             </div>
                                                             <div class="form-group mb-0">
                                                                 <input step="any" type="number" class="form-control display-inline w-47 wm-47" id="hotel_revenues">
@@ -3793,8 +3793,8 @@ $months_name_array = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct
                                                             </div>
 
                                                             <div class="form-group mb-0 mt-3">
-                                                                <label class="control-label display-inline w-47 wm-47"><strong>Ricavi Spa Netti (22%)</strong></label>
-                                                                <label class="control-label display-inline ml-2 w-47 wm-47"><strong>Altri ricavi netti</strong></label>
+                                                                <label class="control-label display-inline w-47 wm-47"><strong>Ricavi Spa</strong></label>
+                                                                <label class="control-label display-inline ml-2 w-47 wm-47"><strong>Altri ricavi</strong></label>
                                                             </div>
                                                             <div class="form-group mb-0">
                                                                 <input step="any" type="number" class="form-control display-inline w-47 wm-47" id="spa_revenues">
@@ -3837,7 +3837,7 @@ $months_name_array = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct
                                                     </div>
 
                                                     <div class="mt-3 mb-5 pb-5 pbm-0 mbm-0 mrm-12px">
-                                                        <input type="button" onclick="save_revenue();" class="btn mt-4 w-100 btn-primary" value="Risparmia entrate">
+                                                        <input type="button" onclick="save_revenue();" class="btn mt-4 w-100 btn-primary" value="Salva Revenue">
                                                     </div>
 
 
@@ -3845,7 +3845,7 @@ $months_name_array = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct
 
                                                 <div class="col-lg-8 pl-5 plm-10px" id="reload_revenues">
                                                     <div class="mt-4">
-                                                        <h3>Ricavi</h3>
+                                                        <h3>Ricavi al mese</h3>
                                                     </div>
 
                                                     <?php
@@ -3858,8 +3858,8 @@ $months_name_array = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct
                                                         <table id="demo-foo-addrow" class="mobile_response_forecast_tables table table-bordered m-t-30 table-hover contact-list full-color-table full-primary-table hover-table" data-paging="true" data-paging-size="25">
                                                             <thead>
                                                                 <tr>
-                                                                    <th class="" >Entrate alberghiere</th>
-                                                                    <th class="" >Entrate accessorie</th>
+                                                                    <th class="" >Entrate Revenue</th>
+                                                                    <th class="" >Entrate aggiuntivi</th>
                                                                     <th class="" >Entrate termali 22%</th>
                                                                     <th class="" >Altri ricavi</th>
                                                                     <th class="" >Saldo del conto</th>
@@ -3907,15 +3907,15 @@ $months_name_array = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct
                                                 <div class="col-lg-4 right-border-div pr-5 prm-0px">
 
                                                     <div class="mt-4">
-                                                        <h3><span id="add_or_edit_expenses_text">Aggiungere</span> Spese <button onclick="clear_expenses_values();" type="button" class="btn btn-success float-right">Valori chiari</button></h3>
+                                                        <h3><span id="add_or_edit_expenses_text">Aggiungere</span> costi <button onclick="clear_expenses_values();" type="button" class="btn btn-success float-right">Cancella</button></h3>
                                                     </div>
 
                                                     <div class="row mt-3">
                                                         <div class="col-lg-12">
 
                                                             <div class="form-group mb-0">
-                                                                <label class="control-label display-inline w-47 wm-47"><strong>Costo dei beni accessori</strong></label>
-                                                                <label class="control-label display-inline ml-2 w-47 wm-47"><strong>Costo dei prodotti termali</strong></label>
+                                                                <label class="control-label display-inline w-47 wm-47"><strong>Costi ricavi aggiuntivi</strong></label>
+                                                                <label class="control-label display-inline ml-2 w-47 wm-47"><strong>Costi Spa</strong></label>
                                                             </div>
                                                             <div class="form-group mb-0">
                                                                 <input step="any" type="number" class="form-control display-inline w-47 wm-47" id="ancillary_goods_cost">
@@ -3923,8 +3923,8 @@ $months_name_array = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct
                                                             </div>
 
                                                             <div class="form-group mb-0 mt-3">
-                                                                <label class="control-label display-inline w-47 wm-47"><strong>Costo operativo totale</strong></label>
-                                                                <label class="control-label display-inline ml-2 w-47 wm-47"><strong>Costo amministrativo</strong></label>
+                                                                <label class="control-label display-inline w-47 wm-47"><strong>Costi operativi</strong></label>
+                                                                <label class="control-label display-inline ml-2 w-47 wm-47"><strong>Costi amministrativi</strong></label>
                                                             </div>
                                                             <div class="form-group mb-0">
                                                                 <input step="any" type="number" class="form-control display-inline w-47 wm-47" id="total_operating_cost">
@@ -3933,7 +3933,7 @@ $months_name_array = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct
 
                                                             <div class="form-group mb-0 mt-3">
                                                                 <label class="control-label display-inline w-47 wm-47"><strong>Marketing</strong></label>
-                                                                <label class="control-label display-inline ml-2 w-47 wm-47"><strong>Le tasse</strong></label>
+                                                                <label class="control-label display-inline ml-2 w-47 wm-47"><strong>Tasse + Imposte</strong></label>
                                                             </div>
                                                             <div class="form-group mb-0">
                                                                 <input step="any" type="number" class="form-control display-inline w-47 wm-47" id="marketing">
@@ -3941,8 +3941,8 @@ $months_name_array = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct
                                                             </div>
 
                                                             <div class="form-group mb-0 mt-3">
-                                                                <label class="control-label display-inline w-47 wm-47"><strong>Spese bancarie</strong></label>
-                                                                <label class="control-label display-inline ml-2 w-47 wm-47"><strong>Prestito totale (solo gennaio)</strong></label>
+                                                                <label class="control-label display-inline w-47 wm-47"><strong>Costi bancari</strong></label>
+                                                                <label class="control-label display-inline ml-2 w-47 wm-47"><strong>Crediti (solo gennaio)</strong></label>
                                                             </div>
                                                             <div class="form-group mb-0">
                                                                 <input type="number" step="any" class="form-control display-inline w-47 wm-47" id="bank_charges">
@@ -3988,7 +3988,7 @@ $months_name_array = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct
 
 
                                                     <div class="mt-3 mb-5 pb-5 pbm-0 mbm-0 mrm-12px">
-                                                        <input type="button" onclick="save_cost();" class="btn mt-4 w-100 btn-success" value="Risparmia sulle spese">
+                                                        <input type="button" onclick="save_cost();" class="btn mt-4 w-100 btn-success" value="Salva Costi">
                                                     </div>
 
 
@@ -3996,7 +3996,7 @@ $months_name_array = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct
 
                                                 <div class="col-lg-8 pl-5 plm-10px" id="reload_expenses">
                                                     <div class="mt-4">
-                                                        <h3>Spese</h3>
+                                                        <h3>Costi al mese</h3>
                                                     </div>
 
                                                     <?php
@@ -4009,14 +4009,14 @@ $months_name_array = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct
                                                         <table id="demo-foo-addrow" class="mobile_response_forecast_tables table table-bordered m-t-30 table-hover contact-list full-color-table full-success-table hover-table" data-paging="true" data-paging-size="25">
                                                             <thead>
                                                                 <tr>
-                                                                    <th class="" >Costo accessorio</th>
-                                                                    <th class="" >Costo del centro termale</th>
-                                                                    <th class="" >Costo operativo</th>
-                                                                    <th class="" >Costo amministrativo</th>
+                                                                    <th class="" >Costi ricavi aggiuntivi</th>
+                                                                    <th class="" >Costi Spa</th>
+                                                                    <th class="" >Costi operativi</th>
+                                                                    <th class="" >Costi amministrativi</th>
                                                                     <th class="" >Marketing</th>
-                                                                    <th class="" >Le tasse</th>
-                                                                    <th class="" >Spese bancarie</th>
-                                                                    <th class="" >Prestito totale</th>
+                                                                    <th class="" >Tasse + Imposte</th>
+                                                                    <th class="" >Costi bancari</th>
+                                                                    <th class="" >Crediti</th>
                                                                     <th class="" >Altri costi</th>
                                                                     <th class="" >Data</th>
                                                                     <th class="text-center">Azione</th>
@@ -4065,7 +4065,7 @@ $months_name_array = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct
                                                 <div class="col-lg-4 right-border-div pr-5 prm-0px">
 
                                                     <div class="mt-4">
-                                                        <h3><span id="add_or_edit_key_text">Aggiungere</span> Aspetti principali <button onclick="clear_key_values();" type="button" class="btn btn-info float-right">Valori chiari</button></h3>
+                                                        <h3><span id="add_or_edit_key_text">Aggiungere</span> apertura <button onclick="clear_key_values();" type="button" class="btn btn-info float-right">Cancella</button></h3>
                                                     </div>
 
                                                     <div class="row mt-3">
@@ -4073,7 +4073,7 @@ $months_name_array = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct
 
 
                                                             <div class="form-group mb-0">
-                                                                <label class="control-label display-inline w-47 wm-47"><strong>Camere</strong></label>
+                                                                <label class="control-label display-inline w-47 wm-47"><strong>Camere disponibili</strong></label>
                                                                 <label class="control-label display-inline ml-2 w-47 wm-47"><strong>Letti</strong></label>
                                                             </div>
                                                             <div class="form-group mb-0">
@@ -4082,7 +4082,7 @@ $months_name_array = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct
                                                             </div>
 
                                                             <div class="form-group mb-0 mt-3 mrm-12px">
-                                                                <label class="control-label display-inline w-100 wm-100"><strong>Giorni di apertura</strong></label>
+                                                                <label class="control-label display-inline w-100 wm-100"><strong>Giorni aperti</strong></label>
                                                             </div>
                                                             <div class="form-group mb-0 mrm-12px">
                                                                 <input type="number" class="form-control display-inline w-100 wm-100" id="opening_days">
@@ -4120,7 +4120,7 @@ $months_name_array = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct
 
 
                                                     <div class="mt-3 mb-5 pb-5 pbm-0 mbm-0 mrm-12px">
-                                                        <input type="button" onclick="save_facts();" class="btn mt-4 w-100 btn-info" value="Salva i fatti principali">
+                                                        <input type="button" onclick="save_facts();" class="btn mt-4 w-100 btn-info" value="Salva apertura">
                                                     </div>
 
 
@@ -4128,7 +4128,7 @@ $months_name_array = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct
 
                                                 <div class="col-lg-8 pl-5 plm-10px" id="reload_facts">
                                                     <div class="mt-4">
-                                                        <h3>Aspetti principali</h3>
+                                                        <h3>Disponibilità per mese</h3>
                                                     </div>
 
                                                     <?php
@@ -4141,10 +4141,10 @@ $months_name_array = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct
                                                         <table id="demo-foo-addrow" class="mobile_response_forecast_tables table table-bordered m-t-30 table-hover contact-list full-color-table full-info-table hover-table" data-paging="true" data-paging-size="25">
                                                             <thead>
                                                                 <tr>
-                                                                    <th class="" >Camere disponibili</th>
-                                                                    <th class="" >Letti disponibili</th>
-                                                                    <th class="" >Giorni di apertura</th>
-                                                                    <th class="" >Capacità totale di soggiorno</th>
+                                                                    <th class="" >Camere</th>
+                                                                    <th class="" >Letti</th>
+                                                                    <th class="" >Giorni aperti</th>
+                                                                    <th class="" >Capacità totale</th>
                                                                     <th class="" >Data</th>
                                                                     <th class="text-center">Azione</th>
                                                                 </tr>
@@ -4187,7 +4187,7 @@ $months_name_array = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct
                                                 <div class="col-lg-4 right-border-div pr-5 prm-0px">
 
                                                     <div class="mt-4">
-                                                        <h3><span id="add_or_edit_staffing_text">Aggiungere</span> Costo del personale <button onclick="clear_staffing_values();" type="button" class="btn btn-warning float-right">Valori chiari</button></h3>
+                                                        <h3><span id="add_or_edit_staffing_text">Aggiungere</span> Costi Dipendenti <button onclick="clear_staffing_values();" type="button" class="btn btn-warning float-right">Cancella</button></h3>
                                                     </div>
 
                                                     <div class="row mt-3">
@@ -4195,10 +4195,10 @@ $months_name_array = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct
 
 
                                                             <div class="form-group mb-0 mrm-12px">
-                                                                <label class="control-label display-inline w-100 wm-100"><strong>Nome del personale</strong></label>
+                                                                <label class="control-label display-inline w-100 wm-100"><strong>Nome Dipendenti</strong></label>
                                                             </div>
                                                             <div class="form-group mb-0 mrm-12px">
-                                                                <input type="text" class="form-control display-inline w-100 wm-100" id="staff_name" placeholder="e.g. Reception 1, Operation Mgr, Kitchen 1...">
+                                                                <input type="text" class="form-control display-inline w-100 wm-100" id="staff_name" placeholder="e.g. Carlo Carli...">
                                                             </div>
 
                                                             <div class="form-group mb-0 mt-3">
@@ -4220,11 +4220,11 @@ $months_name_array = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct
                                                             </div>
 
                                                             <div class="form-group mb-0 mt-3">
-                                                                <label class="control-label display-inline ml-2 w-47 wm-47"><strong>Dipartimento del personale</strong></label>
+                                                                <label class="control-label display-inline ml-2 w-47 wm-47"><strong>Reparto</strong></label>
                                                             </div>
                                                             <div class="form-group mb-0">
                                                                 <select class="form-control display-inline w-47 wm-47" id="department_staffing">
-                                                                    <option value="0">Seleziona Dipartimento del personale</option>
+                                                                    <option value="0">Seleziona reparto</option>
                                                                     <?php
                                                                     $sql_depart = "SELECT * FROM `tbl_forecast_staffing_department` WHERE hotel_id = $hotel_id AND is_active = 1 AND is_delete = 0 ORDER BY 1 DESC";
 
@@ -4238,7 +4238,7 @@ $months_name_array = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct
                                                                     }
                                                                     ?> 
                                                                 </select>
-                                                                <input type="button" onclick="add_staff_depart();" class="btn w-47 ml-2 btn-warning" value="Aggiungi dipartimento del personale">
+                                                                <input type="button" onclick="add_staff_depart();" class="btn w-47 ml-2 btn-warning" value="Aggiungi reparto">
                                                             </div>
 
 
@@ -4248,7 +4248,7 @@ $months_name_array = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct
 
 
                                                     <div class="mt-3 mb-5 pb-5 pbm-0 mbm-0 mrm-12px">
-                                                        <input type="button" onclick="save_staff_cost();" class="btn mt-4 w-100 btn-warning" value="Risparmia sui costi del personale">
+                                                        <input type="button" onclick="save_staff_cost();" class="btn mt-4 w-100 btn-warning" value="Salva Dipendenti">
                                                     </div>
 
 
@@ -4256,7 +4256,7 @@ $months_name_array = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct
 
                                                 <div class="col-lg-8 pl-5 plm-10px" id="reload_staffing">
                                                     <div class="mt-4">
-                                                        <h3>Costo del personale</h3>
+                                                        <h3>Costi dipendenti totali</h3>
                                                     </div>
 
                                                     <?php
@@ -4269,8 +4269,8 @@ $months_name_array = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct
                                                         <table id="demo-foo-addrow" class="mobile_response_forecast_tables table table-bordered m-t-30 table-hover contact-list full-color-table full-warning-table hover-table" data-paging="true" data-paging-size="25">
                                                             <thead>
                                                                 <tr>
-                                                                    <th class="" >Titolo del personale</th>
-                                                                    <th class="" >Dipartimento del personale</th>
+                                                                    <th class="" >Dipendente</th>
+                                                                    <th class="" >Reparto</th>
                                                                     <th class="" >Stipendio lordo (€)</th>
                                                                     <th class="" >Salario netto (€)</th>
                                                                     <th class="" >Data</th>
@@ -4301,7 +4301,7 @@ $months_name_array = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct
 
                                                     <?php }else{ ?>
                                                     <div class="text-center mt-5 pt-4"><img src="../assets/images/no-results-cookie.png" width="250" /></div>
-                                                    <h5 class="text-center"><b>Costo del personale non trovato.</b></h5>
+                                                    <h5 class="text-center"><b>Costo del Dipendenti non trovato.</b></h5>
                                                     <?php } ?>
 
                                                 </div>
@@ -4314,7 +4314,7 @@ $months_name_array = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct
                                                 <div class="col-lg-4 right-border-div pr-3 prm-0px">
 
                                                     <div class="mt-4">
-                                                        <h3><span id="add_or_edit_goods_text">Aggiungere</span> Costo fornitori <button onclick="clear_goods_values();" type="button" class="btn btn-dark float-right">Valori chiari</button></h3>
+                                                        <h3><span id="add_or_edit_goods_text">Aggiungere</span> costi fornitore <button onclick="clear_goods_values();" type="button" class="btn btn-dark float-right">Cancella</button></h3>
                                                     </div>
 
                                                     <div class="row mt-3">
@@ -4325,7 +4325,7 @@ $months_name_array = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct
                                                             </div>
 
                                                             <div class="mt-3 pbm-0 mbm-0 mrm-12px">
-                                                                <input type="button" onclick="Add_suppliers();" class="btn mt-4 w-100 btn-dark" value="Aggiungi altro fornitore">
+                                                                <input type="button" onclick="Add_suppliers();" class="btn mt-4 w-100 btn-dark" value="Aggiungi fornitori">
                                                             </div>
 
 
@@ -4369,7 +4369,7 @@ $months_name_array = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct
 
                                                 <div class="col-lg-8" id="reload_goods">
                                                     <div class="mt-4">
-                                                        <h3>Costo fornitori</h3>
+                                                        <h3>Costi fornitori al mese</h3>
                                                     </div>
 
                                                     <?php
@@ -4760,7 +4760,7 @@ $months_name_array = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct
                 // Vertical axis
                 yAxis: [{
                     type: 'category',
-                    data: ['Costi alimentari', 'Personale', 'Le tasse', 'Spese bancarie', 'Altri costi', 'Costo totale' , 'amministrativi' , 'Marketing']
+                    data: ['Costi alimentari', 'Dipendenti', 'Le tasse', 'Spese bancarie', 'Altri costi', 'Costo totale' , 'amministrativi' , 'Marketing']
                 }],
 
                 // Add series
@@ -5656,7 +5656,7 @@ $months_name_array = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct
                             $("#reload_departments").load("util_forecast_departments_reload.php");
                             $("#department_staffing").load("util_forecast_dropdown_department_reload.php");
                         }else{
-                            alert("Dipartimento del personale non salvato.");
+                            alert("Dipartimento del Dipendenti non salvato.");
                         }
                     },
                     error: function(xhr, status, error) {
@@ -5729,7 +5729,7 @@ $months_name_array = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct
                             $("#department_staffing").val(myArray[5]).change();
                             staffings_id = staffing_id;
                         }else{
-                            alert("Costo del personale non ottenuto.");
+                            alert("Costo del Dipendenti non ottenuto.");
                         }
                     },
                     error: function(xhr, status, error) {
@@ -5783,7 +5783,7 @@ $months_name_array = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct
                             if(response == 'success'){
                                 clear_staffing_values();
                             }else{
-                                alert("Costo del personale non salvato.");
+                                alert("Costo del Dipendenti non salvato.");
                             }
                         },
                         error: function(xhr, status, error) {

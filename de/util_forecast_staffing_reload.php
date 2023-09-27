@@ -4,7 +4,7 @@ require_once '../util_session.php';
 ?>
 
 <div class="mt-4">
-    <h3>Personalkosten</h3>
+    <h3>Mitarbeiterkosten Gesamt</h3>
 </div>
 
 <?php
@@ -17,8 +17,8 @@ if ($result_staffing && $result_staffing->num_rows > 0) {
     <table id="demo-foo-addrow" class="mobile_response_forecast_tables table table-bordered m-t-30 table-hover contact-list full-color-table full-warning-table hover-table" data-paging="true" data-paging-size="25">
         <thead>
             <tr>
-                <th class="" >Mitarbeitertitel</th>
-                <th class="" >Personalabteilung</th>
+                <th class="" >Mitarbeiter</th>
+                <th class="" >Abteilung</th>
                 <th class="" >Bruttogehalt (€)</th>
                 <th class="" >Nettogehalt (€)</th>
                 <th class="" >Datum</th>

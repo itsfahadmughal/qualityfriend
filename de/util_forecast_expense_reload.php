@@ -4,7 +4,7 @@ require_once '../util_session.php';
 ?>
 
 <div class="mt-4">
-    <h3>Kosten</h3>
+    <h3>Gesamtaufwände Monat</h3>
 </div>
 
 <?php
@@ -17,15 +17,15 @@ if ($result_expenses && $result_expenses->num_rows > 0) {
     <table id="demo-foo-addrow" class="mobile_response_forecast_tables table table-bordered m-t-30 table-hover contact-list full-color-table full-success-table hover-table" data-paging="true" data-paging-size="25">
         <thead>
             <tr>
-                <th class="" >Nebenkosten</th>
-                <th class="" >Spa-Kosten</th>
-                <th class="" >Betriebskosten</th>
-                <th class="" >Administrator kosten</th>
+                <th class="" >Wareneinsatz Nebenerlöse</th>
+                <th class="" >Wareneinsatz Spa</th>
+                <th class="" >Betriebsaufwände</th>
+                <th class="" >Verwaltungsaufwände</th>
                 <th class="" >Marketing</th>
-                <th class="" >Steuern</th>
-                <th class="" >Bankgebühren</th>
-                <th class="" >Gesamtdarlehen</th>
-                <th class="" >Sonstige Kosten</th>
+                <th class="" >Steuern + Gebühren</th>
+                <th class="" >Bankspesen</th>
+                <th class="" >Kredite</th>
+                <th class="" >Sonstige Aufwände</th>
                 <th class="" >Datum</th>
                 <th class="text-center">Aktion</th>
             </tr>
