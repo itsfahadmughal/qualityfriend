@@ -4498,7 +4498,7 @@ $months_name_array = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct
 
 
         <script>
-            hotel_id_ = <?php echo $hotel_id; ?>;
+            hotel_id_ = '<?php echo $hotel_id; ?>';
             var fd = new FormData();
             fd.append('hotel_id',hotel_id_);
             $.ajax({
@@ -4510,11 +4510,11 @@ $months_name_array = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct
                 success:function(response){
                     const obj = JSON.parse(response);
                     if(response != ''){
-                        $("#text_important1").text(obj.Data[0].total_sale_this_month);
-                        $("#text_important2").text(obj.Data[0].occupancy_rate_this_month);
-                        $("#text_important3").text(obj.Data[0].average_sale_per_night);
-                        $("#text_important4").text(obj.Data[0].yesterday_sale);
-                        $("#text_important5").text(obj.Data[0].total_sale_forecast_till_today_this_year+" / "+ obj.Data[0].total_sale_forecast_till_today_last_year);
+                        $("#text_important1").text(obj.Data[0].total_sale_this_month+" / "+obj.Data[0].total_sale_this_month_percent);
+                        $("#text_important2").text(obj.Data[0].occupancy_rate_this_month+" / "+obj.Data[0].occupancy_rate_this_month_percent);
+                        $("#text_important3").text(obj.Data[0].average_sale_per_night+" / "+obj.Data[0].average_sale_per_night_percent);
+                        $("#text_important4").text(obj.Data[0].yesterday_sale+" / "+obj.Data[0].yesterday_sale_percent);
+                        $("#text_important5").text(obj.Data[0].total_sale_forecast_till_today_this_year+" / "+ obj.Data[0].total_sale_forecast_till_today_last_year_percent);
                     }else{
                         console.log(response);
                     }

@@ -196,6 +196,8 @@ if(file_exists("../util_config.php") && is_readable("../util_config.php") && inc
     //Working
     $time=strtotime(date("Y-m-d"));
     $month_current=date("m",$time);
+    $year_last = $year_-1;
+    $rooms_last=$beds_last=$opening_days_last=$stay_capacity_arr_last=$accomodation_sale_arr_last=$anicillary_sale_arr_last=$total_stay_arr_last=$spa_sale_arr_last=0;
 
     $sql_inner_1="SELECT SUM(CASE WHEN MONTH(`arrival`) != MONTH(`departure`) THEN ((adults+infants+children) * (DATEDIFF( LAST_DAY(`arrival`), `arrival`) + 1)) ELSE (adults+infants+children) * (DATEDIFF(`departure`, `arrival`) + 1) END) as stay_off, SUM(CASE WHEN MONTH(`arrival`) != MONTH(`departure`) THEN (`accommodation_sale` / (DATEDIFF(`departure`, `arrival`) + 1)) * (DATEDIFF( LAST_DAY(`arrival`), `arrival`) + 1) + (`additionalServices_sale` / (DATEDIFF(`departure`, `arrival`) + 1)) * (DATEDIFF( LAST_DAY(`arrival`), `arrival`) + 1) ELSE `accommodation_sale`+`additionalServices_sale` END) as acc_sale FROM `tbl_forecast_reservations_rooms` WHERE hotel_id = $hotel_id AND MONTH(`arrival`) = $month_current AND YEAR(`arrival`) = $year_ AND `status` IN ('reserved','roomFixed','departed','occupied')";
     $result_inner_1 = $conn->query($sql_inner_1);
@@ -230,6 +232,39 @@ if(file_exists("../util_config.php") && is_readable("../util_config.php") && inc
         $total_stay_arr = $stay_off+$stay_off1;
     }
 
+    $sql_inner_1_last="SELECT SUM(CASE WHEN MONTH(`arrival`) != MONTH(`departure`) THEN ((adults+infants+children) * (DATEDIFF( LAST_DAY(`arrival`), `arrival`) + 1)) ELSE (adults+infants+children) * (DATEDIFF(`departure`, `arrival`) + 1) END) as stay_off, SUM(CASE WHEN MONTH(`arrival`) != MONTH(`departure`) THEN (`accommodation_sale` / (DATEDIFF(`departure`, `arrival`) + 1)) * (DATEDIFF( LAST_DAY(`arrival`), `arrival`) + 1) + (`additionalServices_sale` / (DATEDIFF(`departure`, `arrival`) + 1)) * (DATEDIFF( LAST_DAY(`arrival`), `arrival`) + 1) ELSE `accommodation_sale`+`additionalServices_sale` END) as acc_sale FROM `tbl_forecast_reservations_rooms` WHERE hotel_id = $hotel_id AND MONTH(`arrival`) = $month_current AND YEAR(`arrival`) = $year_ AND `status` IN ('reserved','roomFixed','departed','occupied')";
+    $result_inner_1_last = $conn->query($sql_inner_1_last);
+
+    $sql_inner_11_last="SELECT SUM(CASE WHEN MONTH(`arrival`) != MONTH(`departure`) THEN ((adults+infants+children) * (DATEDIFF( `departure`,DATE_SUB(`departure`,INTERVAL DAYOFMONTH(`departure`)-1 DAY)) + 1)) ELSE 0 END) as stay_off , SUM(CASE WHEN MONTH(`arrival`) != MONTH(`departure`) THEN (`accommodation_sale` / (DATEDIFF(`departure`, `arrival`) + 1)) * (DATEDIFF( `departure`,DATE_SUB(`departure`,INTERVAL DAYOFMONTH(`departure`)-1 DAY)) + 1) + (`additionalServices_sale` / (DATEDIFF(`departure`, `arrival`) + 1)) * (DATEDIFF( `departure`,DATE_SUB(`departure`,INTERVAL DAYOFMONTH(`departure`)-1 DAY)) + 1) ELSE 0 END) as acc_sale FROM `tbl_forecast_reservations_rooms` WHERE hotel_id = $hotel_id AND MONTH(`departure`) = $month_current AND YEAR(`departure`) = $year_last AND `status` IN ('reserved','roomFixed','departed','occupied')";
+    $result_inner_11_last = $conn->query($sql_inner_11_last);
+
+    $sale_off=0;
+    $stay_off=0;
+    $sale_off1=0;
+    $stay_off1=0;
+    if ($result_inner_11_last && $result_inner_11_last->num_rows > 0) {
+        while ($row_inner_11_last = mysqli_fetch_array($result_inner_11_last)) {
+            $sale_off1 = $row_inner_11_last['acc_sale'];
+            $stay_off1 = $row_inner_11_last['stay_off'];
+        }
+    }else{
+        $sale_off1 = 0;
+        $stay_off1 = 0;
+    }
+
+    if ($result_inner_1_last && $result_inner_1_last->num_rows > 0) {
+        while ($row_inner_1_last = mysqli_fetch_array($result_inner_1_last)) {
+            $sale_off = $row_inner_1_last['acc_sale'];
+            $stay_off = $row_inner_1_last['stay_off'];
+
+            $accomodation_sale_arr_last = $sale_off+$sale_off1;
+            $total_stay_arr_last = $stay_off+$stay_off1;
+        }
+    }else{
+        $accomodation_sale_arr_last = $sale_off+$sale_off1;
+        $total_stay_arr_last = $stay_off+$stay_off1;
+    }
+
 
 
 
@@ -246,6 +281,22 @@ if(file_exists("../util_config.php") && is_readable("../util_config.php") && inc
         $spa_sale_arr = 0;
     }
 
+
+
+    $sql_inner_2_last="SELECT Ancillary_Revenues_Net,Spa_Revenues_Net_22 FROM `tbl_forecast_revenues` WHERE hotel_id = $hotel_id AND MONTH(`date`) = $month_current AND YEAR(`date`) =  $year_last";
+
+    $result_inner_2_last = $conn->query($sql_inner_2_last);
+    if ($result_inner_2_last && $result_inner_2_last->num_rows > 0) {
+        while ($row_inner_2_last = mysqli_fetch_array($result_inner_2_last)) { 
+            $anicillary_sale_arr_last=$row_inner_2_last['Ancillary_Revenues_Net'];
+            $spa_sale_arr_last=$row_inner_2_last['Spa_Revenues_Net_22'];
+        }
+    }else{
+        $anicillary_sale_arr_last = 0;
+        $spa_sale_arr_last = 0;
+    }
+
+
     $sql_inner_3="SELECT * FROM `tbl_forecast_keyfacts` WHERE hotel_id = $hotel_id AND MONTH(`date`) = $month_current AND YEAR(`date`) =  $year_";
     $result_inner_3 = $conn->query($sql_inner_3);
     if ($result_inner_3 && $result_inner_3->num_rows > 0) {
@@ -261,6 +312,24 @@ if(file_exists("../util_config.php") && is_readable("../util_config.php") && inc
         $beds = 0;
         $opening_days = 0;
     }
+
+
+    $sql_inner_3_last="SELECT * FROM `tbl_forecast_keyfacts` WHERE hotel_id = $hotel_id AND MONTH(`date`) = $month_current AND YEAR(`date`) =  $year_last";
+    $result_inner_3_last = $conn->query($sql_inner_3_last);
+    if ($result_inner_3_last && $result_inner_3_last->num_rows > 0) {
+        while ($row_inner_3_last = mysqli_fetch_array($result_inner_3_last)) { 
+            $stay_capacity_arr_last = $row_inner_3_last['total_stay_capacity'];
+            $rooms_last = $row_inner_3_last['rooms'];
+            $beds_last = $row_inner_3_last['beds'];
+            $opening_days_last = $row_inner_3_last['opening_days'];
+        }
+    }else{
+        $stay_capacity_arr_last = 0;
+        $rooms_last = 0;
+        $beds_last = 0;
+        $opening_days_last = 0;
+    }
+
 
 
     $last_day = date('Y-m-d', strtotime(' -1 day'));
@@ -291,6 +360,40 @@ if(file_exists("../util_config.php") && is_readable("../util_config.php") && inc
     }else{
         $accomodation_sale_arr_last_day = $sale_off_last_day+$sale_off_last_day1;
     }
+
+
+    $temp_last = explode("-",$last_day);
+    $last_day_last = $year_last."-".$temp_last[1]."-".$temp_last[2];
+
+    $sql_inner_last_day_last="SELECT SUM(CASE WHEN MONTH(`arrival`) != MONTH(`departure`) THEN ((adults+infants+children) * (DATEDIFF( LAST_DAY(`arrival`), `arrival`) + 1)) ELSE (adults+infants+children) * (DATEDIFF(`departure`, `arrival`) + 1) END) as stay_off, SUM(CASE WHEN MONTH(`arrival`) != MONTH(`departure`) THEN (`accommodation_sale` / (DATEDIFF(`departure`, `arrival`) + 1)) * (DATEDIFF( LAST_DAY(`arrival`), `arrival`) + 1) + (`additionalServices_sale` / (DATEDIFF(`departure`, `arrival`) + 1)) * (DATEDIFF( LAST_DAY(`arrival`), `arrival`) + 1) ELSE `accommodation_sale`+`additionalServices_sale` END) as acc_sale FROM `tbl_forecast_reservations_rooms` WHERE hotel_id = $hotel_id AND `arrival` = '$last_day_last' AND `status` IN ('reserved','roomFixed','departed','occupied')";
+    $result_inner_last_day_last = $conn->query($sql_inner_last_day_last);
+
+    $sql_inner_last_day1_last="SELECT SUM(CASE WHEN MONTH(`arrival`) != MONTH(`departure`) THEN ((adults+infants+children) * (DATEDIFF( `departure`,DATE_SUB(`departure`,INTERVAL DAYOFMONTH(`departure`)-1 DAY)) + 1)) ELSE 0 END) as stay_off , SUM(CASE WHEN MONTH(`arrival`) != MONTH(`departure`) THEN (`accommodation_sale` / (DATEDIFF(`departure`, `arrival`) + 1)) * (DATEDIFF( `departure`,DATE_SUB(`departure`,INTERVAL DAYOFMONTH(`departure`)-1 DAY)) + 1) + (`additionalServices_sale` / (DATEDIFF(`departure`, `arrival`) + 1)) * (DATEDIFF( `departure`,DATE_SUB(`departure`,INTERVAL DAYOFMONTH(`departure`)-1 DAY)) + 1) ELSE 0 END) as acc_sale FROM `tbl_forecast_reservations_rooms` WHERE hotel_id = $hotel_id AND `arrival` = '$last_day_last' AND `status` IN ('reserved','roomFixed','departed','occupied')";
+    $result_inner_last_day1_last = $conn->query($sql_inner_last_day1_last);
+
+    $sale_off_last_day_last=0;
+    $sale_off_last_day1_last=0;
+    $accomodation_sale_arr_last_day_last= 0;
+
+    if ($result_inner_last_day1_last && $result_inner_last_day1_last->num_rows > 0) {
+        while ($row_inner_11_last = mysqli_fetch_array($result_inner_last_day1_last)) {
+            $sale_off_last_day1_last = $row_inner_11_last['acc_sale'];
+        }
+    }else{
+        $sale_off_last_day1_last = 0;
+    }
+
+    if ($result_inner_last_day_last && $result_inner_last_day_last->num_rows > 0) {
+        while ($row_inner_1_last = mysqli_fetch_array($result_inner_last_day_last)) {
+            $sale_off_last_day_last = $row_inner_1_last['acc_sale'];
+
+            $accomodation_sale_arr_last_day_last = $sale_off_last_day_last+$sale_off_last_day1_last;
+        }
+    }else{
+        $accomodation_sale_arr_last_day_last = $sale_off_last_day_last+$sale_off_last_day1_last;
+    }
+
+
 
 
     $accomodation_sale_arr1=$anicillary_sale_arr1=$spa_sale_arr1=array();
@@ -399,21 +502,55 @@ if(file_exists("../util_config.php") && is_readable("../util_config.php") && inc
     $data1 = array();
     $temp1=array();
 
+
+
     $temp['total_sale_this_month'] =   number_format(round($accomodation_sale_arr + $anicillary_sale_arr + $spa_sale_arr,2), 1, ',', '.').' €';
+
+    if(($accomodation_sale_arr_last + $anicillary_sale_arr_last + $spa_sale_arr_last) != 0){
+        $temp['total_sale_this_month_percent'] =   number_format(round((($accomodation_sale_arr + $anicillary_sale_arr + $spa_sale_arr)*100/($accomodation_sale_arr_last + $anicillary_sale_arr_last + $spa_sale_arr_last))-100,2), 1, ',', '.').' %';
+    }else{
+        $temp['total_sale_this_month_percent'] = "0 %";
+    }
+
+
     if($total_stay_arr != 0 && $stay_capacity_arr != 0){
         $temp['occupancy_rate_this_month'] =   number_format(round(($total_stay_arr*100)/$stay_capacity_arr,2), 1, ',', '.').'%';
     }else{
         $temp['occupancy_rate_this_month'] =   number_format(round(0,2), 1, ',', '.').' %';
     }
+
+    if($total_stay_arr_last != 0 && $stay_capacity_arr_last != 0 && $total_stay_arr != 0 && $stay_capacity_arr != 0){
+        $temp['occupancy_rate_this_month_percent'] =   number_format(round((($total_stay_arr*100)/$stay_capacity_arr)*100 / (($total_stay_arr_last*100)/$stay_capacity_arr_last)-100,2), 1, ',', '.').'%';
+    }else{
+        $temp['occupancy_rate_this_month_percent'] =   number_format(round(0,2), 1, ',', '.').' %';
+    }
+
+
     $temp['average_sale_per_night'] =   number_format(round((($spa_sale_arr*1.22)+($anicillary_sale_arr*1.1)+($accomodation_sale_arr*1.1))/$total_stay_arr,2), 1, ',', '.').' €';
+
+    if(((($spa_sale_arr_last*1.22)+($anicillary_sale_arr_last*1.1)+($accomodation_sale_arr_last*1.1))/$total_stay_arr_last) != 0){
+        $temp['average_sale_per_night_percent'] =   number_format(round(((($spa_sale_arr*1.22)+($anicillary_sale_arr*1.1)+($accomodation_sale_arr*1.1))/$total_stay_arr)*100/((($spa_sale_arr_last*1.22)+($anicillary_sale_arr_last*1.1)+($accomodation_sale_arr_last*1.1))/$total_stay_arr_last) - 100,2), 1, ',', '.').' %';
+    }else{
+        $temp['average_sale_per_night_percent'] = "0 %";
+    }
+
     $temp['yesterday_sale'] = number_format(round($accomodation_sale_arr_last_day,2), 1, ',', '.').' €';
+
+    if($accomodation_sale_arr_last_day_last != 0){
+        $temp['yesterday_sale_percent'] = number_format(round(($accomodation_sale_arr_last_day)*100/($accomodation_sale_arr_last_day_last)-100,2), 1, ',', '.').' %';
+    }else{
+        $temp['yesterday_sale_percent'] = "0 %";
+    }
+
+
+
 
     if(sizeof($accomodation_sale_arr1) > 13 && $accomodation_sale_arr1 != null){
         $temp['total_sale_forecast_till_today_this_year'] =   number_format(round(forecast_prediction($conn,$accomodation_sale_arr1,$date_forecast_last,$index_forecast_data,$year_),2), 1, ',', '.').' €';
-        $temp['total_sale_forecast_till_today_last_year'] =   number_format(round(forecast_prediction($conn,$accomodation_sale_arr1,$date_forecast_last,$index_forecast_data,($year_-1)),2), 1, ',', '.').' €';
+        $temp['total_sale_forecast_till_today_last_year_percent'] =   number_format(round((forecast_prediction($conn,$accomodation_sale_arr1,$date_forecast_last,$index_forecast_data,$year_))*100/(forecast_prediction($conn,$accomodation_sale_arr1,$date_forecast_last,$index_forecast_data,($year_-1)))-100,2), 1, ',', '.').' %';
     }else{
         $temp['total_sale_forecast_till_today_this_year'] =   number_format(round(0,2), 1, ',', '.').' €';
-        $temp['total_sale_forecast_till_today_last_year'] =   number_format(round(0,2), 1, ',', '.').' €';
+        $temp['total_sale_forecast_till_today_last_year_percent'] =   number_format(round(0,2), 1, ',', '.').' %';
     }
 
     array_push($data1, $temp);
