@@ -20,6 +20,7 @@
 
 
                         <li><a href="campaign.php">Campagna di monitoraggio<i class="ti ti-target"></i></a></li>
+                         <li><a href="all_funnel.php">Funnel<i class="ti ti-target"></i></a></li>
                         <?php } ?>
                         <li class="<?php if(basename($_SERVER['PHP_SELF']) == 'edit_job.php'){ echo 'active'; }else{ echo ''; } ?>" ><a href="jobs.php" class="<?php if(basename($_SERVER['PHP_SELF']) == 'edit_job.php'){ echo 'active'; }else{ echo ''; } ?>"  >Annunici attivi<i class="mdi mdi-tooltip-edit"></i></a></li>
                         <?php if($Create_edit_job_ad == 1 || $usert_id == 1){ ?>

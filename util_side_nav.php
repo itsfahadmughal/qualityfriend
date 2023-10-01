@@ -18,6 +18,7 @@
                         <?php if($Create_edit_job_ad == 1 || $usert_id == 1){ ?>
                         <li><a href="create_job.php">Create Job-Ad<i class="mdi mdi-plus-circle"></i></a></li>
                         <li><a href="campaign.php">Tracking Campaign<i class="ti ti-target"></i></a></li>
+                         <li><a href="all_funnel.php">Funnel<i class="ti ti-target"></i></a></li>
                         <?php } ?>
                         <li class="<?php if(basename($_SERVER['PHP_SELF']) == 'edit_job.php'){ echo 'active'; }else{ echo ''; } ?>" ><a href="jobs.php" class="<?php if(basename($_SERVER['PHP_SELF']) == 'edit_job.php'){ echo 'active'; }else{ echo ''; } ?>"  >Active Job-Ad<i class="mdi mdi-tooltip-edit"></i></a></li>
 

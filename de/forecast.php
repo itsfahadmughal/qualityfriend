@@ -291,6 +291,8 @@ $months_name_array = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct
                                             <span>HEUTE <?php echo date("g:i A", strtotime('-1 hour')); ?></span>
                                             <h3 class="text-center">Pickup diesen Monat</h3>
                                             <h2 class="text-center"><b id="text_important1">0</b></h2>
+                                            <h3 class="text-center">Pickup letztes Jahr</h3>
+                                            <h2 class="text-center"><b id="text_important11">0</b></h2>
                                             <div class="text-center"><small>Der Verkauf liegt diesen Monat über dem Zielwert</small></div>
                                         </div>
                                         <div class="col-lg-4 p-3 text-center">
@@ -308,6 +310,8 @@ $months_name_array = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct
                                             <span>HEUTE <?php echo date("g:i A" ,strtotime('-2 hour')); ?></span>
                                             <h3 class="text-center">Auslastung diesen Monat (OCC)</h3>
                                             <h2 class="text-center"><b id="text_important2">0</b></h2>
+                                            <h3 class="text-center">Auslastung letztes Jahr (OCC)</h3>
+                                            <h2 class="text-center"><b id="text_important22">0</b></h2>
                                             <div class="text-center"><small>Über Zielauslastung</small></div>
                                         </div>
 
@@ -320,6 +324,8 @@ $months_name_array = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct
                                             <span>HEUTE <?php echo date("g:i A",strtotime('-2 hour')); ?></span>
                                             <h3 class="text-center">Durchschnittlicher Tagespreis Gesamtjahr (ADR)</h3>
                                             <h2 class="text-center"><b id="text_important3">0</b></h2>
+                                            <h3 class="text-center">Durchschnittlicher Tagespreis letztes Jahr (ADR)</h3>
+                                            <h2 class="text-center"><b id="text_important33">0</b></h2>
                                             <div class="text-center"><small>Guter durchschnittlicher Tagespreis</small></div>
                                         </div>
                                         <div class="col-lg-4 p-3 text-center">
@@ -337,6 +343,8 @@ $months_name_array = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct
                                             <span>HEUTE <?php echo date("g:i A",strtotime('-3 hour')); ?></span>
                                             <h3 class="text-center">Pickup gestern</h3>
                                             <h2 class="text-center"><b id="text_important4">0</b></h2>
+                                            <h3 class="text-center">Pickup gestern letztes Jahr</h3>
+                                            <h2 class="text-center"><b id="text_important44">0</b></h2>
                                             <div class="text-center"><small>Verkauf am letzten Tag</small></div>
                                         </div>
                                     </div>
@@ -348,6 +356,8 @@ $months_name_array = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct
                                             <span>HEUTE <?php echo date("g:i A",strtotime('-3 hour')); ?></span>
                                             <h3 class="text-center">On the books (Pickup Gesamtjahr)</h3>
                                             <h3 class="text-center"><b id="text_important5">0</b></h3>
+                                            <h3 class="text-center">On the books (Pickup letztes Jahr)</h3>
+                                            <h3 class="text-center"><b id="text_important55">0</b></h3>
                                             <div class="text-center"><small>Prognose für das laufende und das vergangene Jahr</small></div>
                                         </div>
                                         <div class="col-lg-4 p-3 text-center">
@@ -3763,6 +3773,12 @@ $months_name_array = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct
                                                                     <td class="text-bold"><?php echo $total_goods_cost; ?></td>
                                                                     <td class="text-bold"><?php echo $year_; ?></td>
                                                                 </tr>
+
+                                                                <tr class="forecast_main_color">
+                                                                    <td class="text-bold"><?php echo 'Gesamt WES pro. Nacht'; ?></td>
+                                                                    <td class="text-bold"><?php if(isset($total_stay_arr) && array_sum($total_stay_arr) != 0){ echo round($total_goods_cost/array_sum($total_stay_arr),2); }else{ echo $total_goods_cost; } ?></td>
+                                                                    <td class="text-bold"><?php echo $year_; ?></td>
+                                                                </tr>
                                                             </tbody>
                                                         </table>
                                                     </div>
@@ -4510,10 +4526,15 @@ $months_name_array = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct
                     const obj = JSON.parse(response);
                     if(response != ''){
                         $("#text_important1").text(obj.Data[0].total_sale_this_month+" / "+obj.Data[0].total_sale_this_month_percent);
+                        $("#text_important11").text(obj.Data[0].total_sale_this_month_last_year);
                         $("#text_important2").text(obj.Data[0].occupancy_rate_this_month+" / "+obj.Data[0].occupancy_rate_this_month_percent);
+                        $("#text_important22").text(obj.Data[0].occupancy_rate_this_month_last_year);
                         $("#text_important3").text(obj.Data[0].average_sale_per_night+" / "+obj.Data[0].average_sale_per_night_percent);
+                        $("#text_important33").text(obj.Data[0].average_sale_per_night_last_year);
                         $("#text_important4").text(obj.Data[0].yesterday_sale+" / "+obj.Data[0].yesterday_sale_percent);
+                        $("#text_important44").text(obj.Data[0].yesterday_sale_last_year);
                         $("#text_important5").text(obj.Data[0].total_sale_forecast_till_today_this_year+" / "+ obj.Data[0].total_sale_forecast_till_today_last_year_percent);
+                        $("#text_important55").text(obj.Data[0].total_sale_forecast_till_today_last_year);
                     }else{
                         console.log(response);
                     }

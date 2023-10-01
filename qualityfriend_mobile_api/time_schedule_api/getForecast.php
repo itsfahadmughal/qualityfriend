@@ -512,19 +512,26 @@ if(file_exists("../util_config.php") && is_readable("../util_config.php") && inc
         $temp['total_sale_this_month_percent'] = "0 %";
     }
 
+    $temp['total_sale_this_month_last_year'] =   number_format(round($accomodation_sale_arr_last + $anicillary_sale_arr_last + $spa_sale_arr_last,2), 1, ',', '.').' €';
 
-    if($total_stay_arr != 0 && $stay_capacity_arr != 0){
+
+    if($stay_capacity_arr != 0){
         $temp['occupancy_rate_this_month'] =   number_format(round(($total_stay_arr*100)/$stay_capacity_arr,2), 1, ',', '.').'%';
     }else{
         $temp['occupancy_rate_this_month'] =   number_format(round(0,2), 1, ',', '.').' %';
     }
 
-    if($total_stay_arr_last != 0 && $stay_capacity_arr_last != 0 && $total_stay_arr != 0 && $stay_capacity_arr != 0){
+    if($stay_capacity_arr_last != 0 && $stay_capacity_arr != 0){
         $temp['occupancy_rate_this_month_percent'] =   number_format(round((($total_stay_arr*100)/$stay_capacity_arr)*100 / (($total_stay_arr_last*100)/$stay_capacity_arr_last)-100,2), 1, ',', '.').'%';
     }else{
         $temp['occupancy_rate_this_month_percent'] =   number_format(round(0,2), 1, ',', '.').' %';
     }
 
+    if($stay_capacity_arr_last != 0){
+        $temp['occupancy_rate_this_month_last_year'] =   number_format(round((($total_stay_arr_last*100)/$stay_capacity_arr_last),2), 1, ',', '.').'%';
+    }else{
+        $temp['occupancy_rate_this_month_last_year'] =   number_format(round(0,2), 1, ',', '.').'%';
+    }
 
     $temp['average_sale_per_night'] =   number_format(round((($spa_sale_arr*1.22)+($anicillary_sale_arr*1.1)+($accomodation_sale_arr*1.1))/$total_stay_arr,2), 1, ',', '.').' €';
 
@@ -534,6 +541,8 @@ if(file_exists("../util_config.php") && is_readable("../util_config.php") && inc
         $temp['average_sale_per_night_percent'] = "0 %";
     }
 
+    $temp['average_sale_per_night_last_year'] =   number_format(round(((($spa_sale_arr_last*1.22)+($anicillary_sale_arr_last*1.1)+($accomodation_sale_arr_last*1.1))/$total_stay_arr_last),2), 1, ',', '.').' €';
+
     $temp['yesterday_sale'] = number_format(round($accomodation_sale_arr_last_day,2), 1, ',', '.').' €';
 
     if($accomodation_sale_arr_last_day_last != 0){
@@ -542,15 +551,19 @@ if(file_exists("../util_config.php") && is_readable("../util_config.php") && inc
         $temp['yesterday_sale_percent'] = "0 %";
     }
 
+    $temp['yesterday_sale_last_year'] = number_format(round($accomodation_sale_arr_last_day_last,2), 1, ',', '.').' €';
 
 
 
     if(sizeof($accomodation_sale_arr1) > 13 && $accomodation_sale_arr1 != null){
         $temp['total_sale_forecast_till_today_this_year'] =   number_format(round(forecast_prediction($conn,$accomodation_sale_arr1,$date_forecast_last,$index_forecast_data,$year_),2), 1, ',', '.').' €';
         $temp['total_sale_forecast_till_today_last_year_percent'] =   number_format(round((forecast_prediction($conn,$accomodation_sale_arr1,$date_forecast_last,$index_forecast_data,$year_))*100/(forecast_prediction($conn,$accomodation_sale_arr1,$date_forecast_last,$index_forecast_data,($year_-1)))-100,2), 1, ',', '.').' %';
+        $temp['total_sale_forecast_till_today_last_year'] =   number_format(round((forecast_prediction($conn,$accomodation_sale_arr1,$date_forecast_last,$index_forecast_data,($year_-1))),2), 1, ',', '.').' €';
+
     }else{
         $temp['total_sale_forecast_till_today_this_year'] =   number_format(round(0,2), 1, ',', '.').' €';
         $temp['total_sale_forecast_till_today_last_year_percent'] =   number_format(round(0,2), 1, ',', '.').' %';
+        $temp['total_sale_forecast_till_today_last_year'] =   number_format(round(0,2), 1, ',', '.').' €';
     }
 
     array_push($data1, $temp);

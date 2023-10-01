@@ -19,6 +19,7 @@
                         <li><a href="create_job.php">Stellenanzeige erstellen<i class="mdi mdi-plus-circle"></i></a></li>
 
                         <li><a href="campaign.php">Tracking-Kampagne<i class="ti ti-target"></i></a></li>
+                         <li><a href="all_funnel.php">Funnel<i class="ti ti-target"></i></a></li>
                         <?php } ?>
                         <li class="<?php if(basename($_SERVER['PHP_SELF']) == 'edit_job.php'){ echo 'active'; }else{ echo ''; } ?>" ><a href="jobs.php" class="<?php if(basename($_SERVER['PHP_SELF']) == 'edit_job.php'){ echo 'active'; }else{ echo ''; } ?>"  >Aktive Stellenanzeigen<i class="mdi mdi-tooltip-edit"></i></a></li>
                         <?php if($Create_edit_job_ad == 1 || $usert_id == 1){ ?>
