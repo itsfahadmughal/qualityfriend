@@ -47,6 +47,8 @@ if(file_exists("util_config.php") && is_readable("util_config.php") && include("
         while($row = mysqli_fetch_array($result)) {
             $temp = array();
 
+
+            $crjb_id =  $row['crjb_id'];
             $temp['job_id'] =   $row['crjb_id'];
             $temp['title'] =   $row['title'];
             $temp['title_it'] =   $row['title_it'];
@@ -100,6 +102,21 @@ if(file_exists("util_config.php") && is_readable("util_config.php") && include("
             }
 
 
+            $temp6  = array();
+            $temp_comments = array();
+            $sql2="SELECT * FROM `tbl_job_benefits` WHERE `job_id` =    $crjb_id";
+            $result2 = $conn->query($sql2);
+            if ($result2 && $result2->num_rows > 0) {
+                while($row2 = mysqli_fetch_array($result2)) {
+                    $temp6['text'] = $row2['text'];
+                    array_push($temp_comments, $temp6);
+                }
+            }
+            $temp['auto_msg'] =$row['auto_msg'];
+            $temp['benefits'] = $temp_comments;
+            $temp['job_funnel'] = $row['job_funnel'];
+            $temp['is_funnel'] = $row['is_funnel'];
+            $temp['logo_image'] =   $row['logo_image'];
 
 
             array_push($data, $temp);

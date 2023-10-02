@@ -309,7 +309,7 @@ include '../util_session.php';
                                                     <h4 class="font-weight-title pt-4">Aggiungi dove si trova il posto</h4>
                                                     <input type="text" id="location_id" class="form-control" placeholder="Posizione">
 
-                                                    <h4 class="font-weight-title ">Auto message to applicant</h4>
+                                                    <h4 class="font-weight-title mt-3">Auto message candidati</h4>
                                                     <div class="card">
                                                         <div class="card-body p-0">
                                                             <div class="summernote" id="message">
@@ -351,6 +351,23 @@ include '../util_session.php';
                                                         <input id="is_funnel" type="checkbox" class="checkbox-size-20">
                                                         <label for="checkbox35" class="font-weight-title font-22 pl-1">Add Funnel</label>
                                                     </div>
+
+                                                    <select id="jobs_funnel" class="select2 form-control custom-select">
+                                                        <option value="0">Select Any Funnel</option>
+                                                        <?php 
+                                                        $sql="SELECT * FROM `tbl_funnel_info` WHERE `hotel_id` = $hotel_id";
+                                                        $result = $conn->query($sql);
+                                                        if ($result && $result->num_rows > 0) {
+                                                            while($row = mysqli_fetch_array($result)) {
+                                                        ?>
+                                                        <option value='<?php echo $row[0]; ?>'><?php echo $row['name']; ?></option>
+                                                        <?php
+                                                            }
+                                                        }
+                                                        ?>
+                                                    </select>
+
+
                                                 </div>
                                             </div>
 
@@ -541,6 +558,8 @@ include '../util_session.php';
                 let language_=document.getElementById("language_id").value;
                 let title_=document.getElementById("title_id").value;
                 let department_=document.getElementById("department_id").value;
+                let jobs_funnel = document.getElementById("jobs_funnel").value;
+
                 let creation_date_=document.getElementById("creation_date_id").value;
                 let description_=$('#description_id').summernote('code');
                 let location_=document.getElementById("location_id").value;
@@ -580,6 +599,8 @@ include '../util_session.php';
 
 
                     fd.append('userbenifits_array',userbenifits_array);
+                    
+                     fd.append('jobs_funnel',jobs_funnel);
 
                     $.ajax({
                         url:'util_save_job.php',

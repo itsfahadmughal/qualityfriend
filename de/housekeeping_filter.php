@@ -437,7 +437,7 @@ $room_id_checklist_array =  array();
                 <div class="col-md-5 wm-50 room_box_fix3  room_text_left" >
                     <h6 class="room_box_p_status_font"><?php echo $presence_status; ?></h6>
                 </div>
-                <div class="col-md-3 wm-50  " >
+                <div class="col-md-3 wm-50 " >
 
                     <?php if(in_array("departed", $status_arr)){ ?>
 

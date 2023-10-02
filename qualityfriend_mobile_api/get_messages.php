@@ -45,14 +45,14 @@ if(file_exists("util_config.php") && is_readable("util_config.php") && include("
         if($last_msg_id != ""){
 
             if($for_what =="user"){
-                $sql="SELECT * FROM (select a.`msg_id`,a.text,a.type,a.time,b.user_id_s,b.user_id_r,b.is_view from tbl_message as a  INNER JOIN  tbl_chat as b ON a.`msg_id` = b.msg_id WHERE ((b.user_id_s = $sender_id AND b.user_id_r = $user_id AND b.`for_what`= 'user') OR   (b.user_id_s = $user_id AND b.user_id_r = $sender_id AND b.`for_what`= 'user'))
+                $sql="SELECT * FROM (select a.`msg_id`,a.text,a.type,a.time,a.url,b.user_id_s,b.user_id_r,b.is_view from tbl_message as a  INNER JOIN  tbl_chat as b ON a.`msg_id` = b.msg_id WHERE ((b.user_id_s = $sender_id AND b.user_id_r = $user_id AND b.`for_what`= 'user') OR   (b.user_id_s = $user_id AND b.user_id_r = $sender_id AND b.`for_what`= 'user'))
     AND a.msg_id <  $last_msg_id
     ORDER BY a.`msg_id` DESC   limit 10) tmp order by tmp.msg_id asc";
             }else if ($for_what =="team"){
 
                 //        here use sender id as team id
                 $team_id = $sender_id;
-                $sql="SELECT * FROM (select a.`msg_id`,a.text,a.type,a.time,b.user_id_s,b.user_id_r,b.is_view from tbl_message as a  INNER JOIN  tbl_chat as b ON a.`msg_id` = b.msg_id WHERE b.user_id_r = $team_id AND b.`for_what`= 'team' AND a.msg_id <  $last_msg_id
+                $sql="SELECT * FROM (select a.`msg_id`,a.text,a.type,a.time,a.url,b.user_id_s,b.user_id_r,b.is_view from tbl_message as a  INNER JOIN  tbl_chat as b ON a.`msg_id` = b.msg_id WHERE b.user_id_r = $team_id AND b.`for_what`= 'team' AND a.msg_id <  $last_msg_id
        ORDER BY a.`msg_id` DESC   limit 10) tmp order by tmp.msg_id asc";
             }
 
@@ -60,11 +60,11 @@ if(file_exists("util_config.php") && is_readable("util_config.php") && include("
 
             if($for_what =="user"){
 
-                $sql="SELECT * FROM (select a.`msg_id`,a.text,a.type,a.time,b.user_id_s,b.user_id_r,b.is_view from tbl_message as a  INNER JOIN  tbl_chat as b ON a.`msg_id` = b.msg_id WHERE (b.user_id_s = $sender_id AND b.user_id_r = $user_id) OR   (b.user_id_s = $user_id AND b.user_id_r = $sender_id) ORDER BY a.`msg_id` DESC   limit 10) tmp order by tmp.msg_id asc";  
+                $sql="SELECT * FROM (select a.`msg_id`,a.text,a.type,a.time,a.url,b.user_id_s,b.user_id_r,b.is_view from tbl_message as a  INNER JOIN  tbl_chat as b ON a.`msg_id` = b.msg_id WHERE (b.user_id_s = $sender_id AND b.user_id_r = $user_id) OR   (b.user_id_s = $user_id AND b.user_id_r = $sender_id) ORDER BY a.`msg_id` DESC   limit 10) tmp order by tmp.msg_id asc";  
             }else if ($for_what =="team"){
                 //        here use sender id as team id
                 $team_id = $sender_id;
-                $sql="SELECT * FROM (select a.`msg_id`,a.text,a.type,a.time,b.user_id_s,b.user_id_r,b.is_view from tbl_message as a  INNER JOIN  tbl_chat as b ON a.`msg_id` = b.msg_id WHERE b.user_id_r = $team_id AND b.`for_what`= 'team' ORDER BY a.`msg_id` DESC   limit 10) tmp order by tmp.msg_id asc";
+                $sql="SELECT * FROM (select a.`msg_id`,a.text,a.type,a.time,a.url,b.user_id_s,b.user_id_r,b.is_view from tbl_message as a  INNER JOIN  tbl_chat as b ON a.`msg_id` = b.msg_id WHERE b.user_id_r = $team_id AND b.`for_what`= 'team' ORDER BY a.`msg_id` DESC   limit 10) tmp order by tmp.msg_id asc";
 
             }
 
@@ -93,7 +93,7 @@ if(file_exists("util_config.php") && is_readable("util_config.php") && include("
                 $temp['text'] = $row['text'];
                 $temp['type'] = $row['type'];
                 $temp['time'] = $row['time'];
-                $temp['time'] = $row['time'];
+                $temp['url'] = $row['url'];
                 $user_id_s = $row['user_id_s'];
                 $temp['user_id_s'] = $row['user_id_s'];
                 $temp['user_id_r'] = $row['user_id_r'];

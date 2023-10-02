@@ -73,9 +73,24 @@ INNER JOIN tbl_util_status as c ON a.`status_id` = c.status_id WHERE a.`tae_id` 
             $step_3 = $row['step_3'];
 
             $cam_id = $row['cam_id'];
+            $crjb_id = $row['crjb_id'];
+
+
+            $answer_array = $row['awnser_array'];
+
+            $answer_array =  json_decode($answer_array);
+            $question_array = $row['question_array'];
+
+            $question_array =  json_decode($question_array);
+            $type_array = $row['type_array'];
+
+            $type_array =  json_decode($type_array);
 
         }
     }
+
+
+
     $sql1="SELECT * FROM `tbl_applicants_ratings` WHERE `tae_id` = $employee_id";
     $result1 = $conn->query($sql1);
     if ($result1 && $result1->num_rows > 0) {
@@ -87,9 +102,6 @@ INNER JOIN tbl_util_status as c ON a.`status_id` = c.status_id WHERE a.`tae_id` 
             $GeneralCompetence = $row1['general_impression'];
         }
     }
-
-
-
     $sql1="SELECT * FROM `tbl_job_ad_campaign` WHERE `id` = $cam_id";
     $result1 = $conn->query($sql1);
     if ($result1 && $result1->num_rows > 0) {
@@ -98,9 +110,40 @@ INNER JOIN tbl_util_status as c ON a.`status_id` = c.status_id WHERE a.`tae_id` 
             $name_cam = $row1['name'];
             $sorce_cam = $row1['sorce'];
             $team_cam = $row1['team'];
+        }
+    }
+
+
+    $sql1="SELECT b.pages_array FROM `tbl_create_job` as a INNER JOIN tbl_funnel_info as b ON a.`job_funnel` = b.f_id WHERE a.crjb_id = $crjb_id ";
+    $result1 = $conn->query($sql1);
+    if ($result1 && $result1->num_rows > 0) {
+        while($row1 = mysqli_fetch_array($result1)) {
+            $pages_array = $row1['pages_array'];
+            $pages_array =  json_decode($pages_array);
 
         }
     }
+
+    $questions  = [];
+
+
+    if($question_array != ""){
+        foreach ($question_array as $question) {
+            // Extract the index from the question, e.g., "answer-3" becomes "3"
+            $index = intval(str_replace("answer-", "", $question)) - 1;
+
+            // Check if the index is within the range of the $pages_array
+            if ($index >= 0 && $index < count($pages_array)) {
+                // Add the corresponding page to the new array
+                $questions [] = $pages_array[$index];
+            } else {
+                $questions [] = "Invalid index";
+            }
+        }
+    }else {
+
+    }
+
 }
 ?>
 <!DOCTYPE html>
@@ -365,6 +408,60 @@ INNER JOIN tbl_util_status as c ON a.`status_id` = c.status_id WHERE a.`tae_id` 
 
                         </div>
                         <?php }?>
+                        <div class="row ">
+                            <div class="col-lg-1 col-xlg-1 col-md-1">
+                            </div>
+                            <div class="col-lg-10 col-xlg-10 col-md-10 p-4">
+                                <div class="container heading_style p-4">
+                                    <h1>Funnel</h1>
+                                    <?php for ($i = 0; $i < count($questions); $i++) { ?>
+                                    <div class="row ">
+                                        <div class="col-md-12">
+                                            <strong><?php echo $questions[$i]; ?></strong>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-12">
+                                            <?php
+
+
+
+                                                                                      $answers = explode('$xvx@', $answer_array[$i]);
+                                                                                      if (count($answers) > 1) {
+                                                                                          for ($j = 1; $j < count($answers); $j++) {
+                                                                                              if (strpos($answers[$j], 'uploads/') !== false) {
+                                                                                                  $base_is = '';
+//                                                                                                  $base_is = 'http://localhost/qualityfriend/';
+                                                                                                  $base_is = 'https://qualityfriend.solutions/';
+
+
+                                                                                                  $base_is = $base_is.$answers[$j];
+                                                                                                  echo "<a target='_blank' href='$base_is'>
+                                                                                                  $base_is</a>";
+
+
+
+                                                                                              } else {
+                                                                                                  echo '<p>' . $answers[$j] . '</p>';
+                                                                                              }
+
+
+                                                                                          }
+                                                                                      } else {
+                                                                                          echo '<p>N/A</p>';
+                                                                                      }
+                                            ?>
+                                        </div>
+                                    </div>
+                                    <?php } ?>
+                                </div>
+
+                            </div>
+                            <div class="col-lg-1 col-xlg-1 col-md-1">
+                            </div>
+                        </div>
+
+
                         <div class="row mt-4">
                             <div class="col-lg-2 col-xlg-2 col-md-2">
 

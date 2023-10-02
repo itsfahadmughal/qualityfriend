@@ -47,6 +47,7 @@ if(isset($_GET['id'])){
 }
 
 
+
 $image_link="";
 $title="";
 $description="";
@@ -58,14 +59,17 @@ $wp_num="";
 $location = "";
 $auto_msg = "";
 $logo_link = "../assets/images/favicon.png";
+$job_funnel = 0;
 $sql="SELECT * FROM `tbl_create_job` WHERE `generated_link` LIKE '%$time_stamp%'";
 $result = $conn->query($sql);
 if ($result && $result->num_rows > 0) {
     $i=1;
     while($row = mysqli_fetch_array($result)) {
         $is_funnel = $row['is_funnel'];
+        $job_funnel = $row['job_funnel'];
         $step_1_q = $row['step_1_q'];
         $step_2_q = $row['step_2_q'];
+
 
         if($row['auto_msg']){
             $auto_msg = $row['auto_msg'];
@@ -77,6 +81,7 @@ if ($result && $result->num_rows > 0) {
         $depart_id=$row['depart_id'];
         if($lang=="english"){
             $crjb_id=$row['crjb_id'];
+
             if($row['title'] != ""){
                 $title=$row['title'];
             }else if($row['title_it'] != ""){
@@ -85,10 +90,10 @@ if ($result && $result->num_rows > 0) {
                 $title=$row['title_de'];
             }
 
-            if($row['description'] != ""){
-                $description=$row['description'];
-            }else if($row['description_it'] != ""){
+            if($row['description_it'] != ""){
                 $description=$row['description_it'];
+            }else if($row['description'] != ""){
+                $description=$row['description'];
             }else if($row['description_de'] != ""){
                 $description=$row['description_de'];
             } 
@@ -99,9 +104,7 @@ if ($result && $result->num_rows > 0) {
                 $location=$row['location_it'];
             }else if($row['location_de'] != ""){
                 $location=$row['location_de'];
-            } 
-
-
+            }
 
 
             $image_link=$row['job_image'];
@@ -149,7 +152,6 @@ if ($result && $result->num_rows > 0) {
             }else if($row['title'] != ""){
                 $title=$row['title'];
             }
-
             if($row['description_de'] != ""){
                 $description=$row['description_de'];
             }else if($row['description_it'] != ""){
@@ -181,10 +183,10 @@ $sql="SELECT * FROM `tbl_hotel` WHERE hotel_id = $hotel_id";
 $result = $conn->query($sql);
 if ($result && $result->num_rows > 0) {
     while($row = mysqli_fetch_array($result)) {
-        if($row['data_protection_de'] != "")
+        if($row['data_protection_it'] != "")
         {
             $data_protection = $row['data_protection_de'];
-        }else if ($row['data_protection'] != ""){
+        }else if ($row['data_protection_de'] != ""){
             $data_protection = $row['data_protection'];
         }else if ($row['data_protection_it'] != ""){
             $data_protection = $row['data_protection_it'];
@@ -200,13 +202,13 @@ if ($result && $result->num_rows > 0) {
             $privacy_policy = $row['privacy_policy_it'];
         }
 
-        if($row['hotel_name_de'] != "")
+        if($row['hotel_name_it'] != "")
         {
-            $hotel_name = $row['hotel_name_de'];
-        }else if ($row['hotel_name_it'] != ""){
             $hotel_name = $row['hotel_name_it'];
         }else if ($row['hotel_name'] != ""){
             $hotel_name = $row['hotel_name'];
+        }else if ($row['hotel_name_de'] != ""){
+            $hotel_name = $row['hotel_name_de'];
         }
     } 
 }
@@ -217,6 +219,40 @@ if($depart_id !=  0 ){
 }else {
     $dis = "";
 }
+
+
+if($job_funnel != 0){
+    $sql="SELECT * FROM `tbl_funnel_info` WHERE`f_id` =  $job_funnel";
+    $result = $conn->query($sql);
+    if ($result && $result->num_rows > 0) {
+        while($row = mysqli_fetch_array($result)) {
+
+            $code = $row['code'];
+
+        } 
+    }
+
+    $code =  str_replace('xxx$#','"',$code);
+    $code =  str_replace("xxxn4$#","'",$code);
+
+    $code =  str_replace("bxi$",'<?php',$code);
+    $code =  str_replace("kik$","?>",$code);
+
+
+
+    $code =  str_replace("./assets","../assets",$code);
+    $code =  str_replace("./images","../images",$code);
+    $code = str_replace('src="images', 'src="../images', $code);
+
+    //    $code =  str_replace("<!--php","<?php",$code);
+
+    $code =  str_replace('src="funnel_php/','src="../funnel_php/',$code);
+    $code =  str_replace("height_fixed","",$code);
+    $code =  str_replace('contenteditable="true"',"",$code);
+}
+
+
+
 
 ?>
 <!DOCTYPE html>
@@ -243,6 +279,22 @@ if($depart_id !=  0 ){
 
         <!-- Add intl-tel-input CSS -->
         <link href="https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.8/css/intlTelInput.min.css" rel="stylesheet">
+
+
+
+        <?php 
+        if($is_funnel == 0 || $job_funnel == 0) {
+        ?>
+
+
+
+        <?php }else {?>
+
+        <link href="../dist/css/funnel.css" rel="stylesheet">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+        <?php }?>
+
+
         <style>
             /* Custom styles for the header */
             .fixed-header {
@@ -267,15 +319,13 @@ if($depart_id !=  0 ){
             .text_center_{
                 text-align: center;
             }
+
             .action-buttons {
                 display: flex;
                 align-items: center;
             }
             .action-buttons button {
                 margin-left: 10px;
-            }
-            .color_is{
-                color: #3d5158;
             }
 
             .text-black {
@@ -313,6 +363,9 @@ if($depart_id !=  0 ){
             .page-wrapper {
                 background: #F3F3F3!important;
             }
+            .color_is{
+                color: #3d5158;
+            }
             .apply_button{
                 height: 50px;
                 width: 150px;
@@ -347,7 +400,6 @@ if($depart_id !=  0 ){
                 font-size: 60px;
             }
             @media (max-width: 1000px) {
-
 
                 .logo_is{
                     max-width: 140px;
@@ -405,11 +457,19 @@ if($depart_id !=  0 ){
             <!-- ============================================================== -->
             <!-- Page wrapper  -->
             <!-- ============================================================== -->
-            <div class="page-wrapper m-0 p-0">
+            <div class="<?php 
+                        if($is_funnel == 0 || $job_funnel == 0) {
+                            echo "page-wrapper m-0 p-0";
+                        }else { 
+                        } ?> ">
                 <!-- ============================================================== -->
                 <!-- Container fluid  -->
                 <!-- ============================================================== -->
-                <div class="container-fluid">
+                <div id="outer-div-id" class="container-fluid 
+                                              <?php 
+                                              if($is_funnel == 0 || $job_funnel == 0) {
+                                              }else { echo "m-0 p-0";
+                                                    } ?> ">
                     <!-- ============================================================== -->
                     <!-- Bread crumb and right sidebar toggle -->
                     <!-- ============================================================== -->
@@ -497,13 +557,18 @@ if($depart_id !=  0 ){
                     <!-- Start Page Content -->
                     <!-- ============================================================== -->
                     <!-- Row -->
+                    <?php 
+                    if($is_funnel == 0 || $job_funnel == 0) {
+                    ?>
+
+
                     <div id = "all_views" >
                         <header class="fixed-header">
                             <div class="logo-text">
                                 <img class="logo_is" onerror="../assets/images/favicon.png" src="<?php echo $logo_link; ?>"  />
                             </div>
                             <div class="action-buttons">
-                                <button class="btn btn-secondary scroll-button apply_button" onclick="scrollToDiv()">Los geht's!</button>
+                                <button class="wm-100 btn w-60 btn-secondary" onclick="scrollToDiv()">Los geht's!</button>
                                 <?php if($is_whatsapp_required==1){ ?>
                                 <div class="whatsapp-button">  
                                     <a href="https://wa.me/<?php echo $wp_num; ?>" target="_blank"><img src="../assets/images/whatsappp.png"  /></a>
@@ -551,13 +616,13 @@ if($depart_id !=  0 ){
 
                                     <?php
 
-    $sql="SELECT * FROM `tbl_job_benefits` where job_id = $crjb_id";
-    $result = $conn->query($sql);
-    if ($result && $result->num_rows > 0) {
-        $x=1;
-        while($row = mysqli_fetch_array($result)) {
-            $text = $row['text'];
-            $id = $row['id'];
+                        $sql="SELECT * FROM `tbl_job_benefits` where job_id = $crjb_id";
+                        $result = $conn->query($sql);
+                        if ($result && $result->num_rows > 0) {
+                            $x=1;
+                            while($row = mysqli_fetch_array($result)) {
+                                $text = $row['text'];
+                                $id = $row['id'];
                                     ?>
                                     <i class="mdi  mdi-check"></i>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                                     <span><?php echo $text; ?></span><br>
@@ -598,6 +663,7 @@ if($depart_id !=  0 ){
                                     </div>
                                 </div>
                             </div>
+
                             <div class="col-lg-12 col-xlg-12 col-md-12">
                                 <?php if($title != "" && $description != ""){ ?>
                                 <div class="row mpt-25 <?php if($image_link != ""){echo 'pt-5';} ?>" >   
@@ -630,7 +696,7 @@ if($depart_id !=  0 ){
 
 
                                             <div class="col-lg-12 col-xlg-12 col-md-12 ">
-                                                <h4 class="font-weight-title inline-div mt-4 mr-3 text-black">Titel auswählen: </h4>
+                                                <h4 class="font-weight-title inline-div mt-4 mr-3 text-black">Titel auswählen : </h4>
                                                 <div class="custom-control custom-radio inline-div mr-3">
                                                     <input type="radio" value="Mr" id="customRadio1" checked name="customRadio" class="custom-control-input">
                                                     <label class="custom-control-label" for="customRadio1">Herr.</label>
@@ -654,15 +720,13 @@ if($depart_id !=  0 ){
                                                 <div id="div_last_name" class="form-group ">
                                                     <input onkeyup="error_handle('last_name')"  name="last_name" 
                                                            id="last_name" placeholder="Nachname*" class="form-control form-control-danger" >
-                                                    <small id="error_msg" class="form-control-feedback display_none">
-                                                        Nachname ist erforderlich</small> </div>
+                                                    <small id="error_msg" class="form-control-feedback display_none">Nachname ist erforderlich</small> </div>
                                             </div>
                                             <div class="col-md-6 ">
                                                 <label class="text-black" >Email*</label>
                                                 <div id="div_email" class="form-group ">
                                                     <input onkeyup="error_handle('email')"  type="email" class="form-control" name="email" id="email" placeholder="Email" class="form-control form-control-danger" >
-                                                    <small id="error_msg_email" class="form-control-feedback display_none">E-Mail ist erforderlich
-                                                    </small> 
+                                                    <small id="error_msg_email" class="form-control-feedback display_none">E-Mail ist erforderlich</small> 
                                                 </div>
                                             </div>
                                             <div class="col-md-6 ">
@@ -672,13 +736,11 @@ if($depart_id !=  0 ){
                                                     <small id="error_msg_email" class="form-control-feedback display_none">D.O.B</small> 
                                                 </div>
                                             </div>
-
                                             <div class="col-md-6 ">
                                                 <label class="text-black" >Telefonnummer*</label>
                                                 <div id="div_phane_name" class="form-group ">
                                                     <input onkeyup="error_handle('phone')"  type="tel" class="form-control" name="phone" id="phone" class="form-control form-control-danger" >
-                                                    <small id="error_msg_phone" class="form-control-feedback display_none">
-                                                        Telefon ist erforderlich</small> </div>
+                                                    <small id="error_msg_phone" class="form-control-feedback display_none">Telefon ist erforderlich</small> </div>
                                             </div>
                                             <div class="col-md-6 ">
                                                 <label class="text-black" >Lebenslauf hochladen</label>
@@ -696,8 +758,7 @@ if($depart_id !=  0 ){
                                                         <a href="javascript:void(0)" class="input-group-append btn btn-default fileinput-exists" data-dismiss="fileinput">Entfernen</a>
                                                     </div>
 
-                                                    <small id="error_msg_cv" class="form-control-feedback display_none">
-                                                        Lebenslauf ist erforderlich</small>
+                                                    <small id="error_msg_cv" class="form-control-feedback display_none">Lebenslauf ist erforderlich</small>
                                                 </div>
                                             </div>
                                             <div class="col-lg-6 col-xlg-6 col-md-6 ">
@@ -706,21 +767,21 @@ if($depart_id !=  0 ){
                                                     <select  onchange="error_handle('department')" name="department" id="department" <?php echo $dis; ?>  class="form-control" >
                                                         <option value="0">Abteilung auswählen</option>
                                                         <?php 
-                                                        $sql="SELECT * FROM `tbl_department` WHERE `hotel_id` =  $hotel_id and is_delete = 0 and is_active = 1 and depart_id != 0 and LOWER(department_name) != 'admin'  ";
-                                                        $result = $conn->query($sql);
-                                                        if ($result && $result->num_rows > 0) {
-                                                            while($row = mysqli_fetch_array($result)) {
-                                                                if($row[0]==$depart_id){
+                        $sql="SELECT * FROM `tbl_department` WHERE `hotel_id` =  $hotel_id and is_delete = 0 and is_active = 1 and depart_id != 0 and LOWER(department_name) != 'admin'  ";
+                        $result = $conn->query($sql);
+                        if ($result && $result->num_rows > 0) {
+                            while($row = mysqli_fetch_array($result)) {
+                                if($row[0]==$depart_id){
                                                         ?>
                                                         <option  value='<?php echo $row[0]; ?>' selected><?php echo $row[1]; ?></option>
                                                         <?php
-                                                                }else{
+                                }else{
                                                         ?>
                                                         <option value='<?php echo $row[0]; ?>'><?php echo $row[1]; ?></option>
                                                         <?php
-                                                                }
-                                                            }
-                                                        }
+                                }
+                            }
+                        }
                                                         ?>
                                                     </select>
                                                     <small id="error_msg_department" class="form-control-feedback display_none"> Abteilung ist erforderlich</small> 
@@ -728,7 +789,7 @@ if($depart_id !=  0 ){
                                             </div>
 
                                             <div class="col-md-6" >
-                                                <label class="text-black" >Bild hochladen </label>
+                                                <label class="text-black" >Bild hochladen</label>
                                                 <div class="fileinput fileinput-new input-group" data-provides="fileinput">
                                                     <div class="form-control" data-trigger="fileinput">
                                                         <i class="glyphicon glyphicon-file fileinput-exists"></i>
@@ -745,7 +806,7 @@ if($depart_id !=  0 ){
                                             </div>
                                             <div class="col-md-12" >
                                                 <label class="text-black" >Message</label>
-                                                <textarea class="form-control" id="message_id" rows="5" placeholder="Schreibe deine Nachricht hier....."></textarea>
+                                                <textarea class="form-control" id="message_id" rows="5" placeholder="Message...."></textarea>
 
                                             </div>
                                             <div class="col-md-12" >
@@ -753,11 +814,10 @@ if($depart_id !=  0 ){
 
                                                     <div class="checkbox checkbox-success mt-4">
                                                         <input onchange="error_handle('d1')" class="has-danger" required id="submit_required" type="checkbox">
-                                                        <label class="d-inline" for="submit_required">Ich bestätige die Kenntnisnahme der  <a class="color_is" onclick="dataprotection()" href="JavaScript:void(0);" ><u>Informationen zum Datenschutz für Bewerber.</u></a></label>
+                                                        <label class="d-inline" for="submit_required">Ich bestätige die Kenntnisnahme der  <a  class="color_is" onclick="dataprotection()" href="JavaScript:void(0);" ><u>Informationen zum Datenschutz für Bewerber.</u></a></label>
                                                     </div>
 
-                                                    <small  id="error_msg_d1" class="form-control-feedback display_none">
-                                                        Akzeptieren Sie die Datenrichtlinie</small>
+                                                    <small  id="error_msg_d1" class="form-control-feedback display_none"> Akzeptieren Sie die Datenrichtlinie</small>
 
                                                 </div>
 
@@ -766,12 +826,11 @@ if($depart_id !=  0 ){
                                                 <div id="div_d2" class="form-group ">
                                                     <div class="checkbox checkbox-success ">
                                                         <input onchange="error_handle('d2')" required id="submit_required2" type="checkbox">
-                                                        <label class="d-inline" for="submit_required2"> Für den Fall, dass meine Bewerbung nicht erfolgreich ist, dürfen meine Bewerberdaten für weitere Stellenausschreibungen aufbewahrt werden. Die konkrete Dauer finden Sie  
+                                                        <label class="d-inline" for="submit_required2"> Für den Fall, dass meine Bewerbung nicht erfolgreich ist, dürfen meine Bewerberdaten für weitere Stellenausschreibungen aufbewahrt werden. Die konkrete Dauer finden Sie 
                                                             <a class="color_is"  onclick="event_privacy()" href="JavaScript:void(0);" ><u>
                                                                 hier.</u></a></label>
                                                     </div>
-                                                    <small id="error_msg_d2" class="form-control-feedback display_none">
-                                                        Akzeptieren Sie die Datenrichtlinie</small>
+                                                    <small id="error_msg_d2" class="form-control-feedback display_none"> Akzeptieren Sie die Datenrichtlinie</small>
 
                                                 </div>
                                             </div>
@@ -801,6 +860,11 @@ if($depart_id !=  0 ){
 
                     </div>
                     <!-- Row -->
+
+                    <?php
+                    }else {
+                        echo $code;
+                    } ?>
                     <!-- ============================================================== -->
                     <!-- End PAge Content -->
                     <!-- ============================================================== -->
@@ -817,7 +881,11 @@ if($depart_id !=  0 ){
             <!-- ============================================================== -->
             <!-- footer -->
             <!-- ============================================================== -->
-            <?php include 'util_footer.php'; ?>
+            <?php 
+            if($is_funnel == 0 && $job_funnel == 0) {
+            ?>
+
+            <?php include 'util_footer.php'; } else {} ?>
             <!-- ============================================================== -->
             <!-- End footer -->
             <!-- ============================================================== -->
@@ -872,9 +940,592 @@ if($depart_id !=  0 ){
         <!-- Add intl-tel-input JavaScript -->
         <script src="https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.8/js/intlTelInput.min.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.8/js/utils.js"></script>
+        <!-- JavaScript to handle scrolling to the specific div -->
+        <script>
+            // Get all elements with class 'multi_selection_open'
+            const multiSelectionElements = document.querySelectorAll('.multi_selection_open');
 
+            // Add click event listeners to toggle the checkbox
+            multiSelectionElements.forEach(element => {
+                element.addEventListener('click', () => {
+                    // Find the inner checkbox within the clicked element
+                    const checkbox = element.querySelector('input[type="checkbox"]');
+
+                    // Toggle the checkbox's checked state
+                    checkbox.checked = !checkbox.checked;
+                });
+            });
+        </script>
 
         <!-- JavaScript to handle scrolling to the specific div -->
+
+
+
+        <script>
+            var all_the_anwer = document.getElementById('all_the_anwer');
+            //remove extra things
+            if (all_the_anwer) {
+                all_the_anwer.classList.add('add_padding_for_show');
+
+                var outerDiv = document.getElementById('outer-div-id'); 
+                var innerDivBackgroundColor = window.getComputedStyle(all_the_anwer).backgroundColor;
+                document.body.style.backgroundColor = innerDivBackgroundColor;
+
+
+                var dropzoneElements = document.querySelectorAll('.dropzone');
+
+                for (var i = 0; i < dropzoneElements.length; i++) {
+                    dropzoneElements[i].classList.remove('dropzone');
+                }
+                var all_the_anwer = document.getElementById('all_the_anwer');
+                var singlePlusElements = all_the_anwer.querySelectorAll('.single_plus');
+                var multiPlusElements = all_the_anwer.querySelectorAll('.multi_plus');
+
+                // Remove elements with class "single_plus"
+                for (var i = 0; i < singlePlusElements.length; i++) {
+                    singlePlusElements[i].remove();
+                }
+
+                // Remove elements with class "multi_plus"
+                for (var i = 0; i < multiPlusElements.length; i++) {
+                    multiPlusElements[i].remove();
+                }
+                //end remove extra things
+                var currently = 'answer-1';
+                var previous = 'answer-1';
+                var awnser_array =[];
+                var question_array =[];
+                var type_array =[];
+                var cvsendButton = "";
+                var awnser_list_for_cv = "";
+
+
+                function getCurrentURL() {
+                    return window.location.href;
+                }
+                function copyToClipboard(text) {
+                    const textArea = document.createElement("textarea");
+                    textArea.value = text;
+
+                    // Add the textarea to the document
+                    document.body.appendChild(textArea);
+
+                    // Select the text in the textarea
+                    textArea.select();
+
+                    // Copy the selected text to the clipboard
+                    document.execCommand("copy");
+
+                    // Remove the textarea from the document
+                    document.body.removeChild(textArea);
+                }
+
+
+                function showAnswer_20(answerId,param2='') {
+                    //                    console.log(previous);
+                    console.log(currently);
+
+                    if(answerId == 'copy'){
+
+                        const urlToCopy = getCurrentURL();
+                        copyToClipboard(urlToCopy);
+
+                    }else{
+
+
+                        //                console.log("this is an id ");    
+                        const answerContainers = document.querySelectorAll(".answer");
+                        answerContainers.forEach(function (container) {
+                            container.classList.remove("active");
+                        });
+                        var selectedAnswer  ;
+                        if(answerId == 'thanks'){
+                            selectedAnswer = document.getElementById(`thanks`);
+                        }else  if(answerId == 'disqualification'){
+                            selectedAnswer = document.getElementById(`disqualification`);
+                        }else  if(answerId == 'form_is'){
+                            selectedAnswer = document.getElementById(`form_is`);
+                        }else  if(answerId == 'copy_paste'){
+
+
+
+
+                        }else {
+                            selectedAnswer = document.getElementById(`answer-${answerId}`);
+                        }
+
+
+                        selectedAnswer.classList.add("active");
+                        const answerContainer = document.getElementById(currently);
+                        if (answerContainer) {
+
+
+
+                            //formultiselect
+                            const multiSelectionSections = answerContainer.querySelectorAll('.multi_selection_open');
+                            if (multiSelectionSections.length > 0) {
+
+                                question_array.push(currently);
+                                type_array.push("multi_selection");
+                                var awnser_list = "";
+                                multiSelectionSections.forEach(section => {
+                                    // Find all checkboxes within the section
+                                    const checkboxes = section.querySelectorAll('input[type="checkbox"]');
+                                    checkboxes.forEach(checkbox => {
+                                        if (checkbox.checked) {
+                                            var element = document.getElementById(`${section.id}`);
+                                            var pTag = element.querySelector('p');
+                                            var pTagText = "";
+                                            if (pTag) {
+                                                var pTagText = pTag.textContent
+                                                }else{
+                                                    var flexGrowElement = element.querySelector('.flex-grow-1');
+                                                    if (flexGrowElement) {
+                                                        // Extract content from the inner div with class "contact"
+                                                        pTagText = flexGrowElement.textContent.trim();
+                                                    }
+                                                }
+                                            awnser_list = awnser_list +"$xvx@"+pTagText
+
+                                            console.log(pTagText);
+                                        } else {        
+                                            //                                    console.log(`Checkbox in section ${section.id} is not checked.`);
+                                            //                                    Perform any actions you need for unchecked checkboxes
+                                        }
+
+
+
+
+                                    });
+                                });
+
+                                awnser_array.push(awnser_list);
+                            } else {
+
+                            }
+                            //forsingle
+                            var singleSelectionElements = answerContainer.getElementsByClassName("single_selection_open");
+
+                            // Loop through the elements and find the one containing the "Yes, I have" text
+
+                            if (singleSelectionElements.length > 0) {
+
+                                question_array.push(currently);
+                                type_array.push("single_selection");
+                                var awnser_list = "";
+
+                                var clickedElement = event.currentTarget; // The element that triggered the event
+                                var flexGrowElement = clickedElement.querySelector(".flex-grow-1");
+                                var pTagText = "";
+                                if (flexGrowElement) {
+                                    var pTag = flexGrowElement.querySelector("p");
+
+                                    if (pTag) {
+                                        pTagText = pTag.textContent.trim();
+
+                                    }else{
+                                        pTagText = flexGrowElement.textContent.trim();
+                                    }
+                                    awnser_list = awnser_list +"$xvx@"+pTagText;
+                                }
+
+
+                                console.log(awnser_array);
+                                awnser_array.push(awnser_list);
+                                console.log(awnser_array)
+
+                            }else{  
+
+                            }
+
+                            //for text area
+                            var textareaOpenElement = answerContainer.querySelector(".textarea_open");
+                            if (textareaOpenElement) {
+                                question_array.push(currently);
+                                type_array.push("textarea_open");
+                                var awnser_list = "";
+                                // Found the element with class "textarea_open"
+                                var textareaElement = textareaOpenElement.querySelector("textarea");
+
+                                if (textareaElement) {
+                                    var textareaText = textareaElement.value; // Use .value to get the text from a <textarea> element
+                                    console.log("Textarea text: " + textareaText);
+                                    awnser_list = awnser_list +"$xvx@"+textareaText;
+                                }
+
+                                console.log(awnser_list)
+                                awnser_array.push(awnser_list);
+                            } else {
+
+
+
+                            }
+
+
+                            //for cv
+                            const cv_open = answerContainer.querySelectorAll('.cv_open');
+                            if (cv_open.length > 0) {
+
+
+
+                                cv_open.forEach(function(cvOpenDiv) {
+                                    var dottedBorderID = cvOpenDiv.querySelector('.dotted-border').id;
+                                    var cvID = cvOpenDiv.querySelector('input[type="file"]').id;
+                                    var removeFileLinkID = cvOpenDiv.querySelector('.remove-file-link').id;
+                                    var uploadText1 = cvOpenDiv.querySelector('.upload-text').id;
+                                    const dottedContainer = document.getElementById(dottedBorderID);
+                                    const uploadText = document.getElementById(uploadText1);
+                                    const removeFileLink = document.getElementById(removeFileLinkID);
+                                    const cv_id = document.getElementById(cvID);
+                                    const messageDiv = document.querySelector(".message");
+                                    var filescv = "";
+
+
+                                    console.log(cvID);
+                                    filescv = $("#" + cvID)[0].files;
+
+
+                                    if(param2 == ''){
+
+                                        if (!cv_id.files.length) {
+
+
+
+                                            cvsendButton = "donot";
+                                            const answerContainers = document.querySelectorAll(".answer");
+                                            answerContainers.forEach(function (container) {
+                                                container.classList.remove("active");
+                                            });
+                                            answerContainer.classList.add("active");
+                                            messageDiv.style.display = "block";
+
+
+
+                                        } else {
+                                            cvsendButton = '';
+                                            var fd = new FormData();
+                                            fd.append('filescv',filescv[0]);
+                                            $.ajax({
+                                                url:'upload.php',
+                                                type: 'post',
+                                                data:fd,
+                                                processData: false,
+                                                contentType: false,
+                                                success:function(response){
+
+
+                                                    awnser_list_for_cv = '';
+
+                                                    awnser_list_for_cv = awnser_list_for_cv +"$xvx@"+response;
+                                                    console.log(response);
+                                                    console.log('');
+                                                    console.log(awnser_array)
+                                                    awnser_array.push(awnser_list_for_cv+'');
+                                                    console.log(awnser_array)
+
+
+                                                },
+                                                error: function(xhr, status, error) {
+                                                    console.log(error);
+                                                },
+                                            });
+
+                                            console.log(awnser_list_for_cv+'okokokokoko');
+                                            question_array.push(currently+'');
+                                            type_array.push("cv_open");
+
+
+
+
+                                            //                                    console.log(awnser_array)
+                                            //                                    console.log(question_array)
+
+
+
+                                        }
+                                    }else{
+                                        cvsendButton = "";
+
+                                        question_array.push(currently+'');
+                                        type_array.push("cv_open");
+                                        awnser_list_for_cv = awnser_list_for_cv +"$xvx@"+'Skip';
+                                        awnser_array.push(awnser_list_for_cv+'');
+
+                                    }
+                                });
+
+
+
+
+                            } else {
+
+                            }
+                            //for form_open
+                            var formOpenDiv = answerContainer.querySelector(".form_open");
+                            if (formOpenDiv) {
+
+
+                                var inputs = formOpenDiv.querySelectorAll('.form-control');
+                                var checkbox = formOpenDiv.querySelector('input[type="checkbox"]');
+                                //                            var errorCheckboxDiv = formOpenDiv.querySelector('.error-checkbox');
+
+                                // Remove red borders from all input fields as soon as the user types
+                                inputs.forEach(function (input) {
+                                    input.addEventListener('input', function () {
+                                        input.classList.remove('error-border');
+                                    });
+                                });
+
+                                // Remove red border from the checkbox parent div
+                                //                            errorCheckboxDiv.classList.remove('error-border');
+
+                                var hasEmptyField = false;
+
+                                // Check if any input field is empty
+                                inputs.forEach(function (input) {
+                                    if (input.value.trim() === '') {
+                                        input.classList.add('error-border');
+                                        hasEmptyField = true;
+                                    }
+                                });
+
+                                // Check if the checkbox is not checked
+                                if (!checkbox.checked) {
+                                    //                                errorCheckboxDiv.classList.add('error-border');
+                                    hasEmptyField = true;
+                                    console.log('empty');
+
+                                }else{
+                                    console.log('no -empty');
+                                }
+
+                                if (hasEmptyField) {
+                                    // Display an error message or take other actions as needed
+                                    console.log('kiki');
+                                    cvsendButton = "donot";
+                                    const answerContainers = document.querySelectorAll(".answer");
+                                    answerContainers.forEach(function (container) {
+                                        container.classList.remove("active");
+                                    });
+                                    answerContainer.classList.add("active");
+                                } else {
+                                    cvsendButton = "";
+                                    var username = inputs[0].value;
+                                    var email = inputs[1].value;
+                                    var phoneNumber = inputs[2].value;
+                                    var isCheckboxChecked = checkbox.checked;
+
+                                    var awnser_list = "";
+                                    awnser_list = awnser_list+"$xvx@"+ 'Name  : '+username;
+                                    awnser_list = awnser_list+"$xvx@"+ 'Email  : '+email;
+                                    awnser_list = awnser_list+"$xvx@"+ 'Phone  : '+phoneNumber;
+
+                                    // Do something with the values, for example, display them in the console
+                                    console.log("Username: " + username);
+                                    console.log("Email: " + email);
+                                    console.log("Phone Number: " + phoneNumber);
+                                    console.log("Checkbox Checked: " + isCheckboxChecked);
+                                    console.log("Form submitted successfully!");
+                                    console.log(awnser_list)
+                                    awnser_array.push(awnser_list);
+
+                                    question_array.push(currently);
+                                    type_array.push("form");
+
+                                    var cam_id  = '<?php echo $cam_id; ?>';
+                                    var job_id = <?php echo $crjb_id; ?>;
+                                    var hotel_id = <?php echo $hotel_id; ?>;
+                                    var mail_msg  = '<?php echo json_decode($auto_msg); ?>';
+
+                                    var fd = new FormData();
+
+
+                                    fd.append('first_name',username);
+                                    fd.append('email',email);
+                                    fd.append('phone',phoneNumber);
+                                    fd.append('job_id',job_id);
+                                    fd.append('hotel_id',hotel_id);
+                                    fd.append('hotel_name',"");
+                                    fd.append('mail_msg',mail_msg);
+                                    fd.append('status_id',6);
+                                    fd.append('cam_id',cam_id);
+                                    fd.append('awnser_array',JSON.stringify(awnser_array));
+                                    fd.append('question_array',JSON.stringify(question_array));
+                                    fd.append('type_array',JSON.stringify(type_array)); 
+
+
+
+                                    $.ajax({
+                                        url:'util_save_applicant.php',
+                                        type: 'post',
+                                        data:fd,
+                                        processData: false,
+                                        contentType: false,
+                                        success:function(response){
+                                            console.log(response);
+                                            if(response == "CREATE"){
+
+
+                                            }else{
+
+
+                                            }
+
+                                        },
+                                        error: function(xhr, status, error) {
+                                            console.log(error);
+                                        },
+                                    });
+
+
+
+
+                                }
+
+                            } else {
+
+
+
+                            }
+
+
+
+
+
+
+
+
+
+                        } else {
+
+                        }
+
+
+
+
+
+
+                        //for cv 
+                        const cv_open = selectedAnswer.querySelectorAll('.cv_open');
+                        if (cv_open.length > 0) {
+                            cv_open.forEach(function(cvOpenDiv) {
+
+
+
+                                var dottedBorderID = cvOpenDiv.querySelector('.dotted-border').id;
+                                var cvID = cvOpenDiv.querySelector('input[type="file"]').id;
+                                var removeFileLinkID = cvOpenDiv.querySelector('.remove-file-link').id;
+                                var uploadText1 = cvOpenDiv.querySelector('.upload-text').id;
+                                const dottedContainer = document.getElementById(dottedBorderID);
+                                const uploadText = document.getElementById(uploadText1);
+                                const removeFileLink = document.getElementById(removeFileLinkID);
+                                const cv_id = document.getElementById(cvID);
+                                const messageDiv = document.querySelector(".message");
+
+
+                                dottedContainer.addEventListener("click", () => {
+                                    if (cv_id.value) {
+                                        cv_id.value = "";
+                                        updateUploadText("Click or drop a file here");
+                                    } else {
+                                        cv_id.click();
+                                    }
+                                });
+
+                                dottedContainer.addEventListener("dragover", (e) => {
+                                    e.preventDefault();
+                                    dottedContainer.classList.add("highlight");
+                                });
+
+                                dottedContainer.addEventListener("dragleave", () => {
+                                    dottedContainer.classList.remove("highlight");
+                                });
+
+                                dottedContainer.addEventListener("drop", (e) => {
+                                    e.preventDefault();
+                                    const files = e.dataTransfer.files;
+                                    if (files.length > 0) {
+                                        cv_id.files = files;
+                                        updateUploadText(files[0].name);
+                                    }
+                                    dottedContainer.classList.remove("highlight");
+                                });
+
+                                cv_id.addEventListener("change", () => {
+                                    const fileName = cv_id.files[0] ? cv_id.files[0].name : "Click or drop a file here";
+                                    updateUploadText(fileName);
+                                });
+
+                                removeFileLink.addEventListener("click", () => {
+                                    cv_id.value = "";
+                                    updateUploadText("Click or drop a file here");
+                                });
+                                function updateUploadText(text) {
+                                    uploadText.textContent = text;
+                                    if (text !== "Click or drop a file here") {
+                                        removeFileLink.style.display = "block";
+                                    } else {
+                                        removeFileLink.style.display = "none";
+                                    }
+                                }
+
+                            });
+
+
+
+                        } else {
+
+                        }
+
+
+                        //just  for multiselection 
+
+                        if(answerId == 'thanks'){
+                            if(cvsendButton == "donot"){
+
+                            }else {
+                                currently = `thanks`;
+                            }
+
+
+                        }else  if(answerId == 'disqualification'){
+
+                            if(cvsendButton == "donot"){
+
+                            }else {
+                                currently = `disqualification`;
+                            }
+
+
+                        }else {
+                            if(cvsendButton == "donot"){
+
+                            }else {
+                                currently = `answer-${answerId}`;
+                            }
+                        }
+
+                    }
+                }
+                document.addEventListener('DOMContentLoaded', function () {
+                    const addFormDiv = document.getElementById('add_form_is');
+                    const funnelAddDiv = document.getElementById('for_funnel_add_is');
+                    // Move the "for_funnel_add" div into the "add_form_is" div
+                    addFormDiv.appendChild(funnelAddDiv);
+                });
+            }else{
+                var application_funnel = document.getElementById('application_funnel');
+                if (application_funnel) {
+                    application_funnel.parentNode.removeChild(application_funnel);
+                    console.log("Removed 'application_funnel'");
+                }
+            }
+
+        </script>
+
+
+
+
         <script>
             function scrollToDiv() {
                 const targetDiv = document.getElementById('application');
@@ -892,7 +1543,7 @@ if($depart_id !=  0 ){
             //            const phoneInput = document.querySelector("#phone");
             //            const iti = window.intlTelInput(phoneInput, {
             //                separateDialCode: true,
-            //                initialCountry: "de", // Set the initial country to Germany (country code "de")
+            //                initialCountry: "it", // Set the initial country to Germany (country code "de")
             //                utilsScript: "https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.8/js/utils.js",
             //            });
 
@@ -1053,6 +1704,16 @@ if($depart_id !=  0 ){
             };
 
             function addapplicant() {
+
+
+                var check_funnel = <?php echo json_encode($job_funnel); ?>;
+
+                var is_funnel = <?php echo json_encode($is_funnel); ?>;
+
+
+
+
+
                 var mrtitle ;
                 var radios = document.getElementsByName('customRadio');
                 for (var radio of radios)
@@ -1076,14 +1737,18 @@ if($depart_id !=  0 ){
                 var hotel_id = <?php echo $hotel_id; ?>;
                 var cv_required = <?php echo $is_cv_required; ?>;
 
+                var cam_id  = '<?php echo $cam_id; ?>';
                 var hotel_name  = '<?php echo $hotel_name; ?>';
                 var mail_msg  = '<?php echo json_decode($auto_msg); ?>';
-                var cam_id  = '<?php echo $cam_id; ?>';
-
                 var fd = new FormData();
                 var files = $('#pic_id')[0].files;
                 var filescv = "";
                 filescv = $('#cv_id')[0].files;
+
+
+
+
+
                 if(document.getElementById("cv_id").value == "" && cv_required == 1) {
                     div_cv.classList.add("has-danger");
                     error_msg_cv.classList.add("display_inline");
@@ -1107,6 +1772,16 @@ if($depart_id !=  0 ){
                         fd.append('mail_msg',mail_msg);
                         fd.append('status_id',6);
                         fd.append('cam_id',cam_id);
+                        console.log("sdsdsd");
+
+                        if(check_funnel == 0 || is_funnel == 0 ){
+
+                        }else{
+                            fd.append('awnser_array',JSON.stringify(awnser_array));
+                            fd.append('question_array',JSON.stringify(question_array));
+                            fd.append('type_array',JSON.stringify(type_array)); 
+                        }
+
                         $.ajax({
                             url:'util_save_applicant.php',
                             type: 'post',
@@ -1116,24 +1791,49 @@ if($depart_id !=  0 ){
                             success:function(response){
                                 console.log(response);
                                 if(response == "CREATE"){
-                                    $("#all_views *").removeAttr('disabled');
-                                    var appication = document.getElementById('application');
-                                    appication.classList.add("display_none");
-                                    var auto_msg =  document.getElementById('auto_msg');
-                                    auto_msg.classList.remove("display_none");
-                                    if (auto_msg) {
-                                        const headerHeight = document.querySelector('.fixed-header').offsetHeight;
-                                        const targetDivPosition = auto_msg.getBoundingClientRect().top;
-                                        window.scrollBy({ top: targetDivPosition - headerHeight, behavior: 'smooth' });
+
+                                    console.log()
+                                    if(check_funnel == 0 || is_funnel == 0 ){
+                                        console.log("all views");
+                                        $("#all_views *").removeAttr('disabled');
+                                        var appication = document.getElementById('application');
+                                        appication.classList.add("display_none");
+                                        var auto_msg =  document.getElementById('auto_msg');
+                                        auto_msg.classList.remove("display_none");
+
+
+                                        if (auto_msg) {
+                                            const headerHeight = document.querySelector('.fixed-header').offsetHeight;
+                                            const targetDivPosition = auto_msg.getBoundingClientRect().top;
+                                            window.scrollBy({ top: targetDivPosition - headerHeight, behavior: 'smooth' });
+                                        }
+                                    }else{
+                                        const answerContainers = document.querySelectorAll(".answer");
+                                        if (answerContainers.length > 0) {
+                                            answerContainers.forEach(function (container) {
+                                                container.classList.remove("active");
+                                            });
+                                            const selectedAnswer = document.getElementById('thanks');
+                                            if (selectedAnswer) {
+                                                selectedAnswer.classList.add('active');
+                                            }else{
+                                                const selectedAnswer = document.getElementById(`thanks`);
+                                                selectedAnswer.classList.add("active");
+                                            }
+
+                                        }
                                     }
                                 }else{
-                                    $("#all_views *").removeAttr('disabled');
-                                    Swal.fire({
-                                        type: 'error',
-                                        title: 'Oops...',
-                                        text: 'Something went wrong!',
-                                        footer: ''
-                                    });
+                                    if(check_funnel == 0 || is_funnel == 0 ){
+                                        console.log("remove");
+                                        $("#all_views *").removeAttr('disabled');
+                                        Swal.fire({
+                                            type: 'error',
+                                            title: 'Oops...',
+                                            text: 'Something went wrong!',
+                                            footer: ''
+                                        });
+                                    }
 
                                 }
 

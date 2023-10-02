@@ -117,7 +117,7 @@ if ($result && $result->num_rows > 0) {
         </div>
         <div class="chat-time"><?php echo $time; ?></div>   
     </div>
-    <?php }else if($type == "docx") { ?>
+    <?php }else if($type == "docx" || $type == "doc") { ?>
     <div class="chat-content">
         <h5><?php if($user_id == $user_id_s){ echo $first_name  ;} else { echo $reciver_name ;}?>  </h5>
         <div   class="box <?php if($user_id == $user_id_s){ echo "" ;} else { echo "";}?>  ">
@@ -127,7 +127,7 @@ if ($result && $result->num_rows > 0) {
         <div class="chat-time"><?php echo $time; ?></div>
     </div>
 
-    <?php }else if($type == "xls") { ?>
+    <?php }else if($type == "xls" || $type == "xlsx") { ?>
     <div class="chat-content">
         <h5><?php if($user_id == $user_id_s){ echo $first_name  ;} else { echo $reciver_name ;}?>  </h5>
         <div   class="box <?php if($user_id == $user_id_s){ echo "" ;} else { echo "";}?>  ">

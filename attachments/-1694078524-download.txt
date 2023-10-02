@@ -1,0 +1,1142 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <!-- Tell the browser to be responsive to screen width -->
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="description" content="">
+        <meta name="author" content="">
+        <!-- Favicon icon -->
+        <link rel="icon" type="image/png" sizes="16x16" href="./assets/images/favicon.png">
+        <title>Chat</title>
+        <!-- Page CSS -->
+        <link href="dist/css/pages/chat-app-page.css" rel="stylesheet">
+        <!-- Custom CSS -->
+        <link href="dist/css/style.min.css" rel="stylesheet">
+        <style>
+            #load_message {
+                overflow-y: auto;
+            }
+            #click {
+                display:none;
+
+            }
+            #Ok{
+                display:none;
+            }
+            .sent-color{
+                background-color: #00BCEB !important;
+                color: white !important;
+            }
+            .recive-color{
+                background-color: gray !important;
+                color: white !important;
+            }
+            .back_color{
+                background-color: black!important;
+                color: white !important;
+            }
+            .circle {
+                width: 40px;
+                height: 40px;
+                line-height: 40px;
+                border-radius: 50%;
+                font-size: 24px;
+                color: #fff;
+                text-align: center;
+                background: #000
+            }
+            .circle { float:left }
+            .container { 
+
+                position: relative;
+
+            }
+
+            .vertical-center {
+                margin: 0;
+                position: absolute;
+                top: 50%;
+                -ms-transform: translateY(-50%);
+                transform: translateY(-50%);
+            }
+
+
+            /* width */
+            ::-webkit-scrollbar {
+                width: 8px;
+            }
+
+            /* Track */
+            ::-webkit-scrollbar-track {
+                background: #f1f1f1; 
+            }
+
+            /* Handle */
+            ::-webkit-scrollbar-thumb {
+                background: #888; 
+            }
+
+            /* Handle on hover */
+            ::-webkit-scrollbar-thumb:hover {
+                background: #555; 
+            }
+            #loading1{
+                visibility: hidden;
+            }
+        </style>
+    </head>
+    <body class="skin-default-dark fixed-layout">
+        <!-- ============================================================== -->
+        <!-- Preloader - style you can find in spinners.css -->
+        <!-- ============================================================== -->
+        <div class="preloader">
+            <div class="loader">
+                <div class="loader__figure"></div>
+                <p class="loader__label">Chat</p>
+            </div>
+        </div>
+        <div id="loading1"  class="d-flex justify-content-center mcenter">
+            <div class="spinner-border text-info" role="status">
+                <span class="sr-only">Loading...</span>
+            </div>
+        </div>
+        <!-- ============================================================== -->
+        <!-- Main wrapper - style you can find in pages.scss -->
+        <!-- ============================================================== -->
+        <div id="main-wrapper">
+            <!-- ============================================================== -->
+            <!-- Topbar header - style you can find in pages.scss -->
+            <!-- ============================================================== -->
+            
+<header class="topbar">
+    <nav class="navbar top-navbar navbar-expand-md navbar-dark">
+        <!-- ============================================================== -->
+        <!-- Logo -->
+        <!-- ============================================================== -->
+        <div class="navbar-header">
+            <a class="navbar-brand" href="index.php">
+                <!-- Logo icon --><b>
+                <!--You can put here icon as well // <i class="wi wi-sunset"></i> //-->
+                <!-- Dark Logo icon -->
+                <img src="./assets/images/favicon.png" alt="homepage" class="dark-logo" />
+                <!-- Light Logo icon -->
+                <img src="./assets/images/favicon.png" alt="homepage" class="light-logo" />
+                </b>
+                <!--End Logo icon --></a>
+        </div>
+        <!-- ============================================================== -->
+        <!-- End Logo -->
+        <!-- ============================================================== -->
+        <div class="navbar-collapse">
+            <!-- ============================================================== -->
+            <!-- toggle and nav items -->
+            <!-- ============================================================== -->
+            <ul class="navbar-nav mr-auto">
+                <!-- This is  -->
+                <li class="nav-item hidden-sm-up"> <a class="nav-link nav-toggler waves-effect waves-light" href="javascript:void(0)"><i class="ti-menu"></i></a></li>
+                <!-- ============================================================== -->
+                <!-- Comment -->
+                <!-- ============================================================== -->
+                                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle waves-effect waves-dark" href="" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <i class="ti-bell"></i>
+                        <div class="notify" id="result_noti_num"> </div>
+                    </a>
+                    <div class="dropdown-menu mailbox animated bounceInDown" id="result_notifications">
+                        <span class="with-arrow"><span class="bg-primary"></span></span>
+                        <ul>
+                            <li>
+                                <div class="drop-title bg-primary text-white">
+                                    <h4 class="m-b-0 m-t-5">4 New</h4>
+                                    <span class="font-light">Notifications</span>
+                                </div>
+                            </li>
+                            <li>
+                                <div class="message-center">
+                                                                        <a href="javascript:void(0)" onclick="redirect_url_alert('shift_pool.php');" >
+                                        <div class="btn btn-danger btn-circle"><i class="ti-bell"></i></div>
+                                        <div class="mail-contnet">
+                                            <h5>Take this from admin </h5> <span class="mail-desc">Take this from admin  Shift Assigned By Admin To You.</span> <span class="time">2023-08-27 21:01:01</span> </div>
+                                    </a>
+
+                                                                        <a href="javascript:void(0)" onclick="redirect_url_alert('shift_pool.php');" >
+                                        <div class="btn btn-danger btn-circle"><i class="ti-bell"></i></div>
+                                        <div class="mail-contnet">
+                                            <h5>ly lo</h5> <span class="mail-desc">ly lo Shift Taken By Worker Still You Take Back.</span> <span class="time">2023-08-27 21:01:01</span> </div>
+                                    </a>
+
+                                                                        <a href="javascript:void(0)" onclick="redirect_url_alert('off_time.php?slug=flag');" >
+                                        <div class="btn btn-danger btn-circle"><i class="ti-bell"></i></div>
+                                        <div class="mail-contnet">
+                                            <h5>Chutti jao enjoy kro 2</h5> <span class="mail-desc">Chutti jao enjoy kro 2 Holiday Updated.</span> <span class="time">2023-08-27 21:01:00</span> </div>
+                                    </a>
+
+                                                                        <a href="javascript:void(0)" onclick="redirect_url_alert('off_time.php?slug=flag');" >
+                                        <div class="btn btn-danger btn-circle"><i class="ti-bell"></i></div>
+                                        <div class="mail-contnet">
+                                            <h5>Chutti jao enjoy kro</h5> <span class="mail-desc">Chutti jao enjoy kro Holiday Added.</span> <span class="time">2023-08-27 21:01:00</span> </div>
+                                    </a>
+
+                                                                    </div>
+                            </li>
+                            <li>
+                                <a class="nav-link text-center m-b-5" href="dashboard.php"> <strong>Check all notifications</strong> <i class="fa fa-angle-right"></i> </a>
+                            </li>
+                        </ul>
+                    </div>
+                </li>
+                <!-- ============================================================== -->
+                <!-- End Comment -->
+                <!-- ============================================================== -->
+                <!-- ============================================================== -->
+                <!-- Messages -->
+                <!-- ============================================================== -->
+                
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle waves-effect waves-dark" href="" id="2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <i class="mdi mdi-wechat mobile_chat_size_icon" style="font-size:26px;"></i>
+                        <div class="notify" id="result_msg_num"> </div>
+                    </a>
+                    <div class="dropdown-menu mailbox animated bounceInDown" aria-labelledby="2" id="result_msg">
+                        <span class="with-arrow"><span class="bg-danger"></span></span>
+                        <ul>
+
+                            <li>
+                                <div class="drop-title text-white bg-danger">
+                                    <h4 class="m-b-0 m-t-5">0 New</h4>
+                                    <span class="font-light">Messages</span>
+                                </div>
+                            </li>
+                            <li>
+                                <div class="message-center">
+                                                                    </div>
+                            </li>
+                            <li>
+                                <a class="nav-link text-center link m-b-5" href="chat.php"> <b>See all messages</b> <i class="fa fa-angle-right"></i> </a>
+                            </li>
+                        </ul>
+                    </div>
+                </li>
+                <!-- ============================================================== -->
+                <!-- End Messages -->
+                <!-- ============================================================== -->
+                            </ul>
+            <ul class="navbar-nav my-lg-0">
+                <!-- ============================================================== -->
+                <!-- User profile and search -->
+                <!-- ============================================================== -->
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle text-muted waves-effect waves-dark" href="" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><img onerror="this.src='./assets/images/users/user.png'" src="./images/recruiting/20230707_195817_6048.jpg" alt="user" class="img-circle" width="30"></a>
+                    <div class="dropdown-menu dropdown-menu-right user-dd animated flipInY" style="border-bottom:10px solid #00BCEB!important;">
+                        <span class="with-arrow"><span class="bg-info"></span></span>
+                        <div class="d-flex no-block align-items-center p-15 bg-info text-white m-b-10">
+                            <div class=""><img onerror="this.src='./assets/images/users/user.png'" src="./images/recruiting/20230707_195817_6048.jpg" alt="user" class="img-circle" width="60"></div>
+                            <div class="m-l-10">
+                                <h4 class="m-b-0">Talha Sahi</h4>
+                                <p class=" m-b-0">arfasoftech@gmail.com</p>
+                            </div>
+                        </div>
+                        <a class="dropdown-item" href="user_profile.php"><i class="ti-user m-r-5 m-l-5"></i> My Profile</a>
+                                                <a class="dropdown-item" href="chat.php"><i class="ti-email m-r-5 m-l-5"></i> Inbox</a>
+                        
+                        <form  id="my_form"  method="POST">
+                            <span class="dropdown-item"><i class="ti-unlink m-r-5 m-l-5"></i>
+                                <input class="btn p-0 w-100" style="text-align:left;" type="submit" name="logout" value="Logout"/>
+                            </span>
+                        </form>
+
+                    </div>
+
+                </li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link black_color font_name minus_padding">Talha Sahi</a>
+                </li>
+                <!-- ============================================================== -->
+                <!-- User profile and search -->
+                <!-- ============================================================== -->
+
+
+
+                <!--                Change Language-->
+                
+                <li class="nav-item"> <a class="nav-link  waves-effect waves-light" href="setting.php"><i class="ti-settings"></i></a></li>
+
+                <li class="nav-item right-side-toggle"> <a class="nav-link  waves-effect waves-light" href="javascript:void(0)"><i class="ti-angle-double-down"></i></a></li>
+            </ul>
+        </div>
+    </nav>
+</header>
+<script src="./assets/node_modules/jquery/jquery-3.2.1.min.js"></script>
+<script>
+    function redirect_url_alert(url){
+        window.location.href = url;
+    }
+
+    function reload() {
+
+        $( "#result_notifications" ).load( "util_reload_notification.php" );
+        $( "#result_msg" ).load( "util_reload_msgs.php" );
+        $( "#result_noti_num" ).load( "util_reload_noti_number.php" );
+        $( "#result_msg_num" ).load( "util_reload_msg_number.php" );
+
+        setTimeout(reload, 3000);
+    }
+
+    reload();
+
+
+
+    function lang_change(url){
+        window.location.href = url;
+    }
+
+    var notification_id = [];
+    var notification_id_len = '0';
+    var todo_ids = [];
+    var dates =  [];
+
+    duplicate();
+    function duplicate(){
+        $.ajax({
+            url:'util_auto_dublicate.php',
+            method:'POST',
+            data:{ todo_ids:todo_ids,name: "todo",dates:dates},
+            success:function(response){
+                console.log(response);
+            },
+            error: function(xhr, status, error) {
+                console.log(error);
+            },
+        });
+    }
+</script>            <!-- ============================================================== -->
+            <!-- End Topbar header -->
+            <!-- ============================================================== -->
+            <!-- ============================================================== -->
+            <!-- Left Sidebar - style you can find in sidebar.scss  -->
+            <!-- ============================================================== -->
+            <aside class="left-sidebar">
+    <div class="d-flex no-block nav-text-box align-items-center">
+        <span><img src="./assets/images/logo-icon.png" width="30px" height="30px" alt="elegant admin template"></span>
+        <a class="nav-lock waves-effect waves-dark ml-auto hidden-md-down" href="javascript:void(0)"><i class="mdi mdi-toggle-switch"></i></a>
+        <a class="nav-toggler waves-effect waves-dark ml-auto hidden-sm-up" href="javascript:void(0)"><i class="ti-menu ti-close"></i></a>
+    </div>
+    <!-- Sidebar scroll-->
+    <div class="scroll-sidebar">
+        <!-- Sidebar navigation-->
+        <nav class="sidebar-nav">
+            <ul id="sidebarnav">
+                <li> <a class="" href="dashboard.php" aria-expanded="false"><i class="icon-home"></i><span class="hide-menu">Dashboard</span></a>
+                </li>
+
+                            <li class="" > <a class="has-arrow waves-effect waves-dark" href="javascript:void(0)" aria-expanded="false"><i class="mdi mdi-format-float-none"></i><span class="hide-menu">Recruiting</span></a>
+                    <ul aria-expanded="false" class="collapse">
+                                                <li><a href="create_job.php">Create Job-Ad<i class="mdi mdi-plus-circle"></i></a></li>
+                        <!--                        <li><a href="funnel.php">Create Funnel<i class="mdi mdi-plus-circle"></i></a></li>-->
+                        <li><a href="campaign.php">Tracking Campaign<i class="ti ti-target"></i></a></li>
+                        <li><a href="all_funnel.php">Funnel<i class="ti ti-target"></i></a></li>
+                                                <li class="" ><a href="jobs.php" class=""  >Active Job-Ad<i class="mdi mdi-tooltip-edit"></i></a></li>
+                                                <li><a href="job_drafted.php">Drafted Job-Ad<i class="mdi mdi-arrange-bring-forward"></i></a></li>
+
+                        <li><a href="job_archived.php">Archived Job-Ad<i class="mdi mdi-archive"></i></a></li>
+
+                                                <li class="" ><a href="applications.php" class="" >Applications <i class="mdi mdi-clipboard-text"></i></a></li>
+                        <li><a href="archived_application.php">Archived Applications<i class="ti-archive"></i></a></li>
+
+                        
+                        <li class=""><a href="employees.php" class="" >Employees<i class="ti-user"></i></a></li>
+                        <li><a href="employees_retired.php">Retired Employees<i class="mdi mdi-account"></i></a></li>
+                                            </ul>
+                </li>
+                
+                <li class="" > <a class="has-arrow waves-effect waves-dark" href="javascript:void(0)" aria-expanded="false"><i class="fas fa-hands-helping"></i><span class="hide-menu">Handover</span></a>
+                    <ul aria-expanded="false" class="collapse ">
+
+                        <li class=""><a href="handover.php" class="">Handover<i class="fas fa-handshake"></i></a></li>
+
+                        <li><a href="handover_completed.php">Handover Completed<i class="fas fa-hand-rock"></i></a></li> 
+
+
+                                                <li><a href="handover_drafted.php">Drafted Handover<i class="fas fa-hand-holding"></i></a></li> 
+                                            </ul>
+                </li>
+                
+                <li class="" > <a class="has-arrow waves-effect waves-dark" href="javascript:void(0)" aria-expanded="false"><i class="fas fa-book"></i><span class="hide-menu">Handbook</span></a>
+                    <ul aria-expanded="false" class="collapse" >
+
+
+
+                        <li class="" ><a href="handbook.php" class="" >Handbook<i class="mdi mdi-plus-circle"></i></a></li>
+
+                                                <li><a href="handbook_drafted.php">Drafted Handbook<i class="mdi mdi-tooltip-edit"></i></a></li> 
+                                            </ul>
+                </li>
+                
+                <li class="" > <a class="has-arrow waves-effect waves-dark" href="javascript:void(0)" aria-expanded="false"><i class="fas fa-clipboard-check"></i><span class="hide-menu">Todo/Checklist</span></a>
+                    <ul aria-expanded="false" class="collapse" >
+
+                        <li class="" ><a href="todo_check_list.php" class="" >Todo/Checklist<i class="fas fa-check-circle"></i></a></li>
+
+
+
+                        <li><a href="todo_check_list_completed.php">Todo/Checklist Completed<i class="fas fa-paste"></i></a></li> 
+
+
+
+                                                <li><a href="todo_checklist_drafted.php">Drafted Todo/Checklist<i class="fas fa-calendar-check"></i></a></li> 
+                                            </ul>
+                </li>
+                
+                <li class="" > <a class="has-arrow waves-effect waves-dark" href="javascript:void(0)" aria-expanded="false"><i class="fab fa-readme"></i><span class="hide-menu">Notices</span></a>
+                    <ul aria-expanded="false" class="collapse" >
+                        <li class=""><a href="notices.php" class="">Notices<i class="fab fa-digital-ocean"></i></a></li>
+                                                <li><a href="notices_drafted.php">Drafted Notices<i class="fab fa-draft2digital"></i></a></li> 
+                                            </ul>
+                </li>
+
+                
+                <li class=""> <a class="has-arrow waves-effect waves-dark" href="javascript:void(0)" aria-expanded="false"><i class="fas fa-wrench"></i><span class="hide-menu">Repairs</span></a>
+                    <ul aria-expanded="false" class="collapse">
+                        <li class=""><a href="repairs.php" class="">Repairs<i class="fas fa-plus-circle"></i></a></li>
+                        <li><a href="repairs_completed.php">Repairs Completed<i class="fab fa-empire"></i></a></li> 
+                                                <li><a href="repairs_drafted.php">Drafted Repairs<i class="fab fa-firstdraft"></i></a></li> 
+                                            </ul>
+                </li>
+                
+
+                                <li class="" > <a class="has-arrow waves-effect waves-dark" href="javascript:void(0)" aria-expanded="false"><i class="mdi mdi-broom"></i><span class="hide-menu">Housekeeping</span></a>
+                    <ul aria-expanded="false" class="collapse" >
+
+                        <li class=""><a href="housekeeping.php" class="">Housekeeping<i class="mdi mdi-broom"></i></a></li>
+
+
+                        <li><a href="housekeeping_extrajob_complete.php">ExtraJob Completed<i class="mdi mdi-playlist-check"></i></a></li> 
+                    </ul>
+                </li>
+                
+
+                                <!--Time Schedule Start-->
+
+                <li class="">
+                    <a class="has-arrow waves-effect waves-dark" href="javascript:void(0)" aria-expanded="false"><i class="mdi mdi-chart-timeline"></i><span class="hide-menu">Time Schedule</span></a>
+                    <ul aria-expanded="false" class="collapse">
+
+                         
+                        <li class="" ><a class="" href="schedules.php">Schedules<i class="mdi mdi-timetable"></i></a></li> 
+                        <li class="" ><a class="" href="my_schedules.php">My Schedule<i class="mdi mdi-table-column-width"></i></a></li>
+
+                         <li class=""><a class="" href="engage.php">Engage<i class="mdi mdi-emoticon"></i></a></li> 
+
+                                                <li><a href="shift_pool.php">Shift Pool<i class="fas fa-life-ring"></i></a></li>
+                        
+
+                                                <li class=""><a href="off_time.php?slug=flag" class="" >Off Time<i class="mdi mdi-clock"></i></a></li>
+                                                <li><a href="reports.php">Reports<i class="far fa-chart-bar"></i></a></li>
+                        
+
+                    </ul>
+                </li>
+
+                                <!--Time Schedule End-->
+
+                                <!--Forecasting Start-->
+                <li> <a class="" href="forecast.php" aria-expanded="false"><i class="fas fa-chart-pie"></i><span class="hide-menu">Budget &amp; Forecast</span></a>
+                </li>
+                                <!--Forecasting End-->
+
+            </ul>
+        </nav>
+        <!-- End Sidebar navigation -->
+    </div>
+    <!-- End Sidebar scroll-->
+</aside>            <!-- ============================================================== -->
+            <!-- End Left Sidebar - style you can find in sidebar.scss  -->
+            <!-- ============================================================== -->
+            <!-- ============================================================== -->
+            <!-- Page wrapper  -->
+            <!-- ============================================================== -->
+            <div class="page-wrapper">
+                <!-- ============================================================== -->
+                <!-- Container fluid  -->
+                <!-- ============================================================== -->
+                <div class="container-fluid">
+                    <!-- ============================================================== -->
+                    <!-- Bread crumb and right sidebar toggle -->
+                    <!-- ============================================================== -->
+                    <div class="row page-titles">
+                        <div class="col-md-5 align-self-center">
+                            <h4 class="text-themecolor">Chats</h4>
+                        </div>
+                        <div class="col-md-7 align-self-center text-right">
+
+                        </div>
+                    </div>
+                    <!-- ============================================================== -->
+                    <!-- End Bread crumb and right sidebar toggle -->
+                    <!-- ============================================================== -->
+                    <!-- ============================================================== -->
+                    <!-- Start Page Content -->
+                    <!-- ============================================================== -->
+                    <div class="row">
+                        <div class="col-12 pm-0">
+                            <div class="card m-b-0">
+                                <!-- .chat-row -->
+                                <div  class="chat-main-box">
+                                    <!-- .chat-left-panel -->
+                                    <div id="chat_users" class="chat-left-aside">
+                                        <div class="open-panel"><i class="ti-angle-right"></i></div>
+                                        <div class="chat-left-inner">
+                                            <div class="form-material">
+                                                <input class="form-control p-2" onkeyup="search_c();" id="search_contact" type="text" placeholder="Search Contact">
+                                            </div>
+                                            <ul class="chatonline style-none" id="contact_list">
+                                                
+
+
+
+                                                
+                                                <li>
+                                                    <a class="divacb container" id="div_50" onclick='selected_divs(50,"user")' href="javascript:void(0)">
+                                                        <div class="circle">T</div>
+                                                        <span class="name vertical-center ml-3">TalhaNNN&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+                                                                                                                    </span>
+                                                    </a>
+                                                </li>
+
+
+
+                                                
+                                                <li>
+                                                    <a class="divacb container" id="div_2" onclick='selected_divs(2,"user")' href="javascript:void(0)">
+                                                        <div class="circle">T</div>
+                                                        <span class="name vertical-center ml-3">Talha&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+                                                                                                                    </span>
+                                                    </a>
+                                                </li>
+
+
+
+                                                
+                                                <li>
+                                                    <a class="divacb container" id="div_t_34" onclick='selected_divs(34,"team")' href="javascript:void(0)">
+                                                        <div class="circle">T</div>
+                                                        <span class="name vertical-center ml-3">Test&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+                                                                                                                    </span>
+                                                    </a>
+                                                </li>
+
+
+
+                                                
+                                                <li>
+                                                    <a class="divacb container" id="div_t_20" onclick='selected_divs(20,"team")' href="javascript:void(0)">
+                                                        <div class="circle">T</div>
+                                                        <span class="name vertical-center ml-3">Team A&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+                                                                                                                    </span>
+                                                    </a>
+                                                </li>
+
+
+
+                                                                                                <!--                                                teams-->
+                                                <li class="p-30"></li>
+
+                                            </ul>
+                                        </div>
+                                    </div>
+                                    <!-- .chat-left-panel -->
+
+                                    <!-- .chat-right-panel -->
+
+                                    <div class="chat-right-aside"  id="banner">
+
+                                        <div class="card-body border-top">
+                                            <div class="row">
+                                                <div class="col-12 text-center mt-5 pt-5">
+                                                    <svg width="360" viewBox="0 0 303 172" fill="none" preserveAspectRatio="xMidYMid meet" class=""><path fill-rule="evenodd" clip-rule="evenodd" d="M229.565 160.229c32.647-10.984 57.366-41.988 53.825-86.81-5.381-68.1-71.025-84.993-111.918-64.932C115.998 35.7 108.972 40.16 69.239 40.16c-29.594 0-59.726 14.254-63.492 52.791-2.73 27.933 8.252 52.315 48.89 64.764 73.962 22.657 143.38 13.128 174.928 2.513z" fill="#364147"></path><path fill-rule="evenodd" clip-rule="evenodd" d="M131.589 68.942h.01c6.261 0 11.336-5.263 11.336-11.756S137.86 45.43 131.599 45.43c-5.081 0-9.381 3.466-10.822 8.242a7.302 7.302 0 0 0-2.404-.405c-4.174 0-7.558 3.51-7.558 7.838s3.384 7.837 7.558 7.837h13.216zM105.682 128.716c3.504 0 6.344-2.808 6.344-6.27 0-3.463-2.84-6.27-6.344-6.27-1.156 0-2.24.305-3.173.839v-.056c0-6.492-5.326-11.756-11.896-11.756-5.29 0-9.775 3.413-11.32 8.132a8.025 8.025 0 0 0-2.163-.294c-4.38 0-7.93 3.509-7.93 7.837 0 4.329 3.55 7.838 7.93 7.838h28.552z" fill="#F1F1F2" fill-opacity=".38"></path><rect x=".445" y=".55" width="50.58" height="100.068" rx="7.5" transform="rotate(6 -391.775 121.507) skewX(.036)" fill="#00BCEB" stroke="#316474"></rect><rect x=".445" y=".55" width="50.403" height="99.722" rx="7.5" transform="rotate(6 -356.664 123.217) skewX(.036)" fill="#eef9fc" stroke="#316474"></rect><path d="M57.16 51.735l-8.568 82.024a5.495 5.495 0 0 1-6.042 4.895l-32.97-3.465a5.504 5.504 0 0 1-4.897-6.045l8.569-82.024a5.496 5.496 0 0 1 6.041-4.895l5.259.553 22.452 2.36 5.259.552a5.504 5.504 0 0 1 4.898 6.045z" fill="#ebfbff" stroke="#316474"></path><path d="M26.2 102.937c.863.082 1.732.182 2.602.273.238-2.178.469-4.366.69-6.546l-2.61-.274c-.238 2.178-.477 4.365-.681 6.547zm-2.73-9.608l2.27-1.833 1.837 2.264 1.135-.917-1.838-2.266 2.27-1.833-.92-1.133-2.269 1.834-1.837-2.264-1.136.916 1.839 2.265-2.27 1.835.92 1.132zm-.816 5.286c-.128 1.3-.265 2.6-.41 3.899.877.109 1.748.183 2.626.284.146-1.31.275-2.614.413-3.925-.878-.092-1.753-.218-2.629-.258zm16.848-8.837c-.506 4.801-1.019 9.593-1.516 14.396.88.083 1.748.192 2.628.267.496-4.794 1-9.578 1.513-14.37-.864-.143-1.747-.192-2.625-.293zm-4.264 2.668c-.389 3.772-.803 7.541-1.183 11.314.87.091 1.74.174 2.601.273.447-3.912.826-7.84 1.255-11.755-.855-.15-1.731-.181-2.589-.306-.04.156-.069.314-.084.474zm-4.132 1.736c-.043.159-.06.329-.077.49-.297 2.896-.617 5.78-.905 8.676l2.61.274c.124-1.02.214-2.035.33-3.055.197-2.036.455-4.075.627-6.115-.863-.08-1.724-.17-2.585-.27z" fill="#316474"></path><path d="M17.892 48.489a1.652 1.652 0 0 0 1.468 1.803 1.65 1.65 0 0 0 1.82-1.459 1.652 1.652 0 0 0-1.468-1.803 1.65 1.65 0 0 0-1.82 1.459zM231.807 136.678l-33.863 2.362c-.294.02-.54-.02-.695-.08a.472.472 0 0 1-.089-.042l-.704-10.042a.61.61 0 0 1 .082-.054c.145-.081.383-.154.677-.175l33.863-2.362c.294-.02.54.02.695.08.041.016.069.03.088.042l.705 10.042a.61.61 0 0 1-.082.054 1.678 1.678 0 0 1-.677.175z" fill="#fff" stroke="#316474"></path><path d="M283.734 125.679l-138.87 9.684c-2.87.2-5.371-1.963-5.571-4.823l-6.234-88.905c-.201-2.86 1.972-5.35 4.844-5.55l138.87-9.684c2.874-.2 5.371 1.963 5.572 4.823l6.233 88.905c.201 2.86-1.971 5.349-4.844 5.55z" fill="#eef9fc"></path><path d="M144.864 135.363c-2.87.2-5.371-1.963-5.571-4.823l-6.234-88.905c-.201-2.86 1.972-5.35 4.844-5.55l138.87-9.684c2.874-.2 5.371 1.963 5.572 4.823l6.233 88.905c.201 2.86-1.971 5.349-4.844 5.55" stroke="#316474"></path><path d="M278.565 121.405l-129.885 9.058c-2.424.169-4.506-1.602-4.668-3.913l-5.669-80.855c-.162-2.31 1.651-4.354 4.076-4.523l129.885-9.058c2.427-.169 4.506 1.603 4.668 3.913l5.669 80.855c.162 2.311-1.649 4.354-4.076 4.523z" fill="#ebfbff" stroke="#316474"></path><path d="M230.198 129.97l68.493-4.777.42 5.996c.055.781-.098 1.478-.363 1.972-.27.5-.611.726-.923.748l-165.031 11.509c-.312.022-.681-.155-1.017-.613-.332-.452-.581-1.121-.636-1.902l-.42-5.996 68.494-4.776c.261.79.652 1.483 1.142 1.998.572.6 1.308.986 2.125.929l24.889-1.736c.817-.057 1.491-.54 1.974-1.214.413-.577.705-1.318.853-2.138z" fill="#00BCEB" stroke="#316474"></path><path d="M230.367 129.051l69.908-4.876.258 3.676a1.51 1.51 0 0 1-1.403 1.61l-168.272 11.735a1.51 1.51 0 0 1-1.613-1.399l-.258-3.676 69.909-4.876a3.323 3.323 0 0 0 3.188 1.806l25.378-1.77a3.32 3.32 0 0 0 2.905-2.23z" fill="#EEFAF6" stroke="#316474"></path><ellipse rx="15.997" ry="15.997" transform="rotate(-3.989 1304.861 -2982.552) skewX(.021)" fill="#00BCEB" stroke="#316474"></ellipse><path d="M208.184 87.11l-3.407-2.75-.001-.002a1.952 1.952 0 0 0-2.715.25 1.89 1.89 0 0 0 .249 2.692l.002.001 5.077 4.11v.001a1.95 1.95 0 0 0 2.853-.433l8.041-12.209a1.892 1.892 0 0 0-.573-2.643 1.95 1.95 0 0 0-2.667.567l-6.859 10.415z" fill="#fff" stroke="#316474"></path></svg>
+
+                                                    <h3 class="mt-2">QualityFriend Messaging</h3>
+                                                    <p>Send and receive messages on web and mobile app.</p>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                    </div>
+
+                                    <div class="chat-right-aside"  id="Ok">
+                                        <div class="chat-main-header">
+                                            <div class="p-3 b-b">
+                                                <h4 class="box-title">Chat Message</h4>
+                                            </div>
+                                        </div>
+                                        <div class="chat-rbox">
+                                            <ul  id="load_message" class="chat-list p-3">
+                                                <!--chat Row -->
+                                            </ul>
+                                            <div id="go_to" >
+                                            </div>
+                                        </div>
+                                        <div class="card-body border-top">
+                                            <div class="row">
+                                                <div class="col-lg-1 wm-21 text-left">
+                                                    <label class="btn btn-info btn-circle btn-lg pointer" for="imageFile" ><i class="mdi mdi-link-variant"></i></label>
+                                                    <input style="display:none; visibility: none;" type="file"
+                                                           accept=".doc,.docx,image/*,.pdf,.xlsx,.xls,.ppt, .pptx,.txt,video/mp4,video/x-m4v,video/*"
+                                                           id="imageFile" onchange="SendImage(this);"  />
+                                                </div>
+                                                <div class="col-lg-10 wm-58 text-left">
+                                                    <textarea onkeyup="EnableDisable(this)"  id="msg" placeholder="Type your message here" class="form-control border-0"></textarea>
+                                                </div>
+                                                <div class="col-lg-1 wm-21 text-right pt-1">
+                                                    <button     onmousedown="recode(this)" onmouseup="stop(this)"  id="click_voice" type="button" class="btn btn-info btn-circle btn-lg"><i class="
+                                                        mdi mdi-microphone"></i> </button>
+
+                                                    <button disabled="disabled"      onclick="sent_msg()"  id="click" type="button" class="btn btn-info btn-circle btn-lg"><i class="fas fa-paper-plane"></i> </button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!-- .chat-right-panel -->
+                                </div>
+                                <!-- /.chat-row -->
+                            </div>
+                        </div>
+                    </div>
+                    <!-- ============================================================== -->
+                    <!-- End PAge Content -->
+                    <!-- ============================================================== -->
+                    <!-- ============================================================== -->
+                    <!-- Right sidebar -->
+                    <!-- ============================================================== -->
+                    <!-- .right-sidebar -->
+                    <!-- Right sidebar -->
+<!-- ============================================================== -->
+<!-- .right-sidebar -->
+<div class="right-sidebar">
+    <div class="slimscrollright">
+        <div class="rpanel-title"> Theme Panel <span><i class="ti-close right-side-toggle"></i></span> </div>
+        <div class="r-panel-body">
+            <ul id="themecolors" class="m-t-20">
+                <li><b>With Light sidebar</b></li>
+                <li><a href="javascript:void(0)" data-skin="skin-default" class="default-theme">1</a></li>
+                <li><a href="javascript:void(0)" data-skin="skin-green" class="green-theme">2</a></li>
+                <li><a href="javascript:void(0)" data-skin="skin-red" class="red-theme">3</a></li>
+                <li><a href="javascript:void(0)" data-skin="skin-blue" class="blue-theme">4</a></li>
+                <li><a href="javascript:void(0)" data-skin="skin-purple" class="purple-theme">5</a></li>
+                <li><a href="javascript:void(0)" data-skin="skin-megna" class="megna-theme">6</a></li>
+                <li class="d-block m-t-30"><b>With Dark sidebar</b></li>
+                <li><a href="javascript:void(0)" data-skin="skin-default-dark" class="default-dark-theme">7</a></li>
+                <li><a href="javascript:void(0)" data-skin="skin-green-dark" class="green-dark-theme">8</a></li>
+                <li><a href="javascript:void(0)" data-skin="skin-red-dark" class="red-dark-theme working">9</a></li>
+                <li><a href="javascript:void(0)" data-skin="skin-blue-dark" class="blue-dark-theme">10</a></li>
+                <li><a href="javascript:void(0)" data-skin="skin-purple-dark" class="purple-dark-theme">11</a></li>
+                <li><a href="javascript:void(0)" data-skin="skin-megna-dark" class="megna-dark-theme ">12</a></li>
+            </ul>
+            <!--
+<ul class="m-t-20 chatonline">
+<li><b>Chat option</b></li>
+<li>
+<a href="javascript:void(0)"><img src="./assets/images/users/1.jpg" alt="user-img" class="img-circle"> <span>Varun Dhavan <small class="text-success">online</small></span></a>
+</li>
+<li>
+<a href="javascript:void(0)"><img src="./assets/images/users/2.jpg" alt="user-img" class="img-circle"> <span>Genelia Deshmukh <small class="text-warning">Away</small></span></a>
+</li>
+<li>
+<a href="javascript:void(0)"><img src="./assets/images/users/3.jpg" alt="user-img" class="img-circle"> <span>Ritesh Deshmukh <small class="text-danger">Busy</small></span></a>
+</li>
+<li>
+<a href="javascript:void(0)"><img src="./assets/images/users/4.jpg" alt="user-img" class="img-circle"> <span>Arijit Sinh <small class="text-muted">Offline</small></span></a>
+</li>
+<li>
+<a href="javascript:void(0)"><img src="./assets/images/users/5.jpg" alt="user-img" class="img-circle"> <span>Govinda Star <small class="text-success">online</small></span></a>
+</li>
+<li>
+<a href="javascript:void(0)"><img src="./assets/images/users/6.jpg" alt="user-img" class="img-circle"> <span>John Abraham<small class="text-success">online</small></span></a>
+</li>
+<li>
+<a href="javascript:void(0)"><img src="./assets/images/users/7.jpg" alt="user-img" class="img-circle"> <span>Hritik Roshan<small class="text-success">online</small></span></a>
+</li>
+<li>
+<a href="javascript:void(0)"><img src="./assets/images/users/8.jpg" alt="user-img" class="img-circle"> <span>Pwandeep rajan <small class="text-success">online</small></span></a>
+</li>
+</ul>
+-->
+        </div>
+    </div>
+</div>
+<!-- ============================================================== -->
+<!-- End Right sidebar -->
+<!-- ============================================================== -->                    <!-- ============================================================== -->
+                    <!-- End Right sidebar -->
+                    <!-- ============================================================== -->
+                </div>
+                <!-- ============================================================== -->
+                <!-- End Container fluid  -->
+                <!-- ============================================================== -->
+            </div>
+            <!-- ============================================================== -->
+            <!-- End Page wrapper  -->
+            <!-- ============================================================== -->
+            <!-- ============================================================== -->
+            <!-- footer -->
+            <!-- ============================================================== -->
+            <footer class="footer mobile-align-center text-center mobile-container-pl-75">
+   Copyright &copy; <script>document.write(new Date().getFullYear())</script> - <a href="https://www.holidayfriend.solutions" class="text-success" target="_blank"> QualityFriend</a>, All rights reserved.
+</footer>            <!-- ============================================================== -->
+            <!-- End footer -->
+            <!-- ============================================================== -->
+        </div>
+        <!-- ============================================================== -->
+        <!-- End Wrapper -->
+        <!-- ============================================================== -->
+        <!-- ============================================================== -->
+        <!-- All Jquery -->
+        <!-- ============================================================== -->
+        <script src="./assets/node_modules/jquery/jquery-3.2.1.min.js"></script>
+        <!-- Bootstrap tether Core JavaScript -->
+        <script src="./assets/node_modules/popper/popper.min.js"></script>
+        <script src="./assets/node_modules/bootstrap/js/bootstrap.min.js"></script>
+        <!-- slimscrollbar scrollbar JavaScript -->
+        <script src="dist/js/perfect-scrollbar.jquery.min.js"></script>
+        <!--Wave Effects -->
+        <script src="dist/js/waves.js"></script>
+        <!--Menu sidebar -->
+        <script src="dist/js/sidebarmenu.js"></script>
+        <!--stickey kit -->
+        <script src="./assets/node_modules/sticky-kit-master/dist/sticky-kit.min.js"></script>
+        <script src="./assets/node_modules/sparkline/jquery.sparkline.min.js"></script>
+        <!--Custom JavaScript -->
+        <script src="dist/js/custom.min.js"></script>
+        <script src="dist/js/pages/chat.js"></script>
+
+
+
+
+
+        <script type="text/javascript">
+
+            var temp = [];
+            $("#load_message").scroll(function(){
+                temp = [];
+                if ($(this).scrollTop() == 0) {
+
+                    $($("#load_message li").get().reverse()).each(function() { 
+                        var iid=$(this).attr('id');
+                        temp.push(iid);
+                    });
+                    var lastItem = temp.pop();
+                    const myArray = lastItem.split("_");
+                    var last_msg_id = myArray[0];
+                    var sender_id = myArray[1];
+                    var for_what = myArray[2];
+
+                    $.ajax({    
+                        url:'utill_chat_reload.php',
+                        method:'POST',
+                        data:{sender_id:sender_id,last_msg_id:last_msg_id,for_what:for_what},
+                        success:function(response){
+                            console.log(response);
+                            if(response.trim() != ""){
+                                document.getElementById("loading1").style.visibility = "hidden";
+                                element.classList.remove("disabled");
+                                $( "#load_message" ).prepend(response);
+                                $('#load_message').scrollTop($('#load_message li:nth-child(15)').position().top);
+                            }else{
+                                document.getElementById("loading1").style.visibility = "hidden";
+                                element.classList.remove("disabled");
+                            }
+                        },
+                        error: function(xhr, status, error) {
+                            console.log(error);
+                            document.getElementById("loading1").style.visibility = "hidden";
+                            element.classList.remove("disabled");
+
+                        },
+                    });
+                }
+            });
+            var btnSubmit = document.getElementById("click");
+            function EnableDisable(message) {
+                //Verify the TextBox value.
+                if (message.value.trim() != "") {
+                    //Enable the TextBox when TextBox has value.
+                    btnSubmit.disabled = false;
+                    document.getElementById("click_voice").style.display="none";
+                    document.getElementById("click").style.display="inline-block";
+                } else {
+                    //Disable the TextBox when TextBox is empty.
+                    btnSubmit.disabled = true;
+                    document.getElementById("click_voice").style.display="inline-block";
+                    document.getElementById("click").style.display="none"
+                }
+            };
+
+
+            function reload_user(sender_id,for_what) {
+                $.ajax({    
+                    url:'utill_chat_user_reload.php',
+                    method:'POST',
+                    data:{sender_id:sender_id,for_what:for_what},
+                    success:function(response){
+                        console.log(response);
+                        document.getElementById("chat_users").innerHTML = response;
+
+                    },
+                    error: function(xhr, status, error) {
+                        console.log(error);
+
+
+                    },
+                });
+            }
+        </script>
+
+        <script>
+
+            var selected_user;
+            var for_what;
+            var slug=0;
+            var slug_for_what = 'user';
+            if(slug != 0){
+                selected_divs(slug,slug_for_what);
+            }
+            function selected_divs(sender_id,for_what_is){
+
+                document.getElementById("Ok").style.display="inline-block";
+                document.getElementById("banner").style.display="none";
+                document.getElementById("loading1").style.visibility = "visible";
+                var element = document.getElementById("Ok");
+                element.classList.add("disabled");
+                for_what = for_what_is;
+
+                var msgs ;
+
+                if(for_what == "user"){
+                    var id = 'div_'+sender_id;
+
+                    msg = 'msg_'+sender_id;
+                    selected_user = sender_id;
+                }else if(for_what == "team"){
+                    var id = 'div_t_'+sender_id;
+                    selected_user = sender_id;
+                    msg = 'msg_t_'+sender_id;
+                }
+                $(".divacb").removeClass("selected_user");
+                document.getElementById(id).classList.add('selected_user');
+                $.ajax({    
+                    url:'utill_chat_reload.php',
+                    method:'POST',
+                    data:{sender_id:sender_id,for_what:for_what},
+                    success:function(response){
+                        document.getElementById("loading1").style.visibility = "hidden";
+                        element.classList.remove("disabled");
+                        document.getElementById("load_message").innerHTML = response;
+                        $('#load_message').animate({scrollTop: $('#load_message').prop("scrollHeight")}, 500);
+
+
+
+                        document.getElementById(msg).style.display="none";
+                    },
+                    error: function(xhr, status, error) {
+                        console.log(error);
+                    },
+                });
+            }
+
+            function SendImage(event) {
+                document.getElementById("loading1").style.visibility = "visible";
+                var element = document.getElementById("Ok");
+                element.classList.add("disabled");
+                var file = event.files[0];
+                var type_sent ="docx";
+                if (file.type.match("image.*")) {
+                    type_sent = "image"
+                }
+                if (file.type.match(".docx") || file.type.match(".doc") ) {
+                    type_sent = "docx"
+                }
+
+                if (file.type.match(".xlsx") || file.type.match(".xls") || file.type.match("application/vnd.openxmlformats-officedocument.spreadsheetml.sheet") ) {
+                    type_sent = "xls"
+                }
+
+                if (file.type.match(".pdf")) {
+                    type_sent = "pdf"
+                }
+
+                if (file.type.match(".ppt") || file.type.match(".pptx") || (file.type.match("application/vnd.ms-powerpoint"))) {
+                    type_sent = "ppt"
+                }
+                if (file.type.match("video/mp4") || file.type.match("video/x-m4v") || file.type.match("video.*")) {
+                    type_sent = "video"
+                }  
+                if (file.type.match(".txt")  ||  file.type.match("text/plain") ) {
+                    type_sent = "txt"
+                }
+                var reader = new FileReader();
+                var fd = new FormData();
+                var files_doc = $('#imageFile')[0].files;
+                var doc_file =     files_doc[0];
+                reader.addEventListener("load", function () {
+                    result = reader.result;
+
+
+                    fd.append('message',result);
+                    fd.append('selected_user',selected_user);
+                    fd.append('type',type_sent);
+                    fd.append('for_what',for_what);
+                    fd.append('doc_file',doc_file);
+
+                    $.ajax({    
+                        url:'utill_sent_msg.php',
+                        type: 'post',
+                        data:fd,
+                        processData: false,
+                        contentType: false,
+                        success:function(response){
+                            console.log(response);
+                            if(response == "1"){
+                                $.ajax({    
+                                    url:'utill_chat_reload.php',
+                                    method:'POST',
+                                    data:{sender_id:selected_user,for_what:for_what},
+                                    success:function(response){
+                                        document.getElementById("loading1").style.visibility = "hidden";
+                                        element.classList.remove("disabled");
+                                        document.getElementById("load_message").innerHTML = response;
+                                        document.getElementById("msg").value = '';
+                                        $('#load_message').animate({scrollTop: $('#load_message').prop("scrollHeight")}, 500);
+                                        btnSubmit.disabled = true;
+                                        document.getElementById("click_voice").style.display="inline-block";
+                                        document.getElementById("click").style.display="none"
+                                    },
+                                    error: function(xhr, status, error) {
+                                        console.log(error);
+
+                                    },
+                                });
+
+
+                                reload_user(selected_user,for_what);
+
+                            }else{
+
+                            }
+                        },
+                        error: function(xhr, status, error) {
+                            console.log(error);
+
+                        },
+                    });
+                }, false);
+                if (file) {
+                    reader.readAsDataURL(file);
+                }
+
+            }
+            function sent_msg(){
+                var message=document.getElementById("msg").value;
+                document.getElementById("loading1").style.visibility = "visible";
+                var element = document.getElementById("Ok");
+                element.classList.add("disabled");
+                $.ajax({    
+                    url:'utill_sent_msg.php',
+                    method:'POST',
+                    data:{message:message,selected_user:selected_user,type:"message",for_what:for_what},
+                    success:function(response){
+                        console.log(response);
+                        if(response == "1"){
+                            $.ajax({    
+                                url:'utill_chat_reload.php',
+                                method:'POST',
+                                data:{sender_id:selected_user,for_what:for_what},
+                                success:function(response){
+                                    document.getElementById("loading1").style.visibility = "hidden";
+                                    element.classList.remove("disabled");
+                                    document.getElementById("load_message").innerHTML = response;
+                                    document.getElementById("msg").value = '';
+                                    $('#load_message').animate({scrollTop: $('#load_message').prop("scrollHeight")}, 500);
+                                    btnSubmit.disabled = true;
+                                    document.getElementById("click_voice").style.display="inline-block";
+                                    document.getElementById("click").style.display="none"
+                                },
+                                error: function(xhr, status, error) {
+                                    console.log(error);
+
+                                },
+                            });
+                            reload_user(selected_user,for_what);
+                        }else{
+
+                        }
+                    },
+                    error: function(xhr, status, error) {
+                        console.log(error);
+
+                    },
+                });
+            }
+            var timeout;
+            let chunks = [];
+            let recoder;
+            var blob ;
+            var m ;
+            var device; 
+            var elapsedTimeTimer;
+            var audioRecordStartTime = new Date();
+            elapsedTimeTimer = setInterval(() => {
+                //compute the elapsed time every second
+                //                let elapsedTime = computeElapsedTime(audioRecordStartTime); //pass the actual record start time
+                //                //display the elapsed time
+                //                console.log("caled");
+                //                console.log(elapsedTime);
+            }, 1000);
+            function computeElapsedTime(startTime) {
+                //record end time
+                let endTime = new Date();
+                //time difference in ms
+                let timeDiff = endTime - startTime;
+                //convert time difference from ms to seconds
+                timeDiff = timeDiff / 1000;
+                //extract integer seconds that dont form a minute using %
+                let seconds = Math.floor(timeDiff % 60); //ignoring uncomplete seconds (floor)
+                //pad seconds with a zero if neccessary
+                seconds = seconds < 10 ? "0" + seconds : seconds;
+
+                //convert time difference from seconds to minutes using %
+                timeDiff = Math.floor(timeDiff / 60);
+
+                //extract integer minutes that don't form an hour using %
+                let minutes = timeDiff % 60; //no need to floor possible incomplete minutes, becase they've been handled as seconds
+                minutes = minutes < 10 ? "0" + minutes : minutes;
+
+                //convert time difference from minutes to hours
+                timeDiff = Math.floor(timeDiff / 60);
+
+                //extract integer hours that don't form a day using %
+                let hours = timeDiff % 24; //no need to floor possible incomplete hours, becase they've been handled as seconds
+
+                //convert time difference from hours to days
+                timeDiff = Math.floor(timeDiff / 24);
+
+                // the rest of timeDiff is number of days
+                let days = timeDiff; //add days to hours
+
+                let totalHours = hours + (days * 24);
+                totalHours = totalHours < 10 ? "0" + totalHours : totalHours;
+
+                if (totalHours === "00") {
+                    return minutes + ":" + seconds;
+                } else {
+                    return totalHours + ":" + minutes + ":" + seconds;
+                }
+            }
+
+            function recode(control){
+                device = navigator.mediaDevices.getUserMedia({audio:true});
+                console.log("recode1");
+                device.then(stream =>{
+                    recoder = new  MediaRecorder(stream);
+                    recoder.ondataavailable = e => {
+                        chunks.push(e.data);
+                        if(recoder.state == 'inactive'){
+                            blob  = new Blob(chunks,{ 'type': 'audio/mp3;' });
+                            var reader = new FileReader();
+                            reader.addEventListener("load", function () {
+                                document.getElementById("loading1").style.visibility = "visible";
+                                var element = document.getElementById("Ok");
+                                element.classList.add("disabled");
+                                $.ajax({    
+                                    url:'utill_sent_msg.php',
+                                    method:'POST',
+                                    data:{message:reader.result,selected_user:selected_user,type:"audio",for_what:for_what},
+                                    success:function(response){
+                                        console.log(response);
+                                        if(response == "1"){
+                                            $.ajax({    
+                                                url:'utill_chat_reload.php',
+                                                method:'POST',
+                                                data:{sender_id:selected_user,for_what:for_what},
+                                                success:function(response){
+                                                    document.getElementById("loading1").style.visibility = "hidden";
+                                                    element.classList.remove("disabled");
+                                                    document.getElementById("load_message").innerHTML = response;
+                                                    document.getElementById("msg").value = '';
+                                                    $('#load_message').animate({scrollTop: $('#load_message').prop("scrollHeight")}, 500);
+                                                    btnSubmit.disabled = true;
+                                                    document.getElementById("click_voice").style.display="inline-block";
+                                                    document.getElementById("click").style.display="none"
+                                                },
+                                                error: function(xhr, status, error) {
+                                                    console.log(error);
+
+                                                },
+                                            });
+                                            reload_user(selected_user,for_what);
+                                        }else{
+
+                                        }
+                                    },
+                                    error: function(xhr, status, error) {
+                                        console.log(error);
+
+                                    },
+                                });
+
+                            }, false);
+                            reader.readAsDataURL(blob);
+                        }
+                    }
+                });
+
+                var element = document.getElementById("click_voice");
+                element.classList.remove("btn-info");
+                element.classList.add("btn-danger");
+                console.log("recode");
+                chunks = []
+                timeout = setInterval(()=> {
+                    recoder.start();
+                    console.log("dhdh");
+                },100);
+            }
+            function stop(control){
+                var element = document.getElementById("click_voice");
+                element.classList.add("btn-info");
+                element.classList.remove("btn-danger");
+                recoder.stop();
+                clearInterval(timeout);
+            }
+        </script>
+        <script>
+            function downloadPDF (pdf,type) {
+                const linkSource = pdf;
+                const downloadLink = document.createElement("a");
+                const fileName = "download."+type;
+                downloadLink.href = linkSource;
+                downloadLink.download = fileName;
+                downloadLink.click();
+            }
+        </script>
+
+        <script>
+            function search_c() {
+                var input, filter, ul, li, a, i, txtValue;
+                input = document.getElementById("search_contact");
+                filter = input.value.toUpperCase();
+                ul = document.getElementById("contact_list");
+                li = ul.getElementsByTagName("li");
+                for (i = 0; i < li.length; i++) {
+                    a = li[i].getElementsByTagName("a")[0];
+                    txtValue = a.textContent || a.innerText;
+                    if (txtValue.toUpperCase().indexOf(filter) > -1) {
+                        li[i].style.display = "";
+                    } else {
+                        li[i].style.display = "none";
+                    }
+                }
+            }
+        </script>
+
+    </body>
+
+</html>

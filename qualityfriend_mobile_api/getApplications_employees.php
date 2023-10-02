@@ -92,6 +92,9 @@ if(file_exists("util_config.php") && is_readable("util_config.php") && include("
                 $temp['resume_url'] = $row['resume_url'];
                 $temp['image_url'] = $row['image_url'];
 
+
+
+
                 //Hide one 
 
                 if ($application_id != 0 ){
@@ -179,6 +182,13 @@ if(file_exists("util_config.php") && is_readable("util_config.php") && include("
                 }
 
 
+
+
+
+
+
+
+
                 //Hide one 
                 if ($application_id != 0 ){
 
@@ -211,6 +221,33 @@ if(file_exists("util_config.php") && is_readable("util_config.php") && include("
                     }
 
                 }
+                $cam_id = 0;
+                $cam_id = $row['cam_id'];
+                if ($cam_id != 0 ){
+                    $sql12="SELECT * FROM `tbl_job_ad_campaign` WHERE `id` = $cam_id";
+                    $result12 = $conn->query($sql12);
+                    if ($result12 && $result12->num_rows > 0) {
+                        while($row12 = mysqli_fetch_array($result12)) {
+                            $temp['genreted_url'] = $row12['genreted_url'];
+                            $temp['name_is'] = $row12['name'];
+                            $temp['sorce'] = $row12['sorce'];
+                            $temp['team'] = $row12['team'];
+
+                        }
+                    }
+                }else {
+
+                    $temp['genreted_url'] = '';
+                    $temp['name_is'] = '';
+                    $temp['sorce'] = '';
+                    $temp['team'] = '';
+
+                }
+
+
+
+
+
                 array_push($data, $temp);
                 unset($temp);
                 $temp1['flag'] = 1;

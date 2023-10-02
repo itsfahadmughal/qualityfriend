@@ -2,7 +2,6 @@
 include 'util_config.php';
 include '../util_session.php';
 include('../smtp/PHPMailerAutoload.php');
-
 $mrtitle="";
 $first_name="";
 $last_name="";
@@ -30,7 +29,9 @@ $filepath="";
 $filenamecv="";
 $filepathcv="";
 $hotel_id = 0;
-
+$awnser_array = "";
+$question_array = "";
+$type_array = "";
 function sendFCM($registration_ids,$title,$msg) {
     // FCM API Url
     $url = 'https://fcm.googleapis.com/fcm/send';
@@ -85,16 +86,59 @@ function sendFCM($registration_ids,$title,$msg) {
     return $result;
 }
 
+function smtp_mailer($to,$subject, $msg){
+    $mail = new PHPMailer(); 
+    //$mail->SMTPDebug=3;
+    $mail->IsSMTP(); 
+    $mail->SMTPAuth = true; 
+    $mail->SMTPSecure = 'tls'; 
+    $mail->Host = "smtp.hostinger.com";
+    $mail->Port = 587; 
+    $mail->IsHTML(true);
+    $mail->CharSet = 'UTF-8';
+    $mail->Username = "noreply@qualityfriend.solutions";
+    $mail->Password = 'Pakistan@143';
+    $mail->SetFrom("noreply@qualityfriend.solutions");
+    $mail->Subject = $subject;
+    $mail->Body =$msg;
+    $mail->AddAddress($to);
+    $mail->SMTPOptions=array('ssl'=>array(
+        'verify_peer'=>false,
+        'verify_peer_name'=>false,
+        'allow_self_signed'=>false
+    ));
+    if(!$mail->Send()){
+        // echo $mail->ErrorInfo;
+    }else{
+        //    echo 'Sent';
+    }
+}
+
+
+
 
 
 $hotel_name = "";
 $mail_msg = "";
-
 $cam_id = 0;
+
+if(isset($_POST['awnser_array'])){
+    $awnser_array = $_POST['awnser_array'];
+}
+if(isset($_POST['question_array'])){
+    $question_array = $_POST['question_array'];
+}
+if(isset($_POST['type_array'])){
+    $type_array = $_POST['type_array'];
+}
+
+
+
+
+
 if(isset($_POST['cam_id'])){
     $cam_id=$_POST['cam_id'];
 }
-
 if(isset($_POST['hotel_name'])){
     $hotel_name=$_POST['hotel_name'];
 }
@@ -167,34 +211,6 @@ if(isset($_FILES['file']['name'])){
 $ext = pathinfo($filename, PATHINFO_EXTENSION);
 
 
-function smtp_mailer($to,$subject, $msg){
-    $mail = new PHPMailer(); 
-    //$mail->SMTPDebug=3;
-    $mail->IsSMTP(); 
-    $mail->SMTPAuth = true; 
-    $mail->SMTPSecure = 'tls'; 
-    $mail->Host = "smtp.hostinger.com";
-    $mail->Port = 587; 
-    $mail->IsHTML(true);
-    $mail->CharSet = 'UTF-8';
-    $mail->Username = "noreply@qualityfriend.solutions";
-    $mail->Password = 'Pakistan@143';
-    $mail->SetFrom("noreply@qualityfriend.solutions");
-    $mail->Subject = $subject;
-    $mail->Body =$msg;
-    $mail->AddAddress($to);
-    $mail->SMTPOptions=array('ssl'=>array(
-        'verify_peer'=>false,
-        'verify_peer_name'=>false,
-        'allow_self_signed'=>false
-    ));
-    if(!$mail->Send()){
-        // echo $mail->ErrorInfo;
-    }else{
-        //    echo 'Sent';
-    }
-}
-
 if($filename!=""){
     if($ext == "jpeg" || $ext == "jpg"){ 
         $original_image = imagecreatefromjpeg($filepath);
@@ -250,16 +266,17 @@ $last_editby_id=$user_id;
 $last_editby_ip=getIPAddress();
 $last_edit_time=date("Y-m-d H:i:s");
 
+
 $Step_1 = "";
 $Step_3 = "";
-$sql="INSERT INTO `tbl_applicants_employee`( `hotel_id`,`crjb_id`, `title`, `name`, `surname`, `email`, `phone`, `resume_url`, `image_url`, `message`, `depart_id_app`, `depart_id_emp`, `dob`, `dob_place`, `tax_number`, `application_time`, `start_working_time`, `end_working_time`, `status_id`, `is_active_user`, `is_delete`, `tags`, `comments`, `step_1`, `step_3`,`cam_id`, `entrytime`, `entrybyid`, `entrybyip`, `edittime`, `editbyid`, `editbyip`) VALUES ('$hotel_id','$job_id','$mrtitle','$first_name','$last_name','$email','$phone','$cv_url','$img_url','$message','$department_id','$department_id','$dob','$dob_place','$tax_number','$application_time','$start_working_time','$end_working_time','$status_id','$is_active_user','$is_delete','$tags','$comments','$Step_1','$Step_3','$cam_id','$entry_time','$entryby_id','$entryby_ip','$last_edit_time','$last_editby_id','$last_editby_ip')";
 
-
+$sql="INSERT INTO `tbl_applicants_employee`( `hotel_id`,`crjb_id`, `title`, `name`, `surname`, `email`, `phone`, `resume_url`, `image_url`, `message`, `depart_id_app`, `depart_id_emp`, `dob`, `dob_place`, `tax_number`, `application_time`, `start_working_time`, `end_working_time`, `status_id`, `is_active_user`, `is_delete`, `tags`, `comments`, `step_1`, `step_3`,`cam_id`, `awnser_array`, `question_array`, `type_array`, `entrytime`, `entrybyid`, `entrybyip`, `edittime`, `editbyid`, `editbyip`) VALUES ('$hotel_id','$job_id','$mrtitle','$first_name','$last_name','$email','$phone','$cv_url','$img_url','$message','$department_id','$department_id','$dob','$dob_place','$tax_number','$application_time','$start_working_time','$end_working_time','$status_id','$is_active_user','$is_delete','$tags','$comments','$Step_1','$Step_3','$cam_id','$awnser_array','$question_array','$type_array',
+'$entry_time','$entryby_id','$entryby_ip','$last_edit_time','$last_editby_id','$last_editby_ip')";
 $result = $conn->query($sql);
 if($result){
-
-
     $last_id = $conn->insert_id;
+
+
 
 
     $title ="";
@@ -277,16 +294,20 @@ if($result){
 
     }
 
+
+
     //    mail start
 
-    //    $to      = $email;
-    //    $subject = 'Thanks for apply in '.$hotel_name;
-    //    $message = $mail_msg;
-    //    $headers = 'From: noReply@qualityfriend.solutions'       . "\r\n" .
-    //        'Reply-To: noReply@qualityfriend.solutions' . "\r\n";
-    //    smtp_mailer($to,$subject, $message);
+    $to      = $email;
+    $subject = 'Thanks for apply in '.$hotel_name;
+    $message = $mail_msg;
+    $headers = 'From: noReply@qualityfriend.solutions'       . "\r\n" .
+        'Reply-To: noReply@qualityfriend.solutions' . "\r\n";
+    smtp_mailer($to,$subject, $message);
 
     //    mail end
+
+
 
     //getUserToken
     $user_token  = "";
@@ -311,10 +332,7 @@ if($result){
 
 
 
-
-    //    $sql_log="INSERT INTO `tbl_log`(`user_id`, `log_text`, `hotel_id`, `entrytime`) VALUES ('$user_id','$first_name Applicant Created','$hotel_id','$entry_time')";
-    //    $result_log = $conn->query($sql_log);
-    echo 'CREATE';
+    echo "CREATE";
 }else{
     echo "Error";
 }

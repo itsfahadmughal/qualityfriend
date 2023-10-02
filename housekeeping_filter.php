@@ -413,7 +413,7 @@ $room_id_checklist_array =  array();
                 <div class="col-md-12 wm-50 pt-1" >
                     <h6 class="room_text_center room_box_fix room_box_ststus_font pt-1"><?php echo $breakfast; ?></h6>
                 </div>
-                <div class="col-md-12  wm-50" >
+                <div class="col-md-12 wm-50 " >
                     <h6 class="room_text_center room_box_fix room_box_ststus_font pt-1"><?php echo $urgent; ?></h6>
                 </div>
                 <div class="col-md-5 wm-50 room_box_fix3  room_text_left" >

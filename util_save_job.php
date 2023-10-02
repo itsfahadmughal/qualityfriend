@@ -28,6 +28,7 @@ $filename1 = "";
 $filepath1="";
 $is_active="";
 $auto_msg = "";
+$jobs_funnel = 0;
 
 
 
@@ -35,7 +36,9 @@ if(isset($_POST['auto_msg'])){
     $auto_msg=trim(str_replace("'","`",$_POST['auto_msg']));
 }
 
-
+if(isset($_POST['jobs_funnel'])){
+    $jobs_funnel=$_POST['jobs_funnel'];
+}
 if(isset($_POST['is_active'])){
     $is_active=$_POST['is_active'];
 }
@@ -197,37 +200,32 @@ $entry_time=date("Y-m-d H:i:s");;
 $last_editby_id=$user_id;
 $last_editby_ip=getIPAddress();
 $last_edit_time=date("Y-m-d H:i:s");
-
 if($language=='english'){
-    $sql="INSERT INTO `tbl_create_job`(`title`, `title_it`, `title_de`, `description`, `description_it`, `description_de`, `location`, `location_it`, `location_de`, `job_image`,`logo_image`, `generated_link`,`creation_date`, `depart_id`, `hotel_id`, `is_cv_required`,`is_funnel`,`step_1_q`, `step_2_q`, `saved_status`, `is_active`, `whatsapp`, `whatsapp_isactive`,`auto_msg`, `entrytime`, `entrybyid`, `entrybyip`, `edittime`, `editbyid`, `editbyip`) VALUES ('$title','','','$description','','','$location','','','$img_url','$img_url1','$generated_link','$creation_date','$department','$hotel_id',$cv_required,'$is_funnel','$question_1','$question_2','$saved_status',1,'$wp_num','$whatsapp_required','$auto_msg','$entry_time','$entryby_id','$entryby_ip','$last_edit_time','$last_editby_id','$last_editby_ip')";
+    $sql="INSERT INTO `tbl_create_job`(`title`, `title_it`, `title_de`, `description`, `description_it`, `description_de`, `location`, `location_it`, `location_de`, `job_image`,`logo_image`, `generated_link`,`creation_date`, `depart_id`, `hotel_id`, `is_cv_required`,`is_funnel`,`step_1_q`, `step_2_q`, `saved_status`, `is_active`, `whatsapp`, `whatsapp_isactive`,`auto_msg`,`job_funnel`, `entrytime`, `entrybyid`, `entrybyip`, `edittime`, `editbyid`, `editbyip`) VALUES ('$title','','','$description','','','$location','','','$img_url','$img_url1','$generated_link','$creation_date','$department','$hotel_id',$cv_required,'$is_funnel','$question_1','$question_2','$saved_status',1,'$wp_num','$whatsapp_required','$auto_msg','$jobs_funnel','$entry_time','$entryby_id','$entryby_ip','$last_edit_time','$last_editby_id','$last_editby_ip')";
 }elseif($language=='italian'){
     $generated_link="it/preview_job.php?lang=".$language."&slug=".time().rand();
 
-    $sql="INSERT INTO `tbl_create_job`(`title`, `title_it`, `title_de`, `description`, `description_it`, `description_de`, `location`, `location_it`, `location_de`, `job_image`,`logo_image`, `generated_link`, `creation_date`, `depart_id`, `hotel_id`, `is_cv_required`,`is_funnel`,`step_1_q`, `step_2_q`, `saved_status`, `is_active`, `whatsapp`, `whatsapp_isactive`,`auto_msg`, `entrytime`, `entrybyid`, `entrybyip`, `edittime`, `editbyid`, `editbyip`) VALUES ('','$title','','','$description','','','$location','','$img_url','$img_url1','$generated_link','$creation_date','$department','$hotel_id',$cv_required,'$is_funnel','$question_1','$question_2','$saved_status',1,'$wp_num','$whatsapp_required','$auto_msg','$entry_time','$entryby_id','$entryby_ip','$last_edit_time','$last_editby_id','$last_editby_ip')";
+    $sql="INSERT INTO `tbl_create_job`(`title`, `title_it`, `title_de`, `description`, `description_it`, `description_de`, `location`, `location_it`, `location_de`, `job_image`,`logo_image`, `generated_link`, `creation_date`, `depart_id`, `hotel_id`, `is_cv_required`,`is_funnel`,`step_1_q`, `step_2_q`, `saved_status`, `is_active`, `whatsapp`, `whatsapp_isactive`,`auto_msg`,`job_funnel`, `entrytime`, `entrybyid`, `entrybyip`, `edittime`, `editbyid`, `editbyip`) VALUES ('','$title','','','$description','','','$location','','$img_url','$img_url1','$generated_link','$creation_date','$department','$hotel_id',$cv_required,'$is_funnel','$question_1','$question_2','$saved_status',1,'$wp_num','$whatsapp_required','$auto_msg','$jobs_funnel','$entry_time','$entryby_id','$entryby_ip','$last_edit_time','$last_editby_id','$last_editby_ip')";
 }elseif($language=='german'){
     $generated_link="de/preview_job.php?lang=".$language."&slug=".time().rand();
 
-    $sql="INSERT INTO `tbl_create_job`(`title`, `title_it`, `title_de`, `description`, `description_it`, `description_de`, `location`, `location_it`, `location_de`, `job_image`,`logo_image`, `generated_link`, `creation_date`, `depart_id`, `hotel_id`, `is_cv_required`,`is_funnel`,`step_1_q`, `step_2_q`, `saved_status`, `is_active`, `whatsapp`, `whatsapp_isactive`,`auto_msg`, `entrytime`, `entrybyid`, `entrybyip`, `edittime`, `editbyid`, `editbyip`) VALUES ('','','$title','','','$description','','','$location','$img_url','$img_url1','$generated_link','$creation_date','$department','$hotel_id',$cv_required,'$is_funnel','$question_1','$question_2','$saved_status',1,'$wp_num','$whatsapp_required','$auto_msg','$entry_time','$entryby_id','$entryby_ip','$last_edit_time','$last_editby_id','$last_editby_ip')";
+    $sql="INSERT INTO `tbl_create_job`(`title`, `title_it`, `title_de`, `description`, `description_it`, `description_de`, `location`, `location_it`, `location_de`, `job_image`,`logo_image`, `generated_link`, `creation_date`, `depart_id`, `hotel_id`, `is_cv_required`,`is_funnel`,`step_1_q`, `step_2_q`, `saved_status`, `is_active`, `whatsapp`, `whatsapp_isactive`,`auto_msg`,`job_funnel`, `entrytime`, `entrybyid`, `entrybyip`, `edittime`, `editbyid`, `editbyip`) VALUES ('','','$title','','','$description','','','$location','$img_url','$img_url1','$generated_link','$creation_date','$department','$hotel_id',$cv_required,'$is_funnel','$question_1','$question_2','$saved_status',1,'$wp_num','$whatsapp_required','$auto_msg','$jobs_funnel','$entry_time','$entryby_id','$entryby_ip','$last_edit_time','$last_editby_id','$last_editby_ip')";
 }else{
     if($img_url=="" &&  $img_url1 == "" ){
-        $sql="UPDATE `tbl_create_job` SET `title`='$title',`title_it`='$title_it',`title_de`='$title_de',`description`='$description',`description_it`='$description_it',`description_de`='$description_de',`location`='$location',`location_it`='$location_it',`location_de`='$location_de',`creation_date`='$creation_date',`depart_id`='$department',`is_cv_required`='$cv_required',`is_funnel`='$is_funnel',`step_1_q`='$question_1',`step_2_q`='$question_2',`saved_status`='$saved_status',`whatsapp`='$wp_num',`whatsapp_isactive`='$whatsapp_required',`auto_msg`='$auto_msg',`edittime`='$last_edit_time',`editbyid`='$last_editby_id',`editbyip`='$last_editby_ip' WHERE crjb_id = $crjb_id";
+        $sql="UPDATE `tbl_create_job` SET `title`='$title',`title_it`='$title_it',`title_de`='$title_de',`description`='$description',`description_it`='$description_it',`description_de`='$description_de',`location`='$location',`location_it`='$location_it',`location_de`='$location_de',`creation_date`='$creation_date',`depart_id`='$department',`is_cv_required`='$cv_required',`is_funnel`='$is_funnel',`step_1_q`='$question_1',`step_2_q`='$question_2',`saved_status`='$saved_status',`whatsapp`='$wp_num',`whatsapp_isactive`='$whatsapp_required',`auto_msg`='$auto_msg',`job_funnel`='$jobs_funnel',`edittime`='$last_edit_time',`editbyid`='$last_editby_id',`editbyip`='$last_editby_ip' WHERE crjb_id = $crjb_id";
     }else if ($img_url !="" &&  $img_url1 == "" ){
-        $sql="UPDATE `tbl_create_job` SET `title`='$title',`title_it`='$title_it',`title_de`='$title_de',`description`='$description',`description_it`='$description_it',`description_de`='$description_de',`location`='$location',`location_it`='$location_it',`location_de`='$location_de',`job_image`='$img_url',`creation_date`='$creation_date',`depart_id`='$department',`is_cv_required`='$cv_required',`is_funnel`='$is_funnel',`step_1_q`='$question_1',`step_2_q`='$question_2',`saved_status`='$saved_status',`whatsapp`='$wp_num',`whatsapp_isactive`='$whatsapp_required',`auto_msg`='$auto_msg',`edittime`='$last_edit_time',`editbyid`='$last_editby_id',`editbyip`='$last_editby_ip' WHERE crjb_id = $crjb_id";
+        $sql="UPDATE `tbl_create_job` SET `title`='$title',`title_it`='$title_it',`title_de`='$title_de',`description`='$description',`description_it`='$description_it',`description_de`='$description_de',`location`='$location',`location_it`='$location_it',`location_de`='$location_de',`job_image`='$img_url',`creation_date`='$creation_date',`depart_id`='$department',`is_cv_required`='$cv_required',`is_funnel`='$is_funnel',`step_1_q`='$question_1',`step_2_q`='$question_2',`saved_status`='$saved_status',`whatsapp`='$wp_num',`whatsapp_isactive`='$whatsapp_required',`auto_msg`='$auto_msg',`job_funnel`='$jobs_funnel',`edittime`='$last_edit_time',`editbyid`='$last_editby_id',`editbyip`='$last_editby_ip' WHERE crjb_id = $crjb_id";
     }else if ($img_url =="" &&  $img_url1 != "" ){
-        $sql="UPDATE `tbl_create_job` SET `title`='$title',`title_it`='$title_it',`title_de`='$title_de',`description`='$description',`description_it`='$description_it',`description_de`='$description_de',`location`='$location',`location_it`='$location_it',`location_de`='$location_de',`logo_image`='$img_url1',`creation_date`='$creation_date',`depart_id`='$department',`is_cv_required`='$cv_required',`is_funnel`='$is_funnel',`step_1_q`='$question_1',`step_2_q`='$question_2',`saved_status`='$saved_status',`whatsapp`='$wp_num',`whatsapp_isactive`='$whatsapp_required',`auto_msg`='$auto_msg',`edittime`='$last_edit_time',`editbyid`='$last_editby_id',`editbyip`='$last_editby_ip' WHERE crjb_id = $crjb_id";
+        $sql="UPDATE `tbl_create_job` SET `title`='$title',`title_it`='$title_it',`title_de`='$title_de',`description`='$description',`description_it`='$description_it',`description_de`='$description_de',`location`='$location',`location_it`='$location_it',`location_de`='$location_de',`logo_image`='$img_url1',`creation_date`='$creation_date',`depart_id`='$department',`is_cv_required`='$cv_required',`is_funnel`='$is_funnel',`step_1_q`='$question_1',`step_2_q`='$question_2',`saved_status`='$saved_status',`whatsapp`='$wp_num',`whatsapp_isactive`='$whatsapp_required',`auto_msg`='$auto_msg',`job_funnel`='$jobs_funnel',`edittime`='$last_edit_time',`editbyid`='$last_editby_id',`editbyip`='$last_editby_ip' WHERE crjb_id = $crjb_id";
     }else {
-        $sql="UPDATE `tbl_create_job` SET `title`='$title',`title_it`='$title_it',`title_de`='$title_de',`description`='$description',`description_it`='$description_it',`description_de`='$description_de',`location`='$location',`location_it`='$location_it',`location_de`='$location_de',`job_image`='$img_url',`logo_image`='$img_url1',`creation_date`='$creation_date',`depart_id`='$department',`is_cv_required`='$cv_required',`is_funnel`='$is_funnel',`step_1_q`='$question_1',`step_2_q`='$question_2',`saved_status`='$saved_status',`whatsapp`='$wp_num',`whatsapp_isactive`='$whatsapp_required',`auto_msg`='$auto_msg',`edittime`='$last_edit_time',`editbyid`='$last_editby_id',`editbyip`='$last_editby_ip' WHERE crjb_id = $crjb_id";
+        $sql="UPDATE `tbl_create_job` SET `title`='$title',`title_it`='$title_it',`title_de`='$title_de',`description`='$description',`description_it`='$description_it',`description_de`='$description_de',`location`='$location',`location_it`='$location_it',`location_de`='$location_de',`job_image`='$img_url',`logo_image`='$img_url1',`creation_date`='$creation_date',`depart_id`='$department',`is_cv_required`='$cv_required',`is_funnel`='$is_funnel',`step_1_q`='$question_1',`step_2_q`='$question_2',`saved_status`='$saved_status',`whatsapp`='$wp_num',`whatsapp_isactive`='$whatsapp_required',`auto_msg`='$auto_msg',`job_funnel`='$jobs_funnel',`edittime`='$last_edit_time',`editbyid`='$last_editby_id',`editbyip`='$last_editby_ip' WHERE crjb_id = $crjb_id";
     }
 }
 
 $result = $conn->query($sql);
-
 if($result){
     if($language == "english" || $language == "italian" || $language == "german"){
         $job_id = $conn->insert_id;
-
-
-
     }else {
         $job_id = $crjb_id;
         $sql_d = "DELETE FROM `tbl_job_benefits` WHERE `job_id` = $job_id";

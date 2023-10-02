@@ -132,7 +132,7 @@ if(file_exists("util_config.php") && is_readable("util_config.php") && include("
     $hotel_id = "";
     $name_employee="";
     $entry_time = date("Y-m-d H:i:s");
-    $sql_dob="SELECT * FROM `tbl_applicants_employee` WHERE `dob` like '%$date' OR `dob` like '%$date_current'";
+    $sql_dob="SELECT * FROM `tbl_applicants_employee` WHERE `dob` like '%$date' OR `dob` like '%$date_current' and is_delete = 0";
     $result_dob = $conn->query($sql_dob);
     if ($result_dob && $result_dob->num_rows > 0) {
         while($row_dob = mysqli_fetch_array($result_dob)) {
@@ -153,7 +153,7 @@ if(file_exists("util_config.php") && is_readable("util_config.php") && include("
 
 if($name_employee != $row_dob['name'] || $n == 0){
 
-            $sql_user_token="SELECT a.* FROM `tbl_user` as a INNER JOIN tbl_rules as b on a.usert_id = b.usert_id Where a.hotel_id = $hotel_id AND b.rule_11 = 1";
+            $sql_user_token="SELECT a.* FROM `tbl_user` as a INNER JOIN tbl_rules as b on a.usert_id = b.usert_id Where a.hotel_id = $hotel_id a.is_delete = 0 AND b.rule_11 = 1";
             $result_user_token = $conn->query($sql_user_token);
             if ($result_user_token && $result_user_token->num_rows > 0) {
                 while($row_user_token = mysqli_fetch_array($result_user_token)) {

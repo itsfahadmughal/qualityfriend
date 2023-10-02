@@ -292,7 +292,7 @@ $lenth_todo_notification_dashboard = sizeof($todo_notification_id_dashboard);
 
                         <?php
 
-                        $sql="SELECT * FROM `tbl_alert` WHERE `is_delete` = 0 AND `hotel_id` = $hotel_id AND user_id = $user_id  ORDER BY `tbl_alert`.`priority` DESC,`tbl_alert`.`alert_id` DESC";
+                        $sql="SELECT * FROM `tbl_alert` WHERE `is_delete` = 0 AND `hotel_id` = $hotel_id AND user_id = $user_id  ORDER BY `tbl_alert`.`priority` DESC,`tbl_alert`.`entrytime` DESC";
 
                         $result = $conn->query($sql);
                         if ($result && $result->num_rows > 0) {

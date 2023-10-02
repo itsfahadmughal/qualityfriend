@@ -28,12 +28,13 @@ $location_de="";
 $is_active="";
 
 $auto_msg = "";
-
+$job_funnel = 0;
 $sql="SELECT * FROM `tbl_create_job` where crjb_id = $crjb_id";
 $result = $conn->query($sql);
 if ($result && $result->num_rows > 0) {
     $i=1;
     while($row = mysqli_fetch_array($result)) {
+        $job_funnel = $row['job_funnel'];
         $title=$row['title'];
         $title_it=$row['title_it'];
         $title_de=$row['title_de'];
@@ -434,9 +435,9 @@ if ($result1 && $result1->num_rows > 0) {
                                                     <input id="location_id" type="text" value="<?php echo $location; ?>" class="form-control" placeholder="Location">
 
                                                     <h4 class="font-weight-title ">Auto message to applicant</h4>
-                                                    
-                                                    
-                                                      <div class="card">
+
+
+                                                    <div class="card">
                                                         <div class="card-body p-0">
                                                             <div id="message" class="summernote">
                                                                 <?php echo $auto_msg; ?>
@@ -477,6 +478,27 @@ if ($result1 && $result1->num_rows > 0) {
                                                     </div>
 
 
+
+                                                    <select id="jobs_funnel" class="select2 form-control custom-select">
+                                                        <option value="0">Select Any Funnel</option>
+                                                        <?php 
+                                                        $sql="SELECT * FROM `tbl_funnel_info` WHERE `hotel_id` = $hotel_id";
+                                                        $result = $conn->query($sql);
+                                                        if ($result && $result->num_rows > 0) {
+                                                            while($row = mysqli_fetch_array($result)) {
+                                                                if($row[0]==$job_funnel){
+                                                        ?>
+                                                        <option value='<?php echo $row[0]; ?>' selected><?php echo $row['name']; ?></option>
+                                                        <?php
+                                                                }else{
+                                                        ?>
+                                                        <option value='<?php echo $row[0]; ?>'><?php echo $row['name']; ?></option>
+                                                        <?php
+                                                                }
+                                                            }
+                                                        }
+                                                        ?>
+                                                    </select>
 
 
 
@@ -814,7 +836,7 @@ if ($result1 && $result1->num_rows > 0) {
                 let location_de_=document.getElementById("location_de_id").value;
                 let cv_required_=document.getElementById("cv_required_id").checked;
                 let is_funnel=document.getElementById("is_funnel").checked;
-
+                let jobs_funnel = document.getElementById("jobs_funnel").value;
                 let message=  $('#message').summernote('code');
 
 
@@ -859,7 +881,7 @@ if ($result1 && $result1->num_rows > 0) {
                         fd.append('auto_msg',message);
 
                         fd.append('userbenifits_array',userbenifits_array);
-
+                        fd.append('jobs_funnel',jobs_funnel);
                         $.ajax({
                             url:'util_save_job.php',
                             type: 'post',

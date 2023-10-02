@@ -14,9 +14,9 @@ if(file_exists("util_config.php") && is_readable("util_config.php") && include("
     }
 
     $check_apk = "api";
-    //auto call
-    include '../housekeeping_utills/util_auto_run.php';
-    include '../housekeeping_utills/read_xml.php';
+//    //auto call
+//    include '../housekeeping_utills/util_auto_run.php';
+//    include '../housekeeping_utills/read_xml.php';
 
 
     if(isset($_POST["user_id"])){
