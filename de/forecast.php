@@ -3745,7 +3745,7 @@ $months_name_array = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct
 
                                                 <div class="col-lg-12">
                                                     <div class="table-responsive goods_table_responsive">
-                                                        <table class="pb-3 table table table-bordered table-hover table-striped">
+                                                        <table class="pb-3 table table table-bordered table-hover">
                                                             <thead>
                                                                 <tr class="text-bold">
                                                                     <th class="text-bold text-success">Name des Anbieters</th>
@@ -3753,29 +3753,99 @@ $months_name_array = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct
                                                                     <th class="text-bold text-success">Datum</th>
                                                                 </tr>
                                                             </thead>
-                                                            <tbody>
+                                                            
+                                                                <tbody>
 
                                                                 <?php
                                                     $total_goods_cost=0;
+                                                    $mn=0;
+                                                    $month=null;
+                                                    $year_goods=null;
+                                                    $cost_per_month=0;
                                                     while ($row = mysqli_fetch_array($result_goods_data)) {
+                                                        $year_goods=date('Y', strtotime($row['date']));
+
+                                                        $sql_inner_1="SELECT SUM(CASE WHEN MONTH(`arrival`) != MONTH(`departure`) THEN ((adults+infants+children) * (DATEDIFF( LAST_DAY(`arrival`), `arrival`) + 1)) ELSE (adults+infants+children) * (DATEDIFF(`departure`, `arrival`) + 1) END) as stay_off, SUM(CASE WHEN MONTH(`arrival`) != MONTH(`departure`) THEN (`accommodation_sale` / (DATEDIFF(`departure`, `arrival`) + 1)) * (DATEDIFF( LAST_DAY(`arrival`), `arrival`) + 1) + (`additionalServices_sale` / (DATEDIFF(`departure`, `arrival`) + 1)) * (DATEDIFF( LAST_DAY(`arrival`), `arrival`) + 1) ELSE `accommodation_sale`+`additionalServices_sale` END) as acc_sale FROM `tbl_forecast_reservations_rooms` WHERE hotel_id = $hotel_id AND MONTH(`arrival`) = $month AND YEAR(`arrival`) = $year_goods AND `status` IN ('reserved','roomFixed','departed','occupied')";
+                                                        $result_inner_1 = $conn->query($sql_inner_1);
+
+                                                        $sql_inner_11="SELECT SUM(CASE WHEN MONTH(`arrival`) != MONTH(`departure`) THEN ((adults+infants+children) * (DATEDIFF( `departure`,DATE_SUB(`departure`,INTERVAL DAYOFMONTH(`departure`)-1 DAY)) + 1)) ELSE 0 END) as stay_off , SUM(CASE WHEN MONTH(`arrival`) != MONTH(`departure`) THEN (`accommodation_sale` / (DATEDIFF(`departure`, `arrival`) + 1)) * (DATEDIFF( `departure`,DATE_SUB(`departure`,INTERVAL DAYOFMONTH(`departure`)-1 DAY)) + 1) + (`additionalServices_sale` / (DATEDIFF(`departure`, `arrival`) + 1)) * (DATEDIFF( `departure`,DATE_SUB(`departure`,INTERVAL DAYOFMONTH(`departure`)-1 DAY)) + 1) ELSE 0 END) as acc_sale FROM `tbl_forecast_reservations_rooms` WHERE hotel_id = $hotel_id AND MONTH(`departure`) = $month AND YEAR(`departure`) = $year_goods AND `status` IN ('reserved','roomFixed','departed','occupied')";
+                                                        $result_inner_11 = $conn->query($sql_inner_11);
+
+                                                        $stay_off_goods=0;
+                                                        $stay_off1_goods=0;
+                                                        $total_stay_goods=0;
+                                                        if ($result_inner_11 && $result_inner_11->num_rows > 0) {
+                                                            while ($row_inner_11 = mysqli_fetch_array($result_inner_11)) {
+                                                                $stay_off1_goods = $row_inner_11['stay_off'];
+                                                            }
+                                                        }else{
+                                                            $stay_off1_goods = 0;
+                                                        }
+
+                                                        if ($result_inner_1 && $result_inner_1->num_rows > 0) {
+                                                            while ($row_inner_1 = mysqli_fetch_array($result_inner_1)) {
+                                                                $stay_off_goods = $row_inner_1['stay_off'];
+                                                            }
+                                                        }else{
+                                                            $stay_off_goods = 0;
+                                                        }
+                                                        $total_stay_goods = $stay_off_goods+$stay_off1_goods;
+
+                                                        if($mn == 0){
+                                                            $month=date('m', strtotime($row['date']));
+                                                        }
+                                                        if($month == date('m', strtotime($row['date']))){
+                                                            $cost_per_month += $row['cost'];
                                                                 ?>
                                                                 <tr class="">
                                                                     <td><?php echo $row['supplier_name']; ?></td>
                                                                     <td><?php echo number_format($row['cost'], 1, ',', '.'); 
-                                                        $total_goods_cost += $row['cost'];
+                                                            $total_goods_cost += $row['cost'];
                                                                         ?></td>
                                                                     <td class=""><?php echo date('M, Y', strtotime($row['date'])); ?></td>
                                                                 </tr>
-                                                                <?php } ?>
-
+                                                                <?php }else{
+                                                            $cost_per_month += $row['cost'];
+                                                                ?>
+                                                                <tr class="forecast_light_gray_color">
+                                                                    <td>Gesamt WES pro. person/Monat</td>
+                                                                    <td><?php if($total_stay_goods !=0 ){echo number_format($cost_per_month/$total_stay_goods, 1, ',', '.');
+                                                                                                        }else{
+                                                                    echo number_format($cost_per_month, 1, ',', '.');
+                                                                }
+                                                                        ?></td>
+                                                                    <td class=""><?php echo date('F', mktime(0, 0, 0, $month, 10)); ?></td>
+                                                                </tr>
+                                                                <tr class="">
+                                                                    <td><?php echo $row['supplier_name']; ?></td>
+                                                                    <td><?php echo number_format($row['cost'], 1, ',', '.'); 
+                                                            $total_goods_cost += $row['cost'];
+                                                                        ?></td>
+                                                                    <td class=""><?php echo date('M, Y', strtotime($row['date'])); ?></td>
+                                                                </tr>
+                                                                <?php
+                                                            $month=date('m', strtotime($row['date']));
+                                                            $cost_per_month = 0;
+                                                        } 
+                                                        $mn++; }
+                                                                ?>
+                                                                
+                                                                <tr class="forecast_light_gray_color">
+                                                                    <td>Gesamt WES pro. person/Monat</td>
+                                                                    <td><?php if($total_stay_goods !=0 ){echo number_format($cost_per_month/$total_stay_goods, 1, ',', '.');
+                                                                                                        }else{
+                                                                    echo number_format($cost_per_month, 1, ',', '.');
+                                                                }
+                                                                        ?></td>
+                                                                    <td class=""><?php echo date('F', mktime(0, 0, 0, $month, 10)); ?></td>
+                                                                </tr>
                                                                 <tr class="forecast_gray_color">
-                                                                    <td class="text-bold"><?php echo 'Gesamt '; ?></td>
+                                                                    <td class="text-bold"><?php echo 'Gesamt'; ?></td>
                                                                     <td class="text-bold"><?php echo $total_goods_cost; ?></td>
                                                                     <td class="text-bold"><?php echo $year_; ?></td>
                                                                 </tr>
-
                                                                 <tr class="forecast_main_color">
-                                                                    <td class="text-bold"><?php echo 'Gesamt WES pro. Nacht'; ?></td>
+                                                                    <td class="text-bold"><?php echo 'Gesamt WES pro. person/Jahr'; ?></td>
                                                                     <td class="text-bold"><?php if(isset($total_stay_arr) && array_sum($total_stay_arr) != 0){ echo round($total_goods_cost/array_sum($total_stay_arr),2); }else{ echo $total_goods_cost; } ?></td>
                                                                     <td class="text-bold"><?php echo $year_; ?></td>
                                                                 </tr>

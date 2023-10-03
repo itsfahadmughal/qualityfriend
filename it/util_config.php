@@ -1,16 +1,16 @@
 <?php
 
-define('DB_SERVER', 'localhost');
-define('DB_USERNAME', 'u284404027_qualityfriendU');
-define('DB_PASSWORD', ':8VkqX/liH');
-define('DB_NAME', 'u284404027_qualityfriend');
-$baseurl="https://qualityfriend.solutions/";
+//define('DB_SERVER', 'localhost');
+//define('DB_USERNAME', 'u284404027_qualityfriendU');
+//define('DB_PASSWORD', ':8VkqX/liH');
+//define('DB_NAME', 'u284404027_qualityfriend');
+//$baseurl="https://qualityfriend.solutions/";
 
-  define('DB_SERVER', 'localhost');
-  define('DB_USERNAME', 'root');
-  define('DB_PASSWORD', '');
-  define('DB_NAME', 'qualityfriend');
-  $baseurl="http://localhost/QualityFriend/";
+define('DB_SERVER', 'localhost');
+define('DB_USERNAME', 'root');
+define('DB_PASSWORD', '');
+define('DB_NAME', 'qualityfriend');
+$baseurl="http://localhost/QualityFriend/";
 
 
 /* Attempt to connect to MySQL database */
