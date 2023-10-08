@@ -39,7 +39,6 @@ if(isset($_SESSION['depart_id'])){
 if(isset($_SESSION['profile_image'])){
     $profile_image = $_SESSION['profile_image'];
 }
-
 $Create_edit_todo_checklist=0;
 $Create_edit_handbooks=0;
 $Create_edit_repairs=0;

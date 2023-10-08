@@ -1,4 +1,4 @@
-<?php 
+<?php
 require_once 'util_config.php';
 require_once '../util_session.php';
 $main_url=basename($_SERVER['REQUEST_URI']);
@@ -364,21 +364,21 @@ window.location = '".$baseurl."it/".$final."';</script>";
                         </div>
                         <!-- List group -->
                         <div class="list-group list-group-flush">
-                            <a href="javascript:void(0)" class="list-group-item list-group-item-action active_lang lang_hover" onclick="lang_change('../<?php echo $main_url; ?>')" >
+                            <a href="javascript:void(0)" class="list-group-item list-group-item-action active_lang lang_hover" onclick="lang_change('../<?php echo $main_url; ?>','EN')" >
                                 <div class="row align-items-center">
                                     <div class="col pl-4 pr-3">
                                         <h3 class="mb-0" style="font-weight:bold;margin:0px;font-size: 1.0625rem;font-family: inherit;">EN</h3>
                                     </div>
                                 </div>
                             </a>
-                            <a href="javascript:void(0)" class="list-group-item list-group-item-action lang_hover" onclick="lang_change('../it/<?php echo $main_url; ?>')" >
+                            <a href="javascript:void(0)" class="list-group-item list-group-item-action lang_hover" onclick="lang_change('../it/<?php echo $main_url; ?>','IT')" >
                                 <div class="row align-items-center">
                                     <div class="col pl-4 pr-3">
                                         <h3 class="mb-0" style="font-weight:bold;margin:0px;font-size: 1.0625rem;font-family: inherit;">IT</h3>
                                     </div>
                                 </div>
                             </a>
-                            <a href="javascript:void(0)" class="list-group-item list-group-item-action lang_hover" onclick="lang_change('../de/<?php echo $main_url; ?>')" >
+                            <a href="javascript:void(0)" class="list-group-item list-group-item-action lang_hover" onclick="lang_change('../de/<?php echo $main_url; ?>','DE')" >
                                 <div class="row align-items-center">
                                     <div class="col pl-4 pr-3">
                                         <h3 class="mb-0" style="font-weight:bold;margin:0px;font-size: 1.0625rem;font-family: inherit;">DE</h3>
@@ -416,12 +416,20 @@ window.location = '".$baseurl."it/".$final."';</script>";
 
     reload();
 
-
-
-    function lang_change(url){
-        window.location.href = url;
+    function lang_change(url, langtype){
+        $.ajax({
+            url:'../util_normal_user_lang_change.php',
+            method:'POST',
+            data:{ selected_language:langtype},
+            success:function(response){
+                console.log(response);
+                window.location.href = url;
+            },
+            error: function(xhr, status, error) {
+                console.log(error);
+            },
+        });
     }
-
     var notification_id = <?php echo  json_encode($new_noti_id);?>;
     var notification_id_len = '<?php echo  $new_lenth_todo_notification;?>';
     var todo_ids = <?php echo  json_encode($new_todo_id);?>;
