@@ -106,15 +106,23 @@ for($j=0;$j<sizeof($arrOutput['reservation']);$j++) {
                 }
                 if(isset($arrOutput['reservation'][$j]['roomReservations']['roomReservation'][$k]['sales']['@attributes']['accommodation'])){
                     $accommodation_sale = $arrOutput['reservation'][$j]['roomReservations']['roomReservation'][$k]['sales']['@attributes']['accommodation'];
+                }else{
+                    $accommodation_sale = 0;
                 }
                 if(isset($arrOutput['reservation'][$j]['roomReservations']['roomReservation'][$k]['sales']['@attributes']['spa'])){
                     $spa_sale = $arrOutput['reservation'][$j]['roomReservations']['roomReservation'][$k]['sales']['@attributes']['spa'];
+                }else{
+                    $spa_sale = 0;
                 }
                 if(isset($arrOutput['reservation'][$j]['roomReservations']['roomReservation'][$k]['sales']['@attributes']['additionalServices'])){
                     $additionalServices_sale = $arrOutput['reservation'][$j]['roomReservations']['roomReservation'][$k]['sales']['@attributes']['additionalServices'];
+                }else{
+                    $additionalServices_sale = 0;
                 }
                 if(isset($arrOutput['reservation'][$j]['roomReservations']['roomReservation'][$k]['sales']['@attributes']['extras'])){
                     $extras_sale = $arrOutput['reservation'][$j]['roomReservations']['roomReservation'][$k]['sales']['@attributes']['extras'];
+                }else{
+                    $extras_sale = 0;
                 }
                 if($result_reservation){
                     $sql_reservation_rooms = "INSERT INTO `tbl_forecast_reservations_rooms`(`frcr_id`, `reservation_id`, `date`, `arrival`, `departure`, `status`, `roomType`, `roomNumber`, `ratePlanCode`, `accommodation_sale`, `additionalServices_sale`, `spa_sale`, `extras_sale`, `adults`, `infants`, `children`, `hotel_id`) VALUES ('$last_id_reservation','$reservation_id','$reservation_date','$arrival','$departure','$status','$roomType','$roomNumber','$ratePlanCode','$accommodation_sale','$additionalServices_sale','$spa_sale','$extras_sale','$adults','$infants','$children','$hotel_id')";
@@ -192,15 +200,23 @@ for($j=0;$j<sizeof($arrOutput['reservation']);$j++) {
             }
             if(isset($arrOutput['reservation'][$j]['roomReservations']['roomReservation']['sales']['@attributes']['accommodation'])){
                 $accommodation_sale = $arrOutput['reservation'][$j]['roomReservations']['roomReservation']['sales']['@attributes']['accommodation'];
+            }else{
+                $accommodation_sale = 0;
             }
             if(isset($arrOutput['reservation'][$j]['roomReservations']['roomReservation']['sales']['@attributes']['spa'])){
                 $spa_sale = $arrOutput['reservation'][$j]['roomReservations']['roomReservation']['sales']['@attributes']['spa'];
+            }else{
+                $spa_sale = 0;
             }
             if(isset($arrOutput['reservation'][$j]['roomReservations']['roomReservation']['sales']['@attributes']['additionalServices'])){
                 $additionalServices_sale = $arrOutput['reservation'][$j]['roomReservations']['roomReservation']['sales']['@attributes']['additionalServices'];
+            }else{
+                $additionalServices_sale = 0;
             }
             if(isset($arrOutput['reservation'][$j]['roomReservations']['roomReservation']['sales']['@attributes']['extras'])){
                 $extras_sale = $arrOutput['reservation'][$j]['roomReservations']['roomReservation']['sales']['@attributes']['extras'];
+            }else{
+                $extras_sale = 0;
             }
             if($result_reservation){
                 $sql_reservation_rooms = "INSERT INTO `tbl_forecast_reservations_rooms`(`frcr_id`, `reservation_id`, `date`, `arrival`, `departure`, `status`, `roomType`, `roomNumber`, `ratePlanCode`, `accommodation_sale`, `additionalServices_sale`, `spa_sale`, `extras_sale`, `adults`, `infants`, `children`, `hotel_id`) VALUES ('$last_id_reservation','$reservation_id','$reservation_date','$arrival','$departure','$status','$roomType','$roomNumber','$ratePlanCode','$accommodation_sale','$additionalServices_sale','$spa_sale','$extras_sale','$adults','$infants','$children','$hotel_id')";
